@@ -1,8 +1,14 @@
-# Teknocamp 2026 – Bygg din egen AI-agent
+# TechnoCamp 2026 – Bygg din egen AI-agent
 
-Et 2-dagers hands-on workshop der du designer, bygger og presenterer din egen AI-agent. Du velger eget prosjekt og plattform fra dag én, og jobber med noe som er relevant for din hverdag. Workshopen dekker alt fra grunnleggende agenttyper til multi-agent-arkitektur, sikkerhet og governance.
+[assets/agent-camp-banner.png]
 
-**Målgruppe:** Ledere og konsulenter i IT-bransjen. Level 100–300 – ingen krav til dyp programmeringskunnskap.
+Her finner du informasjon, inspirasjon og praktisk støtte som vi håper vil være nyttig for deg både før, under og etter campen.
+
+Dette blir to dager der vi håper du lærer, bygger, utforsker, deler erfaringer og ikke minst har det gøy sammen.
+
+Gjennom disse sidene får du oversikt over programmet, ressurser og innholdet i de ulike sesjonene. Vi i sporgrammet håper campen gir deg mulighet til å teste, inspirere og dele det du bygger. Vi gleder oss til å bygge agenter sammen med dere og sette i gang.
+
+Hilsen Steinar, Hanne og Claus.
 
 ## Tidsplan
 
