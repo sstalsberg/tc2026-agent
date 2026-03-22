@@ -16,37 +16,38 @@ Med forbehold om endringer, her er en foreløpig tidsplan for de to dagene:
 
 ### Dag 1
 
-| Tid | Sesjon | Type |
-|-----|--------|------|
-| 09:45 - 10:00 | Intro: praktisk info og gruppedeling | Info |
-| 10:00 - 10:05 | Tema 1: Hva er en agent? | Presentasjon |
-| 10:05 - 10:15 | Lab: Bordprat om agenter du vil bygge | Lab |
-| 10:15 - 10:30 | Tema 2: Hvordan komme i gang med en agent; Plattformer og agentrammeverk | Presentasjon |
-| 10:30 - 10:45 | Pause | – |
-| 10:45 - 11:15 | Lab: Valg av plattform og start å bygge din agent | Lab |
-| 11:15 - 11:30 | Tema 3 del 1: Instruksjoner og kunnskap (RAG) | Presentasjon |
-| 11:30 - 12:00 | Lab: Jobb med instruksjoner og kunnskap | Lab |
-| 12:00 - 13:00 | Lunsj | – |
-| 13:00 - 13:20 | Tema 3 del 2: API og MCP | Presentasjon |
-| 13:20 - 14:00 | Lab: Jobb med API og MCP for din agent | Lab |
-| 14:00 - 15:00 | Tema 4: Under panseret på en LLM (v/Claus) | Presentasjon |
-| 15:00 - 15:30 | Pause / foto | – |
-| 15:30 - 16:30 | Tema 5: "The future of software delivery is agentic" (Microsoft v/Maxim) | Foredrag |
-| 16:30 - 17:00 | Lab: Fortsett bygging (Valgfritt) | Lab |
-| 17:00 | Steinars time (Sønsteby) | Foredrag | – |
+| Blokk | Deløkt | Varighet | Type |
+|------|--------|----------|------|
+| 09:45 - 10:30 | Intro: praktisk info og gruppedeling | 15 min | Info |
+|  | Tema 1: Hva er en agent? | 5 min | Presentasjon |
+|  | Lab: Bordprat om agenter du vil bygge | 10 min | Lab |
+|  | Tema 2: Hvordan komme i gang med en agent; plattformer og agentrammeverk | 15 min | Presentasjon |
+| 10:30 - 10:45 | Pause | 15 min | – |
+| 10:45 - 12:00 | Lab: Valg av plattform og start å bygge din agent | 30 min | Lab |
+|  | Tema 3 del 1: Instruksjoner og kunnskap (RAG) | 15 min | Presentasjon |
+|  | Lab: Jobb med instruksjoner og kunnskap | 30 min | Lab |
+| 12:00 - 13:00 | Lunsj | 60 min | – |
+| 13:00 - 14:00 | Tema 3 del 2: API og MCP | 20 min | Presentasjon |
+|  | Lab: Jobb med API og MCP for din agent | 40 min | Lab |
+| 14:00 - 15:00 | Tema 4: Under panseret på en LLM (v/Claus) | 20 min | Presentasjon |
+|  | Lab: Videre arbeid med agenten etter tema 4 | 40 min | Lab |
+| 15:00 - 15:30 | Pause / foto | 30 min | – |
+| 15:30 - 16:30 | Tema 5: "The future of software delivery is agentic" (Microsoft v/Maxim) | 60 min | Foredrag |
+| 16:30 - 17:00 | Lab: Fortsett bygging (valgfritt) | 30 min | Lab |
+| 17:00 | Steinars time (Sønsteby) | – | Foredrag |
 
 ### Dag 2
 
-| Tid | Sesjon | Type |
-|-----|--------|------|
-| 09:30 - 09:45 | Tema 6 del 1: Agentarkitektur | Presentasjon |
-| 09:45 - 10:30 | Lab: Test ut arkitekturvalg for agenten din | Lab |
-| 10:30 - 10:45 | Pause | – |
-| 10:45 - 11:00 | Tema 6 del 2: Copilot i Fabric (Claus) | Presentasjon |
-| 11:00 - 11:30 | Lab: Siste arbeidsøkt med din agent | Lab |
-| 11:30 - 11:45 | Tema 7: Governance | Presentasjon |
-| 11:45 - 12:00 | Oppsummering, tilbakemeldinger og demoer | Lab / oppsummering |
-| 12:00 | Lunsj og hjemreise | – |
+| Blokk | Deløkt | Varighet | Type |
+|------|--------|----------|------|
+| 09:30 - 10:30 | Tema 6 del 1: Agentarkitektur | 15 min | Presentasjon |
+|  | Lab: Test ut arkitekturvalg for agenten din | 45 min | Lab |
+| 10:30 - 10:45 | Pause | 15 min | – |
+| 10:45 - 11:30 | Tema 6 del 2: Copilot i Fabric (Claus) | 15 min | Presentasjon |
+|  | Lab: Siste arbeidsøkt med din agent | 30 min | Lab |
+| 11:30 - 12:00 | Tema 7: Governance | 15 min | Presentasjon |
+|  | Oppsummering, tilbakemeldinger og demoer | 15 min | Oppsummering |
+| 12:00 | Lunsj og hjemreise | – | – |
 
 ## Sesjonsoversikt
 
