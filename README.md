@@ -1,52 +1,64 @@
-# TechnoCamp 2026 – Bygg din egen AI-agent
+# TechnoCamp 2026 – Copilot-agenter
 
 ![TC2026 – Copilot-agenter](assets/agent-camp-banner.png)
 
-Velkommen til TechnoCamp 2026! 
+## Velkommen til TechnoCamp 2026
 
 Gjennom disse sidene får du oversikt over programmet, ressurser og innhold i de ulike sesjonene.
 
-Vi i sporprogrammet håper campen gir deg mulighet til å utforske, inspirere og dele erfaringer rundt det å bygge agenter, og ikke minst ha det gøy sammen. Vi gleder oss til å sette i gang🤖🤖🤖🤖
-
+Vi i sporprogrammet håper campen gir deg mulighet til å utforske, inspirere og dele erfaringer rundt det å bygge agenter, og ikke minst ha det gøy sammen. Vi gleder oss til å sette i gang og se hva dere bygger 🤖🚀
+  
 Hilsen Steinar, Hanne og Claus
 
 ## Tidsplan
 
+Med forbehold om endringer, her er en foreløpig tidsplan for de to dagene:
+
 ### Dag 1
 
-| Tid | Sesjon | Type | Varighet |
-|-----|--------|------|----------|
-| 09:00 | [1: Velkommen og introduksjon](sesjoner/01-velkommen-og-introduksjon.md) | Presentasjon | 20 min |
-| 09:20 | Lab: Idé og planlegging | Lab | 40 min |
-| 10:00 | [2: Kom i gang med en agent](sesjoner/02-kom-i-gang-med-en-agent.md) | Presentasjon | 20 min |
-| 10:20 | Lab: Hello Copilot Agent | Lab | 55 min |
-| 11:15 | Pause | – | 15 min |
-| 11:30 | [3: Koble til data og handlinger](sesjoner/03-koble-til-data-og-handlinger.md) | Presentasjon | 20 min |
-| 11:50 | Lab: Integrasjoner og verktøy | Lab | 70 min |
+| Tid | Sesjon | Type |
+|-----|--------|------|
+| 09:45 - 10:00 | Intro: praktisk info og gruppedeling | Info |
+| 10:00 - 10:05 | Tema 1: Hva er en agent? | Presentasjon |
+| 10:05 - 10:15 | Lab: Bordprat om agenter du vil bygge | Lab |
+| 10:15 - 10:30 | Tema 2: Hvordan komme i gang med en agent; Plattformer og agentrammeverk | Presentasjon |
+| 10:30 - 10:45 | Pause | – |
+| 10:45 - 11:15 | Lab: Valg av plattform og start å bygge din agent | Lab |
+| 11:15 - 11:30 | Tema 3 del 1: Instruksjoner og kunnskap (RAG) | Presentasjon |
+| 11:30 - 12:00 | Lab: Jobb med instruksjoner og kunnskap | Lab |
+| 12:00 - 13:00 | Lunsj | – |
+| 13:00 - 13:20 | Tema 3 del 2: API og MCP | Presentasjon |
+| 13:20 - 14:00 | Lab: Jobb med API og MCP for din agent | Lab |
+| 14:00 - 15:00 | Tema 4: Under panseret på en LLM (v/Claus) | Presentasjon |
+| 15:00 - 15:30 | Pause / foto | – |
+| 15:30 - 16:30 | Tema 5: "The future of software delivery is agentic" (Microsoft v/Maxim) | Foredrag |
+| 16:30 - 17:00 | Lab: Fortsett bygging (Valgfritt) | Lab |
+| 17:00 | Steinars time (Sønsteby) | Foredrag | – |
 
 ### Dag 2
 
-| Tid | Sesjon | Type | Varighet |
-|-----|--------|------|----------|
-| 09:00 | [4: Prompt engineering og kvalitet](sesjoner/04-prompt-engineering-og-kvalitet.md) | Presentasjon | 20 min |
-| 09:20 | Lab: Test og trim din agent | Lab | 55 min |
-| 10:15 | Pause | – | 15 min |
-| 10:30 | [5: Agentarkitektur og multi-agent](sesjoner/05-agentarkitektur-og-multiagent.md) | Presentasjon | 20 min |
-| 10:50 | Lab: Multi-agent / poler agent | Lab | 40 min |
-| 11:30 | [6: Sikkerhet og governance](sesjoner/06-sikkerhet-governance.md) | Presentasjon | 20 min |
-| 11:50 | [7: Avslutning – demo og oppsummering](sesjoner/07-avslutning.md) | Demo/refleksjon | 30 min |
+| Tid | Sesjon | Type |
+|-----|--------|------|
+| 09:30 - 09:45 | Tema 6 del 1: Agentarkitektur | Presentasjon |
+| 09:45 - 10:30 | Lab: Test ut arkitekturvalg for agenten din | Lab |
+| 10:30 - 10:45 | Pause | – |
+| 10:45 - 11:00 | Tema 6 del 2: Copilot i Fabric (Claus) | Presentasjon |
+| 11:00 - 11:30 | Lab: Siste arbeidsøkt med din agent | Lab |
+| 11:30 - 11:45 | Tema 7: Governance | Presentasjon |
+| 11:45 - 12:00 | Oppsummering, tilbakemeldinger og demoer | Lab / oppsummering |
+| 12:00 | Lunsj og hjemreise | – |
 
 ## Sesjonsoversikt
 
 | # | Tittel | Nøkkeltemaer |
 |---|--------|--------------|
-| 1 | Velkommen og introduksjon | Agenttyper (retrieval → task → autonomous), business case |
-| 2 | Kom i gang med en agent | Plattformvalg, Copilot Studio, generative orchestrator |
-| 3 | Koble til data og handlinger | RAG, verktøy, MCP, Power Automate, REST API |
-| 4 | Prompt engineering og kvalitet | Instructions vs. descriptions, testing, dynamic chaining |
-| 5 | Agentarkitektur og multi-agent | Child vs. connected agents, Hub-and-spoke, A2A |
-| 6 | Sikkerhet og governance | Entra ID, least privilege, content moderation, Purview |
-| 7 | Avslutning | Demo-runde, takeaways, neste steg |
+| 1 | Hva er en agent? | Praktisk info, grupper, begreper og forståelse |
+| 2 | Kom i gang med en agent | Plattformer, agentrammeverket, første steg |
+| 3 | Agentens rammeverk | RAG, verktøy, API, MCP og tilhørende labarbeid |
+| 4 | Under panseret | Teknisk innblikk i hvordan agentene virker |
+| 5 | Future of software delivery is agentic | Perspektiver fra Microsoft |
+| 6 | Agentarkitektur | Arkitektur, Copilot i Fabric |
+| 7 | Governance og avslutning | Styring, oppsummering, demoer og tilbakemeldinger |
 
 ## Forutsetninger
 
@@ -67,11 +79,4 @@ Se [PREREQUISITES.md](PREREQUISITES.md) for sjekkliste og oppsett.
 **Læring:**
 - [Microsoft Learn – AI agents](https://learn.microsoft.com/en-us/ai/)
 - [AI-102: Azure AI Engineer Associate](https://learn.microsoft.com/credentials/certifications/azure-ai-engineer/)
-
-## Lisens
-
-MIT
-
----
-
-*Spørsmål? Kontakt [steinar.stalsberg@atea.no](mailto:steinar.stalsberg@atea.no)*
+- [Microsoft Copilot Studio dokumentasjon](https://learn.microsoft.com/en-us/microsoft-copilot-studio/)
