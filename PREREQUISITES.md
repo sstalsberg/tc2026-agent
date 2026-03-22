@@ -56,6 +56,8 @@ Det viktigste før oppstart er derfor ikke å ha alt perfekt klart, men å ha va
 - [Opprett miljø i Power Platform](https://learn.microsoft.com/nb-no/power-platform/admin/create-environment)
 - [Power Platform Admin Center](https://admin.powerplatform.microsoft.com)
 
+---
+
 ### Alternativ B: Agent Builder i Microsoft 365 Copilot
 
 **Passer for:** Deg som vil komme raskt i gang med deklarative agenter direkte i Microsoft 365 Copilot.
@@ -74,6 +76,8 @@ Det viktigste før oppstart er derfor ikke å ha alt perfekt klart, men å ha va
 **Nyttige lenker:**
 
 - [Deklarative agenter i Microsoft 365 Copilot](https://learn.microsoft.com/nb-no/microsoft-365-copilot/extensibility/overview-declarative-agent)
+
+---
 
 ### Alternativ C: Microsoft Foundry
 
@@ -97,6 +101,8 @@ Det viktigste før oppstart er derfor ikke å ha alt perfekt klart, men å ha va
 - [Microsoft Foundry dokumentasjon](https://learn.microsoft.com/nb-no/azure/ai-foundry/)
 - [Azure gratis konto](https://azure.microsoft.com/free/)
 - [Azure Cost Management](https://portal.azure.com/#blade/Microsoft_Azure_CostManagement/Menu/overview)
+
+---
 
 ### Alternativ D: Microsoft 365 Agents SDK med VS Code
 

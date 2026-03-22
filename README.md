@@ -20,7 +20,7 @@ Med forbehold om endringer, her er en foreløpig tidsplan for de to dagene:
 
 ### Dag 1
 
-| Blokk | Deløkt | Varighet | Type |
+| Tid | Økter | Varighet | Type |
 |------|--------|----------|------|
 | 09:45 - 10:30 | Intro: praktisk info og gruppedeling | 15 min | Info |
 |  | Tema 1: Hva er en agent? | 5 min | Presentasjon |
@@ -42,7 +42,7 @@ Med forbehold om endringer, her er en foreløpig tidsplan for de to dagene:
 
 ### Dag 2
 
-| Blokk | Deløkt | Varighet | Type |
+| Tid | Økter | Varighet | Type |
 |------|--------|----------|------|
 | 09:30 - 10:30 | Tema 6 del 1: Agentarkitektur | 15 min | Presentasjon |
 |  | Lab: Test ut arkitekturvalg for agenten din | 45 min | Lab |
@@ -53,7 +53,7 @@ Med forbehold om endringer, her er en foreløpig tidsplan for de to dagene:
 |  | Oppsummering, tilbakemeldinger og demoer | 15 min | Oppsummering |
 | 12:00 | Lunsj og hjemreise | – | – |
 
-## Sesjonsoversikt
+## Temaoversikt
 
 | # | Tittel | Nøkkeltemaer |
 |---|--------|--------------|
