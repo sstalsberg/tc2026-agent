@@ -10,6 +10,10 @@ Vi i sporprogrammet håper campen gir deg mulighet til å utforske, inspirere og
   
 Hilsen Steinar, Hanne og Claus
 
+## Forutsetninger
+
+Se [PREREQUISITES.md](PREREQUISITES.md) for sjekkliste og oppsett det er lurt å ha klart før campen starter.
+
 ## Tidsplan
 
 Med forbehold om endringer, her er en foreløpig tidsplan for de to dagene:
@@ -60,10 +64,6 @@ Med forbehold om endringer, her er en foreløpig tidsplan for de to dagene:
 | 5 | Future of software delivery is agentic | Perspektiver fra Microsoft |
 | 6 | Agentarkitektur | Arkitektur, Copilot i Fabric |
 | 7 | Governance og avslutning | Styring, oppsummering, demoer og tilbakemeldinger |
-
-## Forutsetninger
-
-Se [PREREQUISITES.md](PREREQUISITES.md) for sjekkliste og oppsett.
 
 ## Ressurser
 
