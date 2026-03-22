@@ -1,14 +1,12 @@
 # TechnoCamp 2026 – Bygg din egen AI-agent
 
-[assets/agent-camp-banner.png]
+![TC2026 – Copilot-agenter](assets/agent-camp-banner.png)
 
-Her finner du informasjon, inspirasjon og praktisk støtte som vi håper vil være nyttig for deg både før, under og etter campen.
+Velkommen til TechnoCamp 2026! Gjennom disse sidene får du oversikt over programmet, ressurser og innhold i de ulike sesjonene.
 
-Dette blir to dager der vi håper du lærer, bygger, utforsker, deler erfaringer og ikke minst har det gøy sammen.
+Vi i sporprogrammet håper campen gir deg mulighet til å utforske, inspirere og dele erfaringer rundt det å bygge agenter, og ikke minst ha det gøy sammen. Vi gleder oss til å bygge agenter sammen med dere og sette i gang.
 
-Gjennom disse sidene får du oversikt over programmet, ressurser og innholdet i de ulike sesjonene. Vi i sporgrammet håper campen gir deg mulighet til å teste, inspirere og dele det du bygger. Vi gleder oss til å bygge agenter sammen med dere og sette i gang.
-
-Hilsen Steinar, Hanne og Claus.
+Hilsen Steinar, Hanne og Claus
 
 ## Tidsplan
 
