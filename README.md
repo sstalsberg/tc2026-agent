@@ -7,12 +7,12 @@
 Gjennom disse sidene får du oversikt over programmet, ressurser og innhold i de ulike sesjonene.
 
 Vi i sporprogrammet håper campen gir deg mulighet til å utforske, inspirere og dele erfaringer rundt det å bygge agenter, og ikke minst ha det gøy sammen. Vi gleder oss til å sette i gang og se hva dere bygger 🤖🚀
-  
+
 Hilsen Steinar, Hanne og Claus
 
 ## Forutsetninger
 
-Se [PREREQUISITES.md](PREREQUISITES.md) for sjekkliste og oppsett det er lurt å ha klart før campen starter.
+Les [mer her](PREREQUISITES.md) for sjekkliste og oppsett det er lurt å ha klart før campen starter.
 
 ## Tidsplan
 
@@ -59,11 +59,11 @@ Med forbehold om endringer, her er en foreløpig tidsplan for de to dagene:
 |---|--------|--------------|
 | 1 | Hva er en agent? | Praktisk info, grupper, begreper og forståelse |
 | 2 | Kom i gang med en agent | Plattformer, agentrammeverket, første steg |
-| 3 | Agentens rammeverk | RAG, verktøy, API, MCP og tilhørende labarbeid |
-| 4 | Under panseret | Teknisk innblikk i hvordan agentene virker |
-| 5 | Future of software delivery is agentic | Perspektiver fra Microsoft |
-| 6 | Agentarkitektur | Arkitektur, Copilot i Fabric |
-| 7 | Governance og avslutning | Styring, oppsummering, demoer og tilbakemeldinger |
+| 3 | Agentens rammeverk | RAG, verktøy, API og MCP |
+| 4 | Under panseret på LLM | Teknisk innblikk i hvordan agentene virker |
+| 5 | Github Copilot: Future of software delivery is agentic | Perspektiver |
+| 6 | Agentarkitektur, Orkestrator, multiagenter, A2A | Arkitektur, Copilot i Fabric |
+| 7 | Governance og avslutning | Agent365, oppsummering, demoer og tilbakemeldinger |
 
 ## Ressurser
 

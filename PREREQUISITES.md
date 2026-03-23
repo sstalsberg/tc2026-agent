@@ -2,53 +2,30 @@
 
 Denne siden gir deg en enkel sjekkliste for hva som bør være på plass før sporprogrammet starter.
 
-Vi har begrenset med tid under campen, så jo mer du har klart på forhånd, desto mer får du ut av øktene og labene.
-
-- [Dette bør du ha klart](#dette-bør-du-ha-klart)
-- [Velg hvordan du vil bygge](#velg-hvordan-du-vil-bygge)
-- [Plattformvalg](#plattformvalg)
-- [Sjekkliste før oppstart](#sjekkliste-før-oppstart)
-- [Tips: Ha en idé klar](#tips-ha-en-idé-klar)
-- [Hvis noe ikke virker](#hvis-noe-ikke-virker)
+Vi har begrenset med tid, så jo mer du har klart på forhånd, desto mer tid har du til bygging av dine agenter.
 
 ## Dette er nyttig å ha klart
 
-- Ha med laptop og lader
+- Ha med laptop og lader 
 - Microsoft 365 Copilot lisens (se lenger ned på siden dersom du mangler)
 - En idé om hva slags agent du vil bygge eller utforske
 - Tilgang til de tjenestene eller data du vil bygge og bruke agenten din mot
 - [Visual Studio Code](https://code.visualstudio.com/) installert og startet minst én gang
 - Egen GitHub-konto dersom du vil jobbe  kodebasert
 
-## Velg hvordan du vil bygge
+## Velg hvilken plattform du vil bruke
 
 Du velger selv hvilken plattform du vil jobbe med under campen. Det er også helt fint å teste flere plattformer underveis.
 
-Vi kommer til å jobbe med temaer som:
-
-- Hvordan komme i gang med en agent
-- Plattformer og agentrammeverket
-- Instruksjoner, kunnskap, API og MCP
-- Arkitektur, governance og videre utvikling
-
-Det viktigste før oppstart er derfor ikke å ha alt perfekt klart, men å ha valgt et utgangspunkt og sjekket at du kommer inn i verktøyene du tror du vil bruke.
-
-## Plattformvalg
-
 ### Alternativ A: Copilot Studio
 
-**Passer for:** Deg som vil bygge agenter med lav terskel og tett integrasjon mot Microsoft 365, Teams, SharePoint og Power Platform.
-
-**Ha dette klart:**
-
-- Microsoft 365 Copilot-lisens
-- Tilgang til et Power Platform-miljø
+**Passer for:** når du vil bygge agenter med lav terskel og tett integrasjon mot Microsoft 365, Teams, SharePoint.
 
 **Sjekk dette på forhånd:**
-
-1. Åpne [Copilot Studio](https://copilotstudio.microsoft.com)
-2. Logg inn
-3. Bekreft at du kommer inn i løsningen og kan se eller opprette en agent
+1. Du har en Microsoft 365 Copilot-lisens
+2. Åpne [Copilot Studio](https://copilotstudio.microsoft.com)
+3. Bekreft at du kommer inn i løsningen og kan [opprette en agent](https://learn.microsoft.com/nb-no/microsoft-copilot-studio/fundamentals-create-agent)
+4. Om du ønsker kan du også opprette et eget developer Power Platform-miljø på forhånd.
 
 **Nyttige lenker:**
 
@@ -60,7 +37,7 @@ Det viktigste før oppstart er derfor ikke å ha alt perfekt klart, men å ha va
 
 ### Alternativ B: Agent Builder i Microsoft 365 Copilot
 
-**Passer for:** Deg som vil komme raskt i gang med deklarative agenter direkte i Microsoft 365 Copilot.
+**Passer for:** deg som vil komme raskt i gang med deklarative agenter direkte i Microsoft 365 Copilot.
 
 **Ha dette klart:**
 
@@ -70,8 +47,7 @@ Det viktigste før oppstart er derfor ikke å ha alt perfekt klart, men å ha va
 **Sjekk dette på forhånd:**
 
 1. Åpne [Microsoft 365 Copilot Chat](https://m365.cloud.microsoft/chat/)
-2. Logg inn
-3. Bekreft at du finner muligheten til å opprette eller bygge en agent
+2. Bekreft at du finner muligheten til å opprette eller bygge en agent
 
 **Nyttige lenker:**
 
@@ -81,20 +57,11 @@ Det viktigste før oppstart er derfor ikke å ha alt perfekt klart, men å ha va
 
 ### Alternativ C: Microsoft Foundry
 
-**Passer for:** Deg som vil jobbe mer kodebasert med modeller, integrasjoner og mer fleksibel agentarkitektur.
+**Passer for:** deg som vil jobbe fleksibelt med med modeller, integrasjoner og agentarkitektur.
 
-**Ha dette klart:**
+Vi setter opp et felles Azure-miljø for de som deltar i sporprogrammet. Dersom du har eget subscription du vil bruke, er det også helt fint.
 
-- Eget Azure-abonnement med nødvendige rettigheter
-- Eller bruk av konto og miljø som vi setter opp for deltakere som trenger det
-
-> Hvis du bruker eget Azure-abonnement, vær oppmerksom på at bruk av tjenester kan medføre kostnader som ikke dekkes av sporprogrammet.
-
-**Sjekk dette på forhånd:**
-
-1. Åpne [Microsoft Foundry](https://ai.azure.com)
-2. Logg inn
-3. Bekreft at du kan åpne eller opprette et prosjekt
+Mer info kommer for tilgang og oppsett av miljøet før campen starter.
 
 **Nyttige lenker:**
 
@@ -106,18 +73,18 @@ Det viktigste før oppstart er derfor ikke å ha alt perfekt klart, men å ha va
 
 ### Alternativ D: Microsoft 365 Agents SDK med VS Code
 
-**Passer for:** Deg som vil bygge mer fritt i kode, bruke SDK-er og jobbe tett med utviklerverktøy.
+**Passer for:** deg som vil bygge mer fritt i kode, bruke SDK-er og jobbe tett med utviklerverktøy.
 
 **Ha dette klart:**
 
 - [Visual Studio Code](https://code.visualstudio.com/download)
 - GitHub-konto
-- Node.js og/eller Python installert dersom du vil jobbe lokalt med kode
+- Node.js og/eller Python installert
 
 **Sjekk dette på forhånd:**
 
 1. Start VS Code minst én gang
-2. Logg inn med GitHub-kontoen din dersom du vil bruke GitHub-funksjoner
+2. Logg inn med GitHub-kontoen din i VS Code
 3. Verifiser at `node --version` og/eller `python --version` fungerer lokalt
 
 **Nyttige lenker:**
@@ -133,9 +100,7 @@ Gå gjerne gjennom denne listen dagen før eller samme morgen.
 ### For alle deltakere
 
 - [ ] Jeg har med laptop og lader
-- [ ] Jeg kan logge inn med Atea-kontoen min
 - [ ] Jeg har åpnet verktøyene jeg planlegger å bruke
-- [ ] Jeg har installert og startet VS Code
 - [ ] Jeg har en idé om hva jeg vil bygge, eller hva jeg vil utforske
 
 ### Hvis jeg vil bruke Copilot Studio
