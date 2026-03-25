@@ -35,8 +35,8 @@ Med forbehold om endringer, her er en foreløpig tidsplan for de to dagene:
 | 12:00 - 13:00 | Lunsj | 60 min | – |
 | 13:00 - 14:00 | Tema 3 del 2: API og MCP | 20 min | Presentasjon |
 |  | Lab: Jobb med API og MCP for din agent | 40 min | Lab |
-| 14:00 - 15:00 | Tema 4: Under panseret på en LLM (v/Claus) | 20 min | Presentasjon |
-|  | Lab: Videre arbeid med agenten etter tema 4 | 40 min | Lab |
+| 14:00 - 15:00 | Tema 4: Under panseret på en LLM (v/Claus) | 30 min | Presentasjon |
+|  | Lab: Videre arbeid med agenten etter tema 4 | 30 min | Lab |
 | 15:00 - 15:30 | Pause / foto | 30 min | – |
 | 15:30 - 16:30 | Tema 5: "The future of software delivery is agentic" (Microsoft v/Maxim) | 60 min | Foredrag |
 | 16:30 - 17:00 | Lab: Fortsett bygging (valgfritt) | 30 min | Lab |
