@@ -10,6 +10,8 @@ Vi i sporprogrammet håper campen gir deg mulighet til å utforske, inspirere og
 
 Hilsen Steinar, Hanne og Claus
 
+![Sporansvarlige](assets/trackteam.png)
+
 ## Forutsetninger
 
 Les [mer her](PREREQUISITES.md) for sjekkliste og oppsett det er lurt å ha klart før campen starter.
