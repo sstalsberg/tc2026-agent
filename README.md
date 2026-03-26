@@ -8,7 +8,7 @@ Med disse sidene får du oversikt over programmet, ressurser og innhold i de uli
 
 Vi i sporprogrammet håper campen gir deg mulighet til å utforske, inspirere og dele erfaringer rundt det å bygge agenter, og ikke minst ha det gøy sammen. Vi gleder oss til å sette i gang og se hva dere bygger 🤖🚀
 
-Hilsen Steinar, Hanne og Claus
+Hilsen Hanne, Steinar og Claus
 
 ![Sporansvarlige](assets/trackteam.png)
 
