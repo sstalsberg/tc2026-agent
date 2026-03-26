@@ -70,16 +70,18 @@ Med forbehold om endringer, her er en foreløpig tidsplan for de to dagene:
 ## Ressurser
 
 **Plattformer:**
+- [Microsoft M365 Copilot](https://m365.cloud.microsoft)
 - [Microsoft Copilot Studio](https://copilotstudio.microsoft.com)
 - [Azure AI Foundry](https://ai.azure.com)
-- [Copilot Studio – kom i gang (Microsoft Learn)](https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-get-started)
-
-**Protokoller og SDK:**
-- [Model Context Protocol (MCP)](https://modelcontextprotocol.io/)
-- [A2A Protocol](https://a2aprotocol.org)
 - [M365 Agents SDK](https://learn.microsoft.com/en-us/microsoft-365/agents-sdk/)
 
+**Protokoller:**
+- [Model Context Protocol (MCP)](https://modelcontextprotocol.io/)
+- [A2A Protocol](https://a2aprotocol.org)
+
 **Læring:**
-- [Microsoft Learn – AI agents](https://learn.microsoft.com/en-us/ai/)
+- [Microsoft Learn – AI agents](https://learn.microsoft.com/en-us/ai)
 - [AI-102: Azure AI Engineer Associate](https://learn.microsoft.com/credentials/certifications/azure-ai-engineer/)
-- [Microsoft Copilot Studio dokumentasjon](https://learn.microsoft.com/en-us/microsoft-copilot-studio/)
+- [Microsoft Copilot Studio dokumentasjon](https://learn.microsoft.com/en-us/microsoft-copilot-studio)
+- [Copilot Studio Agent Academy](https://microsoft.github.io/agent-academy)
+- [Copilot Developer Camp](https://microsoft.github.io/copilot-camp)
