@@ -91,6 +91,8 @@ Det finnes flere måter å hente kunnskap på i Microsoft-økosystemet:
 
 ### Hvor passer RAG inn?
 
+![Eksempel på hvordan agentic retrieval bruker kontekst, stavekorrigering og splitting av forespørsler](https://learn.microsoft.com/en-us/azure/search/media/agentic-retrieval/agentric-retrieval-example.png)
+
 RAG står for Retrieval-Augmented Generation.
 
 En enkel forklaring er:
@@ -113,6 +115,8 @@ I teorien virker RAG enkelt. I praksis er det flere utfordringer:
 - sikkerhet og tilgangsstyring må holdes intakt
 
 Det betyr at retrieval-laget er like viktig som selve modellen.
+
+![Arkitektur for agentic retrieval med query planning, parallelle søk og sammenslåtte resultater](https://learn.microsoft.com/en-us/azure/search/media/agentic-retrieval/agentic-retrieval-architecture.png)
 
 ### Hva må retrieval-laget gjøre godt?
 
@@ -370,3 +374,7 @@ Etter denne modulen bør du sitte igjen med:
 - [Generative orchestration in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-generative-actions)
 - [Azure AI Search: Retrieval-augmented generation overview](https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview)
 - [Microsoft Foundry Agent Service overview](https://learn.microsoft.com/en-us/azure/foundry/agents/overview)
+
+## Kildegrunnlag for bilder
+
+- Diagrammer: «Agentic retrieval in Azure AI Search» (Microsoft Learn): https://learn.microsoft.com/en-us/azure/search/agentic-retrieval-overview

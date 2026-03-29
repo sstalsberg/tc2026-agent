@@ -19,6 +19,8 @@ Samme agentidé kan bygges på flere måter. Plattformvalget påvirker blant ann
 
 ## Microsofts agentøkosystem
 
+![Copilot Studio-startside med valg for å bygge agent eller workflow](https://learn.microsoft.com/en-us/microsoft-copilot-studio/media/fundamentals-what-is-copilot-studio/home-page.png)
+
 | Plattform | Hva den er | Når den passer |
 | --- | --- | --- |
 | Agent Builder i M365 Copilot | Deklarative agenter direkte i Microsoft 365 Copilot | Rask prototyping og personlig eller teamnær produktivitet |
@@ -96,3 +98,7 @@ Etter denne modulen bør du sitte igjen med fire ting:
 - [Microsoft 365 Agents SDK overview](https://learn.microsoft.com/en-us/microsoft-365/agents-sdk/agents-sdk-overview)
 - [Microsoft Foundry Agent Service overview](https://learn.microsoft.com/en-us/azure/foundry/agents/overview)
 - [Microsoft Agent Framework overview](https://learn.microsoft.com/en-us/agent-framework/overview/agent-framework-overview)
+
+## Kildegrunnlag for bilder
+
+- Skjermbilde: «Copilot Studio overview» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-what-is-copilot-studio
