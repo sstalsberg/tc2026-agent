@@ -44,6 +44,8 @@ En enkel måte å lese tabellen på er dette:
 - Orkestrering styrer flyten
 - Triggeren avgjør når agenten starter
 
+![Diagram av hva en AI-agent består av (input, modell/instruksjoner/verktøy og output)](https://learn.microsoft.com/en-us/azure/foundry/agents/media/what-is-an-agent.png)
+
 ## Tre agenttyper
 
 I workshopen bruker vi tre enkle kategorier:
@@ -158,3 +160,7 @@ Etter denne sesjonen skal deltakerne sitte igjen med tre ting:
 - [Copilot Studio overview](https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-what-is-copilot-studio)
 - [Microsoft Foundry Agent Service overview](https://learn.microsoft.com/en-us/azure/foundry/agents/overview)
 - [Microsoft 365 Agents SDK overview](https://learn.microsoft.com/en-us/microsoft-365/agents-sdk/agents-sdk-overview)
+
+## Kildegrunnlag for bilder
+
+- Diagram: «What is Microsoft Foundry Agent Service?» (Microsoft Learn): https://learn.microsoft.com/en-us/azure/foundry/agents/overview
