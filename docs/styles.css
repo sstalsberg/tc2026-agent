@@ -45,9 +45,9 @@ body {
   margin: 0 auto;
   padding: 56px 0 48px;
   display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(300px, 360px);
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   gap: 28px;
-  align-items: end;
+  align-items: stretch;
 }
 
 .eyebrow {
@@ -122,6 +122,9 @@ h3 {
   border-color: rgba(223, 243, 238, 0.24);
   color: #f6fbfa;
   backdrop-filter: blur(8px);
+  width: 100%;
+  min-width: 0;
+  align-self: start;
 }
 
 .hero__progress-head {
@@ -454,7 +457,7 @@ h3 {
   color: var(--tc-accent-strong);
 }
 
-@media (max-width: 980px) {
+@media (max-width: 860px) {
   .hero__inner,
   .layout {
     grid-template-columns: 1fr;
