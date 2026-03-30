@@ -151,6 +151,52 @@ style: |
 
 ---
 
+# Microsoft Agent 365 som kontrollplan
+
+- Per **30. mars 2026** beskriver Microsoft Learn `Microsoft Agent 365`
+  som en kontrollplan for AI-agenter
+- Poenget er ikke å bygge agenten for deg
+- Poenget er å styre agentporteføljen på virksomhetsnivå
+
+Kjernetanker:
+
+- egen identitet med `Microsoft Entra Agent ID`
+- oversikt i `Microsoft 365 admin center` og `Agent Registry`
+- kobling til `Purview`, `Defender`, observability og styrte verktøy
+- dokumentert som del av `Frontier preview-programmet`
+
+---
+
+# Hvordan Agent 365 passer mot governance-lagene
+
+| Lag | Hvordan Agent 365 bidrar |
+| --- | --- |
+| Tilgang | Agentidentitet, registry, least privilege, Conditional Access og sponsorskap |
+| Sikkerhet | Defender, runtime-beskyttelse, prompt shield, policyer og trusselhåndtering |
+| Kvalitet | Observabilitet, sporbarhet og innsikt som gjør evaluering mer konkret |
+| Drift | Sentral administrasjon, agentoversikt, onboarding, livssyklus og policyhåndheving |
+
+---
+
+# Hvorfor Agent 365 er interessant
+
+`Microsoft Agent 365` er relevant når spørsmålet ikke lenger er:
+
+- Hvordan bygger vi én agent?
+
+men:
+
+- Hvordan oppdager vi hvilke agenter som er i bruk?
+- Hvordan vet vi hvilken identitet de har?
+- Hvordan begrenser vi hva de får tilgang til?
+- Hvordan ser vi misbruk, feil og risikofylt adferd?
+- Hvordan kobler vi dem til eksisterende sikkerhets- og compliance-arbeid?
+
+Det er et styringslag for agentporteføljen,  
+ikke bare et nytt byggespor.
+
+---
+
 # Identitet og tilgang
 
 | Prinsipp | Hvorfor det betyr noe |
@@ -294,5 +340,6 @@ Hvorfor dette betyr noe:
 # Hva har vi gått igjennom i denne modulen?
 
 1. Hvorfor governance, sikkerhet og evaluering må bygges inn fra starten
-2. Hvordan feedback, tracing og målinger brukes til å forbedre agenten
-3. Hva publisering, tilgang og lisens betyr når agenten skal i produksjon
+2. Hvordan Microsoft Agent 365 kan fungere som kontrollplan rundt identitet, observabilitet og sikkerhet
+3. Hvordan feedback, tracing og målinger brukes til å forbedre agenten
+4. Hva publisering, tilgang og lisens betyr når agenten skal i produksjon
