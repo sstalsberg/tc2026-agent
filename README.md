@@ -59,13 +59,14 @@ Med forbehold om endringer, her er en foreløpig tidsplan for de to dagene:
 
 | # | Tittel | Nøkkeltemaer |
 |---|--------|--------------|
-| 1 | Hva er en agent? | Praktisk info, grupper, begreper og forståelse |
-| 2 | Kom i gang med en agent | Plattformer, agentrammeverket, første steg |
-| 3 | Agentens rammeverk | RAG, verktøy, API og MCP |
-| 4 | Under panseret på LLM | Teknisk innblikk i hvordan agentene virker |
+| 1 | [Hva er en agent?](moduler/01-introduksjon-til-agenter.md) | Praktisk info, grupper, begreper og forståelse |
+| 2 | [Agentplattformer](moduler/02-agentplattformer.md) | Plattformer, agentrammeverket, første steg |
+| 3 | [Agentens rammeverk](moduler/03-instruksjoner-kunnskap-verktoy.md) | RAG, verktøy, API og MCP |
+| 4 | [Under panseret på LLM](moduler/04-prompt-engineering-og-kvalitet.md) | Teknisk innblikk i hvordan agentene virker |
 | 5 | Github Copilot: Future of software delivery is agentic | Perspektiver |
-| 6 | Agentarkitektur, Orkestrator, multiagenter, A2A | Arkitektur, Copilot i Fabric |
-| 7 | Governance og avslutning | Agent365, oppsummering, demoer og tilbakemeldinger |
+| 6 | [Agentarkitektur](moduler/06-agentarkitektur-og-multiagent.md) | Arkitektur, Orkestrator, multiagenter, A2A, Copilot i Fabric |
+| 7 | [Governance og avslutning](moduler/07-sikkerhet-governance.md) | Agent365 |
+| 8 | [Avsutning](moduler/08-avslutning.md) | ppsummering, demoer og tilbakemeldinger |
 
 ## Ressurser
 

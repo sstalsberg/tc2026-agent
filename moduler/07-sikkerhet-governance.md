@@ -5,6 +5,7 @@ Denne modulen handler om hva som må være på plass når en agent skal gå fra 
 Vi ser på:
 
 - hvorfor governance er nødvendig rundt agenter
+- hvordan Microsoft Agent 365 kan fungere som kontrollplan for agentporteføljen
 - hvordan tilgang, sikkerhet og guardrails må styres
 - hvordan du evaluerer kvalitet før produksjon
 - hvordan feedback og observabilitet brukes til forbedring
@@ -16,6 +17,7 @@ Målet er å gjøre det tydelig at en agent ikke bare er en modell med litt inst
 
 - Forstå hvorfor governance må bygges inn fra starten
 - Kjenne de viktigste styringslagene rundt en agent
+- Forstå hvor Microsoft Agent 365 passer inn i styring, sikkerhet og drift
 - Se hva som må evalueres før en agent settes i produksjon
 - Forstå hvordan feedback, tracing og logging brukes til forbedring
 - Vite hva publisering, lisens og kostnad betyr i drift
@@ -57,6 +59,77 @@ Dette er en god huskeregel fordi mange team fokuserer tungt på ett lag, men gle
 
 Et team kan for eksempel være gode på tilgangsstyring, men mangle systematisk evaluering.
 Eller de kan ha god kvalitet i test, men ingen plan for publisering og kostnad i drift.
+
+## Microsoft Agent 365 som kontrollplan
+
+Per 30. mars 2026 beskriver Microsoft Learn `Microsoft Agent 365` som en kontrollplan for AI-agenter på tvers av hvor de er bygget eller kjøpt inn.
+
+Det viktigste poenget er ikke at Agent 365 bygger agenten for deg.
+Poenget er at Agent 365 skal gjøre det mulig å:
+
+- gi agenten en tydelig identitet
+- få oversikt over hvilke agenter som finnes i virksomheten
+- styre tilgang, policyer og livssyklus
+- koble agentene til observabilitet, sikkerhet og compliance
+
+Microsoft beskriver blant annet disse kjernedelene:
+
+| Del | Hva det betyr i praksis |
+| --- | --- |
+| Microsoft Entra Agent ID | Hver agent kan få egen identitet for tilgang, livssyklus og styring |
+| Microsoft 365 admin center | IT kan se, overvåke og administrere agenter i en kjent kontrollflate |
+| Agent Registry | Gir oversikt over registrerte agenter, agenter med Agent ID og eventuelle shadow agents |
+| Purview og Defender | Kobler agentene til data governance, audit, trusseldeteksjon og respons |
+| MCP og agentverktøy | Gjør det mulig å koble agenter til styrte verktøy og data i Microsoft 365 |
+
+Det gjør Agent 365 relevant i denne modulen fordi det flytter diskusjonen fra:
+
+- "hvordan bygger vi én agent?"
+
+til:
+
+- "hvordan styrer vi mange agenter på en virksomhetsmessig måte?"
+
+Det er også viktig å være presis på modenhet:
+
+- Per 30. mars 2026 er Agent 365 dokumentert som del av `Frontier preview-programmet`
+- dokumentasjonen sier at funksjoner og tilgjengelighet kan endre seg i preview
+
+## Hvordan Agent 365 passer mot governance-lagene
+
+Hvis vi bruker de fire styringslagene i denne modulen, kan Agent 365 leses slik:
+
+| Lag | Hvordan Agent 365 bidrar |
+| --- | --- |
+| Tilgang | Agentidentitet, registry, least privilege, Conditional Access og sponsorskap |
+| Sikkerhet | Defender, runtime-beskyttelse, prompt shield, policyer og trusselhåndtering |
+| Kvalitet | Observabilitet, sporbarhet og innsikt som gjør evaluering og forbedring mer konkret |
+| Drift | Sentral administrasjon, agentoversikt, onboarding, livssyklus og policyhåndheving |
+
+Dette betyr ikke at Agent 365 erstatter:
+
+- gode instruksjoner
+- testsett
+- guardrails i selve agenten
+- tydelige eiere og godkjenning
+
+Men det betyr at virksomheten kan få en mer samlet måte å styre agentlandskapet på.
+
+## Hvorfor Agent 365 er interessant i denne workshopen
+
+I workshopen snakker vi mye om enkeltagenter, Copilot Studio, Foundry og kodeagenter.
+Agent 365 er interessant fordi Microsoft beskriver det som laget over dette igjen:
+
+- et styringslag for agentporteføljen
+- ikke bare et nytt byggespor
+
+Det gjør det spesielt relevant når spørsmålene blir:
+
+- Hvordan oppdager vi hvilke agenter som faktisk er i bruk?
+- Hvordan vet vi hvilken identitet en agent har?
+- Hvordan begrenser vi hva agenten får tilgang til?
+- Hvordan ser vi misbruk, feil og risikofylt adferd?
+- Hvordan kobler vi agentene til eksisterende sikkerhets- og compliance-arbeid?
 
 ## Identitet og tilgang
 
@@ -261,14 +334,18 @@ Poenget med øvelsen er å flytte tankegangen fra bygging til drift:
 
 ## Oppsummering
 
-Etter denne modulen bør du sitte igjen med tre ting:
+Etter denne modulen bør du sitte igjen med fire ting:
 
 1. Hvorfor governance, sikkerhet og evaluering må bygges inn fra starten
-2. Hvordan feedback, tracing og målinger brukes til å forbedre agenten
-3. Hva publisering, tilgang og lisens betyr når agenten skal i produksjon
+2. Hvordan Agent 365 kan fungere som kontrollplan rundt identitet, observabilitet og sikkerhet
+3. Hvordan feedback, tracing og målinger brukes til å forbedre agenten
+4. Hva publisering, tilgang og lisens betyr når agenten skal i produksjon
 
 ## Lenker
 
+- [Overview of Microsoft Agent 365](https://learn.microsoft.com/microsoft-agent-365/overview)
+- [Agent Management Essentials for Microsoft 365](https://learn.microsoft.com/copilot/microsoft-365/agent-essentials/agent-essentials-overview)
+- [Secure AI agents at scale using Microsoft Agent 365](https://learn.microsoft.com/security/security-for-ai/agent-365-security)
 - [Copilot Studio security and governance](https://learn.microsoft.com/microsoft-copilot-studio/security-and-governance)
 - [Assign licenses and manage access to Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/requirements-licensing)
 - [Copilot Studio analytics and effectiveness](https://learn.microsoft.com/microsoft-copilot-studio/analytics-improve-agent-effectiveness)

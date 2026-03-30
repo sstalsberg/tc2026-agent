@@ -1,7 +1,6 @@
 # Lab 2 – Koble til kunnskapskilder
 
 **Tilhører:** Sesjon 3  
-**Tidsestimat:** 20–30 minutter  
 **Forutsetning:** [Lab 1](lab-01-oppsett-og-ide.md) fullført
 
 ---

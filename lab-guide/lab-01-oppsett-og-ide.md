@@ -1,7 +1,6 @@
 # Lab 1 – Opprett din første agent
 
-**Tilhører:** Sesjon 1–2  
-**Tidsestimat:** 20–30 minutter  
+**Tilhører:** Sesjon 1–2
 **Forutsetning:** Tilgang til [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com)
 
 ---
@@ -31,11 +30,7 @@ Når du er ferdig skal du ha:
 
 1. Klikk på **miljønavnet** øverst til høyre
 2. En liste over tilgjengelige miljøer åpner seg
-3. Velg miljøet du har fått tildelt for workshopen (f.eks. `Hackathon-miljø` eller `Dev`)
-
-> **Viktig:** Ikke bruk produksjonsmiljøet. Hvis du er usikker, spør instruktøren hvilke miljø du skal bruke.
-
-> **Ser du bare ett miljø?** Det er helt normalt. Gå videre til neste steg.
+3. Velg miljøet du ønsker å bruke for workshopen (om du er usikker, velg det som heter Personal Productivity (default)» eller spør instruktøren)
 
 ---
 
