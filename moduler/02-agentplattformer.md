@@ -96,7 +96,3 @@ Etter denne modulen bør du sitte igjen med fire ting:
 - [Microsoft 365 Agents SDK overview](https://learn.microsoft.com/en-us/microsoft-365/agents-sdk/agents-sdk-overview)
 - [Microsoft Foundry Agent Service overview](https://learn.microsoft.com/en-us/azure/foundry/agents/overview)
 - [Microsoft Agent Framework overview](https://learn.microsoft.com/en-us/agent-framework/overview/agent-framework-overview)
-
-## Kildegrunnlag for bilder
-
-- Skjermbilde: «Copilot Studio overview» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-what-is-copilot-studio

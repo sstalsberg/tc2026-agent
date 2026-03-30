@@ -16,18 +16,9 @@ Målet er ikke å rekke én ting til. Målet er å sette læringen i system, syn
 - Lære av andres valg, feil og erfaringer
 - Sitte igjen med en tydelig plan for neste steg etter workshopen
 
-## Del 1: Hva har vi gått gjennom?
+## Hva har vi gått gjennom?
 
 Gjennom workshopen har vi bygget opp en helhetlig forståelse av agentutvikling, fra idé til drift.
-
-Den røde tråden kan leses slik:
-
-1. Hva en agent er
-2. Hvordan du kommer i gang
-3. Hvordan du styrer agenten med instruksjoner, kunnskap og verktøy
-4. Hva som skjer i modellen under panseret
-5. Hvordan agentløsningen kan skaleres i arkitektur
-6. Hvordan løsningen styres, evalueres og publiseres
 
 ## Oppsummering av modulene
 
@@ -45,7 +36,18 @@ Det viktigste er ikke å huske hver detalj, men å forstå helheten.
 
 Modul 5 holdes som en ekstern økt, men hører likevel naturlig inn i helheten fordi den viser hvordan de samme prinsippene dukker opp igjen i kodeagenter og utviklerverktøy.
 
-## Del 2: Deling og demo
+## Den røde tråden i workshopen
+
+Den enkleste måten å lese hele workshopen på er slik:
+
+1. Finn en god oppgave for en agent
+2. Velg riktig plattform og byggespor
+3. Skriv gode instruksjoner
+4. Koble på riktig kunnskap og riktige verktøy
+5. Velg modell og modalitet bevisst
+6. Design arkitektur, styring og drift for videre bruk
+
+## Deling og demo
 
 I denne delen er fokuset å dele det dere har laget så langt. Det kan være:
 
@@ -78,20 +80,6 @@ Et alternativ er å bruke dette skjemaet:
 | Læring | Hva fungerte? Hva var vanskelig? |
 | Neste steg | Hva ville du gjort med mer tid? |
 
-## Hva det er nyttig å lytte etter hos andre
-
-Når andre presenterer, er det nyttig å ikke bare se på “hvor bra demoen er”.
-
-Lytt heller etter:
-
-- var problemet tydelig?
-- var agentens rolle tydelig?
-- var valgene rundt kunnskap og verktøy forståelige?
-- var det riktig å holde løsningen enkel, eller burde den vært delt opp?
-- hva ville vært neste naturlige forbedring?
-
-Deling er nyttig nettopp fordi andre ofte ser ting du selv har blitt blind for.
-
 ## Refleksjon etter demoene
 
 Etter delingen kan det være nyttig å samle noen felles refleksjoner:
@@ -103,7 +91,7 @@ Etter delingen kan det være nyttig å samle noen felles refleksjoner:
 | Hvilke agenttyper så vi flest av? | |
 | Hva overrasket dere mest? | |
 
-## Forslag til avsluttende runde
+## Avsluttende runde
 
 Hvis du vil ha en enkel avslutning i rommet, kan hver deltaker eller gruppe svare kort på én av disse:
 

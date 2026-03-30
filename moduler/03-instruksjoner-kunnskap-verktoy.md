@@ -89,7 +89,6 @@ Det finnes flere måter å hente kunnskap på i Microsoft-økosystemet:
 - Azure AI Search for klassisk RAG
 - agentic retrieval i Azure AI Search / Foundry IQ
 
-
 ### Hvor passer RAG inn?
 
 RAG står for Retrieval-Augmented Generation.
@@ -102,8 +101,6 @@ En enkel forklaring er:
 4. Agenten svarer, gjerne med siteringer
 
 RAG er altså ett mønster for å hente relevant kontekst før modellen svarer.
-
-![Eksempel på hvordan agentic retrieval bruker kontekst, stavekorrigering og splitting av forespørsler](https://learn.microsoft.com/en-us/azure/search/media/agentic-retrieval/agentric-retrieval-example.png)
 
 ### Hvorfor er RAG vanskelig i praksis?
 
@@ -137,13 +134,10 @@ To begreper er spesielt viktige:
 - **Chunking**: store dokumenter deles opp i mindre biter før de søkes i eller indekseres
 
 Semantisk søk hjelper systemet å finne riktig innhold.
+Chunking hjelper systemet å hente riktig utdrag.
 
-![Illustrasjon av hvordan semantisk søk tolker ulike betydninger av samme ord basert på kontekst](https://learn.microsoft.com/en-us/azure/search/media/semantic-search-overview/semantic-vector-representation.png)
-
-Chunking hjelper systemet å hente riktig utdrag. Hvis chunkene er for store, blir konteksten upresis. Hvis de er for små, kan du miste sammenheng.
-
-![Illustrasjon fra Copilot Studio som viser hvordan kunnskapskilder brukes for å hente informasjon til svarene](https://learn.microsoft.com/en-us/microsoft-copilot-studio/media/knowledge/knowledge-source-overview-graphic.png)
-ILLUSTRASJON: Hvordan kunnskapskilder vectoriseres og chunkes i Copilot Studio
+Hvis chunkene er for store, blir konteksten upresis.
+Hvis de er for små, kan du miste sammenheng.
 
 ### Hva avgjør kvaliteten på kunnskapssvar?
 
@@ -188,20 +182,6 @@ Når du tester en agent med kunnskapskilder, er det viktig å teste både:
 
 Dette er et viktig poeng: du bør ikke bare teste “om agenten svarer”, men også hvorfor den svarer som den gjør.
 
-### Kunnskapspipeline med Copilot
-
-![Diagram av Copilot Studio RAG-flyt med query optimization, information retrieval, summarization og validering](https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/media/implementationguide/copilot-studio-rag-architecture.png)
-
-| Steg | Navn | Hva skjer |
-| --- | --- | --- |
-| 1 | Meldingen vurderes | Sjekker om meldingen er trygg å behandle |
-| 2 | Spørsmålet optimaliseres | Omskriver spørsmålet med samtalekontekst |
-| 3 | Informasjon hentes | Søker enten direkte i kilden eller i en indeks, avhengig av strategi |
-| 4 | Innhold oppsummeres | LLM oppsummerer med Responsible AI-guardrails |
-| 5 | Kildegrunnlag valideres | Bekrefter opphav og lager siteringer |
-| 6 | Svaret modereres | Dobbeltsjekker svaret for uønsket innhold |
-| 7 | Respons returneres | Returnerer svar, siteringer og logger |
-
 ## Del 3: Verktøy i agenter
 
 ### Hva mener vi med verktøy?
@@ -240,6 +220,32 @@ Eksempler:
 - Teams
 - Microsoft 365-data via Graph, Semantic Index og brukerens tilgangsmodell
 
+Det er viktig å forstå at dette normalt ikke er direkte API-kall fra agenten slik du ville gjort i en vanlig integrasjon. Dette er grounding og handlinger som plattformen allerede kan støtte gjennom Microsoft 365-laget.
+
+### Variabler og samtalekontekst
+
+Kunnskap er ikke det samme som samtalekontekst.
+
+Variabler brukes når agenten må holde på informasjon som gjelder i akkurat denne dialogen eller prosessen, for eksempel:
+
+- svar brukeren allerede har gitt
+- hvilken kanal eller rolle samtalen gjelder
+- kontekst som skal sendes videre til flow, tool eller annet topic
+
+I Copilot Studio er disse typene vanlige:
+
+| Type | Bruk |
+| --- | --- |
+| Topic-variabler | Verdier som bare brukes i ett topic eller steg |
+| Globale variabler | Verdier som brukes på tvers av topics i samme sesjon |
+| Systemvariabler | Informasjon om bruker, kanal og aktivitet |
+| Environment variables | Konfigurasjon fra plattformen |
+
+Dette er nyttig å ha med fordi agenten ofte trenger både:
+
+- kunnskap for å vite noe
+- variabler for å huske hva som gjelder i samtalen akkurat nå
+
 ### Connectors
 
 En connector er i praksis et innpakket API med definerte handlinger.
@@ -251,6 +257,38 @@ Det viktige her er:
 - begrenset operasjonssett
 
 Connectoren eksponerer som regel ikke hele systemets API, bare et utvalg av handlinger.
+
+### Run a Prompt / AI prompt som verktøy
+
+Noen ganger er ikke riktig verktøy et API eller en flow, men et eget prompt.
+
+I Copilot Studio kan et prompt kjøres som en egen tool med:
+
+- egne inputvariabler
+- eget modellvalg
+- strukturert output
+
+Dette passer godt når du trenger:
+
+- klassifisering eller ekstraksjon
+- fast struktur på svaret, for eksempel JSON
+- en gjenbrukbar AI-operasjon som oppsummering, sentiment eller transformasjon
+
+Det samme mønsteret finnes også i Foundry og kodeagenter: en tydelig prompt-basert action med klart input og output.
+
+### Computer Use / GUI-automatisering
+
+Noen ganger finnes det verken API, connector eller egnet workflow. Da kan GUI-automatisering være et alternativ.
+
+I Copilot Studio brukes dette gjennom `Computer Use`, hvor agenten kan tolke skjermen og bruke virtuell mus og tastatur.
+
+Det viktigste å forstå er:
+
+- verktøyet bruker syn og resonnering for å tolke UI
+- det passer best når en tjeneste mangler API eller annen integrasjon
+- det er tregere og mer sårbart enn API-basert integrasjon
+
+Derfor bør dette brukes når andre og mer robuste integrasjonsformer ikke er tilgjengelige.
 
 ### Prosess
 
@@ -268,6 +306,41 @@ Et viktig skille i modulen er:
 
 Prosess passer godt når stegene er kjent, og når flere systemer må oppdateres i riktig rekkefølge.
 
+### Prosessmønstre: agent flow og event trigger
+
+To mønstre går igjen i mange agentplattformer:
+
+| Mønster | Hva det betyr | Typisk bruk |
+| --- | --- | --- |
+| Agent flow / workflow | En definert sekvens av steg som agenten kan starte | Repeterbare prosesser, godkjenning, oppdatering av flere systemer |
+| Event trigger | En hendelse starter agenten eller prosessen uten at brukeren spør i chat | Ny e-post, ny fil, ny rad, tidsplan, webhook eller business event |
+
+Navnene varierer mellom plattformer, men prinsippet er det samme:
+
+- Copilot Studio bruker agent flows og event triggers
+- Foundry bruker workflows, actions og eksterne triggere
+- kodeagenter kan starte fra scheduler, webhook, queue eller backend-jobb
+
+### Hvordan agenten bruker prosess
+
+To vanlige forløp er:
+
+1. Brukerinitiert: Agent → Prosess → Systemer → Prosess → Agent
+2. Hendelsesdrevet: Hendelse → Prosess → Systemer → Prosess → Agent
+
+Dette understreker et viktig skille:
+
+- agenten velger og resonnerer
+- prosessen utfører og standardiserer
+
+### Prosess: styrker, begrensninger og når det passer
+
+| Styrker | Begrensninger | Bruk når |
+| --- | --- | --- |
+| Orkestrerer flere systemer i én operasjon | Kan oppleves tregt i chat | Prosessen er definert |
+| Standardiserer samme prosess hver gang | Dårlig egnet for avansert dynamisk resonnering | Stegene er kjent på forhånd |
+| Kan trigges av bruker, tidsplan eller hendelse | Krever god styring av auth, logging og feil | Flere systemer må oppdateres eller følges opp automatisk |
+
 ### API som verktøy
 
 Et API er en kontrollert inngang til et system.
@@ -279,6 +352,8 @@ For agentbruk er det viktig at API-et ikke bare finnes, men at det er tydelig be
 - hva som kommer tilbake
 - hvordan autentisering håndteres
 - hvilket schema eller kontrakt som gjelder
+
+Et godt agent-API er derfor ikke bare “et endpoint som finnes”, men en tydelig kontrakt som beskriver hva agenten kan gjøre og hvordan den skal gjøre det.
 
 ### MCP: Model Context Protocol
 
@@ -298,6 +373,33 @@ MCP tilfører:
 
 Dette gjør det lettere for agenten å forstå hvilke verktøy som finnes og hvordan de skal brukes.
 
+### Hva består MCP av, og hvordan fungerer det?
+
+| Byggekloss | Rolle |
+| --- | --- |
+| MCP server | Eksponerer verktøy og kontekst |
+| Tools | Konkrete operasjoner agenten kan bruke |
+| Context | Gjør relevant kontekst tilgjengelig for agenten |
+| Schema | Beskriver input, output og hensikt |
+| Discovery | Lar agenten se hvilke verktøy som finnes |
+| Execution | Kjøring mot underliggende systemer |
+
+Den enkle flyten er:
+
+Agent → MCP → API / data / kontekst → MCP → Agent
+
+### API vs MCP
+
+En nyttig huskeregel er:
+
+- API = “kall denne funksjonen”
+- MCP = “her er verktøyene og konteksten du kan bruke”
+
+Eller enda enklere:
+
+- API gir tilgang til funksjoner
+- MCP gjør verktøy og kontekst brukbare for agenten
+
 ### A2A: agent som verktøy
 
 A2A betyr at én agent kan bruke en annen agent via en standard protokoll.
@@ -310,12 +412,16 @@ Dette passer når den andre agenten allerede har:
 
 Det er altså ikke meningen at én agent skal “gjøre alt”. Noen ganger er det bedre å la en spesialisert agent gjøre jobben.
 
+### Tool, API, MCP og skill: hva er forskjellen?
+
+| Begrep | Hva det er |
+| --- | --- |
+| Tool | Én konkret handling agenten kan utføre |
+| API | Teknisk kontrakt til et system |
+| MCP | Standardisert verktøylag for agenten |
+| Skill | Arbeidsmåte, instruksjoner og støttemateriell for en oppgavetype |
+
 ### Skills
-
-Mulige illustrasjoner av skills:
-
-- Forslag 1: Skill som kombinerer veiledning og utførelse
-![Diagram som viser at agenten bruker en custom skill med tilknyttede verktøy og får data tilbake](https://learn.microsoft.com/en-us/azure/sre-agent/media/skills/custom-skill-flow.svg)
 
 En skill er ikke bare et verktøy, men en gjenbrukbar arbeidsmåte. Den kan bestå av:
 
@@ -328,6 +434,16 @@ Et nyttig skille er:
 
 - et tool lar agenten gjøre noe
 - en skill lærer agenten hvordan den bør løse en type oppgave
+
+### Eksempel på skill-tenkning
+
+En skill gir ikke bare tilgang til en operasjon, men en oppskrift for hvordan agenten bør jobbe.
+
+| Oppgave | Hva skillen gir agenten |
+| --- | --- |
+| Feilsøke en deployment | Vet hvilke logger, statuskommandoer og checks som bør kjøres |
+| Gjennomgå en pull request | Følger en standard review-metode og sjekker risikoer |
+| Lage et nytt API | Vet hvilke filer, maler og teststeg som normalt trengs |
 
 ## Hvordan velge riktig nivå?
 
@@ -395,33 +511,3 @@ Etter denne modulen bør du sitte igjen med:
 - [Generative orchestration in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-generative-actions)
 - [Azure AI Search: Retrieval-augmented generation overview](https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview)
 - [Microsoft Foundry Agent Service overview](https://learn.microsoft.com/en-us/azure/foundry/agents/overview)
-
-## Kildegrunnlag for bilder
-
-- Diagrammer: «Agentic retrieval in Azure AI Search» (Microsoft Learn): https://learn.microsoft.com/en-us/azure/search/agentic-retrieval-overview
-- Diagrammer: «Semantic indexing for Microsoft 365 Copilot» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoftsearch/semantic-index-for-copilot
-- Skjermbilder: «Use OneLake files in Microsoft Foundry» (Microsoft Learn): https://learn.microsoft.com/en-us/fabric/onelake/onelake-foundry-knowledge
-- Illustrasjon: «Semantic Ranking Overview» (Microsoft Learn): https://learn.microsoft.com/en-us/azure/search/semantic-search-overview
-- Diagram: «Relevance and Ranking Overview» (Microsoft Learn): https://learn.microsoft.com/en-us/azure/search/search-relevance-overview
-- Illustrasjon: «Develop a RAG Solution - Generate Embeddings Phase» (Microsoft Learn): https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-generate-embeddings
-- Illustrasjon: «Use unstructured data as a knowledge source» (Microsoft Learn): https://learn.microsoft.com/en-au/microsoft-copilot-studio/knowledge-unstructured-data
-- Diagram: «Enhance AI responses by using Retrieval Augmented Generation» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/retrieval-augmented-generation
-- Diagram: «Agent architecture components» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/architecture/components-of-agent-architecture
-- Illustrasjon: «Design an effective agent with the agent design canvas» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/agent-design-canvas-framework
-- Skjermbilde: «Modify prompt» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoft-copilot-studio/nlu-generative-answers-prompt-modification
-- Diagram: «System messages» (Microsoft Learn): https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/system-message
-- Skjermbilder: «Safety system message templates» (Microsoft Learn): https://learn.microsoft.com/en-us/azure/ai-foundry/openai/concepts/safety-system-message-templates
-- Skjermbilder: «Draft a prompt with Copilot» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoft-copilot-studio/draft-with-copilot
-- Skjermbilde: «Use your own data in a prompt» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoft-copilot-studio/use-your-own-prompt-data
-- Skjermbilde: «Get started with prompt library» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoft-copilot-studio/prompt-library
-- Skjermbilder: «Use cloud flows designer» (Microsoft Learn): https://learn.microsoft.com/en-us/power-automate/flows-designer
-- Diagram og skjermbilder: «Overview - Azure Logic Apps» (Microsoft Learn): https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-overview
-- Skjermbilder: «Call an agent flow from an agent» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-use-flow
-- Skjermbilde: «Create an agent flow as a tool» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-flow-create
-- Diagram: «Get started with MCP and .NET AI» (Microsoft Learn): https://learn.microsoft.com/en-us/dotnet/ai/get-started-mcp
-- Diagrammer: «Introduction to agents and MCP» (Microsoft Learn): https://learn.microsoft.com/en-us/azure/developer/ai/intro-agents-mcp
-- Skjermbilde: «MCP Inspector» (Model Context Protocol docs): https://modelcontextprotocol.io/docs/tools/inspector
-- Diagrammer: «Multi-agent patterns» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/architecture/multi-agent-patterns
-- Diagrammer: «AI Agent Orchestration Patterns» (Microsoft Learn): https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns
-- Diagram og skjermbilde: «Skills in Azure SRE Agent» (Microsoft Learn): https://learn.microsoft.com/en-us/azure/sre-agent/skills
-- Skjermbilde: «Azure Agent Skills» (MicrosoftDocs on GitHub): https://github.com/MicrosoftDocs/agent-skills/blob/main/README.md

@@ -84,7 +84,20 @@ Det viktigste er at agenten blir vanskeligere å styre når:
 - for mange ansvar ligger i samme løsning
 - samme agent må håndtere veldig ulike roller
 
-## Child agents og connected agents
+## Diskusjon: Trenger du multi-agent?
+
+Før du deler opp løsningen, er det nyttig å stoppe opp og vurdere om behovet faktisk er der.
+
+Diskuter for agentideen din:
+
+| Spørsmål | Hva du leter etter |
+| --- | --- |
+| Har løsningen tydelige delområder eller roller? | Tegn på at spesialisering kan gi verdi |
+| Har ulike deler forskjellige verktøy, data eller eiere? | Tegn på at ansvar bør skilles |
+| Trenger du flere perspektiver eller review før svar? | Tegn på at fleragentmønster kan bedre kvaliteten |
+| Holder én agent hvis du rydder i instruksjoner og verktøy? | Sjekk om multi-agent egentlig bare skjuler et designproblem |
+
+## Copilot Studio - Child agents vs. connected agents
 
 I Copilot Studio er dette en nyttig skillelinje når du vil dele opp løsningen.
 
@@ -95,6 +108,7 @@ I Copilot Studio er dette en nyttig skillelinje når du vil dele opp løsningen.
 | Kontekst | Del av samme løsning | Samtalehistorikk kan sendes videre, eller begrenses |
 | Gjenbruk | Best for ett avgrenset delproblem | Best for gjenbruk, eget domene eller eget team |
 | Livssyklus | Forvaltes sammen med hovedagenten | Kan publiseres og styres separat |
+| Typiske koblinger | Copilot Studio internt | Copilot Studio, Foundry, Microsoft 365 Agents SDK eller A2A |
 
 En enkel måte å forstå forskjellen på er:
 
@@ -128,9 +142,9 @@ Forskjellige plattformer legger orkestreringen på forskjellige steder:
 | --- | --- |
 | Copilot Studio | Generativ orkestrering velger topics, tools, knowledge og andre agenter |
 | Microsoft Foundry - prompt agents | Tjenesten håndterer orkestreringen automatisk |
-| Microsoft Foundry - workflow agents | Workflows orkestrerer steg, branching og agentmønstre |
-| Microsoft Foundry - hosted agents | Du skriver orkestreringslogikken selv i kode |
-| Agent Framework | Ferdige workflow-orkestratorer styrer flyt, kontekst og samarbeid |
+| Microsoft Foundry - workflow agents | Workflows orkestrerer steg, branching og agent-til-agent-mønstre |
+| Microsoft Foundry - hosted agents | Du skriver orkestreringslogikken selv i kode, inkludert tool calls, flertrinns resonnering og agentkoordinering, mens Foundry håndterer runtime, skalering og infrastruktur |
+| Agent Framework | Du bruker ferdige workflow-orkestratorer som sequential, concurrent, handoff, group chat og magentic for å styre flyt, kontekst og human-in-the-loop i kode |
 
 Dette er nyttig å forstå fordi multi-agent ikke alltid betyr samme tekniske løsning.
 
@@ -174,7 +188,7 @@ I Foundry brukes ikke topic-begrepet på samme måte. Der er de nærmeste parall
 - workflows
 - agentlogikk
 
-## Human in the loop
+## Human in the loop i agentiske prosesser
 
 Når agenter går fra å svare til å handle, blir menneskelig kontroll viktigere.
 
@@ -195,7 +209,7 @@ Jo mer autonom en agent er, desto viktigere er det å ha:
 - eskalering
 - sporbarhet
 
-## A2A – Agent-to-Agent
+## A2A – Agent-to-Agent-protokollen
 
 `A2A` står for `Agent-to-Agent` og beskriver en standardisert måte for agenter å snakke med andre agenter på tvers av plattformer.
 
@@ -211,13 +225,33 @@ Det er særlig nyttig når den andre agenten allerede har:
 - egne verktøy
 - eller er bygget i et annet rammeverk
 
+I praksis er dette relevant når du bygger en portefølje av agenter i stedet for én stor altmulig-agent.
+
 | MCP | A2A |
 | --- | --- |
 | Verktøytilgang | Agent-til-agent kommunikasjon |
 | Kobler LLM til funksjoner og data | Kobler agenter på tvers av plattformer |
 | Én host → mange servere | Mange agenter → samarbeid via manifester |
 
-Dette gjør A2A relevant når du bygger en agentportefølje i stedet for bare én agent.
+I Microsoft Foundry finnes dette som en egen A2A tool. I Copilot Studio kan A2A-agenter kobles på som connected agents.
+
+## A2A i praksis
+
+| Begrep | Hva det betyr |
+| --- | --- |
+| Agent Card | Et maskinlesbart “visittkort” som beskriver agentens kapabiliteter, endepunkt og auth |
+| Task | Selve oppgaven som sendes fra én agent til en annen |
+| Artifacts | Resultater som kommer tilbake, for eksempel tekst, filer eller strukturert data |
+| Discovery | Orkestratoren kan finne relevante agenter uten hardkoding |
+
+Hovedidé:
+
+- MCP gjør verktøy oppdagbare for agenten
+- A2A gjør andre agenter oppdagbare for agenten
+
+Når passer det?
+
+- når en annen agent allerede eier sitt domene, sine verktøy og sin logikk
 
 ## Hva må du styre når flere agenter samarbeider?
 

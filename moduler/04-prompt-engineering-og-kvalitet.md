@@ -14,6 +14,7 @@ Målet er ikke å gå dypt inn i modellteori, men å gi et praktisk språk for �
 - Forstå hvordan en språkmodell bygger svar fra input og tokens
 - Se hvordan instruksjoner, kontekst og verktøyresultater blir del av modellens input
 - Forstå hva kontekstvindu og tokenbruk betyr i praksis
+- Forstå hvordan temperatur og top-p påvirker variasjon og kontroll
 - Kjenne forskjellen på generalistmodeller, reasoning-modeller, små modeller og multimodale modeller
 - Vurdere når multimodalitet gir verdi, og når ren tekst er nok
 
@@ -69,6 +70,21 @@ I praksis betyr dette:
 - bilder og andre multimodale inputformer bruker også tokens
 
 Dette er en av grunnene til at gode instruksjoner og godt retrieval-design betyr så mye. Det handler ikke bare om kvalitet, men også om effektiv bruk av kontekstvinduet.
+
+## Temperatur og top-p
+
+I tillegg til modellvalg finnes det noen innstillinger som påvirker hvordan modellen svarer.
+
+| Innstilling | Hva den styrer | Typisk bruk |
+| --- | --- | --- |
+| Temperatur | Hvor variert eller kreativ modellen er | Lav for fakta, verktøy og stabile svar |
+| Top-p | Hvor bredt sett av sannsynlige tokens modellen velger fra | Finjustering av variasjon og kontroll |
+
+Praktisk huskeregel:
+
+- start lavt når agenten skal være presis og forutsigbar
+- øk bare når oppgaven faktisk trenger mer variasjon eller kreativitet
+- juster helst én innstilling om gangen, så du forstår hva som faktisk påvirker resultatet
 
 ## Hva påvirker kvaliteten på svaret?
 

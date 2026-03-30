@@ -141,25 +141,24 @@ Dette gjør også evaluering mer konkret. I stedet for å spørre “føles agen
 
 ## Feedback og observabilitet
 
-Når agenten er i bruk, trenger du to typer innsikt:
-
-- hva brukerne opplever
-- hva systemet faktisk gjør
+Når agenten er i bruk, trenger du både brukerinnsikt og teknisk observabilitet.
 
 | Kilde | Hva du lærer |
 | --- | --- |
-| Brukerfeedback | Om svarene faktisk oppleves nyttige |
-| Analytics | Hvilke spørsmål som går bra eller dårlig |
-| Tracing | Hvilke steg, verktøy og agenter som ble brukt |
-| Logging | Feil, latency, kostnad og sikkerhetshendelser |
+| Brukerfeedback | Om agenten faktisk oppleves nyttig |
+| Analytics | Hvilke spørsmål og mønstre som går bra eller dårlig |
+| Traces | Hvilke steg, verktøy og agenter som ble brukt |
+| Metrics og logs | Latency, feilrate, tokenbruk, kostnad og sikkerhetshendelser |
+| Correlation ID | Binder sammen hele kjeden på tvers av verktøy og agenter |
 
-God drift krever begge deler:
+Eksempler på plattformstøtte:
 
-- kvantitative målinger
-- kvalitative tilbakemeldinger
+- Copilot Studio: analytics og plattformlogger
+- Foundry og Azure: tracing, metrics og monitorering
+- Purview og andre kontrollflater: revisjon og sporbarhet
 
-Hvis du bare ser på logger, kan du overse dårlig brukeropplevelse.
-Hvis du bare ser på kommentarer, kan du overse tekniske mønstre og kostnadsdrivere.
+Poenget er ikke bare å vite at noe gikk galt.
+Du må kunne forklare hvor i kjeden det skjedde og hvorfor.
 
 ## Hvordan forbedrer du en agent over tid?
 
@@ -176,6 +175,20 @@ Dette er viktig fordi mange agentprosjekter feiler i drift, ikke i demo.
 
 Problemet er sjelden at agenten aldri fungerte.
 Problemet er at ingen hadde en god måte å oppdage, forklare og forbedre feilene på.
+
+## Kanal og klient
+
+Før du publiserer, er det nyttig å skille mellom hvor agenten er tilgjengelig og hvordan brukeren faktisk møter den.
+
+| Begrep | Hva det betyr |
+| --- | --- |
+| Kanal | Stedet agenten publiseres til, for eksempel Teams, M365 Copilot, web eller app |
+| Klient | Grensesnittet brukeren faktisk møter, for eksempel Teams-chat, webchat eller en egendefinert app |
+
+Dette skillet gjør publiseringsdiskusjonen skarpere:
+
+- kanalen sier hvor agenten er tilgjengelig
+- klienten sier hvordan opplevelsen faktisk ser ut for brukeren
 
 ## Publisering er mer enn å trykke "Publish"
 
