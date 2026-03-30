@@ -4,25 +4,24 @@ const modules = [
     title: "Modul 1 – Introduksjon til AI-agenter",
     shortTitle: "Modul 1",
     summary:
-      "Grunnforståelse av hva en agent er, hvilke byggeklosser den består av, og når agent faktisk passer som løsning.",
+      "Hva er en agent? Hvilke byggeklosser består den av? Når er en agent passende løsning.",
     takeaways: [
-      "En agent er mer enn en chatbot fordi den kan kombinere modell, instruksjoner, kunnskap og verktøy.",
-      "Ikke alle agenter trenger alle byggeklosser, men du bør kjenne dem.",
-      "Retrieval-, task- og autonomous-agenter løser ulike typer oppgaver."
+      "En agent kombinerer språkmodell, styring, kunnskap og verktøy.",
+      "Retrieval-, task- og autonomous-agenter passer til ulike behov og ulike typer oppgaver."
     ],
     practice:
       "Forklar agentideen din med tre setninger: Hvem er brukeren, hva skal agenten gjøre, og hvilken verdi gir den?",
     questions: [
       {
-        prompt: "Hva gjør en AI-agent til mer enn en tradisjonell chatbot?",
+        prompt: "Hva beskriver best en AI-agent slik modulen definerer den?",
         options: [
-          "At den alltid er publisert i Teams.",
-          "At den kombinerer modell, instruksjoner, kunnskap og ofte verktøy.",
-          "At den alltid kan jobbe helt autonomt."
+          "Et intelligent program som bruker en eller flere språkmodeller til å forstå behov, resonnere og utføre oppgaver.",
+          "En fast regelmotor uten språkforståelse som alltid følger samme flyt.",
+          "En chatbot som kun leser opp ferdige svar fra en FAQ."
         ],
-        correctIndex: 1,
+        correctIndex: 0,
         explanation:
-          "Riktig. I workshopen er kjernepoenget at agenten ikke bare prater, men bruker styring, kontekst og ofte handlinger."
+          "Riktig. Modulen beskriver agenten som et intelligent program som bruker språkmodeller til å forstå, resonnere og utføre oppgaver."
       },
       {
         prompt: "Hvilken byggekloss avgjør når agenten starter?",
@@ -32,33 +31,37 @@ const modules = [
           "Riktig. Triggeren sier når agenten starter, enten fra brukerinput eller en hendelse."
       },
       {
-        prompt: "Hvilket eksempel passer best som retrieval-agent?",
+        prompt: "Hvilket eksempel passer best som task-agent?",
         options: [
           "En FAQ-agent over SharePoint-dokumenter.",
           "En agent som oppretter ordre i et CRM-system.",
           "En agent som overvåker innboks og bokfører fakturaer automatisk."
         ],
-        correctIndex: 0,
+        correctIndex: 1,
         explanation:
-          "Riktig. Retrieval-agenten svarer over egne data, ofte dokumenter eller kunnskapskilder."
+          "Riktig. Task-agenter bruker systemer og API-er for å utføre konkrete oppgaver, som å opprette en ordre i et CRM-system."
       },
       {
         prompt: "Når passer en agent typisk dårlig?",
         options: [
+          "Når oppgaven følger helt faste regler uten rom for tolkning.",
           "Når behovet er variabelt og krever dialog.",
-          "Når flere steg må håndteres over tid.",
-          "Når oppgaven følger helt faste regler uten rom for tolkning."
+          "Når flere steg må håndteres før svar eller utførelse."
         ],
-        correctIndex: 2,
+        correctIndex: 0,
         explanation:
-          "Riktig. Hvis alt er helt fast og deterministisk, er ikke agent alltid riktig verktøy."
+          "Riktig. Modulen peker på at helt faste regler og krav om null tolkning ofte er tegn på at en agent ikke er riktig løsning."
       },
       {
-        prompt: "Hvilken agenttype passer best for en løsning som overvåker e-post og handler mot et mål over tid?",
-        options: ["Retrieval", "Task", "Autonomous"],
-        correctIndex: 2,
+        prompt: "Hva kjennetegner en god første agentidé i laben?",
+        options: [
+          "En tydelig bruker, en tydelig oppgave og en tydelig verdi.",
+          "Så mange verktøy og datakilder som mulig fra start.",
+          "At agenten må være helt autonom før den er interessant."
+        ],
+        correctIndex: 0,
         explanation:
-          "Riktig. Autonomous-agenter jobber mot mål, triggere og verktøy over tid."
+          "Riktig. I modulteksten er dette kjernen i en god første agentidé: tydelig bruker, tydelig oppgave og tydelig verdi."
       }
     ]
   },
