@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>TechnoCamp 2026 – Interaktiv modultrening</title>
+    <title>TechnoCamp 2026 – Copilot Agenter</title>
     <meta
       name="description"
-      content="Interaktiv quizportal for TechnoCamp 2026 med én treningsdel per modul."
+      content="Quiz og modultrening for TechnoCamp 2026: Copilot Agenter."
     />
     <link rel="stylesheet" href="./styles.css" />
     <script defer src="./app.js"></script>
@@ -14,19 +14,21 @@
   <body>
     <header class="hero">
       <div class="hero__inner">
-        <p class="eyebrow">TechnoCamp 2026</p>
-        <h1>Interaktiv modultrening</h1>
-        <p class="hero__lead">
-          En enkel quizportal deltakerne kan bruke etter hver modul. Innholdet
-          er basert på workshopdeckene og lagrer fremdrift lokalt i nettleseren.
-        </p>
-      </div>
-    </header>
+        <div class="hero__copy">
+          <p class="eyebrow">TechnoCamp 2026</p>
+          <h1>Copilot Agenter</h1>
+          <p class="hero__lead">
+            Litt quiz, litt repetisjon og forhåpentligvis noen små aha-øyeblikk
+            underveis. Velg en modul, test magefølelsen og se hvor mye agent-snakk
+            som faktisk sitter etter foredragene.
+          </p>
+        </div>
 
-    <div class="layout">
-      <aside class="sidebar">
-        <section class="panel panel--sticky">
-          <h2>Fremdrift</h2>
+        <section class="panel hero__progress" aria-labelledby="progress-title">
+          <div class="hero__progress-head">
+            <p class="hero__progress-kicker">Status akkurat nå</p>
+            <h2 id="progress-title">Fremdrift</h2>
+          </div>
           <div class="stats">
             <div class="stat">
               <span class="stat__label">Moduler fullfort</span>
@@ -48,8 +50,12 @@
             Nullstill fremdrift
           </button>
         </section>
+      </div>
+    </header>
 
-        <section class="panel">
+    <div class="layout">
+      <aside class="sidebar">
+        <section class="panel panel--sticky">
           <h2>Moduler</h2>
           <nav id="module-nav" class="module-nav" aria-label="Velg modul"></nav>
         </section>
