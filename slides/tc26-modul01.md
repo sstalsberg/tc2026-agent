@@ -205,8 +205,6 @@ For Atea betyr dette både intern bruk og nye leveranser til kunder.
 - Copilot Studio vs. å kode selv: hva foretrekker du, og hvorfor?
 - Er 1,3 milliarder innen 2028 noe du tror skjer og hvilke muligheter, utfordringer, trusseler skaper det for IT-bransjen?
 
-#TODO: Lag en løsning som kan samle og oppsummere diskusjonen i sanntid, f.eks. i et delt dokument eller en whiteboard.
-
 ---
 
 # Noen forslag til agentideer
