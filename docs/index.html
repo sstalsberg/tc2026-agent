@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TechnoCamp 2026 – Interaktiv modultrening</title>
+    <meta
+      name="description"
+      content="Interaktiv quizportal for TechnoCamp 2026 med én treningsdel per modul."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script defer src="./app.js"></script>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero__inner">
+        <p class="eyebrow">TechnoCamp 2026</p>
+        <h1>Interaktiv modultrening</h1>
+        <p class="hero__lead">
+          En enkel quizportal deltakerne kan bruke etter hver modul. Innholdet
+          er basert på workshopdeckene og lagrer fremdrift lokalt i nettleseren.
+        </p>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <section class="panel panel--sticky">
+          <h2>Fremdrift</h2>
+          <div class="stats">
+            <div class="stat">
+              <span class="stat__label">Moduler fullfort</span>
+              <strong id="completed-modules">0/0</strong>
+            </div>
+            <div class="stat">
+              <span class="stat__label">Riktige svar</span>
+              <strong id="correct-answers">0/0</strong>
+            </div>
+            <div class="stat">
+              <span class="stat__label">Total progresjon</span>
+              <strong id="overall-progress">0%</strong>
+            </div>
+          </div>
+          <div class="progress-bar" aria-hidden="true">
+            <div id="progress-fill" class="progress-bar__fill"></div>
+          </div>
+          <button id="reset-progress" class="button button--ghost" type="button">
+            Nullstill fremdrift
+          </button>
+        </section>
+
+        <section class="panel">
+          <h2>Moduler</h2>
+          <nav id="module-nav" class="module-nav" aria-label="Velg modul"></nav>
+        </section>
+      </aside>
+
+      <main id="module-view" class="content" aria-live="polite"></main>
+    </div>
+  </body>
+</html>

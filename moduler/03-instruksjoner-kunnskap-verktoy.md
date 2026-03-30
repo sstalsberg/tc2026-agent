@@ -89,9 +89,8 @@ Det finnes flere måter å hente kunnskap på i Microsoft-økosystemet:
 - Azure AI Search for klassisk RAG
 - agentic retrieval i Azure AI Search / Foundry IQ
 
-### Hvor passer RAG inn?
 
-![Eksempel på hvordan agentic retrieval bruker kontekst, stavekorrigering og splitting av forespørsler](https://learn.microsoft.com/en-us/azure/search/media/agentic-retrieval/agentric-retrieval-example.png)
+### Hvor passer RAG inn?
 
 RAG står for Retrieval-Augmented Generation.
 
@@ -104,6 +103,8 @@ En enkel forklaring er:
 
 RAG er altså ett mønster for å hente relevant kontekst før modellen svarer.
 
+![Eksempel på hvordan agentic retrieval bruker kontekst, stavekorrigering og splitting av forespørsler](https://learn.microsoft.com/en-us/azure/search/media/agentic-retrieval/agentric-retrieval-example.png)
+
 ### Hvorfor er RAG vanskelig i praksis?
 
 I teorien virker RAG enkelt. I praksis er det flere utfordringer:
@@ -115,8 +116,6 @@ I teorien virker RAG enkelt. I praksis er det flere utfordringer:
 - sikkerhet og tilgangsstyring må holdes intakt
 
 Det betyr at retrieval-laget er like viktig som selve modellen.
-
-![Arkitektur for agentic retrieval med query planning, parallelle søk og sammenslåtte resultater](https://learn.microsoft.com/en-us/azure/search/media/agentic-retrieval/agentic-retrieval-architecture.png)
 
 ### Hva må retrieval-laget gjøre godt?
 
@@ -138,10 +137,13 @@ To begreper er spesielt viktige:
 - **Chunking**: store dokumenter deles opp i mindre biter før de søkes i eller indekseres
 
 Semantisk søk hjelper systemet å finne riktig innhold.
-Chunking hjelper systemet å hente riktig utdrag.
 
-Hvis chunkene er for store, blir konteksten upresis.
-Hvis de er for små, kan du miste sammenheng.
+![Illustrasjon av hvordan semantisk søk tolker ulike betydninger av samme ord basert på kontekst](https://learn.microsoft.com/en-us/azure/search/media/semantic-search-overview/semantic-vector-representation.png)
+
+Chunking hjelper systemet å hente riktig utdrag. Hvis chunkene er for store, blir konteksten upresis. Hvis de er for små, kan du miste sammenheng.
+
+![Illustrasjon fra Copilot Studio som viser hvordan kunnskapskilder brukes for å hente informasjon til svarene](https://learn.microsoft.com/en-us/microsoft-copilot-studio/media/knowledge/knowledge-source-overview-graphic.png)
+ILLUSTRASJON: Hvordan kunnskapskilder vectoriseres og chunkes i Copilot Studio
 
 ### Hva avgjør kvaliteten på kunnskapssvar?
 
@@ -185,6 +187,20 @@ Når du tester en agent med kunnskapskilder, er det viktig å teste både:
 - test smalere scope og metadatafiltre
 
 Dette er et viktig poeng: du bør ikke bare teste “om agenten svarer”, men også hvorfor den svarer som den gjør.
+
+### Kunnskapspipeline med Copilot
+
+![Diagram av Copilot Studio RAG-flyt med query optimization, information retrieval, summarization og validering](https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/media/implementationguide/copilot-studio-rag-architecture.png)
+
+| Steg | Navn | Hva skjer |
+| --- | --- | --- |
+| 1 | Meldingen vurderes | Sjekker om meldingen er trygg å behandle |
+| 2 | Spørsmålet optimaliseres | Omskriver spørsmålet med samtalekontekst |
+| 3 | Informasjon hentes | Søker enten direkte i kilden eller i en indeks, avhengig av strategi |
+| 4 | Innhold oppsummeres | LLM oppsummerer med Responsible AI-guardrails |
+| 5 | Kildegrunnlag valideres | Bekrefter opphav og lager siteringer |
+| 6 | Svaret modereres | Dobbeltsjekker svaret for uønsket innhold |
+| 7 | Respons returneres | Returnerer svar, siteringer og logger |
 
 ## Del 3: Verktøy i agenter
 
@@ -296,6 +312,11 @@ Det er altså ikke meningen at én agent skal “gjøre alt”. Noen ganger er d
 
 ### Skills
 
+Mulige illustrasjoner av skills:
+
+- Forslag 1: Skill som kombinerer veiledning og utførelse
+![Diagram som viser at agenten bruker en custom skill med tilknyttede verktøy og får data tilbake](https://learn.microsoft.com/en-us/azure/sre-agent/media/skills/custom-skill-flow.svg)
+
 En skill er ikke bare et verktøy, men en gjenbrukbar arbeidsmåte. Den kan bestå av:
 
 - instruksjoner
@@ -378,3 +399,29 @@ Etter denne modulen bør du sitte igjen med:
 ## Kildegrunnlag for bilder
 
 - Diagrammer: «Agentic retrieval in Azure AI Search» (Microsoft Learn): https://learn.microsoft.com/en-us/azure/search/agentic-retrieval-overview
+- Diagrammer: «Semantic indexing for Microsoft 365 Copilot» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoftsearch/semantic-index-for-copilot
+- Skjermbilder: «Use OneLake files in Microsoft Foundry» (Microsoft Learn): https://learn.microsoft.com/en-us/fabric/onelake/onelake-foundry-knowledge
+- Illustrasjon: «Semantic Ranking Overview» (Microsoft Learn): https://learn.microsoft.com/en-us/azure/search/semantic-search-overview
+- Diagram: «Relevance and Ranking Overview» (Microsoft Learn): https://learn.microsoft.com/en-us/azure/search/search-relevance-overview
+- Illustrasjon: «Develop a RAG Solution - Generate Embeddings Phase» (Microsoft Learn): https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-generate-embeddings
+- Illustrasjon: «Use unstructured data as a knowledge source» (Microsoft Learn): https://learn.microsoft.com/en-au/microsoft-copilot-studio/knowledge-unstructured-data
+- Diagram: «Enhance AI responses by using Retrieval Augmented Generation» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/retrieval-augmented-generation
+- Diagram: «Agent architecture components» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/architecture/components-of-agent-architecture
+- Illustrasjon: «Design an effective agent with the agent design canvas» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/agent-design-canvas-framework
+- Skjermbilde: «Modify prompt» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoft-copilot-studio/nlu-generative-answers-prompt-modification
+- Diagram: «System messages» (Microsoft Learn): https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/system-message
+- Skjermbilder: «Safety system message templates» (Microsoft Learn): https://learn.microsoft.com/en-us/azure/ai-foundry/openai/concepts/safety-system-message-templates
+- Skjermbilder: «Draft a prompt with Copilot» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoft-copilot-studio/draft-with-copilot
+- Skjermbilde: «Use your own data in a prompt» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoft-copilot-studio/use-your-own-prompt-data
+- Skjermbilde: «Get started with prompt library» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoft-copilot-studio/prompt-library
+- Skjermbilder: «Use cloud flows designer» (Microsoft Learn): https://learn.microsoft.com/en-us/power-automate/flows-designer
+- Diagram og skjermbilder: «Overview - Azure Logic Apps» (Microsoft Learn): https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-overview
+- Skjermbilder: «Call an agent flow from an agent» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-use-flow
+- Skjermbilde: «Create an agent flow as a tool» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-flow-create
+- Diagram: «Get started with MCP and .NET AI» (Microsoft Learn): https://learn.microsoft.com/en-us/dotnet/ai/get-started-mcp
+- Diagrammer: «Introduction to agents and MCP» (Microsoft Learn): https://learn.microsoft.com/en-us/azure/developer/ai/intro-agents-mcp
+- Skjermbilde: «MCP Inspector» (Model Context Protocol docs): https://modelcontextprotocol.io/docs/tools/inspector
+- Diagrammer: «Multi-agent patterns» (Microsoft Learn): https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/architecture/multi-agent-patterns
+- Diagrammer: «AI Agent Orchestration Patterns» (Microsoft Learn): https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns
+- Diagram og skjermbilde: «Skills in Azure SRE Agent» (Microsoft Learn): https://learn.microsoft.com/en-us/azure/sre-agent/skills
+- Skjermbilde: «Azure Agent Skills» (MicrosoftDocs on GitHub): https://github.com/MicrosoftDocs/agent-skills/blob/main/README.md
