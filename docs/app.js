@@ -15,11 +15,11 @@ const modules = [
       {
         prompt: "Hva beskriver best en AI-agent slik modulen definerer den?",
         options: [
-          "Et intelligent program som bruker en eller flere språkmodeller til å forstå behov, resonnere og utføre oppgaver.",
           "En fast regelmotor uten språkforståelse som alltid følger samme flyt.",
-          "En chatbot som kun leser opp ferdige svar fra en FAQ."
+          "En chatbot som kun leser opp ferdige svar fra en FAQ.",
+          "Et intelligent program som bruker en eller flere språkmodeller til å forstå behov, resonnere og utføre oppgaver."
         ],
-        correctIndex: 0,
+        correctIndex: 2,
         explanation:
           "Modulen beskriver agenten som et intelligent program som bruker språkmodeller til å forstå, resonnere og utføre oppgaver."
       },
@@ -59,11 +59,11 @@ const modules = [
       {
         prompt: "Hva kjennetegner en god første agentidé i laben?",
         options: [
-          "En tydelig bruker, en tydelig oppgave og en tydelig verdi.",
           "Så mange verktøy og datakilder som mulig fra start.",
-          "At agenten må være helt autonom før den er interessant."
+          "At agenten må være helt autonom før den er interessant.",
+          "En tydelig bruker, en tydelig oppgave og en tydelig verdi."
         ],
-        correctIndex: 0,
+        correctIndex: 2,
         explanation:
           "I modulteksten er dette kjernen i en god første agentidé: tydelig bruker, tydelig oppgave og tydelig verdi."
       }
@@ -85,8 +85,8 @@ const modules = [
     questions: [
       {
         prompt: "Hvilken plattform passer best når agenten skal svare over et tydelig avgrenset dokumentsett?",
-        options: ["SharePoint agents", "Microsoft Agent Framework", "Microsoft 365 Agents SDK"],
-        correctIndex: 0,
+        options: ["Microsoft Agent Framework", "Microsoft 365 Agents SDK", "SharePoint agents"],
+        correctIndex: 2,
         explanation:
           "Riktig. SharePoint agents passer når agenten bygges direkte over et avgrenset innholdssett."
       },
@@ -95,7 +95,7 @@ const modules = [
         options: ["Agent Builder i M365 Copilot", "Foundry Agent Service", "Agent Framework"],
         correctIndex: 0,
         explanation:
-          "Riktig. Agent Builder er den raskeste inngangen for prototyping i Microsoft 365."
+          "Agent Builder er den raskeste inngangen for prototyping i Microsoft 365."
       },
       {
         prompt: "Når er Microsoft 365 Agents SDK spesielt relevant?",
@@ -106,14 +106,14 @@ const modules = [
         ],
         correctIndex: 0,
         explanation:
-          "Riktig. SDK-sporet er relevant når kanalopplevelse og egen kode er viktig."
+          "SDK-sporet er relevant når kanalopplevelse og egen kode er viktig."
       },
       {
         prompt: "Hvilket byggespor passer best når managed runtime, RBAC, tracing og skalering i Azure er viktigst?",
         options: ["Copilot Studio", "Microsoft Foundry Agent Service", "SharePoint agents"],
         correctIndex: 1,
         explanation:
-          "Riktig. Foundry Agent Service passer godt når du trenger Azure-plattform og mer avansert drift."
+          "Foundry Agent Service passer godt når du trenger Azure-plattform og mer avansert drift."
       },
       {
         prompt: "Når er Microsoft Agent Framework mest relevant?",
@@ -124,7 +124,7 @@ const modules = [
         ],
         correctIndex: 0,
         explanation:
-          "Riktig. Agent Framework er laget for orkestrering, workflows og multi-agent i kode."
+          "Agent Framework er laget for orkestrering, workflows og multi-agent i kode."
       }
     ]
   },
@@ -145,22 +145,22 @@ const modules = [
       {
         prompt: "Hva mangler ofte i agentinstruksjoner, og gjør at agenten må gjette mer?",
         options: [
-          "Handlingsrom, verktøybruk, stoppkriterier og rekkefølge.",
           "Fargevalg, logo og ikoner.",
-          "Kostnadsestimat for plattformen."
+          "Kostnadsestimat for plattformen.",
+          "Handlingsrom, verktøybruk, stoppkriterier og rekkefølge."
         ],
-        correctIndex: 0,
+        correctIndex: 2,
         explanation:
           "Riktig. I workshopen er dette fire ting som ofte mangler, og som svekker agentens styring."
       },
       {
         prompt: "Hvorfor er few-shot-eksempler nyttige i instruksjoner?",
         options: [
-          "De hjelper når tone, struktur og svarstil er viktig.",
           "De erstatter behovet for kunnskapskilder.",
-          "De gjør at agenten ikke lenger trenger evaluering."
+          "De gjør at agenten ikke lenger trenger evaluering.",
+          "De hjelper når tone, struktur og svarstil er viktig."
         ],
-        correctIndex: 0,
+        correctIndex: 2,
         explanation:
           "Riktig. Eksempler på gode svar hjelper agenten å forstå forventet stil og struktur."
       },
@@ -178,29 +178,29 @@ const modules = [
       {
         prompt: "Hvorfor er det viktig å beskrive en kunnskapskilde godt?",
         options: [
-          "Fordi agenten bruker beskrivelsen for å velge riktig kilde, spesielt når flere kilder ligner på hverandre.",
           "Bare for at mennesker skal like oppsettet bedre.",
-          "Kun for å få lavere lisenskostnad."
+          "Kun for å få lavere lisenskostnad.",
+          "Fordi agenten bruker beskrivelsen for å velge riktig kilde, spesielt når flere kilder ligner på hverandre."
         ],
-        correctIndex: 0,
+        correctIndex: 2,
         explanation:
           "Riktig. Gode beskrivelser hjelper agenten å velge riktig kunnskapskilde, og er ekstra viktige når antallet kilder vokser."
       },
       {
         prompt: "Hva er forskjellen på semantisk søk og chunking?",
         options: [
-          "Semantisk søk finner mening; chunking deler dokumenter i mindre biter for bedre treff.",
           "Semantisk søk brukes bare i Teams; chunking brukes bare i Azure.",
-          "Det er to ord for akkurat det samme."
+          "Det er to ord for akkurat det samme.",
+          "Semantisk søk finner mening; chunking deler dokumenter i mindre biter for bedre treff."
         ],
-        correctIndex: 0,
+        correctIndex: 2,
         explanation:
           "Riktig. Semantikk hjelper deg å finne riktig innhold, chunking hjelper deg å hente riktig utdrag."
       },
       {
         prompt: "Hvilket verktøynivå passer best når agenten skal kjøre flere kjente steg på tvers av systemer?",
-        options: ["Prosess", "Variabler", "Innebygde verktøy"],
-        correctIndex: 0,
+        options: ["Variabler", "Innebygde verktøy", "Prosess"],
+        correctIndex: 2,
         explanation:
           "Riktig. Prosess brukes når agenten må starte en sekvens av handlinger, ikke bare ett kall."
       },
@@ -218,11 +218,11 @@ const modules = [
       {
         prompt: "Hva er MCP best beskrevet som?",
         options: [
-          "Et standardisert lag for verktøy og kontekst som gjøres brukbart for agenten.",
           "Bare en ny type database.",
-          "Et annet navn for SharePoint-agent."
+          "Et annet navn for SharePoint-agent.",
+          "Et standardisert lag for verktøy og kontekst som gjøres brukbart for agenten."
         ],
-        correctIndex: 0,
+        correctIndex: 2,
         explanation:
           "Riktig. MCP standardiserer hvordan verktøy og kontekst eksponeres til agenter."
       }
@@ -256,51 +256,51 @@ const modules = [
       {
         prompt: "Hva mener vi med inputpakken til modellen?",
         options: [
-          "Hele kombinasjonen av instruksjoner, brukerforespørsel, grounding, verktøyresultater og relevant historikk.",
           "Bare det brukeren skrev i siste melding.",
-          "Kun systemprompten."
+          "Kun systemprompten.",
+          "Hele kombinasjonen av instruksjoner, brukerforespørsel, grounding, verktøyresultater og relevant historikk."
         ],
-        correctIndex: 0,
+        correctIndex: 2,
         explanation:
           "Riktig. Prompt i bred forstand er hele inputpakken modellen faktisk får."
       },
       {
         prompt: "Når bør du starte med lav temperatur?",
         options: [
-          "Når agenten skal være presis, stabil og faktabasert.",
           "Når du vil ha mest mulig kreativ variasjon i alle svar.",
-          "Når du vil slippe å evaluere agenten."
+          "Når du vil slippe å evaluere agenten.",
+          "Når agenten skal være presis, stabil og faktabasert."
         ],
-        correctIndex: 0,
+        correctIndex: 2,
         explanation:
           "Riktig. Lav temperatur passer bedre for fakta, verktøybruk og forutsigbare svar."
       },
       {
         prompt: "Hvilken modelltype prioriterer du typisk for flertrinns logikk og krevende analyse?",
-        options: ["Reasoning-modell", "Small language model", "Ren multimodal modell uten tekstbehov"],
-        correctIndex: 0,
+        options: ["Small language model", "Reasoning-modell", "Ren multimodal modell uten tekstbehov"],
+        correctIndex: 1,
         explanation:
           "Riktig. Reasoning-modeller er typisk bedre på komplekse problemer og flertrinns resonnering."
       },
       {
         prompt: "Når gir multimodalitet mest verdi?",
         options: [
-          "Når visuell eller auditiv kontekst faktisk er viktig, som skjermbilder, dokumentlayout eller tale.",
           "Når du bare har korte tekstspørsmål.",
-          "Når du vil bruke så få tokens som mulig."
+          "Når du vil bruke så få tokens som mulig.",
+          "Når visuell eller auditiv kontekst faktisk er viktig, som skjermbilder, dokumentlayout eller tale."
         ],
-        correctIndex: 0,
+        correctIndex: 2,
         explanation:
           "Riktig. Multimodalitet gir verdi når tekst alene ikke dekker oppgaven godt nok."
       },
       {
         prompt: "Hvorfor bør du ikke bruke multimodalitet bare fordi det er mulig?",
         options: [
-          "Det kan gi mer kostnad, mer kompleksitet og er ikke nødvendig hvis tekst er nok.",
           "Det fungerer bare i forskningsprosjekter.",
+          "Det kan gi mer kostnad, mer kompleksitet og er ikke nødvendig hvis tekst er nok.",
           "Det kan ikke kombineres med andre verktøy."
         ],
-        correctIndex: 0,
+        correctIndex: 1,
         explanation:
           "Riktig. Hvis ren tekst er nok, er det ofte enklere, billigere og lettere å styre."
       }
@@ -323,33 +323,33 @@ const modules = [
       {
         prompt: "Hva er hovedpoenget med å ha kodeagenter som ekstern økt i dette løpet?",
         options: [
-          "Å vise at de samme agentmønstrene også brukes i utviklerverktøy og kodeflyt.",
           "Å erstatte alle andre moduler i workshopen.",
-          "Å gjøre Copilot Studio irrelevant."
+          "Å gjøre Copilot Studio irrelevant.",
+          "Å vise at de samme agentmønstrene også brukes i utviklerverktøy og kodeflyt."
         ],
-        correctIndex: 0,
+        correctIndex: 2,
         explanation:
           "Riktig. Modul 5 er med for å vise at prinsippene fra workshopen også gjelder i pro-code-scenarier."
       },
       {
         prompt: "Hvilken type arbeid kan en kodeagent typisk hjelpe med?",
         options: [
-          "Generering av tester, dokumentasjon, analyser og forslag til kodeendringer.",
           "Bare design av PowerPoint-temaer.",
+          "Generering av tester, dokumentasjon, analyser og forslag til kodeendringer.",
           "Kun lisenshåndtering i Microsoft 365."
         ],
-        correctIndex: 0,
+        correctIndex: 1,
         explanation:
           "Riktig. Kodeagenter brukes ofte i utviklerflyt til analyse, endringer, test og dokumentasjon."
       },
       {
         prompt: "Hvilke tre prinsipper går igjen fra resten av workshopen og inn i kodeagenter?",
         options: [
-          "Instruksjoner, kontekst og verktøy.",
           "Bare hastighet, hosting og CSS.",
-          "Kun modellvalg og branch-navn."
+          "Kun modellvalg og branch-navn.",
+          "Instruksjoner, kontekst og verktøy."
         ],
-        correctIndex: 0,
+        correctIndex: 2,
         explanation:
           "Riktig. Kodeagenter er fortsatt agenter: de trenger styring, relevant kontekst og riktige verktøy."
       }
@@ -372,11 +372,11 @@ const modules = [
       {
         prompt: "Hva er en typisk gevinst med multi-agent?",
         options: [
-          "Mer spesialisering og enklere vedlikehold av delansvar.",
           "At alle sikkerhetsbehov forsvinner.",
-          "At man aldri lenger trenger evaluering."
+          "At man aldri lenger trenger evaluering.",
+          "Mer spesialisering og enklere vedlikehold av delansvar."
         ],
-        correctIndex: 0,
+        correctIndex: 2,
         explanation:
           "Riktig. Multi-agent kan gi tydeligere roller, bedre gjenbruk og bedre sporbarhet."
       },
@@ -390,33 +390,33 @@ const modules = [
       {
         prompt: "Hva er et typisk tegn på at én agent bør splittes i flere?",
         options: [
-          "Beskrivelser overlapper, ulike team eier ulike domener, eller agenten har for mange valg.",
           "At agenten bare har en enkel FAQ-oppgave.",
+          "Beskrivelser overlapper, ulike team eier ulike domener, eller agenten har for mange valg.",
           "At man vil unngå all form for styring."
         ],
-        correctIndex: 0,
+        correctIndex: 1,
         explanation:
           "Riktig. Når ansvar og metadata begynner å flyte sammen, er oppdeling ofte et bedre designvalg."
       },
       {
         prompt: "Hva skiller en connected agent fra en child agent i Copilot Studio?",
         options: [
-          "Connected agent er mer selvstendig og kan styres og gjenbrukes separat.",
           "Child agent er alltid ekstern og eies av et annet team.",
-          "Det er ingen reell forskjell."
+          "Det er ingen reell forskjell.",
+          "Connected agent er mer selvstendig og kan styres og gjenbrukes separat."
         ],
-        correctIndex: 0,
+        correctIndex: 2,
         explanation:
           "Riktig. Child agents er inne i samme løsning, connected agents er mer selvstendige og kan ha eget domene og livssyklus."
       },
       {
         prompt: "Hva er orkestratorlagets hovedjobb?",
         options: [
-          "Å velge mellom topics, tools, knowledge og andre agenter, og styre rekkefølge og kontekst.",
           "Å erstatte behovet for instruksjoner.",
-          "Å lagre alle filer i OneDrive."
+          "Å lagre alle filer i OneDrive.",
+          "Å velge mellom topics, tools, knowledge og andre agenter, og styre rekkefølge og kontekst."
         ],
-        correctIndex: 0,
+        correctIndex: 2,
         explanation:
           "Riktig. Orkestratorlaget er arkitekturlaget som styrer hva som skal skje videre."
       },
@@ -446,22 +446,22 @@ const modules = [
       {
         prompt: "Hvorfor trenger agenter governance?",
         options: [
-          "Fordi agenten kan hente data, bruke verktøy og utføre handlinger med reelle konsekvenser.",
           "Bare for å tilfredsstille formelle krav til presentasjoner.",
-          "Kun når agenten er bygget i Azure."
+          "Kun når agenten er bygget i Azure.",
+          "Fordi agenten kan hente data, bruke verktøy og utføre handlinger med reelle konsekvenser."
         ],
-        correctIndex: 0,
+        correctIndex: 2,
         explanation:
           "Riktig. Governance handler om at agenten er en virksomhetsløsning, ikke bare en smart demo."
       },
       {
         prompt: "Hvilke fire styringslag bruker workshopen som mental modell?",
         options: [
-          "Tilgang, sikkerhet, kvalitet og drift.",
           "Bruker, modell, design og budsjett.",
+          "Tilgang, sikkerhet, kvalitet og drift.",
           "Kode, nettverk, database og CSS."
         ],
-        correctIndex: 0,
+        correctIndex: 1,
         explanation:
           "Riktig. Disse fire lagene gjør governance mer konkret og lettere å fordele ansvar i."
       },
@@ -479,109 +479,58 @@ const modules = [
       {
         prompt: "Hva bør et godt testsett inneholde i tillegg til vanlige spørsmål?",
         options: [
-          "Vanskelige spørsmål, utenfor scope, sikkerhetstester og verktøy/prosessflyt.",
           "Kun spørsmål som allerede virker fint i demo.",
-          "Bare ett langt dokument som agenten leser."
+          "Bare ett langt dokument som agenten leser.",
+          "Vanskelige spørsmål, utenfor scope, sikkerhetstester og verktøy/prosessflyt."
         ],
-        correctIndex: 0,
+        correctIndex: 2,
         explanation:
           "Riktig. Testsettet må dekke både normal bruk, grenser, sikkerhet og handlinger."
       },
       {
         prompt: "Hva er en Correlation ID nyttig for?",
         options: [
-          "Å binde sammen hele kjeden på tvers av verktøy, kall og agenter.",
           "Å velge fargepalett for klienten.",
-          "Å lage kortere prompttekster."
+          "Å lage kortere prompttekster.",
+          "Å binde sammen hele kjeden på tvers av verktøy, kall og agenter."
         ],
-        correctIndex: 0,
+        correctIndex: 2,
         explanation:
           "Riktig. Correlation ID gjør observabilitet og feilsøking på tvers av kjeder mulig."
       },
       {
         prompt: "Hva er forskjellen på kanal og klient?",
         options: [
-          "Kanal er hvor agenten publiseres; klient er grensesnittet brukeren faktisk møter.",
           "Kanal er alltid Teams, klient er alltid web.",
+          "Kanal er hvor agenten publiseres; klient er grensesnittet brukeren faktisk møter.",
           "Det er to ord for det samme."
         ],
-        correctIndex: 0,
+        correctIndex: 1,
         explanation:
           "Riktig. Skillet hjelper når du diskuterer publisering og brukeropplevelse."
       },
       {
         prompt: "Hvorfor er publisering mer enn å trykke Publish?",
         options: [
-          "Fordi du må avklare tilgang, identitet i drift, versjonering og godkjenning.",
           "Fordi modellen må trenes på nytt hver gang.",
-          "Fordi publisering automatisk løser kostnadsproblemer."
+          "Fordi publisering automatisk løser kostnadsproblemer.",
+          "Fordi du må avklare tilgang, identitet i drift, versjonering og godkjenning."
         ],
-        correctIndex: 0,
+        correctIndex: 2,
         explanation:
           "Riktig. Publisering er et kontrollpunkt, ikke bare en knapp."
       }
     ]
-  },
-  {
-    id: "modul8",
-    title: "Modul 8 – Avslutning, oppsummering og deling",
-    shortTitle: "Modul 8",
-    summary:
-      "Oppsummering av løpet, deling av læring og en siste sjekk på om deltakerne ser den røde tråden fra idé til drift.",
-    takeaways: [
-      "Hele workshopen kan leses som en reise fra oppgavevalg til drift.",
-      "Demoer og refleksjon gjør læringen tydelig.",
-      "Målet er ikke perfekt leveranse, men tydelige valg og neste steg."
-    ],
-    practice:
-      "Svar kort på to ting: Hva er det viktigste du tar med deg, og hva vil du teste videre først?",
-    questions: [
-      {
-        prompt: "Hva er første steg i den røde tråden i workshopen?",
-        options: [
-          "Finne en god oppgave for en agent.",
-          "Velge den dyreste modellen.",
-          "Bygge multi-agent fra dag én."
-        ],
-        correctIndex: 0,
-        explanation:
-          "Riktig. Workshopen starter med problemet og bruken, ikke med teknologien."
-      },
-      {
-        prompt: "Hva er et godt demoformat i avslutningen?",
-        options: [
-          "Forklar hva du bygde, hvem agenten er for, en ting den gjør bra og en ting du vil forbedre videre.",
-          "Les opp hele instruksjonsfilen ord for ord.",
-          "Vis bare lisensmatrisen."
-        ],
-        correctIndex: 0,
-        explanation:
-          "Riktig. Demoen skal være kort, tydelig og fokusert på verdi, valg og videre forbedring."
-      },
-      {
-        prompt: "Hvilke tre lag ble oppsummert som det som gjør agenten nyttig i praksis?",
-        options: [
-          "Instruksjoner, kunnskapskilder og verktøy.",
-          "Bilder, lyd og video.",
-          "CSS, backend og hosting."
-        ],
-        correctIndex: 0,
-        explanation:
-          "Riktig. Dette er kjernelaget fra modul 3 som gjenbrukes i resten av workshopen."
-      },
-      {
-        prompt: "Hva er et godt tegn på at workshopen har gjort jobben sin?",
-        options: [
-          "At deltakerne sitter igjen med språk, struktur og erfaring nok til å bygge videre.",
-          "At alle har bygget en perfekt produksjonsklar agent.",
-          "At ingen endret mening underveis."
-        ],
-        correctIndex: 0,
-        explanation:
-          "Riktig. Målet er bevisste valg og videre fremdrift, ikke perfekt ferdig produkt."
-      }
-    ]
   }
+];
+
+const agentFunFacts = [
+  "IDC-estimatet som brukes i workshopen peker mot 1,3 milliarder AI-agenter innen 2028.",
+  "En retrieval-agent trenger ofte bare språkmodell, instruksjoner og kunnskap for å være nyttig.",
+  "Det er først når agenten skal løse flertrinnsoppgaver at orkestrering virkelig blir synlig.",
+  "Mange av de beste agentidéene starter smått: én tydelig bruker, én tydelig oppgave og én tydelig verdi.",
+  "Agenter gir ofte mest verdi når de kombinerer kunnskap med handling, ikke bare genererer tekst.",
+  "En virksomhet vil sjelden ende opp med én agent. Ofte vokser det fram en hel portefølje over tid."
 ];
 
 const storageKey = "tc26-modultester-state-v1";
@@ -710,11 +659,13 @@ function renderNav() {
 }
 
 function renderModule() {
-  const module = modules.find((item) => item.id === state.activeModuleId) || modules[0];
+  const moduleIndex = modules.findIndex((item) => item.id === state.activeModuleId);
+  const module = modules[moduleIndex] || modules[0];
   const progress = getModuleProgress(module);
   const hasModuleAnswers = module.questions.some((_, questionIndex) =>
     Boolean(getQuestionState(module.id, questionIndex))
   );
+  const funFact = agentFunFacts[moduleIndex % agentFunFacts.length];
 
   const questionMarkup = module.questions
     .map((question, questionIndex) => renderQuestion(module, question, questionIndex))
@@ -759,7 +710,7 @@ function renderModule() {
     </section>
 
     <section class="summary-card">
-      <strong>Tips:</strong> Deltakerne kan bruke denne modulen som repetisjon etter foredraget, eller som kontrollspørsmål i grupper.
+      <strong>Visste du at?</strong> ${funFact}
     </section>
   `;
 
