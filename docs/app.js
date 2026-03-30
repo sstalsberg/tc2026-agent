@@ -24,11 +24,15 @@ const modules = [
           "Riktig. Modulen beskriver agenten som et intelligent program som bruker språkmodeller til å forstå, resonnere og utføre oppgaver."
       },
       {
-        prompt: "Hvilken byggekloss avgjør når agenten starter?",
-        options: ["Trigger", "Kunnskap", "Orkestrering"],
+        prompt: "Hvordan ser Microsoft for seg at virksomheter tar i bruk agenter?",
+        options: [
+          "Som en portefølje av Microsoft-agenter, partneragenter og egne agenter bygget av virksomheten.",
+          "Ved å standardisere på én agenttype og én leverandør for alt.",
+          "Ved å bruke bare ferdige Microsoft-agenter og unngå egne løsninger."
+        ],
         correctIndex: 0,
         explanation:
-          "Riktig. Triggeren sier når agenten starter, enten fra brukerinput eller en hendelse."
+          "Riktig. Modul 1 beskriver at virksomheter typisk vil ha en portefølje som består av Microsoft-agenter, partneragenter og egne agenter."
       },
       {
         prompt: "Hvilket eksempel passer best som task-agent?",
