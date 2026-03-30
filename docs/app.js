@@ -21,7 +21,7 @@ const modules = [
         ],
         correctIndex: 0,
         explanation:
-          "Riktig. Modulen beskriver agenten som et intelligent program som bruker språkmodeller til å forstå, resonnere og utføre oppgaver."
+          "Modulen beskriver agenten som et intelligent program som bruker språkmodeller til å forstå, resonnere og utføre oppgaver."
       },
       {
         prompt: "Hvordan ser Microsoft for seg at virksomheter tar i bruk agenter?",
@@ -32,7 +32,7 @@ const modules = [
         ],
         correctIndex: 0,
         explanation:
-          "Riktig. Modul 1 beskriver at virksomheter typisk vil ha en portefølje som består av Microsoft-agenter, partneragenter og egne agenter."
+          "Modul 1 beskriver at virksomheter typisk vil ha en portefølje som består av Microsoft-agenter, partneragenter og egne agenter."
       },
       {
         prompt: "Hvilket eksempel passer best som task-agent?",
@@ -43,7 +43,7 @@ const modules = [
         ],
         correctIndex: 1,
         explanation:
-          "Riktig. Task-agenter bruker systemer og API-er for å utføre konkrete oppgaver, som å opprette en ordre i et CRM-system."
+          "Task-agenter bruker systemer og API-er for å utføre konkrete oppgaver, som å opprette en ordre i et CRM-system."
       },
       {
         prompt: "Når passer en agent typisk dårlig?",
@@ -54,7 +54,7 @@ const modules = [
         ],
         correctIndex: 0,
         explanation:
-          "Riktig. Modulen peker på at helt faste regler og krav om null tolkning ofte er tegn på at en agent ikke er riktig løsning."
+          "Modulen peker på at helt faste regler og krav om null tolkning ofte er tegn på at en agent ikke er riktig løsning."
       },
       {
         prompt: "Hva kjennetegner en god første agentidé i laben?",
@@ -65,7 +65,7 @@ const modules = [
         ],
         correctIndex: 0,
         explanation:
-          "Riktig. I modulteksten er dette kjernen i en god første agentidé: tydelig bruker, tydelig oppgave og tydelig verdi."
+          "I modulteksten er dette kjernen i en god første agentidé: tydelig bruker, tydelig oppgave og tydelig verdi."
       }
     ]
   },
@@ -623,6 +623,14 @@ function saveState() {
   window.localStorage.setItem(storageKey, JSON.stringify(state));
 }
 
+function resetModuleAnswers(moduleId) {
+  Object.keys(state.answers).forEach((key) => {
+    if (key.startsWith(`${moduleId}::`)) {
+      delete state.answers[key];
+    }
+  });
+}
+
 function questionKey(moduleId, questionIndex) {
   return `${moduleId}::${questionIndex}`;
 }
@@ -704,6 +712,9 @@ function renderNav() {
 function renderModule() {
   const module = modules.find((item) => item.id === state.activeModuleId) || modules[0];
   const progress = getModuleProgress(module);
+  const hasModuleAnswers = module.questions.some((_, questionIndex) =>
+    Boolean(getQuestionState(module.id, questionIndex))
+  );
 
   const questionMarkup = module.questions
     .map((question, questionIndex) => renderQuestion(module, question, questionIndex))
@@ -716,7 +727,17 @@ function renderModule() {
           <h2>${module.title}</h2>
           <p class="module-card__summary">${module.summary}</p>
         </div>
-        <div class="module-card__tag">${progress.correct}/${progress.total} riktige</div>
+        <div class="module-card__actions">
+          <div class="module-card__tag">${progress.correct}/${progress.total} riktige</div>
+          <button
+            type="button"
+            class="button button--ghost button--module-reset"
+            id="reset-module"
+            ${hasModuleAnswers ? "" : "disabled"}
+          >
+            Nullstill modul
+          </button>
+        </div>
       </div>
 
       <div class="two-column">
@@ -743,6 +764,7 @@ function renderModule() {
   `;
 
   attachQuestionHandlers(module);
+  attachModuleResetHandler(module);
 }
 
 function renderQuestion(module, question, questionIndex) {
@@ -780,6 +802,7 @@ function renderQuestion(module, question, questionIndex) {
           data-module-id="${module.id}"
           data-question-index="${questionIndex}"
           data-option-index="${optionIndex}"
+          ${hasAnswered ? "disabled" : ""}
         >
           ${option}
         </button>
@@ -812,11 +835,15 @@ function renderQuestion(module, question, questionIndex) {
 }
 
 function attachQuestionHandlers(module) {
-  moduleView.querySelectorAll(".option").forEach((button) => {
+  moduleView.querySelectorAll(".option:not(:disabled)").forEach((button) => {
     button.addEventListener("click", () => {
       const questionIndex = Number(button.dataset.questionIndex);
       const optionIndex = Number(button.dataset.optionIndex);
       const question = module.questions[questionIndex];
+
+      if (getQuestionState(module.id, questionIndex)) {
+        return;
+      }
 
       state.answers[questionKey(module.id, questionIndex)] = {
         selectedIndex: optionIndex,
@@ -826,6 +853,19 @@ function attachQuestionHandlers(module) {
       saveState();
       render();
     });
+  });
+}
+
+function attachModuleResetHandler(module) {
+  const resetModuleButton = moduleView.querySelector("#reset-module");
+  if (!resetModuleButton) {
+    return;
+  }
+
+  resetModuleButton.addEventListener("click", () => {
+    resetModuleAnswers(module.id);
+    saveState();
+    render();
   });
 }
 
