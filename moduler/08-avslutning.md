@@ -9,6 +9,8 @@ Planen er todelt:
 
 Målet er ikke å rekke én ting til. Målet er å sette læringen i system, synliggjøre progresjonen og gjøre neste steg tydelig.
 
+[Forrige: Modul 7](./07-sikkerhet-governance.md) | [Til hovedside](../README.md)
+
 ## Læringsmål
 
 - Oppsummere de viktigste prinsippene fra hele workshopen
@@ -107,3 +109,5 @@ Hele workshopen har i praksis handlet om dette:
 3. Forstå modellvalg, arkitektur og drift godt nok til å gjøre bevisste valg
 
 Hvis deltakerne sitter igjen med det, har workshopen gjort jobben sin.
+
+[Forrige: Modul 7](./07-sikkerhet-governance.md) | [Til hovedside](../README.md)

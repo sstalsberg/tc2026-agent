@@ -8,6 +8,8 @@ Denne modulen så går vi igjennom det som gjør en agent nyttig:
 
 Vi ser på hvordan disse delene henger sammen, og hvordan du kan begynne å tenke på dem når du utvikler din egen agentidé.
 
+[Forrige: Modul 2](./02-agentplattformer.md) | [Til hovedside](../README.md) | [Neste: Modul 4](./04-prompt-engineering-og-kvalitet.md)
+
 ## Læringsmål
 
 - Forstå hva instruksjoner er og hvordan de skrives
@@ -503,6 +505,8 @@ Etter denne modulen bør du sitte igjen med:
 1. Evnen til å skrive tydeligere instruksjoner
 2. En bedre forståelse av hvordan kunnskap, kontekst, grounding og RAG påvirker kvalitet
 3. Et tydeligere språk for å velge og beskrive verktøy i agenten
+
+[Forrige: Modul 2](./02-agentplattformer.md) | [Til hovedside](../README.md) | [Neste: Modul 4](./04-prompt-engineering-og-kvalitet.md)
 
 ## Lenker
 

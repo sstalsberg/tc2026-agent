@@ -58,6 +58,7 @@ Se [PREREQUISITES.md](../PREREQUISITES.md) for fullstendig liste over hva du tre
 - Microsoft 365-konto med Copilot Studio-lisens (eller trial)
 - Tilgang til et Power Platform-miljø (helst ikke produksjon)
 - Nettleser (Edge eller Chrome anbefales)
+- Ved behov: følg [Lab 0](lab-00-atea-miljo-for-copilot-studio.md) for å opprette eget development environment i Atea
 
 ---
 
@@ -67,6 +68,7 @@ Labene følger sesjonene i workshopen:
 
 | Lab | Tittel | Sesjon | Tidsestimat |
 |-----|--------|--------|-------------|
+| [Lab 0](lab-00-atea-miljo-for-copilot-studio.md) | Sett opp ditt Atea-miljø for Copilot Studio | Før oppstart | 10–15 min |
 | [Lab 1](lab-01-oppsett-og-ide.md) | Opprett din første agent | Sesjon 1–2 | 20–30 min |
 | [Lab 2](lab-02-kunnskap-og-data.md) | Koble til kunnskapskilder | Sesjon 3 | 20–30 min |
 | [Lab 3](lab-03-verktoy-og-integrasjoner.md) | Legg til verktøy og integrasjoner | Sesjon 3 | 25–35 min |
@@ -74,7 +76,7 @@ Labene følger sesjonene i workshopen:
 | [Lab 5](lab-05-avansert.md) | Multi-agent og avansert | Sesjon 5 | 30–40 min |
 | [Lab 6](lab-06-demo-forberedelse.md) | Klargjør demo og presentasjon | Avslutning | 15–20 min |
 
-**Totalt tidsestimat:** Ca. 2,5–3 timer
+**Totalt tidsestimat:** Ca. 2,5–3 timer, pluss 10–15 min oppsett ved behov
 
 ---
 
@@ -82,6 +84,7 @@ Labene følger sesjonene i workshopen:
 
 Har du erfaring med Copilot Studio og vil komme kjapt i gang?
 
+0. Hvis du mangler eget miljø: følg [Lab 0](lab-00-atea-miljo-for-copilot-studio.md)
 1. Gå til [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com)
 2. Klikk **Opprett** → **Ny agent**
 3. Navn: `Onboarding-agent`, språk: Norsk
@@ -102,4 +105,4 @@ Trenger du mer detaljer? Følg de fullstendige labene i rekkefølge.
 
 ---
 
-*Sist oppdatert: Mars 2026*
+*Sist oppdatert: April 2026*

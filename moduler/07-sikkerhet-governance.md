@@ -13,6 +13,8 @@ Vi ser på:
 
 Målet er å gjøre det tydelig at en agent ikke bare er en modell med litt instruksjoner. Når agenten skal i produksjon, blir den en løsning som må eies, styres, måles og forbedres.
 
+[Forrige: Modul 6](./06-agentarkitektur-og-multiagent.md) | [Til hovedside](../README.md) | [Neste: Modul 8](./08-avslutning.md)
+
 ## Læringsmål
 
 - Forstå hvorfor governance må bygges inn fra starten
@@ -340,6 +342,8 @@ Etter denne modulen bør du sitte igjen med fire ting:
 2. Hvordan Agent 365 kan fungere som kontrollplan rundt identitet, observabilitet og sikkerhet
 3. Hvordan feedback, tracing og målinger brukes til å forbedre agenten
 4. Hva publisering, tilgang og lisens betyr når agenten skal i produksjon
+
+[Forrige: Modul 6](./06-agentarkitektur-og-multiagent.md) | [Til hovedside](../README.md) | [Neste: Modul 8](./08-avslutning.md)
 
 ## Lenker
 

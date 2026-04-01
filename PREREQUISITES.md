@@ -26,12 +26,14 @@ Du velger selv hvilken plattform du vil jobbe med under campen. Det er også hel
 2. Åpne [Copilot Studio](https://copilotstudio.microsoft.com)
 3. Bekreft at du kommer inn i løsningen og kan [opprette en agent](https://learn.microsoft.com/nb-no/microsoft-copilot-studio/fundamentals-create-agent)
 4. Om du ønsker kan du også opprette et eget developer Power Platform-miljø på forhånd.
+5. Følg [Lab 0: Sett opp ditt Atea-miljø for Copilot Studio](lab-guide/lab-00-atea-miljo-for-copilot-studio.md) hvis du trenger en steg-for-steg-veiledning
 
 **Nyttige lenker:**
 
 - [Copilot Studio: Kom i gang](https://learn.microsoft.com/nb-no/microsoft-copilot-studio/fundamentals-get-started)
 - [Opprett miljø i Power Platform](https://learn.microsoft.com/nb-no/power-platform/admin/create-environment)
 - [Power Platform Admin Center](https://admin.powerplatform.microsoft.com)
+- [Lab 0: Sett opp ditt Atea-miljø for Copilot Studio](lab-guide/lab-00-atea-miljo-for-copilot-studio.md)
 
 ---
 
@@ -108,6 +110,7 @@ Gå gjerne gjennom denne listen dagen før eller samme morgen.
 - [ ] Jeg har Microsoft 365 Copilot-lisens, eller har bestilt via [Atea OneHub](https://atea.link/getcopilot)
 - [ ] Jeg får åpnet [Copilot Studio](https://copilotstudio.microsoft.com)
 - [ ] Jeg har tilgang til et Power Platform-miljø
+- [ ] Jeg har fulgt [Lab 0](lab-guide/lab-00-atea-miljo-for-copilot-studio.md) hvis jeg trengte et eget environment i Atea
 
 ### Hvis jeg vil bruke Agent Builder
 

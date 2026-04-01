@@ -2,6 +2,8 @@
 
 Målet er å få oversikt over Microsofts agentøkosystem og velge en fornuftig plattform for agenten.
 
+[Forrige: Modul 1](./01-introduksjon-til-agenter.md) | [Til hovedside](../README.md) | [Neste: Modul 3](./03-instruksjoner-kunnskap-verktoy.md)
+
 ## Læringsmål
 
 - Forstå forskjellen mellom de viktigste agentplattformene i Microsoft-økosystemet
@@ -89,6 +91,8 @@ Etter denne modulen bør du sitte igjen med fire ting:
 2. En forståelse av forskjellen mellom raske innganger og mer avanserte byggevalg
 3. En enkel modell for å velge passende plattform ut fra behov
 4. Opprettet en første agentidé og testet i en av plattformene
+
+[Forrige: Modul 1](./01-introduksjon-til-agenter.md) | [Til hovedside](../README.md) | [Neste: Modul 3](./03-instruksjoner-kunnskap-verktoy.md)
 
 ## Lenker
 

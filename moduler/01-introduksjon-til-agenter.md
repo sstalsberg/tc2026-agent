@@ -2,6 +2,8 @@
 
 Denne sesjonen handler om å forstå hva en agent er, hvilke typer agenter som finnes, når de passer godt, og hvordan du kan begynne å tenke på din egen agentidé.
 
+[Til hovedside](../README.md) | [Neste: Modul 2](./02-agentplattformer.md)
+
 ## Læringsmål
 
 - Forstå hva en AI-agent er og hvilke byggeklosser den består av
@@ -150,6 +152,8 @@ Etter denne sesjonen skal deltakerne sitte igjen med tre ting:
 1. En enkel og presis forståelse av hva en AI-agent er
 2. Et språk for å skille mellom retrieval, task og autonomous
 3. Et første utkast til en egen agentidé som kan videreutvikles i resten av workshopen
+
+[Til hovedside](../README.md) | [Neste: Modul 2](./02-agentplattformer.md)
 
 ## Lenker
 

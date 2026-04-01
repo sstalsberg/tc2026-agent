@@ -9,6 +9,8 @@ Målet er ikke å gå dypt inn i modellteori, men å gi et praktisk språk for �
 - hvordan du velger riktig modell for en agent
 - når multimodalitet gir verdi
 
+[Forrige: Modul 3](./03-instruksjoner-kunnskap-verktoy.md) | [Til hovedside](../README.md) | [Neste: Modul 6](./06-agentarkitektur-og-multiagent.md)
+
 ## Læringsmål
 
 - Forstå hvordan en språkmodell bygger svar fra input og tokens
@@ -218,6 +220,8 @@ Etter denne modulen bør du sitte igjen med tre ting:
 1. En praktisk forståelse av hvordan en språkmodell bygger svar fra input og tokens
 2. Et språk for å vurdere modellvalg ut fra kvalitet, kostnad og responstid
 3. En forståelse av når multimodalitet gir verdi, og når ren tekst er nok
+
+[Forrige: Modul 3](./03-instruksjoner-kunnskap-verktoy.md) | [Til hovedside](../README.md) | [Neste: Modul 6](./06-agentarkitektur-og-multiagent.md)
 
 ## Lenker
 

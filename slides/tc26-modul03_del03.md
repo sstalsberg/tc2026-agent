@@ -180,6 +180,19 @@ I Copilot Studio har du tre typer variabler:
 | Environment variables | Konfigurasjon fra plattformen |
 
 
+---
+
+# Synonymer og regex: fra fritekst til strukturert input
+
+| Mønster | Hva det gjør | Eksempel |
+| --- | --- | --- |
+| Synonymer | Fanger ulike ord for samme begrep | `leilighet`, `flat`, `apartment` |
+| Lukket liste | Begrenser input til kjente valg | `hus`, `duplex`, `condo` |
+| Regex | Fanger mønstre i tekst | `[1-5]` soverom, postnr, ordrenr |
+
+- Dette er broen mellom fri tekst og variabler agenten faktisk kan bruke
+- Reduserer feil i oppslag, routing og verktøykall
+- Passer best når innholdet er kjent og variasjonene kan beskrives
 
 ---
 

@@ -25,20 +25,20 @@ Med forbehold om endringer, her er en foreløpig tidsplan for de to dagene:
 | Tid | Økter | Varighet | Type |
 |------|--------|----------|------|
 | 09:45 - 10:30 | Intro: praktisk info og gruppedeling | 15 min | Info |
-|  | Tema 1: Hva er en agent? | 5 min | Presentasjon |
-|  | Lab: Bordprat om agenter du vil bygge | 10 min | Lab |
-|  | Tema 2: Hvordan komme i gang med en agent; plattformer og agentrammeverk | 15 min | Presentasjon |
+|  | [Modul 1: Hva er en agent?](moduler/01-introduksjon-til-agenter.md) | 5 min | Presentasjon |
+|  | [Lab: Bordprat om agenter du vil bygge](moduler/01-introduksjon-til-agenter.md) | 10 min | Lab |
+|  | [Modul 2: Hvordan komme i gang med en agent; plattformer og agentrammeverk](moduler/02-agentplattformer.md) | 15 min | Presentasjon |
 | 10:30 - 10:45 | Pause | 15 min | – |
-| 10:45 - 12:00 | Lab: Valg av plattform og start å bygge din agent | 30 min | Lab |
-|  | Tema 3 del 1: Instruksjoner og kunnskap (RAG) | 15 min | Presentasjon |
-|  | Lab: Jobb med instruksjoner og kunnskap | 30 min | Lab |
+| 10:45 - 12:00 | [Lab: Valg av plattform og start å bygge din agent](moduler/02-agentplattformer.md) | 30 min | Lab |
+|  | [Modul 3 del 1: Instruksjoner og kunnskap (RAG)](moduler/03-instruksjoner-kunnskap-verktoy.md) | 15 min | Presentasjon |
+|  | [Lab: Jobb med instruksjoner og kunnskap](moduler/03-instruksjoner-kunnskap-verktoy.md) | 30 min | Lab |
 | 12:00 - 13:00 | Lunsj | 60 min | – |
-| 13:00 - 14:00 | Tema 3 del 2: API og MCP | 20 min | Presentasjon |
-|  | Lab: Jobb med API og MCP for din agent | 40 min | Lab |
-| 14:00 - 15:00 | Tema 4: Under panseret på en LLM (v/Claus) | 30 min | Presentasjon |
-|  | Lab: Videre arbeid med agenten etter tema 4 | 30 min | Lab |
+| 13:00 - 14:00 | [Modul 3 del 2: API og MCP](moduler/03-instruksjoner-kunnskap-verktoy.md) | 20 min | Presentasjon |
+|  | [Lab: Jobb med API og MCP for din agent](moduler/03-instruksjoner-kunnskap-verktoy.md) | 40 min | Lab |
+| 14:00 - 15:00 | [Modul 4: Under panseret på en LLM (v/Claus)](moduler/04-prompt-engineering-og-kvalitet.md) | 30 min | Presentasjon |
+|  | [Lab: Videre arbeid med agenten etter modul 4](moduler/04-prompt-engineering-og-kvalitet.md) | 30 min | Lab |
 | 15:00 - 15:30 | Pause / foto | 30 min | – |
-| 15:30 - 16:30 | Tema 5: "The future of software delivery is agentic" (Microsoft v/Maxim) | 60 min | Foredrag |
+| 15:30 - 16:30 | Modul 5: "The future of software delivery is agentic" (Microsoft v/Maxim) | 60 min | Foredrag |
 | 16:30 - 17:00 | Lab: Fortsett bygging (valgfritt) | 30 min | Lab |
 | 17:00 | Steinars time (Sønsteby) | – | Foredrag |
 
@@ -46,16 +46,16 @@ Med forbehold om endringer, her er en foreløpig tidsplan for de to dagene:
 
 | Tid | Økter | Varighet | Type |
 |------|--------|----------|------|
-| 09:30 - 10:30 | Tema 6 del 1: Agentarkitektur | 15 min | Presentasjon |
-|  | Lab: Test ut arkitekturvalg for agenten din | 45 min | Lab |
+| 09:30 - 10:30 | [Modul 6 del 1: Agentarkitektur](moduler/06-agentarkitektur-og-multiagent.md) | 15 min | Presentasjon |
+|  | [Lab: Test ut arkitekturvalg for agenten din](moduler/06-agentarkitektur-og-multiagent.md) | 45 min | Lab |
 | 10:30 - 10:45 | Pause | 15 min | – |
-| 10:45 - 11:30 | Tema 6 del 2: Copilot i Fabric (Claus) | 15 min | Presentasjon |
-|  | Lab: Siste arbeidsøkt med din agent | 30 min | Lab |
-| 11:30 - 12:00 | Tema 7: Governance | 15 min | Presentasjon |
-|  | Oppsummering, tilbakemeldinger og demoer | 15 min | Oppsummering |
+| 10:45 - 11:30 | [Modul 6 del 2: Copilot i Fabric (Claus)](moduler/06-agentarkitektur-og-multiagent.md) | 15 min | Presentasjon |
+|  | [Lab: Siste arbeidsøkt med din agent](moduler/06-agentarkitektur-og-multiagent.md) | 30 min | Lab |
+| 11:30 - 12:00 | [Modul 7: Governance](moduler/07-sikkerhet-governance.md) | 15 min | Presentasjon |
+|  | [Oppsummering, tilbakemeldinger og demoer](moduler/08-avslutning.md) | 15 min | Oppsummering |
 | 12:00 | Lunsj og hjemreise | – | – |
 
-## Temaoversikt
+## Moduloversikt
 
 | # | Tittel | Nøkkeltemaer |
 |---|--------|--------------|
@@ -65,8 +65,8 @@ Med forbehold om endringer, her er en foreløpig tidsplan for de to dagene:
 | 4 | [Under panseret på LLM](moduler/04-prompt-engineering-og-kvalitet.md) | Teknisk innblikk i hvordan agentene virker |
 | 5 | Github Copilot: Future of software delivery is agentic | Perspektiver |
 | 6 | [Agentarkitektur](moduler/06-agentarkitektur-og-multiagent.md) | Arkitektur, Orkestrator, multiagenter, A2A, Copilot i Fabric |
-| 7 | [Governance og avslutning](moduler/07-sikkerhet-governance.md) | Agent365 |
-| 8 | [Avsutning](moduler/08-avslutning.md) | ppsummering, demoer og tilbakemeldinger |
+| 7 | [Governance, evaluering og publisering](moduler/07-sikkerhet-governance.md) | Agent365, sikkerhet, evaluering og publisering |
+| 8 | [Avslutning, oppsummering og deling](moduler/08-avslutning.md) | Oppsummering, demoer og tilbakemeldinger |
 
 ## Ressurser
 

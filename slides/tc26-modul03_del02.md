@@ -144,6 +144,20 @@ style: |
 
 ---
 
+### Ustrukturert kunnskap vs. Strukturerte data
+
+Det er nyttig å skille mellom to typer kunnskap i en agent:
+
+| Type | Hva det er | Typisk bruk |
+| --- | --- | --- |
+| Ustrukturert kunnskap | Dokumenter, nettsider, notater, e-poster og fritekst | Spørsmål, oppsummering, søk og forklaring |
+| Strukturert data | Rader, felter og objekter som kunder, kontakter, saker, ordre og hendelser | brukes ofte til presise oppslag, regler, validering og handlinger |
+
+- bruk dokumentkilder når brukeren trenger forklaring, kontekst eller siterbare svar
+- bruk strukturert data når agenten må finne, oppdatere eller kontrollere konkrete felter og poster
+
+---
+
 # Måter å hente kunnskap på i Microsoft-økosystemet
 
 | Teknikk | Kort forklart | Styrke |

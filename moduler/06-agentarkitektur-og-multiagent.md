@@ -12,6 +12,8 @@ Vi ser på:
 
 Målet er ikke å gjøre alle til multi-agent-arkitekter på én gang. Målet er å gi deg et språk for å vite når multi-agent gir verdi, og når det bare gjør løsningen mer komplisert.
 
+[Forrige: Modul 4](./04-prompt-engineering-og-kvalitet.md) | [Til hovedside](../README.md) | [Neste: Modul 7](./07-sikkerhet-governance.md)
+
 ## Læringsmål
 
 - Forstå hvorfor multi-agent kan gi bedre spesialisering, gjenbruk og sporbarhet
@@ -310,6 +312,8 @@ Etter denne modulen bør du sitte igjen med:
 1. En forståelse av hvorfor og når multi-agent kan være nyttig
 2. Et språk for å beskrive mønstre som sekvens, handoff, group chat og orchestrator
 3. En bedre forståelse av hvordan orkestrering, topics, child agents, connected agents og A2A henger sammen
+
+[Forrige: Modul 4](./04-prompt-engineering-og-kvalitet.md) | [Til hovedside](../README.md) | [Neste: Modul 7](./07-sikkerhet-governance.md)
 
 ## Lenker
 
