@@ -3,62 +3,47 @@
 **Passer for:** Deltakere som skal bruke Copilot Studio i Atea-tenant  
 **Mål:** Du får et eget miljø med Dataverse i Atea og har valgt det i Copilot Studio
 
-## Steg 1 - Sjekk om du allerede har et eget miljø
-
-1. Gå til [Power Apps](https://make.powerapps.com).
-2. Se øverst til høyre etter miljøvalg.
-3. Åpne listen over tilgjengelige miljøer.
-4. Se etter et personlig eller eget miljø, for eksempel et miljø som inneholder navnet ditt.
-
-Hvis du allerede har et egnet miljø i Atea:
-
-- velg det
-- gå videre til Steg 3
-
-Hvis du bare ser `Default` eller ønsker å sette opp nytt miljø:
-
-- gå videre til neste steg og opprett et eget miljø
-
----
-
-## Steg 2 - Opprett ditt eget miljø i PPAC
+## Steg 1 - Opprett ditt eget miljø i Power Plattfomr Admin Center
 
 1. Gå til [Power Platform admin center](https://admin.powerplatform.microsoft.com).
 2. Velg **Manage** og deretter **Environments**.
 
-![Åpne PPAC og gå til Manage](../Build-Your-Own-Agent-Copilot-Studio-in-a-Day-main/Images/Lab-4/Exercise1-Task1-1.png)
-![Gå til miljøoversikten i PPAC](../Build-Your-Own-Agent-Copilot-Studio-in-a-Day-main/Images/Lab-4/Exercise1-Task1-2.png)
+![Åpne PPAC og gå til Manage](../assets/ppac-01.png)
 
 3. Klikk **New** for å opprette et nytt miljø.
 4. Fyll inn miljødetaljene:
 
 - **Name**: bruk et tydelig navn, for eksempel `fornavn-copilotstudio-dev`
 - **Region**: velg `Europe`
-- **Type**: miljøtypen `Developer`
+- **Get new features early**: valgfritt, men kan gi tilgang til nye funksjoner før de rulles ut bredt. Støttes ikke i alle regioner.
+- **Type**: `Developer`
 - **Purpose**: valgfritt, for eksempel `Workshop for Copilot Studio`
 
-6. Klikk **Next** og fullfør Dataverse-oppsettet:
+![Gå til miljøoversikten i PPAC](../assets/ppac-02.png)
 
-- **Language**: bruk ønsket standardspråk
-- **Currency**: velg relevant valuta
-- **Enable Dynamics 365 apps**: la denne være av hvis workshopen ikke uttrykkelig krever det
-- **Deploy sample apps and data**: la denne være av med mindre instruktøren ber dere slå den på
+5. Klikk **Next** og fullfør Dataverse-oppsettet:
 
-7. Klikk **Save** og vent til miljøet er ferdig provisjonert. Dette kan ta noen minutter.
+- **Language**: bruk ønsket standardspråk, velg norsk eller engelsk
+- **Currency**: velg relevant valuta (ikke relevant for denne workshopen)
+- **URL name**: valgfritt, men lurt å sette i prosjektets navn for å lettere kjenne det igjen senere
+- **Deploy sample apps and data**: valgfritt - lager sample data i dataverse du vil bruke til agenttesting
+
+6. Klikk **Save** og vent til miljøet er ferdig provisjonert. Dette kan ta noen minutter.
+
+![Gå til miljøoversikten i PPAC](../assets/ppac-03.png)
+
+`NB! Det er kun mulig å ha 3x utviklermiljøer per bruker så om du har laget utviklermiljøer tidligere, må du gjenbruke eller slette ett av dem dersom du vil opprette et nytt for denne workshopen.`
 
 ---
 
-## Steg 3 - Verifiser at miljøet er klart i Power Apps
+## Steg 2 - Verifiser at miljøet er klart Copilot Studio
 
-Når miljøet er opprettet eller valgt:
+1. Gå til [Copilot Studio](https://copilotstudio.microsoft.com).
+2. Se øverst til høyre etter miljøvelgeren.
+3. Velg miljøet du nettopp opprettet.
 
-1. Gå til [Power Apps](https://make.powerapps.com).
-2. Åpne miljøvelgeren øverst til høyre.
-3. Velg miljøet du nettopp opprettet eller verifiserte.
-4. Kontroller at du ikke står i `Default`.
+![Velg miljø](../assets/ppac-04.png)
 
-![Miljøvelger i Power Apps](../Build-Your-Own-Agent-Copilot-Studio-in-a-Day-main/Images/Lab-0/Exercise1-Task2-1.png)
-![Velg ditt eget miljø i Power Apps](../Build-Your-Own-Agent-Copilot-Studio-in-a-Day-main/Images/Lab-0/Exercise1-Task2-2.png)
 
 Hvis miljøet ikke dukker opp i Copilot Studio senere, er vanligste årsaker:
 
@@ -66,25 +51,29 @@ Hvis miljøet ikke dukker opp i Copilot Studio senere, er vanligste årsaker:
 - du er logget inn med feil konto
 - miljøet mangler Dataverse eller ligger i en region som ikke støttes
 
----
 
-## Steg 4 - Åpne Copilot Studio i riktig miljø
 
-1. Gå til [Copilot Studio](https://copilotstudio.microsoft.com).
-2. Logg inn med samme Atea-konto.
-3. Se øverst til høyre etter miljøvelgeren.
-4. Velg miljøet du nettopp opprettet eller verifiserte.
 
-Hvis du ser flere miljøer:
+## Steg 3 - Sett opp en default solution i miljøet (valgfritt)
 
-- velg ditt eget miljø
-- unngå `Default` med mindre instruktøren eksplisitt har bedt deg bruke det
+Hvis du vil jobbe mer strukturert med eksport, flytting mellom miljøer eller ALM, kan du opprette en egen solution i miljøet og bruke den som foretrukket løsning.
 
-## Tips - Opprett en egen løsning senere
+1. I Copilot Studio, gå til **Solutions** i venstremenyen
 
-For denne workshopen er det nok at du har et eget miljø.
+![Velg miljø](../assets/ppac-05.png)
 
-Hvis du senere vil jobbe mer strukturert med eksport, flytting mellom miljøer eller ALM, kan du opprette en egen solution i miljøet og bruke den som foretrukket løsning.
+2. Klikk på **+ Create** og velg **Blank solution**
+
+![Velg miljø](../assets/ppac-07.png)
+
+3. Gi solution et navn, for eksempel `CopilotStudioWorkshop`
+4. Du kan la Publisher være standard eller lage en ny hvis du ønsker det
+5. Klikk på "Set as your preferred solution"
+6. Klikk **Create** og vent til løsningen er opprettet  
+
+![Velg miljø](../assets/ppac-06.png)
+
+7. Nå vil alle nye komponenter du oppretter i Copilot Studio automatisk legges i denne løsningen, og det blir enklere å holde oversikt og flytte komponenter mellom miljøer senere.
 
 ## Nyttige lenker
 
