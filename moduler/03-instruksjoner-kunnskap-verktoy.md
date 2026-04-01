@@ -1,6 +1,6 @@
 # Modul 3: Instruksjoner, kunnskap og verktøy
 
-Denne modulen så går vi igjennom det som gjør en agent nyttig:
+I denne modulen går vi gjennom det som gjør en agent nyttig:
 
 - gode instruksjoner
 - kunnskap og grounding
@@ -33,24 +33,24 @@ En nyttig måte å tenke på er at instruksjoner er styringsmekanismen for agent
 
 ### Hva bør instruksjonen inneholde?
 
-| Hva instruksjonen bør inneholde | Hvorfor det betyr noe |
+| Hva instruksjonen bør inneholde | Hvordan skrive den godt |
 | --- | --- |
-| Rolle og mål | Agenten må vite hvem den er og hva som er viktigst |
-| Oppgaver agenten løser | Hjelper agenten å fokusere på riktig type arbeid |
-| Kilder og verktøy den skal bruke, og når | Reduserer feil verktøybruk og unødvendige kall |
-| Hva den skal avvise, eskalere eller be om avklaring på | Definerer grenser og stoppkriterier |
-| Hvordan svaret skal formateres | Sikrer riktig stil, struktur og brukeropplevelse |
-| Eksempler på gode svar | Few-shot-eksempler hjelper når tone og struktur er viktig |
-| Rekkefølge hvis steg må tas i orden | Viktig når agenten skal følge en bestemt prosess |
+| Rolle og mål | Vær spesifikk og konkret |
+| Oppgaver agenten løser | Prioriter det viktigste først |
+| Kilder og verktøy den skal bruke, og når | Si når agenten skal bruke verktøy og når den skal la være |
+| Hva den skal avvise, eskalere eller be om avklaring på | Definer handlingsrom og stoppkriterier |
+| Hvordan svaret skal formateres | Gi tydelig format når det faktisk betyr noe |
+| Eksempler på gode svar | Bruk 1-2 few-shot-eksempler når tone, struktur eller kvalitet er viktig |
+| Rekkefølge hvis steg må tas i orden | Test steg for steg |
 
 ### Det som ofte mangler
 
-Fire ting mangler ofte i agentinstruksjoner:
-
-- handlingsrom
-- verktøybruk
-- stoppkriterier
-- rekkefølge
+| Mangler ofte | Hvorfor det betyr noe |
+| --- | --- |
+| Handlingsrom | Agenten må vite når den skal handle selv og når den skal spørre |
+| Verktøybruk | Tydelige kriterier gir færre unødvendige bruk eller feil verktøykall |
+| Stoppkriterier | Gjør det tydelig når oppgaven er ferdig og når den skal eskalere |
+| Rekkefølge | Hvis steg må tas i riktig rekkefølge, bør instruksjonen si det eksplisitt |
 
 Dette er viktig fordi agenten ellers må “gjette” mer.
 
@@ -60,9 +60,21 @@ Start enkelt. Test. Juster én ting om gangen.
 
 Det er som regel bedre å begynne med korte, tydelige instruksjoner og forbedre dem gradvis enn å starte med en lang tekstblokk full av regler.
 
-## Del 2: Kunnskap, kontekst og grounding
+### Eksempel: instruksjoner for pappavits-agenten
 
-### Kunnskap og kontekst i Microsoft 365
+| Del | Eksempel |
+| --- | --- |
+| Rolle og mål | Du er Pappavits-agenten. Du skal underholde deltakerne med korte, trygge pappa-vitser på norsk bokmål. |
+| Oppgaver | Lag én vits om gangen, lag en ny når brukeren ber om det, og tilpass tema hvis brukeren ønsker det. |
+| Kilder og verktøy | Bruk ikke eksterne kilder eller verktøy. Bruk bare instruksjonene og egne språkferdigheter. |
+| Avvise / avklare | Avvis støtende, hatefulle eller seksuelle vitser. Be om avklaring hvis temaet er uklart. |
+| Svarformat | Svar med 2-4 korte linjer. Gi først vitsen, deretter ett kort oppfølgingsspørsmål. |
+| Few-shot-eksempel | Eksempel: "Hva sa den ene kaffeputen til den andre? Skal vi ta en kopp?" Følg samme lette og tørre stil. |
+| Rekkefølge | 1. Forstå tema eller ønske. 2. Lag én trygg vits. 3. Spør kort om brukeren vil ha en til. |
+
+## Del 2: Kunnskap, kontekst og RAG
+
+### Kunnskap og kontekst i M365
 
 Når vi sier at en agent er “grounded”, mener vi at den svarer med utgangspunkt i faktiske kilder og kontekst, ikke bare modellens generelle kunnskap.
 
@@ -80,16 +92,39 @@ To praktiske følger av dette er:
 
 Det er også viktig å skille mellom varige kunnskapskilder og filer som brukeren laster opp i samtalen. En fil i selve dialogen blir del av konteksten for den samtalen, men er normalt ikke en permanent kunnskapskilde i agenten.
 
+### Ustrukturert kunnskap vs. strukturerte data
+
+Det er nyttig å skille mellom to typer kunnskap i en agent:
+
+| Type | Hva det er | Typisk bruk |
+| --- | --- | --- |
+| Ustrukturert kunnskap | Dokumenter, nettsider, notater, e-poster og fritekst | Spørsmål, oppsummering, søk og forklaring |
+| Strukturert data | Rader, felter og objekter som kunder, kontakter, saker, ordre og hendelser | Presise oppslag, regler, validering og handlinger |
+
+- bruk dokumentkilder når brukeren trenger forklaring, kontekst eller siterbare svar
+- bruk strukturert data når agenten må finne, oppdatere eller kontrollere konkrete felter og poster
+
 ### Måter å hente kunnskap på
 
-Det finnes flere måter å hente kunnskap på i Microsoft-økosystemet:
+| Teknikk | Kort forklart | Styrke |
+| --- | --- | --- |
+| Graph + semantisk indeks | Innebygd grounding i M365 Copilot | Ingen egen indeks |
+| Copilot Studio – SharePoint | SharePoint brukes som kunnskapskilde | Ferskt M365-innhold |
+| Copilot Studio – filer | Opplastede eller synkroniserte filer brukes som kunnskap | Bra for avgrensede dokumentsett |
+| Connectors | Oppslag direkte i kildesystemet | Live data |
+| Azure AI Search – klassisk RAG | Egen indeks med hybrid, vektor og semantikk | Mest kontroll |
+| Azure AI Search – agentic retrieval (preview) | LLM planlegger delspørringer og samler treff | Best for komplekse spørsmål |
 
-- Graph + semantisk indeks i Microsoft 365
-- SharePoint som kunnskapskilde i Copilot Studio
-- opplastede eller synkroniserte filer
-- connectors for live oppslag
-- Azure AI Search for klassisk RAG
-- agentic retrieval i Azure AI Search / Foundry IQ
+### Hvilke strategier støttes hvor?
+
+| Strategi | M365 Copilot | Copilot Studio | Microsoft Foundry |
+| --- | --- | --- | --- |
+| Graph + semantisk indeks | Ja | Ja (delvis) | Ikke innebygd |
+| SharePoint / OneDrive | Ja | Ja | Ikke innebygd |
+| Opplastede filer | Ja, embedded file content | Ja | Nei |
+| Connectors som realtidskunnskap | Begrenset | Ja | Ikke innebygd |
+| Egen indeks med hybrid / vektor / semantikk | Nei | Ja, via Dataverse eller Azure AI Search | Ja, via Azure AI Search |
+| Agentic retrieval over kunnskapsbase | Nei | Via custom integrasjon | Ja, via Foundry IQ (preview) |
 
 ### Hvor passer RAG inn?
 
@@ -162,7 +197,7 @@ Kort sagt:
 - en god beskrivelse hjelper agenten å forstå når en kilde bør brukes
 - en dårlig beskrivelse gjør kildevalget mindre presist
 
-### Praktisk gotcha: 25-kildersgrensen i Copilot Studio
+### Praktisk grense i Copilot Studio
 
 I Copilot Studio gjelder en praktisk grense:
 
@@ -172,17 +207,31 @@ I Copilot Studio gjelder en praktisk grense:
 
 Dette gjør kildebeskrivelser ekstra viktige. Hvis mange kilder ligner på hverandre i navn og beskrivelse, blir det vanskeligere å velge riktig.
 
-### Hvordan teste grounding og retrieval?
+### Hvordan tester du tilgang og treff på kunnskap?
 
-Når du tester en agent med kunnskapskilder, er det viktig å teste både:
-
-- søk direkte i kilden først
-- test både eksakte og semantiske spørsmål
-- test med ulike brukere
-- test hvor raskt endringer i kilden blir søkbare
-- test smalere scope og metadatafiltre
+| Test | Hva du ser etter |
+| --- | --- |
+| Søk direkte i kilden først | Er dokumentet faktisk søkbart, og finnes teksten der du tror den finnes? |
+| Test både eksakte og semantiske spørsmål | Treffer løsningen bare ord, eller også mening og sammenheng? |
+| Test med ulike brukere | Fungerer tilgangstrimming slik at brukere ser forskjellig innhold der de skal? |
+| Test etter endringer i kilden | Hvor raskt blir nye eller oppdaterte dokumenter søkbare? |
+| Test smale scope og metadatafiltre | Blir svarene bedre når du snevrer inn kilde, område eller dokumenttype? |
 
 Dette er et viktig poeng: du bør ikke bare teste “om agenten svarer”, men også hvorfor den svarer som den gjør.
+
+Tips: Bruk Graph Explorer når du vil verifisere tilgang, treff og hva Microsoft 365 faktisk returnerer.
+
+### Kunnskapspipeline med Copilot
+
+| Steg | Navn | Hva skjer |
+| --- | --- | --- |
+| 1 | Meldingen vurderes | Sjekker om meldingen er trygg å behandle |
+| 2 | Spørsmålet optimaliseres | Omskriver spørsmålet med samtalekontekst |
+| 3 | Informasjon hentes | Søker enten direkte i kilden eller i en indeks, avhengig av strategi |
+| 4 | Innhold oppsummeres | LLM oppsummerer med Responsible AI-guardrails |
+| 5 | Kildegrunnlag valideres | Bekrefter opphav og lager siteringer |
+| 6 | Svaret modereres | Dobbeltsjekker svaret for uønsket innhold |
+| 7 | Respons returneres | Returnerer svar, siteringer og logger |
 
 ## Del 3: Verktøy i agenter
 
@@ -197,9 +246,11 @@ Det betyr at agenten går utover ren tekstgenerering. Agenten kan for eksempel:
 - opprette eller oppdatere data
 - bruke andre agenter eller eksterne tjenester
 
-### Verktøynivåene i modulen
+### Fra innebygde verktøy til MCP og skills
 
-I del 3 brukes denne oversikten:
+Del 3 går fra plattformnære verktøy til mer standardiserte integrasjons- og samarbeidsmønstre.
+
+### Oversikt over forskjellige type verktøy
 
 | Nivå | Rolle |
 | --- | --- |
@@ -208,8 +259,8 @@ I del 3 brukes denne oversikten:
 | Prosess | Kjøre flere steg på tvers av systemer |
 | API | Mulighet for full kontroll over logikk og data |
 | MCP | Standardisert lag for verktøy og kontekst |
-| A2A | La en agent bruke en annen agent |
-| Skills | Gjenbrukbar arbeidsmåte for agenter |
+| A2A (preview) | La en agent bruke en annen agent |
+| Skills (kodeagenter) | Gjenbrukbar arbeidsmåte for agenter |
 
 ### Innebygde verktøy
 
@@ -248,6 +299,18 @@ Dette er nyttig å ha med fordi agenten ofte trenger både:
 - kunnskap for å vite noe
 - variabler for å huske hva som gjelder i samtalen akkurat nå
 
+### Synonymer og regex: fra fritekst til strukturert input
+
+| Mønster | Hva det gjør | Eksempel |
+| --- | --- | --- |
+| Synonymer | Fanger ulike ord for samme begrep | `leilighet`, `flat`, `apartment` |
+| Lukket liste | Begrenser input til kjente valg | `hus`, `duplex`, `condo` |
+| Regex | Fanger mønstre i tekst | `[1-5]` soverom, postnr, ordrenr |
+
+- dette er broen mellom fri tekst og variabler agenten faktisk kan bruke
+- det reduserer feil i oppslag, routing og verktøykall
+- det passer best når innholdet er kjent og variasjonene kan beskrives
+
 ### Connectors
 
 En connector er i praksis et innpakket API med definerte handlinger.
@@ -259,6 +322,14 @@ Det viktige her er:
 - begrenset operasjonssett
 
 Connectoren eksponerer som regel ikke hele systemets API, bare et utvalg av handlinger.
+
+Eksempler:
+
+- SharePoint connector
+- Dataverse
+- Salesforce
+- ServiceNow
+- Custom connector mot egen API via Power Platform
 
 ### Run a Prompt / AI prompt som verktøy
 
@@ -296,10 +367,16 @@ Derfor bør dette brukes når andre og mer robuste integrasjonsformer ikke er ti
 
 Prosess betyr at agenten bruker en sekvens av handlinger, ikke bare ett kall.
 
-Typiske teknologier er:
+Typiske former og teknologier er:
 
 - Power Automate
 - Azure Logic Apps
+- backend-jobb, `n8n` eller kode i Foundry og kodeagenter
+
+Eksempler:
+
+- opprette Team, legge til medlemmer og sende varsling
+- registrere sak, hente data og sende til godkjenning
 
 Et viktig skille i modulen er:
 
@@ -347,6 +424,15 @@ Dette understreker et viktig skille:
 
 Et API er en kontrollert inngang til et system.
 
+| Byggekloss | Hva det betyr |
+| --- | --- |
+| Endpoint | URL til en funksjon eller ressurs |
+| Metode | `GET`, `POST`, `PUT`, `PATCH` eller `DELETE` |
+| Input | Data du sender inn, ofte JSON |
+| Output | Strukturert svar tilbake |
+| Auth | Hvem du er og hva du har lov til å gjøre |
+| Schema | Tydelig kontrakt, ofte OpenAPI eller JSON Schema |
+
 For agentbruk er det viktig at API-et ikke bare finnes, men at det er tydelig beskrevet:
 
 - hva det gjør
@@ -356,6 +442,17 @@ For agentbruk er det viktig at API-et ikke bare finnes, men at det er tydelig be
 - hvilket schema eller kontrakt som gjelder
 
 Et godt agent-API er derfor ikke bare “et endpoint som finnes”, men en tydelig kontrakt som beskriver hva agenten kan gjøre og hvordan den skal gjøre det.
+
+### Hva et API gjør i agentkontekst
+
+Når agenten kaller et API:
+
+1. Forespørselen sendes til backend
+2. Backend validerer, henter data eller kjører logikk
+3. Backend returnerer et strukturert svar
+4. Agenten tolker resultatet og svarer brukeren
+
+I praksis trenger agenten ikke bare tilgang til et API, men også en god beskrivelse av hva API-et gjør, hvordan input ser ut og hva som kommer tilbake.
 
 ### MCP: Model Context Protocol
 
@@ -414,6 +511,10 @@ Dette passer når den andre agenten allerede har:
 
 Det er altså ikke meningen at én agent skal “gjøre alt”. Noen ganger er det bedre å la en spesialisert agent gjøre jobben.
 
+I Microsoft Foundry finnes dette som en A2A tool i preview. I Copilot Studio kan du koble til en ekstern agent via en A2A connection i preview.
+
+Vi går dypere inn i multi-agent arkitektur i modul 6.
+
 ### Tool, API, MCP og skill: hva er forskjellen?
 
 | Begrep | Hva det er |
@@ -459,7 +560,7 @@ En skill gir ikke bare tilgang til en operasjon, men en oppskrift for hvordan ag
 
 ## Lab i sesjon 3
 
-### 1. Skriv forslag til instruksjon
+### Laboppgave: Skriv forslag til instruksjon for din agent
 
 Tenk gjennom:
 
@@ -470,7 +571,13 @@ Tenk gjennom:
 - hvordan svaret skal se ut
 - når den skal be om avklaring
 
-### 2. Test grounding og retrieval
+Tips:
+
+- bruk Copilot til å hjelpe deg med å skrive instruksjonen
+- bruk en prompt optimizer til å forbedre den
+- legg ved 1-2 gode eksempler hvis agenten skal svare i en bestemt stil eller struktur
+
+### Laboppgave: Test grounding og retrieval
 
 Skriv tre spørsmål agenten bør kunne svare godt på, og vurder:
 
@@ -479,17 +586,23 @@ Skriv tre spørsmål agenten bør kunne svare godt på, og vurder:
 - hva som skjer med eksakte versus semantiske spørsmål
 - om siteringer og tilgang fungerer som forventet
 
-### 3. Vurder verktøyvalg
+### Laboppgave: Vurder verktøyvalg
 
 Ta utgangspunkt i en oppgave eller agentidé, og vurder:
 
-- hva som bør være innebygd
-- hva som bør være connector
-- hva som bør være prosess
-- hva som bør være API
-- hva som eventuelt bør være MCP, A2A eller skill
+| Behov | Valg | Hvorfor |
+| --- | --- | --- |
+| Hente data fra M365 |  |  |
+| Koble til eksternt system |  |  |
+| Orkestrere flere steg |  |  |
+| Trenge full kontroll over logikk |  |  |
+| Standardisere verktøy for flere agenter |  |  |
 
-Beskriv deretter ett valgt verktøy mer konkret:
+Velg mellom: innebygde verktøy, connectors, prosess, API, MCP, A2A eller skill.
+
+### Laboppgave: Beskriv ett valgt verktøy
+
+Beskriv ett valgt verktøy mer konkret:
 
 - navn
 - formål
@@ -498,13 +611,15 @@ Beskriv deretter ett valgt verktøy mer konkret:
 - read eller write
 - tilgang og godkjenning
 
-## Oppsummering
+Diskuter til slutt om dette passer best som connector, prosess, API, MCP-tool, A2A eller skill.
+
+## Hva har vi gått igjennom i denne modulen?
 
 Etter denne modulen bør du sitte igjen med:
 
-1. Evnen til å skrive tydeligere instruksjoner
-2. En bedre forståelse av hvordan kunnskap, kontekst, grounding og RAG påvirker kvalitet
-3. Et tydeligere språk for å velge og beskrive verktøy i agenten
+1. Skrive tydeligere instruksjoner med rolle, mål, handlingsrom, stoppkriterier og svarformat
+2. Forstå hvordan kunnskap, kontekst, grounding og RAG påvirker kvaliteten på agentsvar
+3. Skille mellom verktøynivåer som innebygde verktøy, connectors, prosess, API, MCP, A2A og skills
 
 [Forrige: Modul 2](./02-agentplattformer.md) | [Til hovedside](../README.md) | [Neste: Modul 4](./04-prompt-engineering-og-kvalitet.md)
 

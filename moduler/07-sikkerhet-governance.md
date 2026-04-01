@@ -334,7 +334,7 @@ Poenget med øvelsen er å flytte tankegangen fra bygging til drift:
 
 - Hva må være på plass før denne agenten er trygg å bruke?
 
-## Oppsummering
+## Hva har vi gått igjennom i denne modulen?
 
 Etter denne modulen bør du sitte igjen med fire ting:
 

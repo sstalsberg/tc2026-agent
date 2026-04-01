@@ -9,6 +9,7 @@ Denne sesjonen handler om å forstå hva en agent er, hvilke typer agenter som f
 - Forstå hva en AI-agent er og hvilke byggeklosser den består av
 - Skille mellom retrieval-, task- og autonomous-agenter
 - Vurdere når en agent passer godt, og når den ikke er riktig løsning
+- Beskrive en første agentidé med målgruppe, oppgave og verdi
 
 ## Hva er en AI-agent?
 
@@ -121,7 +122,7 @@ Vi går dypere inn i plattformvalg senere i kurset. I denne sesjonen er poenget 
 - Når ville du valgt Copilot Studio, og når ville du heller kodet selv?
 - Hvis agentbruk virkelig vokser kraftig de neste årene, hvilke muligheter og utfordringer skaper det for IT-bransjen?
 
-## Lab: Beskriv agentideen din
+## Laboppgave: Beskriv agentideen din
 
 I laben skal du ikke designe hele løsningen. Du skal beskrive kjernen i idéen.
 
@@ -139,19 +140,23 @@ Når dere gir hverandre tilbakemelding, er det spesielt to ting som er viktige:
 - Er problemet agenten skal løse tydelig?
 - Er målgruppen tydelig definert?
 
+### Gruppen gir tilbakemelding på hver idé
+
+Gruppen gir tilbakemelding før 2-3 frivillige deler agentideen sin i plenum.
+
 En god første agentidé er ofte enkel. Den trenger ikke være “stor”. Det viktigste er at den har:
 
 - en tydelig bruker
 - en tydelig oppgave
 - en tydelig verdi
 
-## Oppsummering
+## Hva har vi gått igjennom i denne modulen?
 
 Etter denne sesjonen skal deltakerne sitte igjen med tre ting:
 
-1. En enkel og presis forståelse av hva en AI-agent er
-2. Et språk for å skille mellom retrieval, task og autonomous
-3. Et første utkast til en egen agentidé som kan videreutvikles i resten av workshopen
+1. Forstå hva en AI-agent er og hva den består av
+2. Skille mellom ulike agenttyper og når de passer godt
+3. Beskrive en første agentidé med målgruppe, oppgave og verdi
 
 [Til hovedside](../README.md) | [Neste: Modul 2](./02-agentplattformer.md)
 

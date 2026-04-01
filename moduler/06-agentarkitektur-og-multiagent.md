@@ -74,7 +74,7 @@ Noen typiske signaler på at det kan være på tide å dele opp løsningen er:
 | Signal | Hva det betyr |
 | --- | --- |
 | Beskrivelser begynner å overlappe | Orkestratoren får vanskeligere for å velge riktig tool, topic eller agent |
-| Du nærmer deg 30–40 valg i Copilot Studio | Presisjonen kan begynne å falle |
+| Du nærmer deg 30–40 valg i Copilot Studio | Microsoft anbefaler å vurdere splitting når presisjonen begynner å falle |
 | Ulike team eier ulike domener | Egen agent gir tydeligere ansvar og livssyklus |
 | Du trenger ulike modeller, auth eller policyer | Egen agent gir bedre styring |
 | Kapabiliteten skal gjenbrukes flere steder | En connected agent er ofte bedre enn å kopiere logikk |
@@ -180,6 +180,7 @@ Topics passer godt for:
 - branching
 - faste samtalemønstre
 - dialogsteg som bør være mer deterministiske
+- enkle og deterministiske eller mer komplekse og generative flyter som også kan kalle tools og andre agenter
 
 Et topic er altså ikke bare “et spørsmålssvar”.
 Det er en måte å definere hvordan en del av samtalen skal håndteres.
@@ -213,7 +214,7 @@ Jo mer autonom en agent er, desto viktigere er det å ha:
 
 ## A2A – Agent-to-Agent-protokollen
 
-`A2A` står for `Agent-to-Agent` og beskriver en standardisert måte for agenter å snakke med andre agenter på tvers av plattformer.
+`A2A` står for `Agent-to-Agent` og beskriver en åpen standardisert måte for agenter å snakke med andre agenter på tvers av plattformer.
 
 Kort forklart:
 
@@ -235,7 +236,7 @@ I praksis er dette relevant når du bygger en portefølje av agenter i stedet fo
 | Kobler LLM til funksjoner og data | Kobler agenter på tvers av plattformer |
 | Én host → mange servere | Mange agenter → samarbeid via manifester |
 
-I Microsoft Foundry finnes dette som en egen A2A tool. I Copilot Studio kan A2A-agenter kobles på som connected agents.
+I Microsoft Foundry finnes dette som en egen A2A tool i preview. I Copilot Studio kan A2A-agenter kobles på som connected agents i preview.
 
 ## A2A i praksis
 
@@ -262,7 +263,7 @@ Når flere agenter samarbeider, må du styre mer enn bare hva hver agent gjør a
 | Du må styre | Hvorfor |
 | --- | --- |
 | Gode beskrivelser | Orkestratoren velger topics, tools og agenter ut fra metadata |
-| Kontekstoverføring | Neste agent må få riktig mengde informasjon |
+| Kontekstoverføring | Neste agent må få full samtalehistorikk eller et avgrenset oppdrag, avhengig av behov |
 | Deterministiske handoff | Noe routing bør være eksplisitt, ikke overlatt til modellen |
 | Prioritet og betingelser | Flere byggeklosser kan reagere på samme behov |
 | Sporbarhet og logging | Viktig når flere systemer og agenter er involvert |

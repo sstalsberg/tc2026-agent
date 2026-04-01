@@ -213,7 +213,7 @@ Diskuter også:
 
 Denne øvelsen er nyttig fordi den flytter fokus fra “hvilken modell er best?” til “hvilken modell passer best til oppgaven?”
 
-## Oppsummering
+## Hva har vi gått igjennom i denne modulen?
 
 Etter denne modulen bør du sitte igjen med tre ting:
 

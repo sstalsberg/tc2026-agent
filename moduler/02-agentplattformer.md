@@ -1,4 +1,4 @@
-# Modul 2: Kom i gang med en agent
+# Modul 2: Agentplattformer
 
 Målet er å få oversikt over Microsofts agentøkosystem og velge en fornuftig plattform for agenten.
 
@@ -8,6 +8,7 @@ Målet er å få oversikt over Microsofts agentøkosystem og velge en fornuftig 
 
 - Forstå forskjellen mellom de viktigste agentplattformene i Microsoft-økosystemet
 - Velge en byggeflate som passer agenten din
+- Opprette vår første agent: Pappavits-agenten
 
 ## Hvorfor er plattformvalg viktig?
 
@@ -64,7 +65,11 @@ Valget av byggeflate bør henge sammen med behovet ditt:
 - **Microsoft Foundry** når du trenger Azure-plattform, agentdrift og mer avansert styring
 - **Agent Framework** når du trenger eksplisitt orkestrering og samarbeid mellom flere agenter
 
-## Vår første agent: Pappavits-agenten
+## TechnoCamps første agent
+
+### Pappavits-agenten
+
+Dette er TechnoCamps første agent i workshopen: en bevisst enkel agent som gjør det lett å teste plattformvalg, instruksjoner og første oppsett uten å drukne i domenekompleksitet.
 
 For å lære plattformen og tenkemåten starter vi med en veldig enkel agentidé: en pappavits-agent som skal lage korte, trygge pappa-vitser på norsk bokmål.
 
@@ -76,6 +81,8 @@ For å lære plattformen og tenkemåten starter vi med en veldig enkel agentidé
 
 ## Lab: Opprett den første agenten
 
+Målet i laben er å opprette første versjon av Pappavits-agenten eller bruke samme enkle struktur på din første agent.
+
 Fokuser på disse enkle spørsmålene:
 
 - Hva skal agenten hete?
@@ -83,14 +90,13 @@ Fokuser på disse enkle spørsmålene:
 - Hva er den primære oppgaven?
 - Hva er den enkle verdien den skal gi?
 
-## Oppsummering
+## Hva har vi gått igjennom i denne modulen?
 
-Etter denne modulen bør du sitte igjen med fire ting:
+Etter denne modulen bør du sitte igjen med tre ting:
 
-1. En oversikt over de viktigste agentplattformene i Microsoft-økosystemet
-2. En forståelse av forskjellen mellom raske innganger og mer avanserte byggevalg
-3. En enkel modell for å velge passende plattform ut fra behov
-4. Opprettet en første agentidé og testet i en av plattformene
+1. Forstå forskjellen på plattformene i Microsoft-økosystemet
+2. Velge en byggeflate som passer ideen vår
+3. Opprette vår første agent: Pappavits-agenten
 
 [Forrige: Modul 1](./01-introduksjon-til-agenter.md) | [Til hovedside](../README.md) | [Neste: Modul 3](./03-instruksjoner-kunnskap-verktoy.md)
 
