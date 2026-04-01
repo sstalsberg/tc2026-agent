@@ -225,6 +225,23 @@ God grounding handler derfor ikke bare om språkmodellen, men også om hvor godt
 
 ---
 
+# Foundry IQ / agentic retrieval
+
+| Klassisk retrieval | Agentic retrieval |
+| --- | --- |
+| Én spørring inn mot én indeks | Flere delspørringer planlegges automatisk |
+| Treffer primært på ett formulert spørsmål | Bruker også chat-historikk og underforstått kontekst |
+| Godt nok for enklere spørsmål | Best for komplekse spørsmål og flere kunnskapskilder |
+
+Agentic retrieval gjør typisk dette:
+
+1. Leser hele spørsmålet og samtalekonteksten
+2. Bryter det ned i delspørringer
+3. Kjører dem parallelt
+4. Reranker treff og returnerer grounding, referanser og aktivitetsplan
+
+---
+
 # Semantisk søk og chunking
 
 To nøkkelbegreper i grounding og RAG:
@@ -235,6 +252,37 @@ To nøkkelbegreper i grounding og RAG:
 | Chunking | Store dokumenter deles i mindre biter før de indekseres og hentes | Gir mer presis kontekst og holder seg innenfor tokengrenser |
 
 Kort sagt: semantikk hjelper systemet å finne riktig innhold, chunking hjelper det å hente riktig utdrag.
+
+---
+
+# Azure AI Search: fra dokument til treff
+
+| Steg | Hva som skjer |
+| --- | --- |
+| Datakilde | Dokumenter hentes fra en støttet kilde |
+| Indexer | Trekker innholdet inn i pipelinen |
+| Chunking | Store dokumenter deles opp i mindre biter |
+| Embeddings | Hver bit kan vektoriseres |
+| Index | Tekstfelt og vektorfelt lagres i samme søkeindeks |
+| Vectorizer | Brukerens spørsmål kan vektoriseres ved spørring |
+| Ranking | Hybrid søk og semantisk rangering løfter de beste treffene |
+
+- `Integrated vectorization` gjør chunking og vektorisering til en del av selve indekseringen
+- I Copilot Studio kan Azure AI Search legges inn som egen kunnskapskilde
+
+---
+
+# SharePoint i Azure: indeksert eller remote?
+
+| Mønster | Hva det betyr | Når det passer |
+| --- | --- | --- |
+| `Indexed SharePoint` | Azure AI Search lager indeks over SharePoint-innhold | Når du vil ha mer kontroll på chunking, embeddings og søkeoppsett |
+| `Remote SharePoint` | Innhold hentes direkte fra SharePoint ved spørring | Når du vil respektere brukerens tilgang direkte i M365 uten egen kopi |
+
+Viktig nyanse:
+
+- `Remote SharePoint` bruker SharePoint ved query-tid
+- `Indexed SharePoint` oppretter en full ingest-pipeline med data source, skillset, indexer og index
 
 ---
 

@@ -172,6 +172,47 @@ style: |
 
 ---
 
+# Når trenger Copilot Studio hjelp fra Azure?
+
+| Behov | Azure-spor | Hvorfor |
+| --- | --- | --- |
+| Mer kontroll på kunnskapsinnhenting | `Azure AI Search` | Egen indeks med hybrid, vektor og semantisk rangering |
+| Vanskelige spørsmål over store kunnskapsdomener | `Foundry IQ / agentic retrieval` | LLM planlegger delspørringer og samler treff |
+| Annen modell enn standardvalget | `Azure AI Foundry models` | Prompt-verktøyet kan bruke modeller fra Foundry |
+
+---
+
+# Microsoft-bygde Frontier-agenter
+
+| Agent | Kort forklart |
+| --- | --- |
+| `People (Frontier)` | Person- og organisasjonsagent i Microsoft 365 Copilot |
+| `Workflows Agent (Frontier)` | Lager og kjører workflows med naturlig språk |
+| `App Builder (Frontier)` | Lager lette, interaktive apper uten kode |
+| `Cowork (Frontier)` | Utfører oppgaver på tvers av Microsoft 365 på dine vegne |
+| `Planner (Frontier)` | Planner-agent i Copilot |
+| `Learning (Frontier)` | Learning-agent i private preview |
+| `Project Opal (Frontier)` | Oppgavebasert agent som kan jobbe asynkront via Cloud PC |
+
+- Offentlig dokumenterte eksempler per `1. april 2026`
+
+---
+
+# Frontier-kapabiliteter i eksisterende apper
+
+| Kapabilitet | Kort forklart |
+| --- | --- |
+| `Researcher with Computer Use (Frontier)` | Frontier-kapabilitet i `Researcher`, ikke en egen agent |
+| `Agent Mode / Office Agent` | Innebygde agenter i Word, Excel og PowerPoint |
+
+- Frontier brukes både om egne agenter og nye kapabiliteter i eksisterende Microsoft 365-opplevelser
+
+---
+
+![Agentøkosystemet](../assets/tc01-ecosystem.jpg)
+
+---
+
 # Vår første agent: Pappavits-agenten
 
 | Punkt | Første versjon |
@@ -182,16 +223,19 @@ style: |
 
 ---
 
-# Hva består en Microsoft 365 Agent SDK agent av?
+# Hva består en deklarativ agent av?
 
-| Del | Rolle |
-| --- | --- |
-| `manifest.json` | Pakker agenten som app i Teams og Microsoft 365 |
-| `declarativeAgent.json` | Definerer agentens navn, beskrivelse, instruksjoner og actions |
-| `instruction.txt` | Beskriver hvordan agenten skal forstå input og svare |
-| `ai-plugin.json` | Kobler agenten til actions og verktøy |
-| `adaptiveCards/*.json` | Bestemmer hvordan svaret vises til brukeren |
-| `env/` + `m365agents.yml` | Styrer miljøverdier, provisjonering, pakking og publisering |
+| Del | Type | Rolle |
+| --- | --- | --- |
+| `manifest.json` + ikoner | App package | Pakker agenten som app i Teams og Microsoft 365 |
+| `declarativeAgent.json` | Agentdefinisjon | Definerer navn, beskrivelse, instrukser og actions |
+| `instructions` | Agentinnhold | Ligger ofte i `declarativeAgent.json`, men kan legges i egen tekstfil |
+| `ai-plugin.json` + `openapi.yaml` | Valgfri action | Beskriver eksterne API-kall og operasjoner |
+| `adaptiveCards/*.json` | Valgfri visning | Viser svar som kort i stedet for bare tekst |
+| `env/` + `m365agents.yml` | Toolkit-prosjekt | Styrer provisjonering, bygg og publisering, ikke selve agentlogikken |
+
+- Dette er typisk struktur for en deklarativ agent bygget med app package og Toolkit
+- En code-first agent med Microsoft 365 Agents SDK har mer logikk i kode enn i disse JSON-filene
 
 ---
 
@@ -200,3 +244,7 @@ style: |
 1. Forstår forskjellen på plattformene i Microsoft-økosystemet
 2. Velger en byggeflate som passer ideen vår
 3. Oppretter vår første agent: Pappavits-agenten
+
+---
+
+![Implementering](../assets/tc02-implementation.jpg)

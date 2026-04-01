@@ -265,6 +265,22 @@ Du må kunne forklare hvor i kjeden det skjedde og hvorfor.
 
 ---
 
+# Monitoring med Application Insights
+
+| Hva du får | Eksempler |
+| --- | --- |
+| Samtaletelemetri | Inn- og utgående meldinger og events |
+| Topic- og verktøyinnsikt | Hvilke topics og handlinger som faktisk trigges |
+| Egne events | Custom telemetry fra topic eller prosess |
+| Driftssikt | Latency, exceptions, total conversations og trender |
+
+I praksis:
+
+- Koble agenten til `Application Insights` via connection string i `Settings > Advanced`
+- Bruk `Logs` for KQL-spørringer
+
+---
+
 # Hvordan forbedrer du en agent over tid?
 
 1. Samle feedback og driftsdata

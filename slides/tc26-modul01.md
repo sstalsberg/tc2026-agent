@@ -164,6 +164,12 @@ Ikke alle agenter trenger å bruke alle delene.
 
 ---
 
+![Agenttyper](../assets/tc01-spectrum.jpg)
+
+---
+
+
+
 # Når passer en agent godt?
 
 | Passer godt | Passer dårlig |
