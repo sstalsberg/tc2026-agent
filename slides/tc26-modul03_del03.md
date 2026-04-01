@@ -227,6 +227,18 @@ Tilsvarende mønster finnes også i Foundry og kodeagenter: en prompt-basert act
 
 ---
 
+# Eksempel: code interpreter i en prompt
+
+- `Run a Prompt` kan utvides med `code interpreter`
+- Prompten kan skrive og kjøre Python-kode
+- Godt valg for dataanalyse, beregninger, visualiseringer og behandling av Excel-, Word-, PowerPoint- og PDF-filer
+- Bruk dette når agenten må behandle data eller filer, ikke bare oppsummere tekst
+- Slås på i promptens `Settings` med `Enable code interpreter`
+- Krever brukerautentisering
+- Støtter ikke flere opplastede filer eller flere filutdata i samme prompt
+
+---
+
 # Computer Use / GUI-automatisering
 
 I Copilot Studio er `Computer Use` en funksjonalitet som lar agenten bruke et nettsted eller en desktop-app med virtuell mus og tastatur.
@@ -312,6 +324,18 @@ Et API er en kontrollert inngang til et system.
 
 ---
 
+# Hvordan kobler du et REST API til agenten?
+
+| Del | Rolle |
+| --- | --- |
+| OpenAPI-beskrivelse | Forteller hvilke operasjoner, parametere og svar API-et har |
+| Auth / connection | Lar agenten koble seg til API-et på riktig måte |
+| Beskrivelser | Hjelper modellen å forstå når verktøyet skal brukes |
+| Tool / action / connector | Gjør API-et tilgjengelig som ferdighet i agenten |
+| Visning | Kan vises som tekst eller Adaptive Card |
+
+---
+
 # Hva et API gjør i agentkontekst
 
 Når agenten kaller et API:
@@ -388,6 +412,16 @@ En skill lærer agenten hvordan den bør jobbe, ikke bare hva den kan kalle.
 
 ---
 
+# Eksempel på skill-tenkning
+
+| Oppgave | Hva skillen gir agenten |
+| --- | --- |
+| Feilsøke en deployment | Vet hvilke logs, statuskommandoer og checks som bør kjøres |
+| Gjennomgå en pull request | Følger en standard review-metode og sjekker risikoer |
+| Lage et nytt API | Vet hvilke filer, maler og teststeg som normalt trengs |
+
+---
+
 # Tool, API, MCP og skill: hva er forskjellen?
 
 | Begrep | Hva det er |
@@ -396,16 +430,6 @@ En skill lærer agenten hvordan den bør jobbe, ikke bare hva den kan kalle.
 | API | Teknisk kontrakt til et system |
 | MCP | Standardisert verktøylag for agenten |
 | Skill | Arbeidsmåte, instruksjoner og støttemateriell for en oppgavetype |
-
----
-
-# Eksempel på skill-tenkning
-
-| Oppgave | Hva skillen gir agenten |
-| --- | --- |
-| Feilsøke en deployment | Vet hvilke logs, statuskommandoer og checks som bør kjøres |
-| Gjennomgå en pull request | Følger en standard review-metode og sjekker risikoer |
-| Lage et nytt API | Vet hvilke filer, maler og teststeg som normalt trengs |
 
 ---
 

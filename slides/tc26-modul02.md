@@ -182,6 +182,19 @@ style: |
 
 ---
 
+# Hva består en Microsoft 365 Agent SDK agent av?
+
+| Del | Rolle |
+| --- | --- |
+| `manifest.json` | Pakker agenten som app i Teams og Microsoft 365 |
+| `declarativeAgent.json` | Definerer agentens navn, beskrivelse, instruksjoner og actions |
+| `instruction.txt` | Beskriver hvordan agenten skal forstå input og svare |
+| `ai-plugin.json` | Kobler agenten til actions og verktøy |
+| `adaptiveCards/*.json` | Bestemmer hvordan svaret vises til brukeren |
+| `env/` + `m365agents.yml` | Styrer miljøverdier, provisjonering, pakking og publisering |
+
+---
+
 # Hva har vi gått igjennom i denne modulen?
 
 1. Forstår forskjellen på plattformene i Microsoft-økosystemet

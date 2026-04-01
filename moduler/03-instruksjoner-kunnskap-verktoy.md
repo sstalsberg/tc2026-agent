@@ -349,6 +349,34 @@ Dette passer godt når du trenger:
 
 Det samme mønsteret finnes også i Foundry og kodeagenter: en tydelig prompt-basert action med klart input og output.
 
+### Eksempel: code interpreter i en prompt
+
+Et konkret eksempel på `Run a Prompt` i Copilot Studio er å slå på `code interpreter` i prompt-verktøyet.
+
+Da kan prompten ikke bare generere tekst, men også skrive og kjøre Python-kode for å:
+
+- analysere data
+- gjøre beregninger og statistikk
+- lese, oppdatere og returnere Excel-filer
+- behandle Word-, PowerPoint- og PDF-filer
+- lage visualiseringer som grafer og diagrammer
+
+Dette passer når agenten må gjøre faktisk databehandling eller filbehandling, ikke bare oppsummere eller klassifisere tekst.
+
+Praktisk betyr det:
+
+- opprett en `Prompt` som tool i agenten
+- åpne `Settings` for prompten
+- slå på `Enable code interpreter`
+- gi prompten tydelige instruksjoner for input og ønsket output, for eksempel `Return as Excel` eller `Return as JSON`
+
+Viktige begrensninger og krav:
+
+- agenten må bruke brukerautentisering; scenarier uten brukerautentisering fungerer ikke
+- flere opplastede filer i samme prompt støttes ikke
+- flere filutdata i samme prompt støttes ikke
+- oppfølgingsspørsmål over flere turns om en opplastet fil støttes ikke
+
 ### Computer Use / GUI-automatisering
 
 Noen ganger finnes det verken API, connector eller egnet workflow. Da kan GUI-automatisering være et alternativ.
