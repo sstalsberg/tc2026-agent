@@ -44,6 +44,10 @@ For mange virksomheter er disse tre inngangene de mest aktuelle å starte med:
 | Typisk bruk | Enkel deklarativ agent for en rolle eller et team | Agent over et konkret dokumentsett eller prosjektrom | Agent med egne kanaler, verktøy, kunnskap og styring |
 | Styrke | Lav terskel og rask oppstart | Kort vei fra innhold til nyttig agent | Mer kontroll og flere utvidelsesmuligheter |
 
+Hvis du er usikker på hvor du bør starte, kan du bruke Microsoft sitt **Agent Platform Advisor**:
+
+- https://microsoft.github.io/cat/agent-platform-advisor/index.html
+
 ## Tre byggevalg med mer kontroll
 
 |  | Microsoft 365 Agents SDK | Microsoft Foundry Agent Service | Microsoft Agent Framework (preview) |

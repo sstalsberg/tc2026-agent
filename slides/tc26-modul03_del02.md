@@ -269,6 +269,7 @@ Kort sagt: semantikk hjelper systemet å finne riktig innhold, chunking hjelper 
 
 - `Integrated vectorization` gjør chunking og vektorisering til en del av selve indekseringen
 - I Copilot Studio kan Azure AI Search legges inn som egen kunnskapskilde
+- Eksempelrepo: `https://github.com/Azure/Copilot-Studio-and-Azure`
 
 ---
 

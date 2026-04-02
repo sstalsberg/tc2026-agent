@@ -407,6 +407,7 @@ En skill består typisk av:
 - Scripts eller kommandoer agenten kan bruke
 - Ressurser og referansemateriale
 - Strukturert metadata, ofte i en `SKILL.md` eller tilsvarende instruksjonsfil
+- Eksempelrepo: `https://github.com/microsoft/skills`
 
 En skill lærer agenten hvordan den bør jobbe, ikke bare hva den kan kalle.
 

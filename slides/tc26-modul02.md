@@ -160,6 +160,14 @@ style: |
 
 ---
 
+# Når du er i tvil om plattformvalg
+
+- Prøv `Agent Platform Advisor`
+- Den hjelper deg å velge mellom Microsofts agentplattformer ut fra scenario og krav
+- Lenke: `https://microsoft.github.io/cat/agent-platform-advisor/index.html`
+
+---
+
 # Tre byggevalg med mer kontroll
 
 |  | Microsoft 365 Agents SDK | Microsoft Foundry Agent Service | Microsoft Agent Framework (preview) |

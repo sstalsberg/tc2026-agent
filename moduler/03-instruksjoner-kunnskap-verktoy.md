@@ -560,6 +560,7 @@ En skill er ikke bare et verktøy, men en gjenbrukbar arbeidsmåte. Den kan best
 - scripts eller kommandoer
 - ressurser og referansemateriale
 - strukturert metadata, ofte i en `SKILL.md`
+- eksempelrepo: `https://github.com/microsoft/skills`
 
 Et nyttig skille er:
 
@@ -657,4 +658,5 @@ Etter denne modulen bør du sitte igjen med:
 - [Knowledge in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-copilot-studio)
 - [Generative orchestration in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-generative-actions)
 - [Azure AI Search: Retrieval-augmented generation overview](https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview)
+- [Copilot Studio and Azure (eksempelrepo)](https://github.com/Azure/Copilot-Studio-and-Azure)
 - [Microsoft Foundry Agent Service overview](https://learn.microsoft.com/en-us/azure/foundry/agents/overview)
