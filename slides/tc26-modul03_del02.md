@@ -279,10 +279,11 @@ Kort sagt: semantikk hjelper systemet å finne riktig innhold, chunking hjelper 
 | `Indexed SharePoint` | Azure AI Search lager indeks over SharePoint-innhold | Når du vil ha mer kontroll på chunking, embeddings og søkeoppsett |
 | `Remote SharePoint` | Innhold hentes direkte fra SharePoint ved spørring | Når du vil respektere brukerens tilgang direkte i M365 uten egen kopi |
 
-Viktig nyanse:
+Viktige nyanser:
 
-- `Remote SharePoint` bruker SharePoint ved query-tid
-- `Indexed SharePoint` oppretter en full ingest-pipeline med data source, skillset, indexer og index
+- `Remote SharePoint` krever at sluttbrukeren har en **Microsoft 365 Copilot-lisens**
+- `Remote SharePoint` er kun tilgjengelig som knowledge source i **agentic retrieval** (preview) — ikke i klassisk RAG
+
 
 ---
 
