@@ -2,45 +2,115 @@
 
 Aktiv app-versjon: `2.0.0`
 
-Dette prosjektet er satt opp på nytt for Microsoft 365 Agents Toolkit med én tydelig v1-funksjon:
+Dette er et enkelt eksempel på en agent i Microsoft 365 Copilot som kan slå opp kjøretøydata fra Statens vegvesen.
 
-- Oppslag av tekniske kjøretøydata fra Statens vegvesen
-- Oppslag støtter både `kjennemerke` og `understellsnummer` (VIN)
+Du skriver inn et:
 
-## Løsningen inneholder
+- registreringsnummer
+- eller understellsnummer (VIN)
 
-- OpenAPI-spesifikasjon for `/enkeltoppslag/kjoretoydata`
-- Declarative agent med én action (`hentKjoretoydata`)
-- Adaptive Card for presentasjon av nøkkelfelter
-- ApiKeyPluginVault-auth via `SVVAPIKEY_REGISTRATION_ID`
+Agenten henter deretter kjøretøyinformasjon og viser et kort svar tilbake i Copilot.
 
-## Viktige filer
+## Hva er dette eksempelet ment å vise?
 
-- `appPackage/apiSpecificationFile/openapi.yaml`
-- `appPackage/ai-plugin.json`
-- `appPackage/declarativeAgent.json`
-- `appPackage/instruction.txt`
-- `appPackage/adaptiveCards/hentKjoretoydata.json`
-- `env/.env.dev`
+Dette eksempelet viser en veldig vanlig agenttype:
 
-## Kjøring fra scratch
+- brukeren spør om noe konkret
+- agenten kaller et API
+- svaret vises på en ryddig måte
 
-1. Åpne prosjektet i Microsoft 365 Agents Toolkit.
-2. Kjør `Provision`.
-3. Når Toolkit ber om API-nøkkel, legg inn verdien i formatet:
+Det er altså ikke en stor multi-agent-løsning. Det er et lite og forståelig oppslagseksempel.
+
+## Hva kan brukeren spørre om?
+
+- `Slå opp EL99999`
+- `Hent kjøretøydata for VIM12345678901234`
+- `Når er neste EU-kontroll for EL99999?`
+- `Vis merke, drivstoff og egenvekt for EL99999`
+
+## Hva svarer agenten med?
+
+Ved treff vil agenten typisk vise:
+
+- kjennemerke
+- VIN
+- kjøretøyklasse
+- registreringsstatus
+- drivstoff
+- effekt
+- egenvekt / totalvekt
+- frist for neste EU-kontroll
+
+## Hvordan fungerer det?
+
+1. Brukeren skriver inn et registreringsnummer eller VIN
+2. Agenten finner ut hva slags input det er
+3. Agenten kaller Statens vegvesen sitt API
+4. Svaret vises tilbake som et kort med nøkkelinformasjon
+
+## Hva trenger du for å prøve dette?
+
+- Visual Studio Code
+- Microsoft 365 Agents Toolkit
+- en gyldig API-nøkkel for Statens vegvesen
+
+## Slik prøver du eksempelet
+
+1. Åpne prosjektmappen i Visual Studio Code.
+2. Åpne prosjektet i Microsoft 365 Agents Toolkit.
+3. Kjør `Provision`.
+4. Når Toolkit ber om API-nøkkel, lim inn:
    - `Apikey <din_statens_vegvesen_api_nokkel>`
-4. Kjør `Update` (eller `Publish` når du er klar).
-5. Start en ny Copilot-chat og test oppslag.
+5. Kjør `Update`.
+6. Åpne en ny Copilot-chat.
+7. Test med et registreringsnummer eller VIN.
 
-## Forslag til testspørsmål
+Hvis du senere vil distribuere agenten bredere, kan du kjøre `Publish`.
 
-- `Slå opp EL49512`
-- `Hent kjøretøydata for SJNFAAZE0U6015251`
-- `Når er neste EU-kontroll for EL49512?`
+## Hva som fylles inn automatisk
 
-## Feilsøking
+Når du kjører `Provision`, fylles noen tekniske verdier inn automatisk i `env/.env.dev`.
 
-- `401`: API-nøkkel er feil format eller mangler `Apikey `-prefiks.
-- `403`: Nøkkel er ikke gyldig/aktiv for tjenesten.
-- `422` eller `429`: Kvotegrense er nådd, vent til `Retry-After`.
-- Tom respons: sjekk at input faktisk er gyldig kjennemerke/VIN.
+- `TEAMS_APP_ID`
+- `M365_TITLE_ID`
+- `M365_APP_ID`
+- `SVVAPIKEY_REGISTRATION_ID`
+
+I dette repoet er disse verdiene tomme med vilje, slik at eksempelet kan brukes i ulike miljøer.
+
+## Vanlige problemer
+
+- `401`: API-nøkkelen mangler eller er skrevet i feil format
+- `403`: Nøkkelen er ikke gyldig eller har ikke tilgang
+- `422` eller `429`: Du har nådd en kvotegrense
+- Tom respons: Input er ikke et gyldig registreringsnummer eller VIN
+- Ingen prompt om API-nøkkel: slett `SVVAPIKEY_REGISTRATION_ID` i miljøfilen og kjør `Provision` på nytt
+
+## For deg som vil se under panseret
+
+Hvis du vil forstå hvordan eksempelet er bygget, er disse filene de viktigste:
+
+- `appPackage/instruction.txt`
+- `appPackage/declarativeAgent.json`
+- `appPackage/ai-plugin.json`
+- `appPackage/apiSpecificationFile/openapi.yaml`
+- `appPackage/adaptiveCards/hentKjoretoydata.json`
+- `m365agents.yml`
+
+Kort forklart:
+
+- `instruction.txt` styrer hvordan agenten skal oppføre seg
+- `openapi.yaml` beskriver API-kallet
+- `hentKjoretoydata.json` bestemmer hvordan svaret vises
+
+## Sikkerhetssjekk
+
+Jeg fant ingen faktiske API-nøkler i denne mappen.
+
+Det som finnes er:
+
+- app-ID-er
+- tenant-ID
+- registration-ID for API key vault-oppsett
+
+Dette er ikke selve API-nøkkelen. Verdiene i miljøfilen er også tømt, slik at eksempelet er tryggere å dele og enklere å gjenbruke.
