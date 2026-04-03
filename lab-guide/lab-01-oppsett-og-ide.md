@@ -1,7 +1,7 @@
 # Lab 1 – Opprett din første agent
 
-**Tilhører:** Sesjon 1–2
-**Forutsetning:** Tilgang til [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com)
+**Tilhører:** Modul 1 og 2
+**Forutsetning:** [Lab 0](lab-00-atea-miljo-for-copilot-studio.md)
 
 ---
 
@@ -30,7 +30,7 @@ Når du er ferdig skal du ha:
 
 1. Klikk på **miljønavnet** øverst til høyre
 2. En liste over tilgjengelige miljøer åpner seg
-3. Velg miljøet du ønsker å bruke for workshopen (om du er usikker, velg det som heter Personal Productivity (default)» eller spør instruktøren)
+3. Velg miljøet du ønsker å bruke for workshopen
 
 ---
 
@@ -202,7 +202,7 @@ Før du går videre til Lab 2, sjekk at:
 |---------|---------|
 | Agenten svarer på engelsk | Legg til `Svar alltid på norsk bokmål` øverst i instruksjonene |
 | «Create» er grået ut | Sjekk at du har valgt riktig miljø og at du har riktige lisenser |
-| Agenten ignorerer retningslinjene | Flytt de viktigste retningslinjene øverst i instruksjonene, og marker dem med STORE BOKSTAVER |
+| Agenten ignorerer retningslinjene | Flytt de viktigste retningslinjene øverst i instruksjonene |
 | Test-panelet viser feil | Prøv å refreshe siden, eller lagre instruksjonene på nytt |
 | Agenten finner opp informasjon | Bra observasjon! Vi løser dette i Lab 2 ved å legge til en faktabasert kunnskapsbase |
 

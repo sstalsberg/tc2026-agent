@@ -1,0 +1,21 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/copilot/declarative-agent/v1.5/schema.json",
+    "version": "v1.5",
+    "name": "Statens Vegvesen Agent",
+    "description": "Declarative agent created with Microsoft 365 Agents Toolkit can assist user in calling APIs and retrieving responses",
+    "instructions": "$[file('instruction.txt')]",
+    "actions": [
+        {
+            "id": "action_1",
+            "file": "ai-plugin.json"
+        }
+    ],
+    "conversation_starters": [
+        {
+            "text": "Finn kjøretøy på kjennemerke, for eksempel EB11111"
+        },
+        {
+            "text": "Finn kjøretøy på VIN/understellsnummer, for eksempel WVWZZZ1JZXW000001"
+        }
+    ]
+}

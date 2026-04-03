@@ -85,4 +85,5 @@ Med forbehold om endringer, her er en foreløpig tidsplan for de to dagene:
 - [AI-102: Azure AI Engineer Associate](https://learn.microsoft.com/credentials/certifications/azure-ai-engineer/)
 - [Microsoft Copilot Studio dokumentasjon](https://learn.microsoft.com/en-us/microsoft-copilot-studio)
 - [Copilot Studio Agent Academy](https://microsoft.github.io/agent-academy)
+- [Skills for Copilot Studio: Build agents from YAML code, up to 20x Faster](https://microsoft.github.io/mcscatblog/posts/skills-for-copilot-studio/)
 - [Copilot Developer Camp](https://microsoft.github.io/copilot-camp)

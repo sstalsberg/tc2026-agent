@@ -1,0 +1,24 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/copilot/declarative-agent/v1.5/schema.json",
+    "version": "v1.5",
+    "name": "Statens Vegvesen Agent",
+    "description": "Agent for oppslag av tekniske kjøretøydata fra Statens vegvesen",
+    "instructions": "$[file('instruction.txt')]",
+    "actions": [
+        {
+            "id": "action_1",
+            "file": "ai-plugin.json"
+        }
+    ],
+    "conversation_starters": [
+        {
+            "text": "Slå opp kjøretøy med registreringsnummer EL49512"
+        },
+        {
+            "text": "Finn kjøretøy med VIN SJNFAAZE0U6015251"
+        },
+        {
+            "text": "Når er neste EU-kontroll for EL49512?"
+        }
+    ]
+}

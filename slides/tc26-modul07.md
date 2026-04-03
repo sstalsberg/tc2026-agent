@@ -140,6 +140,21 @@ style: |
 
 ---
 
+# Agent sprawl: hvorfor dette blir et IT-problem
+
+| Utfordring | Hva det betyr i praksis |
+| --- | --- |
+| For mange agenter uten oversikt | IT vet ikke hva som faktisk er i bruk |
+| Uklar identitet | Det er uklart hvem agenten handler som |
+| Utydelig eierskap | Ingen følger opp livssyklus, feil eller risiko |
+| Shadow agents | Agenter tas i bruk utenfor etablerte kontrollflater |
+| Større angrepsflate | Flere integrasjoner, flere rettigheter og mer compliance-risiko |
+
+Governance handler derfor ikke bare om én agent.  
+Det handler om å styre en voksende agentportefølje.
+
+---
+
 # Fire styringslag rundt en agent
 
 | Lag | Hva du må styre |
@@ -161,9 +176,25 @@ style: |
 Kjernetanker:
 
 - egen identitet med `Microsoft Entra Agent ID`
-- oversikt i `Microsoft 365 admin center` og `Agent Registry`
+- samlet oversikt i `Microsoft 365 admin center` og `Agent Registry`
 - kobling til `Purview`, `Defender`, observability og styrte verktøy
+- kan omfatte egne registrerte agenter og `shadow agents`
 - dokumentert som del av `Frontier preview-programmet`
+
+---
+
+# De fem pilarene i Agent 365
+
+| Pilar | Hva den gir deg |
+| --- | --- |
+| Registry | Full oversikt over agenter i virksomheten |
+| Access Control | Styrt tilgang, policyer og least privilege |
+| Visualization | Innsikt i forbindelser, bruk og adferd |
+| Interoperability | Kobling til Work IQ, apper og arbeidsflyt |
+| Security | Trusseldeteksjon, beskyttelse og respons |
+
+Dette er nyttig fordi Agent 365 ikke bare er identitet.  
+Det er et bredere styringslag rundt agentene.
 
 ---
 
@@ -197,6 +228,22 @@ ikke bare et nytt byggespor.
 
 ---
 
+# Agent 365 vs. plattformstyring
+
+| Hvis du vil styre ... | Typisk sted |
+| --- | --- |
+| Agenter på tvers av plattformer | `Agent 365` |
+| Agentidentitet, tilgang og registry | `Microsoft 365 admin center` + `Entra Agent ID` |
+| Copilot Studio-spesifikke miljøvalg og ALM | `Power Platform admin center` og Copilot Studio |
+| Førsteparts Copilot-opplevelser | `Microsoft 365 admin center` |
+
+Husk:
+
+- `Agent 365` ligger over flere byggespor
+- plattformspesifikke adminflater forsvinner ikke
+
+---
+
 # Identitet og tilgang
 
 | Prinsipp | Hvorfor det betyr noe |
@@ -212,11 +259,27 @@ ikke bare et nytt byggespor.
 
 | Kontroll | Hva den beskytter mot |
 | --- | --- |
-| Innholdsfiltrering | Skadelig eller uønsket input og output |
+| Input- og output-filtrering | Skadelig eller uønsket input og output før tools og svar brukes |
 | Prompt shields | Direkte og indirekte prompt injection |
 | Grounding og siteringer | Hallusinasjoner og svak sporbarhet |
 | Human in the loop | Feil ved sensitive eller irreversible handlinger |
 | Policyer på verktøy og connectorer | At agenten bruker feil system eller data |
+
+---
+
+# Copilot Studio: hvordan usikkert innhold håndteres
+
+| Mekanisme | Trigges av | Brukeren ser | Hva du justerer |
+| --- | --- | --- | --- |
+| `Responsible AI filtering` | Sikkerhets- eller policybrudd i input eller output | `ContentFiltered` i debug eller blokkert/custom feilmelding i runtime | Juster filtere og sikkerhetsnivå |
+| `Unknown intent fallback` | Ingen god match i trigger, topic eller kjent handlingsspor | `Vennligst omformuler` eller eskalering til fallback | Legg til triggerfraser, knowledge eller tydeligere routing |
+| `Agent instructions` | Sporsperrer eller custom scope-regler i agenten | Høflig avvisning eller forklaring | Gå gjennom instruksjoner, scope og regler |
+
+Husk:
+
+- input filtreres før agenten handler
+- output filtreres før svaret sendes
+- fallback og avvisning er også guardrails
 
 ---
 

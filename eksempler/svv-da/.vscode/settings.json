@@ -1,0 +1,20 @@
+{
+    "debug.onTaskErrors": "abort",
+    "files.associations": {
+        "appPackage/adaptiveCards/*.json": "json"
+    },
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "/aad.*.json"
+            ],
+            "schema": {}
+        },
+        {
+            "fileMatch": [
+                "/appPackage/adaptiveCards/*.json"
+            ],
+            "url": "http://adaptivecards.io/schemas/adaptive-card.json"
+        }
+    ]
+}

@@ -1,0 +1,43 @@
+openapi: 3.0.0
+info:
+  title: Norske helligdager
+  version: "1.0"
+  description: Henter norske offentlige helligdager fra Nager.Date
+servers:
+  - url: https://date.nager.at/api/v3
+paths:
+  /PublicHolidays/{year}/NO:
+    get:
+      summary: Hent norske helligdager for et gitt ar
+      operationId: getPublicHolidaysNo
+      parameters:
+        - name: year
+          in: path
+          required: true
+          description: Arstall, for eksempel 2026
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Liste over norske helligdager
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    date:
+                      type: string
+                    localName:
+                      type: string
+                    name:
+                      type: string
+                    countryCode:
+                      type: string
+                    global:
+                      type: boolean
+                    types:
+                      type: array
+                      items:
+                        type: string

@@ -1,0 +1,343 @@
+openapi: 3.0.4
+info:
+  title: Statens vegvesen - Kjøretøydata (Enkeltoppslag) - Subset
+  description: "OpenAPI-beskrivelse for oppslag av tekniske kjøretøydata hos Statens vegvesen. Operasjonen støtter oppslag med enten kjennemerke eller understellsnummer.\n"
+  version: 1.0.0
+servers:
+  - url: https://akfell-datautlevering.atlas.vegvesen.no
+    description: Produksjon
+paths:
+  /enkeltoppslag/kjoretoydata:
+    get:
+      summary: Hent tekniske kjøretøydata
+      description: "Henter kjøretøydata basert på enten `kjennemerke` eller `understellsnummer`. Send kun én av parameterne i samme kall.\n"
+      operationId: hentKjoretoydata
+      parameters:
+        - name: kjennemerke
+          in: query
+          required: false
+          description: 'Kjøretøyets kjennemerke (normal/veteran/personlig), vanligvis 2-7 tegn.'
+          explode: false
+          schema:
+            maxLength: 7
+            minLength: 2
+            type: string
+            example: EB11111
+        - name: understellsnummer
+          in: query
+          required: false
+          description: 'Kjøretøyets understellsnummer (VIN), 1-19 tegn.'
+          explode: false
+          schema:
+            maxLength: 19
+            minLength: 1
+            type: string
+            example: WVWZZZ1JZXW000001
+      responses:
+        '200':
+          description: Data for kjøretøy ble levert.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KjoretoydataResponse'
+        '400':
+          description: Ugyldig forespørsel (for eksempel både `kjennemerke` og `understellsnummer` satt).
+        '401':
+          description: Manglende/ugyldig autorisasjon i `SVV-Authorization`.
+        '403':
+          description: Ugyldig/sperret API-nøkkel eller tilgang nektet.
+        '422':
+          description: Antall kjøretøy i respons overstiger kvote.
+          headers:
+            Retry-After:
+              description: Prøv igjen etter midnatt (norsk tid).
+              schema:
+                type: string
+        '429':
+          description: For mange kall (kvote oppbrukt i perioden).
+          headers:
+            Retry-After:
+              description: Prøv igjen etter angitt tid.
+              schema:
+                type: string
+        default:
+          description: Uforutsett feil.
+
+components:
+  securitySchemes:
+    svvApiKey:
+      type: apiKey
+      description: 'Sett headerverdi til: `Apikey <din_api_nokkel>`'
+      name: SVV-Authorization
+      in: header
+
+  schemas:
+    KjoretoydataResponse:
+      type: object
+      properties:
+        feilmelding:
+          type: string
+          description: 'Feilmelding i respons, for eksempel OPPLYSNINGER_IKKE_TILGJENGELIGE.'
+          nullable: true
+        kjoretoydataListe:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnkeltOppslagKjoretoydata'
+      additionalProperties: true
+
+    EnkeltOppslagKjoretoydata:
+      type: object
+      properties:
+        kjoretoyId:
+          $ref: '#/components/schemas/KjoretoyIdentitet'
+        forstegangsregistrering:
+          $ref: '#/components/schemas/Forstegangsregistrering'
+        registrering:
+          $ref: '#/components/schemas/Registrering'
+        periodiskKjoretoyKontroll:
+          $ref: '#/components/schemas/PeriodiskKjoretoyKontroll'
+        godkjenning:
+          $ref: '#/components/schemas/Godkjenning'
+      additionalProperties: true
+
+    KjoretoyIdentitet:
+      type: object
+      properties:
+        kjennemerke:
+          type: string
+        understellsnummer:
+          type: string
+        kuid:
+          type: string
+      additionalProperties: true
+
+    Forstegangsregistrering:
+      type: object
+      properties:
+        registrertForstegangNorgeDato:
+          type: string
+          format: date
+      additionalProperties: true
+
+    Registrering:
+      type: object
+      properties:
+        registreringsstatus:
+          $ref: '#/components/schemas/KodeverkType'
+        kjoringensArt:
+          $ref: '#/components/schemas/KodeverkType'
+      additionalProperties: true
+
+    PeriodiskKjoretoyKontroll:
+      type: object
+      properties:
+        kontrollfrist:
+          type: string
+          format: date
+        sistGodkjent:
+          type: string
+          format: date
+      additionalProperties: true
+
+    Godkjenning:
+      type: object
+      properties:
+        tekniskGodkjenning:
+          $ref: '#/components/schemas/TekniskGodkjenning'
+      additionalProperties: true
+
+    TekniskGodkjenning:
+      type: object
+      properties:
+        kjoretoyklassifisering:
+          $ref: '#/components/schemas/Kjoretoyklassifisering'
+        tekniskeData:
+          $ref: '#/components/schemas/TekniskeData'
+      additionalProperties: true
+
+    Kjoretoyklassifisering:
+      type: object
+      properties:
+        beskrivelse:
+          type: string
+      additionalProperties: true
+
+    TekniskeData:
+      type: object
+      properties:
+        generelt:
+          $ref: '#/components/schemas/Generelt'
+        persontall:
+          $ref: '#/components/schemas/Persontall'
+        dimensjoner:
+          $ref: '#/components/schemas/Dimensjoner'
+        vekter:
+          $ref: '#/components/schemas/Vekter'
+        karosseriOgLasteplan:
+          $ref: '#/components/schemas/KarosseriOgLasteplan'
+        motorOgDrivverk:
+          $ref: '#/components/schemas/MotorOgDrivverk'
+        miljodata:
+          $ref: '#/components/schemas/Miljodata'
+      additionalProperties: true
+
+    Generelt:
+      type: object
+      properties:
+        merke:
+          type: array
+          items:
+            $ref: '#/components/schemas/Merke'
+        handelsbetegnelse:
+          type: array
+          items:
+            type: string
+      additionalProperties: true
+
+    Merke:
+      type: object
+      properties:
+        merke:
+          type: string
+      additionalProperties: true
+
+    Persontall:
+      type: object
+      properties:
+        sitteplasserTotalt:
+          type: integer
+      additionalProperties: true
+
+    Dimensjoner:
+      type: object
+      properties:
+        lengde:
+          type: integer
+        bredde:
+          type: integer
+        hoyde:
+          type: integer
+      additionalProperties: true
+
+    Vekter:
+      type: object
+      properties:
+        egenvekt:
+          type: integer
+        tillattTotalvekt:
+          type: integer
+        nyttelast:
+          type: integer
+      additionalProperties: true
+
+    KarosseriOgLasteplan:
+      type: object
+      properties:
+        rFarge:
+          type: array
+          items:
+            $ref: '#/components/schemas/KodeverkType'
+        fargeFjar:
+          type: string
+      additionalProperties: true
+
+    MotorOgDrivverk:
+      type: object
+      properties:
+        effektKraftuttakKW:
+          type: integer
+        maksimumHastighet:
+          type: array
+          items:
+            type: integer
+        maksimumHastighetMalt:
+          type: array
+          items:
+            type: integer
+        motor:
+          type: array
+          items:
+            $ref: '#/components/schemas/Motor'
+      additionalProperties: true
+
+    Motor:
+      type: object
+      properties:
+        motorKode:
+          type: string
+        drivstoff:
+          type: array
+          items:
+            $ref: '#/components/schemas/Drivstoff'
+      additionalProperties: true
+
+    Drivstoff:
+      type: object
+      properties:
+        drivstoffKode:
+          $ref: '#/components/schemas/KodeverkType'
+        maksNettoEffekt:
+          type: number
+        maksEffektPrTime:
+          type: number
+      additionalProperties: true
+
+    Miljodata:
+      type: object
+      properties:
+        miljoOgdrivstoffGruppe:
+          type: array
+          items:
+            $ref: '#/components/schemas/MiljoOgDrivstoffGruppe'
+      additionalProperties: true
+
+    MiljoOgDrivstoffGruppe:
+      type: object
+      properties:
+        drivstoffKodeMiljodata:
+          $ref: '#/components/schemas/KodeverkType'
+        forbrukOgUtslipp:
+          type: array
+          items:
+            $ref: '#/components/schemas/ForbrukOgUtslipp'
+      additionalProperties: true
+
+    ForbrukOgUtslipp:
+      type: object
+      properties:
+        rekkeviddeKm:
+          type: integer
+        nedcRekkeviddeKm:
+          type: integer
+        wltpKjoretoyspesifikk:
+          $ref: '#/components/schemas/WLTP'
+        wltpTypegodkjenningMedium:
+          $ref: '#/components/schemas/WLTP'
+        wltpTypegodkjenningMaks:
+          $ref: '#/components/schemas/WLTP'
+        wltpTypegodkjenningMin:
+          $ref: '#/components/schemas/WLTP'
+      additionalProperties: true
+
+    WLTP:
+      type: object
+      properties:
+        rekkeviddeKmBlandetkjoring:
+          type: integer
+      additionalProperties: true
+
+    KodeverkType:
+      type: object
+      properties:
+        kodeTypeId:
+          type: string
+        kodeBeskrivelse:
+          type: string
+        kodeNavn:
+          type: string
+        kodeVerdi:
+          type: string
+      additionalProperties: true
+
+security:
+  - svvApiKey: []

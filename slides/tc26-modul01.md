@@ -154,6 +154,10 @@ Ikke alle agenter trenger å bruke alle delene.
 
 ---
 
+![Agentflyt](../assets/tc01-agent.png)
+
+---
+
 # Tre agenttyper
 
 | Type | Hva den gjør | Eksempel |

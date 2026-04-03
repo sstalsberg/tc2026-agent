@@ -1,7 +1,6 @@
 # Lab 3 – Legg til verktøy og integrasjoner
 
-**Tilhører:** Sesjon 3  
-**Tidsestimat:** 25–35 minutter  
+**Tilhører:** Modul 3  
 **Forutsetning:** [Lab 2](lab-02-kunnskap-og-data.md) fullført
 
 ---
@@ -9,11 +8,17 @@
 ## Mål for denne laben
 
 Når du er ferdig skal du ha:
+
 - Lagt til minst én innebygd connector (live data)
 - Opprettet en enkel Agent Flow (Power Automate-automatisering)
 - Forstått hva MCP er og sett det i bruk
 - Prøvd et offentlig REST API-verktøy
+- Validert et API utenfor agenten før du kobler det inn
 - En handlingskraftig agent som ikke bare svarer, men *gjør* ting
+
+Til denne laben bruker vi også eksempelfiler i mappen:
+
+- [`../eksempler/`](../eksempler/README.md)
 
 ---
 
@@ -146,6 +151,7 @@ Agenten bør be deg om bekreftelse og deretter trigge flyten. Sjekk at e-posten 
 ## Alternativ C – MCP-server (Model Context Protocol)
 
 MCP er en åpen standard som gjør det enkelt å koble agenten til eksterne tjenester og verktøy.
+I denne laben bruker vi et konkret `remote MCP`-eksempel mot SSB-data via TRY.
 
 ### Hva er MCP?
 
@@ -157,65 +163,153 @@ Agent ──► MCP-klient ──► MCP-server ──► Ekstern tjeneste
 
 MCP-servere fungerer som «broer» mellom agenten og tjenester. Agenten trenger ikke vite detaljene om APIet – MCP-serveren håndterer kommunikasjonen.
 
-### Steg C1 – Legg til en MCP-server i Copilot Studio
+Eksempelfiler for denne delen ligger her:
+
+- [`../eksempler/mcp-ssb-remote/README.md`](../eksempler/mcp-ssb-remote/README.md)
+
+### Steg C0 – Bestill din egen tilgang
+
+Gå til:
+
+- `https://tools.try.no/ssb-mcp`
+
+Der kan du bestille din egen tilgang til MCP-serveren. For workshop-formaal bruker vi dette som et gratis eksempel.
+
+Du faar en personlig MCP-lenke eller noekkel paa e-post.
+
+> **Viktig:** Ikke legg noekkelen inn i repo, slides eller delte dokumenter. Den skal lagres i connectionen i Copilot Studio.
+
+### Steg C1 – Legg til MCP-serveren i Copilot Studio
 
 1. Gå til **«Handlinger»** → **«+ Legg til handling»**
 2. Velg **«MCP-server»** / **«MCP server»**
-3. Du vil se en liste over tilgjengelige innebygde MCP-servere
+3. Velg oppsett for en eksisterende MCP-server
 
-### Steg C2 – Koble til en innebygd MCP-server
+### Steg C2 – Konfigurer SSB-MCP fra TRY
 
-**Alternativ: Microsoft Graph (via M365-connectoren)**
+Bruk disse verdiene:
 
-1. Velg **«Microsoft Graph»** fra MCP-listen (eller tilsvarende)
-2. Klikk **«Koble til»** og logg inn med Microsoft-kontoen din
-3. Velg hvilke tillatelser agenten skal ha (start med «Read»-tillatelser for e-post og kalender)
-4. Klikk **«Legg til»**
+| Felt | Verdi |
+| --- | --- |
+| **Server name** | `SSB MCP` |
+| **Server description** | `Bruk denne serveren naar brukeren vil soeke i eller hente offentlig statistikk fra SSB.` |
+| **Server URL** | `https://tools.try.no/ssb-mcp/mcp` |
+| **Authentication type** | `API key` |
+| **API key type** | `Query` |
+| **Parameter name** | `key` |
 
-**Test MCP-tilkoblingen:**
-- `Kan du sjekke hvilke møter jeg har i morgen?`
-- `Hva er de siste e-postene mine fra HR?`
+Naar du oppretter connectionen, limer du inn din personlige noekkel fra TRY.
 
-> **OBS:** Vær bevisst på tillatelsene du gir. I workshop-sammenheng anbefales skrivebeskyttede tillatelser.
+### Steg C3 – Legg serveren til agenten
+
+1. Opprett en ny connection hvis Copilot Studio ber om det
+2. Lim inn din personlige noekkel
+3. Klikk **«Add to agent»** / **«Legg til i agent»**
+4. Sjekk hvilke tools som blir oppdaget
+
+Du vil typisk se verktøy som:
+
+- `ssb_search`
+- `ssb_table_metadata`
+- `ssb_get_data`
+- `ssb_get_url`
+
+### Steg C4 – Test MCP-tilkoblingen i agenten
+
+Prøv disse promptene:
+
+- `Finn en SSB-tabell om befolkning i Norge`
+- `Vis metadata for tabellen 07459`
+- `Hent data fra en SSB-tabell om befolkning`
+- `Lag en delbar URL for en SSB-forespoersel`
+
+Dette er et nyttig poeng i seg selv:
+
+- API gir ofte en teknisk kontrakt
+- MCP gjoer verktøyene oppdagbare og brukbare for agenten
 
 ---
 
 ## Alternativ D – REST API-verktøy
 
-La oss koble til et offentlig, gratis API for å demonstrere REST API-integrasjon. Vi bruker [feriepenger.no API](https://api.publicholidays.no) eller et annet norsk offentlig API.
+Her bruker vi et faktisk fungerende offentlig API:
 
-### Steg D1 – Legg til et REST API
+- `Nager.Date`
+- Endpoint: `https://date.nager.at/api/v3/PublicHolidays/2026/NO`
 
-Vi bruker **Norwegian Public Holidays API** som et enkelt eksempel:
+Dette er et viktig poeng i seg selv:
 
-1. Gå til **«Handlinger»** → **«+ Legg til handling»**
-2. Velg **«REST API»** / **«OpenAPI»**
-3. Klikk **«Importer fra URL»** eller **«Legg inn OpenAPI-spesifikasjon»**
+> En gyldig OpenAPI-spec er ikke nok. Du må validere hele kjeden:
+> `DNS -> endpoint -> auth -> schema`
 
-**OpenAPI-spesifikasjon (kopier inn):**
+Eksempelfiler for denne delen ligger her:
+
+- [`../eksempler/api-nager-date/README.md`](../eksempler/api-nager-date/README.md)
+- [`../eksempler/api-nager-date/openapi.yaml`](../eksempler/api-nager-date/openapi.yaml)
+- [`../eksempler/api-nager-date/request.http`](../eksempler/api-nager-date/request.http)
+
+### Steg D0 – Test API-et først med curl eller Postman
+
+Før du bygger noe i Copilot Studio, test at API-et faktisk svarer.
+
+**curl-eksempel:**
+
+```bash
+curl -X GET "https://date.nager.at/api/v3/PublicHolidays/2026/NO" \
+  -H "Accept: application/json"
+```
+
+Du bør få:
+
+- `HTTP 200`
+- en JSON-liste med norske helligdager
+
+Hvis dette ikke fungerer:
+
+- stopp her
+- ikke bygg connector eller agent ennå
+- feilen ligger i endpoint, DNS, nettverk eller API-et, ikke i agenten
+
+### Steg D1 – Bygg integrasjonen i Copilot Studio
+
+Det finnes to vanlige veier videre:
+
+1. **REST API / OpenAPI-verktøy** direkte i Copilot Studio
+2. **Custom connector** i Power Platform hvis du vil gjenbruke integrasjonen flere steder
+
+Start gjerne med den enkleste varianten som er tilgjengelig i miljøet ditt.
+
+### Steg D2 – Legg inn OpenAPI-spesifikasjonen
+
+Bruk spesifikasjonen fra:
+
+- [`../eksempler/api-nager-date/openapi.yaml`](../eksempler/api-nager-date/openapi.yaml)
+
+Hvis du legger den inn manuelt, ser den slik ut:
+
 ```yaml
 openapi: 3.0.0
 info:
-  title: Norwegian Public Holidays
+  title: Norske helligdager
   version: "1.0"
-  description: Henter norske helligdager
+  description: Henter norske offentlige helligdager fra Nager.Date
 servers:
-  - url: https://api.publicholidays.no
+  - url: https://date.nager.at/api/v3
 paths:
-  /holidays/{year}:
+  /PublicHolidays/{year}/NO:
     get:
-      summary: Hent norske helligdager for et gitt år
-      operationId: getHolidays
+      summary: Hent norske helligdager for et gitt ar
+      operationId: getPublicHolidaysNo
       parameters:
         - name: year
           in: path
           required: true
+          description: Arstall, for eksempel 2026
           schema:
             type: integer
-          description: År (f.eks. 2026)
       responses:
-        '200':
-          description: Liste over helligdager
+        "200":
+          description: Liste over norske helligdager
           content:
             application/json:
               schema:
@@ -225,18 +319,51 @@ paths:
                   properties:
                     date:
                       type: string
+                    localName:
+                      type: string
                     name:
                       type: string
+                    countryCode:
+                      type: string
+                    global:
+                      type: boolean
+                    types:
+                      type: array
+                      items:
+                        type: string
 ```
 
-4. Klikk **«Legg til handling»** / **«Add action»**
-5. Beskriv handlingen: `Henter norske offentlige helligdager for et gitt år`
+Beskriv verktøyet tydelig for agenten:
 
-### Steg D2 – Test REST API
+- Navn: `Hent norske helligdager`
+- Beskrivelse: `Bruk dette verktøyet når brukeren spør om norske helligdager for et bestemt år.`
 
-I Test-panelet:
+### Steg D3 – Test verktøyet i agenten
+
+Når verktøyet er lagt til, test i agenten:
+
 - `Hvilke helligdager er det i 2026?`
-- `Er det en helligdag denne uken?`
+- `Når er neste helligdag i Norge?`
+- `Hent norske helligdager for 2027`
+
+Hvis agenten ikke bruker verktøyet av seg selv, prøv en mer eksplisitt formulering:
+
+- `Bruk verktøyet for norske helligdager og hent 2026`
+
+### Steg D4 – Reflekter over hva som faktisk skjedde
+
+Dette er arbeidsmønsteret vi vil at du skal lære:
+
+1. Test API-et utenfor agenten
+2. Bygg integrasjonen med OpenAPI eller custom connector
+3. Test verktøyet i agenten
+4. Juster beskrivelse, input og instrukser hvis agenten ikke velger verktøyet riktig
+
+Dette mønsteret skal vi bruke igjen senere, blant annet for:
+
+- Statens vegvesen-API
+- remote MCP mot SSB
+- self-hosted MCP-server for Minecraft
 
 ---
 
@@ -247,6 +374,7 @@ Nå bør agenten din ha flere verktøy. Test disse scenariene som bruker kombina
 1. **Informasjon + handling:** `Jeg er ny ansatt. Kan du forklare hva som skjer dag 1, og sende meg en velkomst-e-post?`
 2. **Live data:** `Hva er været i Oslo i dag?`
 3. **API-data:** `Hvilke helligdager har vi igjen i 2026?`
+4. **MCP-data:** `Finn en relevant SSB-tabell om befolkning og hent noen tall`
 
 ---
 
@@ -265,12 +393,16 @@ Nå bør agenten din ha flere verktøy. Test disse scenariene som bruker kombina
 ### MCP-server svarer ikke
 - MCP-servere kan ha forsinkelse ved første tilkobling
 - Sjekk nettverkstilgang (noen bedriftsnettverk blokkerer MCP-trafikk)
-- Prøv en annen MCP-server fra listen
+- Sjekk at `Server URL` er riktig
+- Sjekk at API-noekkelen faktisk er lagt inn i connectionen
+- Hvis serveren bruker query-auth, sjekk at parameteren heter `key`
 
 ### REST API-feil
-- Sjekk at API-URL-en er tilgjengelig (åpne i nettleseren)
+- Test endpointet med `curl`, Postman eller VS Code REST Client før du går inn i agenten
+- Sjekk at domenet faktisk finnes og at DNS-oppslag fungerer
+- Sjekk at OpenAPI-spesifikasjonen peker til riktig base URL
 - Sjekk at OpenAPI-spesifikasjonen er gyldig YAML
-- Noen offentlige APIer kan ha nedetid
+- Husk at en gyldig spec ikke beviser at API-et er tilgjengelig i runtime
 
 ### Agenten kaller ikke verktøyet
 - Agenten kaller verktøy basert på om den forstår at spørsmålet er relevant
@@ -284,6 +416,8 @@ Nå bør agenten din ha flere verktøy. Test disse scenariene som bruker kombina
 - [ ] Minst én innebygd connector er lagt til og fungerer
 - [ ] Agent Flow for velkomst-e-post er opprettet og testet
 - [ ] Agenten kan trigge en automatisering basert på chat
+- [ ] Du har koblet til en eksisterende MCP-server
+- [ ] Du har testet et API med `curl` eller Postman før du koblet det inn
 - [ ] Du har sett et eksempel på live data i et svar (fra weather eller API)
 
 ---

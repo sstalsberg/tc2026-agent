@@ -515,6 +515,21 @@ Den enkle flyten er:
 
 Agent → MCP → API / data / kontekst → MCP → Agent
 
+### Eksempel: remote MCP mot SSB
+
+Et nyttig workshop-eksempel er en eksisterende MCP-server for SSB-data.
+
+Her trenger du ikke bygge serveren selv. I stedet kobler du agenten til en ferdig MCP-server, og agenten faar tilgang til verktøy som:
+
+- `ssb_search`
+- `ssb_table_metadata`
+- `ssb_get_data`
+- `ssb_get_url`
+
+Praktisk betyr dette:
+
+- deltakerne bestiller egen tilgang hos `https://tools.try.no/ssb-mcp`
+
 ### API vs MCP
 
 En nyttig huskeregel er:
@@ -561,6 +576,7 @@ En skill er ikke bare et verktøy, men en gjenbrukbar arbeidsmåte. Den kan best
 - ressurser og referansemateriale
 - strukturert metadata, ofte i en `SKILL.md`
 - eksempelrepo: `https://github.com/microsoft/skills`
+- ressurskatalog: `https://awesome-copilot.github.com/`
 
 Et nyttig skille er:
 
@@ -660,3 +676,7 @@ Etter denne modulen bør du sitte igjen med:
 - [Azure AI Search: Retrieval-augmented generation overview](https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview)
 - [Copilot Studio and Azure (eksempelrepo)](https://github.com/Azure/Copilot-Studio-and-Azure)
 - [Microsoft Foundry Agent Service overview](https://learn.microsoft.com/en-us/azure/foundry/agents/overview)
+- [Connect your agent to an existing MCP server](https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-add-existing-server-to-agent)
+- [Skills for Copilot Studio: Build agents from YAML code, up to 20x Faster](https://microsoft.github.io/mcscatblog/posts/skills-for-copilot-studio/)
+- [TRY SSB MCP](https://tools.try.no/ssb-mcp)
+- [Awesome GitHub Copilot](https://awesome-copilot.github.com/)

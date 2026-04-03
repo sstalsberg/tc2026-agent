@@ -1,13 +1,13 @@
 # Lab 2 – Koble til kunnskapskilder
 
-**Tilhører:** Sesjon 3  
-**Forutsetning:** [Lab 1](lab-01-oppsett-og-ide.md) fullført
+**Tilhører:** Modul 3  
 
 ---
 
 ## Mål for denne laben
 
 Når du er ferdig skal du ha:
+
 - Lastet opp et FAQ-dokument og en onboarding-guide som kunnskapskilder
 - Sett tydelig forskjell på svar med og uten kunnskapsbase
 - Forstått hva RAG (Retrieval-Augmented Generation) gjør for agenten

@@ -1,0 +1,322 @@
+swagger: '2.0'
+info:
+  title: Statens vegvesen - Kjøretøydata
+  version: 2.0.0
+  description: >-
+    REST API for oppslag av tekniske kjøretøydata hos Statens vegvesen. Bruk
+    enten kjennemerke eller understellsnummer (VIN) for å hente
+    kjøretøyinformasjon som registreringsstatus, EU-kontroll og tekniske data.
+host: akfell-datautlevering.atlas.vegvesen.no
+basePath: /
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  svvApiKey:
+    type: apiKey
+    in: header
+    name: SVV-Authorization
+    description: Bruk verdien `Apikey <din_api_nokkel>` i denne headeren.
+security:
+  - svvApiKey: []
+paths:
+  /enkeltoppslag/kjoretoydata:
+    get:
+      summary: Hent kjøretøydata
+      description: >-
+        Henter tekniske kjøretøydata fra Statens vegvesen ved bruk av enten
+        kjennemerke eller understellsnummer (VIN). Bruk bare ett av feltene per
+        kall. Verktøyet er relevant for spørsmål om registreringsstatus,
+        kjøretøyklasse, drivstoff, effekt og frist for neste EU-kontroll.
+      operationId: hentKjoretoydata
+      x-ms-summary: Hent kjøretøydata
+      parameters:
+        - name: kjennemerke
+          in: query
+          required: false
+          type: string
+          description: >-
+            Kjøretøyets kjennemerke eller personlige kjennemerke. Send bare
+            denne parameteren hvis brukeren oppgir registreringsnummer.
+          x-ms-summary: Kjennemerke
+          x-ms-visibility: important
+        - name: understellsnummer
+          in: query
+          required: false
+          type: string
+          description: >-
+            Kjøretøyets understellsnummer (VIN). Send bare denne parameteren
+            hvis brukeren oppgir VIN.
+          x-ms-summary: Understellsnummer (VIN)
+          x-ms-visibility: important
+      responses:
+        '200':
+          description: Kjøretøydata ble levert.
+          schema:
+            $ref: '#/definitions/KjoretoydataResponse'
+        '204':
+          description: Ingen treff for oppgitt kjennemerke eller understellsnummer.
+        '400':
+          description: Ugyldig forespørsel.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Manglende eller ugyldig autorisasjon i SVV-Authorization.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Ugyldig eller sperret API-nøkkel, eller tilgang nektet.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '422':
+          description: Antall kjøretøy i respons overstiger kvote.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '429':
+          description: For mange kall i perioden.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        default:
+          description: Uforutsett feil.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+definitions:
+  ErrorResponse:
+    type: object
+    properties:
+      message:
+        type: string
+        description: Feilmelding som kan vises eller logges.
+  KjoretoydataResponse:
+    type: object
+    properties:
+      feilmelding:
+        type: string
+        description: Feilmelding fra API-et, hvis tilgjengelig.
+        x-ms-summary: Feilmelding
+      kjoretoydataListe:
+        type: array
+        description: Liste med treff fra kjøretøyoppslaget.
+        x-ms-summary: Kjøretøydata
+        items:
+          $ref: '#/definitions/EnkeltOppslagKjoretoydata'
+    additionalProperties: true
+  EnkeltOppslagKjoretoydata:
+    type: object
+    properties:
+      kjoretoyId:
+        $ref: '#/definitions/KjoretoyIdentitet'
+      forstegangsregistrering:
+        $ref: '#/definitions/Forstegangsregistrering'
+      registrering:
+        $ref: '#/definitions/Registrering'
+      periodiskKjoretoyKontroll:
+        $ref: '#/definitions/PeriodiskKjoretoyKontroll'
+      godkjenning:
+        $ref: '#/definitions/Godkjenning'
+    additionalProperties: true
+  KjoretoyIdentitet:
+    type: object
+    properties:
+      kjennemerke:
+        type: string
+        description: Registreringsnummer.
+        x-ms-summary: Kjennemerke
+      understellsnummer:
+        type: string
+        description: Understellsnummer (VIN).
+        x-ms-summary: VIN
+      kuid:
+        type: string
+        description: Intern kjøretøyidentifikator.
+    additionalProperties: true
+  Forstegangsregistrering:
+    type: object
+    properties:
+      registrertForstegangNorgeDato:
+        type: string
+        format: date
+        description: Dato for førstegangsregistrering i Norge.
+        x-ms-summary: Førstegangsregistrert i Norge
+    additionalProperties: true
+  Registrering:
+    type: object
+    properties:
+      registreringsstatus:
+        $ref: '#/definitions/KodeverkType'
+      registrertForstegangPaEierskap:
+        type: string
+        format: date-time
+        description: Dato og tidspunkt for registrering på nåværende eierskap.
+    additionalProperties: true
+  PeriodiskKjoretoyKontroll:
+    type: object
+    properties:
+      kontrollfrist:
+        type: string
+        format: date
+        description: Frist for neste EU-kontroll.
+        x-ms-summary: Frist neste EU-kontroll
+      sistGodkjent:
+        type: string
+        format: date
+        description: Dato for sist godkjente EU-kontroll.
+        x-ms-summary: Sist godkjent EU-kontroll
+    additionalProperties: true
+  Godkjenning:
+    type: object
+    properties:
+      tekniskGodkjenning:
+        $ref: '#/definitions/TekniskGodkjenning'
+    additionalProperties: true
+  TekniskGodkjenning:
+    type: object
+    properties:
+      kjoretoyklassifisering:
+        $ref: '#/definitions/Kjoretoyklassifisering'
+      tekniskeData:
+        $ref: '#/definitions/TekniskeData'
+    additionalProperties: true
+  Kjoretoyklassifisering:
+    type: object
+    properties:
+      beskrivelse:
+        type: string
+        description: Beskrivelse av kjøretøyklassen.
+        x-ms-summary: Kjøretøyklasse
+    additionalProperties: true
+  TekniskeData:
+    type: object
+    properties:
+      generelt:
+        $ref: '#/definitions/Generelt'
+      motorOgDrivverk:
+        $ref: '#/definitions/MotorOgDrivverk'
+      persontall:
+        $ref: '#/definitions/Persontall'
+      dimensjoner:
+        $ref: '#/definitions/Dimensjoner'
+      vekter:
+        $ref: '#/definitions/Vekter'
+      karosseriOgLasteplan:
+        $ref: '#/definitions/KarosseriOgLasteplan'
+    additionalProperties: true
+  Generelt:
+    type: object
+    properties:
+      merke:
+        type: array
+        items:
+          $ref: '#/definitions/Merke'
+        description: Kjøretøymerke.
+      handelsbetegnelse:
+        type: array
+        items:
+          type: string
+        description: Modellnavn eller handelsbetegnelse.
+    additionalProperties: true
+  Merke:
+    type: object
+    properties:
+      merke:
+        type: string
+        description: Bilmerke.
+        x-ms-summary: Merke
+    additionalProperties: true
+  MotorOgDrivverk:
+    type: object
+    properties:
+      motor:
+        type: array
+        items:
+          $ref: '#/definitions/Motor'
+    additionalProperties: true
+  Motor:
+    type: object
+    properties:
+      drivstoff:
+        type: array
+        items:
+          $ref: '#/definitions/Drivstoff'
+    additionalProperties: true
+  Drivstoff:
+    type: object
+    properties:
+      drivstoffKode:
+        $ref: '#/definitions/KodeverkType'
+      maksNettoEffekt:
+        type: number
+        description: Maksimal netto effekt i kW.
+        x-ms-summary: Effekt (kW)
+      maksEffektPrTime:
+        type: number
+        description: Maks effekt per time, brukt for enkelte elektriske kjøretøy.
+    additionalProperties: true
+  Persontall:
+    type: object
+    properties:
+      sitteplasserTotalt:
+        type: integer
+        description: Antall sitteplasser.
+        x-ms-summary: Sitteplasser
+    additionalProperties: true
+  Dimensjoner:
+    type: object
+    properties:
+      lengde:
+        type: integer
+        description: Lengde i millimeter.
+        x-ms-summary: Lengde (mm)
+      bredde:
+        type: integer
+        description: Bredde i millimeter.
+      hoyde:
+        type: integer
+        description: Høyde i millimeter.
+    additionalProperties: true
+  Vekter:
+    type: object
+    properties:
+      egenvekt:
+        type: integer
+        description: Kjøretøyets egenvekt i kilogram.
+        x-ms-summary: Egenvekt (kg)
+      tillattTotalvekt:
+        type: integer
+        description: Tillatt totalvekt i kilogram.
+        x-ms-summary: Tillatt totalvekt (kg)
+      nyttelast:
+        type: integer
+        description: Nyttelast i kilogram.
+    additionalProperties: true
+  KarosseriOgLasteplan:
+    type: object
+    properties:
+      rFarge:
+        type: array
+        items:
+          $ref: '#/definitions/KodeverkType'
+        description: Registrert fargekode eller fargebeskrivelse.
+      fargeFjar:
+        type: string
+        description: Fri tekst-farge når kode ikke er satt.
+    additionalProperties: true
+  KodeverkType:
+    type: object
+    properties:
+      kodeTypeId:
+        type: string
+        description: Type-ID for kodeverk.
+      kodeBeskrivelse:
+        type: string
+        description: Lesbar beskrivelse av koden.
+      kodeNavn:
+        type: string
+        description: Navn på koden.
+      kodeVerdi:
+        type: string
+        description: Selve kodeverdien.
+    additionalProperties: true

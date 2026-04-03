@@ -268,8 +268,24 @@ Kort sagt: semantikk hjelper systemet å finne riktig innhold, chunking hjelper 
 | Ranking | Hybrid søk og semantisk rangering løfter de beste treffene |
 
 - `Integrated vectorization` gjør chunking og vektorisering til en del av selve indekseringen
+- Embeddings kommer normalt fra en modell i `Azure OpenAI` eller `Microsoft Foundry`, ikke fra Azure AI Search alene
+- Det er ofte en fordel å bruke samme embedding-spor ved indeksering og ved spørring
 - I Copilot Studio kan Azure AI Search legges inn som egen kunnskapskilde
 - Eksempelrepo: `https://github.com/Azure/Copilot-Studio-and-Azure`
+
+---
+
+# Copilot Studio filer vs Azure AI Search
+
+| Valg | Styrke | Når det passer |
+| --- | --- | --- |
+| `Filopplasting i Copilot Studio` | Raskt og enkelt aa komme i gang | Mindre dokumentsett og enkel grounding |
+| `Azure AI Search` | Mer kontroll paa chunking, embeddings, metadata, hybridt og semantisk soek | Naar kvalitet, kontroll og soekekonfigurasjon betyr mer |
+
+Kort sagt:
+
+- filopplasting er enklest aa starte med
+- Azure AI Search gir mer kontroll og ofte bedre retrieval i stoerre eller viktigere kunnskapsdomener
 
 ---
 

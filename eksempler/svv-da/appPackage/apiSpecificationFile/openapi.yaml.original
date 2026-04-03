@@ -1,0 +1,189 @@
+openapi: 3.0.3
+info:
+  title: Statens vegvesen - Kjøretøydata (Enkeltoppslag)
+  version: 1.0.0
+  description: >
+    OpenAPI-beskrivelse for oppslag av tekniske kjøretøydata hos Statens vegvesen.
+    Operasjonen støtter oppslag med enten kjennemerke eller understellsnummer.
+servers:
+  - url: https://akfell-datautlevering.atlas.vegvesen.no
+    description: Produksjon
+security:
+  - svvApiKey: []
+paths:
+  /enkeltoppslag/kjoretoydata:
+    get:
+      operationId: hentKjoretoydata
+      summary: Hent tekniske kjøretøydata
+      description: >
+        Henter kjøretøydata basert på enten `kjennemerke` eller `understellsnummer`.
+        Send kun én av parameterne i samme kall.
+      parameters:
+        - name: kjennemerke
+          in: query
+          required: false
+          description: Kjøretøyets kjennemerke (normal/veteran/personlig), vanligvis 2-7 tegn.
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 7
+            example: EB11111
+        - name: understellsnummer
+          in: query
+          required: false
+          description: Kjøretøyets understellsnummer (VIN), 1-19 tegn.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 19
+            example: WVWZZZ1JZXW000001
+      responses:
+        "200":
+          description: Data for kjøretøy ble levert.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KjoretoydataResponse"
+        "400":
+          description: Ugyldig forespørsel (for eksempel både `kjennemerke` og `understellsnummer` satt).
+        "403":
+          description: Ugyldig/sperret API-nøkkel eller tilgang nektet.
+        "422":
+          description: Kvote eller valideringsrelatert avvisning.
+        "429":
+          description: For mange kall (kvote oppbrukt i perioden).
+          headers:
+            Retry-After:
+              description: Prøv igjen etter angitt tid.
+              schema:
+                type: string
+        default:
+          description: Uforutsett feil.
+components:
+  securitySchemes:
+    svvApiKey:
+      type: apiKey
+      in: header
+      name: SVV-Authorization
+      description: "Sett headerverdi til: `Apikey <din_api_nokkel>`"
+  schemas:
+    KjoretoydataResponse:
+      type: object
+      properties:
+        feilmelding:
+          type: string
+          nullable: true
+          description: Feilmelding i respons, for eksempel OPPLYSNINGER_IKKE_TILGJENGELIGE.
+        kjoretoydataListe:
+          type: array
+          items:
+            $ref: "#/components/schemas/EnkeltOppslagKjoretoydata"
+      additionalProperties: true
+    EnkeltOppslagKjoretoydata:
+      type: object
+      properties:
+        kjoretoyId:
+          $ref: "#/components/schemas/KjoretoyIdentitet"
+        forstegangsregistrering:
+          $ref: "#/components/schemas/Forstegangsregistrering"
+        registrering:
+          $ref: "#/components/schemas/Registrering"
+        periodiskKjoretoyKontroll:
+          $ref: "#/components/schemas/PeriodiskKjoretoyKontroll"
+        godkjenning:
+          $ref: "#/components/schemas/Godkjenning"
+      additionalProperties: true
+    KjoretoyIdentitet:
+      type: object
+      properties:
+        kjennemerke:
+          type: string
+        understellsnummer:
+          type: string
+        kuid:
+          type: string
+      additionalProperties: true
+    Forstegangsregistrering:
+      type: object
+      properties:
+        registrertForstegangNorgeDato:
+          type: string
+          format: date
+      additionalProperties: true
+    Registrering:
+      type: object
+      properties:
+        registreringsstatus:
+          $ref: "#/components/schemas/KodeverkType"
+        registrertForstegangPaEierskap:
+          type: string
+          format: date-time
+      additionalProperties: true
+    PeriodiskKjoretoyKontroll:
+      type: object
+      properties:
+        kontrollfrist:
+          type: string
+          format: date
+        sistGodkjent:
+          type: string
+          format: date
+      additionalProperties: true
+    Godkjenning:
+      type: object
+      properties:
+        tekniskGodkjenning:
+          $ref: "#/components/schemas/TekniskGodkjenning"
+      additionalProperties: true
+    TekniskGodkjenning:
+      type: object
+      properties:
+        kjoretoyklassifisering:
+          type: object
+          properties:
+            beskrivelse:
+              type: string
+          additionalProperties: true
+        tekniskeData:
+          $ref: "#/components/schemas/TekniskeData"
+      additionalProperties: true
+    TekniskeData:
+      type: object
+      properties:
+        generelt:
+          $ref: "#/components/schemas/Generelt"
+        persontall:
+          type: object
+          properties:
+            sitteplasserTotalt:
+              type: integer
+          additionalProperties: true
+      additionalProperties: true
+    Generelt:
+      type: object
+      properties:
+        merke:
+          type: array
+          items:
+            type: object
+            properties:
+              merke:
+                type: string
+            additionalProperties: true
+        handelsbetegnelse:
+          type: array
+          items:
+            type: string
+      additionalProperties: true
+    KodeverkType:
+      type: object
+      properties:
+        kodeTypeId:
+          type: string
+        kodeBeskrivelse:
+          type: string
+        kodeNavn:
+          type: string
+        kodeVerdi:
+          type: string
+      additionalProperties: true

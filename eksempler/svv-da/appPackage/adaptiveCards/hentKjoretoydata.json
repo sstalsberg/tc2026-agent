@@ -1,0 +1,83 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.4",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "${if(kjoretoyId.kjennemerke, concat('Kjøretøy ', kjoretoyId.kjennemerke), 'Kjøretøydata')}",
+      "size": "Large",
+      "weight": "Bolder",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "${concat(if(godkjenning.tekniskGodkjenning.tekniskeData.generelt.merke[0].merke, godkjenning.tekniskGodkjenning.tekniskeData.generelt.merke[0].merke, 'Ukjent merke'), ' ', if(godkjenning.tekniskGodkjenning.tekniskeData.generelt.handelsbetegnelse[0], godkjenning.tekniskGodkjenning.tekniskeData.generelt.handelsbetegnelse[0], ''))}",
+      "isSubtle": true,
+      "wrap": true,
+      "spacing": "Small"
+    },
+    {
+      "type": "FactSet",
+      "spacing": "Medium",
+      "facts": [
+        {
+          "title": "Kjennemerke",
+          "value": "${if(kjoretoyId.kjennemerke, kjoretoyId.kjennemerke, 'Ikke oppgitt')}"
+        },
+        {
+          "title": "VIN",
+          "value": "${if(kjoretoyId.understellsnummer, kjoretoyId.understellsnummer, 'Ikke oppgitt')}"
+        },
+        {
+          "title": "Kjøretøyklasse",
+          "value": "${if(godkjenning.tekniskGodkjenning.kjoretoyklassifisering.beskrivelse, godkjenning.tekniskGodkjenning.kjoretoyklassifisering.beskrivelse, 'Ikke oppgitt')}"
+        },
+        {
+          "title": "Registreringsstatus",
+          "value": "${if(registrering.registreringsstatus.kodeBeskrivelse, registrering.registreringsstatus.kodeBeskrivelse, if(registrering.registreringsstatus.kodeNavn, registrering.registreringsstatus.kodeNavn, 'Ikke oppgitt'))}"
+        },
+        {
+          "title": "Drivstoff",
+          "value": "${if(godkjenning.tekniskGodkjenning.tekniskeData.motorOgDrivverk.motor[0].drivstoff[0].drivstoffKode.kodeBeskrivelse, godkjenning.tekniskGodkjenning.tekniskeData.motorOgDrivverk.motor[0].drivstoff[0].drivstoffKode.kodeBeskrivelse, if(godkjenning.tekniskGodkjenning.tekniskeData.motorOgDrivverk.motor[0].drivstoff[0].drivstoffKode.kodeNavn, godkjenning.tekniskGodkjenning.tekniskeData.motorOgDrivverk.motor[0].drivstoff[0].drivstoffKode.kodeNavn, 'Ikke oppgitt'))}"
+        },
+        {
+          "title": "Effekt (kW)",
+          "value": "${if(godkjenning.tekniskGodkjenning.tekniskeData.motorOgDrivverk.motor[0].drivstoff[0].maksNettoEffekt, string(godkjenning.tekniskGodkjenning.tekniskeData.motorOgDrivverk.motor[0].drivstoff[0].maksNettoEffekt), if(godkjenning.tekniskGodkjenning.tekniskeData.motorOgDrivverk.motor[0].drivstoff[0].maksEffektPrTime, string(godkjenning.tekniskGodkjenning.tekniskeData.motorOgDrivverk.motor[0].drivstoff[0].maksEffektPrTime), 'Ikke oppgitt'))}"
+        },
+        {
+          "title": "Farge",
+          "value": "${if(godkjenning.tekniskGodkjenning.tekniskeData.karosseriOgLasteplan.rFarge[0].kodeBeskrivelse, godkjenning.tekniskGodkjenning.tekniskeData.karosseriOgLasteplan.rFarge[0].kodeBeskrivelse, if(godkjenning.tekniskGodkjenning.tekniskeData.karosseriOgLasteplan.rFarge[0].kodeNavn, godkjenning.tekniskGodkjenning.tekniskeData.karosseriOgLasteplan.rFarge[0].kodeNavn, if(godkjenning.tekniskGodkjenning.tekniskeData.karosseriOgLasteplan.fargeFjar, godkjenning.tekniskGodkjenning.tekniskeData.karosseriOgLasteplan.fargeFjar, 'Ikke oppgitt')))}"
+        },
+        {
+          "title": "Sitteplasser",
+          "value": "${if(godkjenning.tekniskGodkjenning.tekniskeData.persontall.sitteplasserTotalt, string(godkjenning.tekniskGodkjenning.tekniskeData.persontall.sitteplasserTotalt), 'Ikke oppgitt')}"
+        },
+        {
+          "title": "Lengde (mm)",
+          "value": "${if(godkjenning.tekniskGodkjenning.tekniskeData.dimensjoner.lengde, string(godkjenning.tekniskGodkjenning.tekniskeData.dimensjoner.lengde), 'Ikke oppgitt')}"
+        },
+        {
+          "title": "Egenvekt (kg)",
+          "value": "${if(godkjenning.tekniskGodkjenning.tekniskeData.vekter.egenvekt, string(godkjenning.tekniskGodkjenning.tekniskeData.vekter.egenvekt), 'Ikke oppgitt')}"
+        },
+        {
+          "title": "Tillatt totalvekt (kg)",
+          "value": "${if(godkjenning.tekniskGodkjenning.tekniskeData.vekter.tillattTotalvekt, string(godkjenning.tekniskGodkjenning.tekniskeData.vekter.tillattTotalvekt), 'Ikke oppgitt')}"
+        },
+        {
+          "title": "Førstegangsreg. NO",
+          "value": "${if(forstegangsregistrering.registrertForstegangNorgeDato, forstegangsregistrering.registrertForstegangNorgeDato, 'Ikke oppgitt')}"
+        },
+        {
+          "title": "Sist EU-kontroll",
+          "value": "${if(periodiskKjoretoyKontroll.sistGodkjent, periodiskKjoretoyKontroll.sistGodkjent, 'Ikke oppgitt')}"
+        },
+        {
+          "title": "Frist neste EU-kontroll",
+          "value": "${if(periodiskKjoretoyKontroll.kontrollfrist, periodiskKjoretoyKontroll.kontrollfrist, 'Ikke oppgitt')}"
+        }
+      ]
+    }
+  ]
+}

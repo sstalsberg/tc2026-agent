@@ -1,0 +1,40 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.24/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.24",
+    "version": "2.0.0",
+    "id": "${{TEAMS_APP_ID}}",
+    "developer": {
+        "name": "Steinar Stalsberg",
+        "websiteUrl": "https://www.example.com",
+        "privacyUrl": "https://www.example.com/privacy",
+        "termsOfUseUrl": "https://www.example.com/termofuse"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "Statens Vegvesen Agent${{APP_NAME_SUFFIX}}",
+        "full": "Statens Vegvesen Agent - Kjøretøyoppslag"
+    },
+    "description": {
+        "short": "Kjøretøyoppslag via Statens vegvesen API",
+        "full": "Copilot-agent som henter tekniske kjøretøydata fra Statens vegvesen basert på kjennemerke eller understellsnummer."
+    },
+    "accentColor": "#FFFFFF",
+    "copilotAgents": {
+        "declarativeAgents": [            
+            {
+                "id": "declarativeAgent",
+                "file": "declarativeAgent.json"
+            }
+        ]
+    },
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+        "akfell-datautlevering.atlas.vegvesen.no"
+    ]
+}

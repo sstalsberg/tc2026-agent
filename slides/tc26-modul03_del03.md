@@ -249,6 +249,24 @@ I Copilot Studio er `Computer Use` en funksjonalitet som lar agenten bruke et ne
 
 ---
 
+# Human in the loop i Copilot Studio
+
+`Human in the loop` er ikke bare et prinsipp. I Copilot Studio finnes det som en konkret capability.
+
+| Mønster | Hva det gjør |
+| --- | --- |
+| `Request for Information` | Agenten sender en forespørsel til et menneske og venter på svar |
+| `Approval / review` | Et menneske kan godkjenne, avvise eller supplere informasjon |
+| `Human supervision` | Agenten kan stoppe opp og be om hjelp når den er usikker |
+
+Typiske brukstilfeller:
+
+- manglende informasjon
+- godkjenning av kostnad eller bestilling
+- avklaringer før agenten fortsetter
+
+---
+
 # Prosess
 
 Prosess lar agenten utføre en definert arbeidsflyt med flere steg, ikke bare ett enkelt kall.
@@ -278,6 +296,23 @@ Navnene varierer, men konseptet er det samme:
 - Copilot Studio: agent flows og event triggers
 - Foundry: workflows, actions og eksterne triggere
 - Kodeagenter: scheduler, webhook, queue eller backend-prosess
+
+---
+
+# Agent + workflow: når bruker du hva?
+
+| Bruk agent når du trenger | Bruk workflow når du trenger |
+| --- | --- |
+| Fleksibilitet i samtale og tolkning | Faste steg i kjent rekkefølge |
+| Resonering og valg av neste handling | Forutsigbar kjøring hver gang |
+| Hente inn kontekst fra bruker eller kilder | Standardisert prosess med logging og kontroll |
+| Dynamisk valg av tools eller neste steg | Godkjenning, branching og systemoppdateringer |
+
+Husk:
+
+- agenten velger og forstår
+- workflowen utfører og standardiserer
+- ofte er riktig mønster `agent + workflow`, ikke `agent vs workflow`
 
 ---
 
@@ -372,6 +407,55 @@ Det flytter også kompleksitet fra agentprompt til et standardisert tjenestelag.
 Flyt:
 
 Agent → MCP → API / data / kontekst → MCP → Agent
+
+---
+
+# MCP i Azure: Logic Apps
+
+| Mulighet | Hva det betyr |
+| --- | --- |
+| `Azure Logic Apps (Standard)` | Kan eksponere workflows som remote MCP-servere |
+| `1400+ connectors` | Gjør det lett aa lage tools mot SaaS, on-prem og Microsoft-tjenester |
+| `Workflows som tools` | Et MCP-kall kan trigge en eksisterende arbeidsflyt |
+| `Easy Auth / OAuth 2.0` | Gir innebygd auth for MCP-serveren |
+| `Application Insights / Log Analytics` | Gir historikk, diagnostikk og sporbarhet |
+
+Passer best naar:
+
+- du allerede har integrasjoner eller workflows i Logic Apps
+- du vil lage MCP-tools raskt uten aa bygge mye kode
+
+---
+
+# MCP i Azure: Azure Functions
+
+| Mulighet | Hva det betyr |
+| --- | --- |
+| `Functions MCP extension` | Bygg MCP-server direkte med Functions-trigger/bindings-modellen |
+| `Self-hosted MCP server` | Host en eksisterende MCP-server bygget med offisiell MCP SDK |
+| `Built-in auth` | Beskytter serverendepunktet med innebygd autentisering |
+| `Managed identity` | Godt spor for sikker tilgang til Azure-ressurser |
+| `Serverless og skalerbar hosting` | Passer godt for kodebaserte og egendefinerte tools |
+
+Passer best naar:
+
+- du vil bygge MCP i kode
+- du trenger mer kontroll enn Logic Apps gir
+- du allerede har en MCP-server du bare vil hoste i Azure
+
+---
+
+# Eksempel: remote MCP mot SSB
+
+- Et konkret eksempel er TRY sin MCP-server for SSB-data
+- Deltakeren bestiller egen tilgang via `https://tools.try.no/ssb-mcp`
+- I Agenten legger du inn:
+  - `Server URL`: `https://tools.try.no/ssb-mcp/mcp`
+  - `Authentication`: `API key`
+  - `Type`: `Query`
+  - `Parameter`: `key`
+- Typiske tools: `ssb_search`, `ssb_table_metadata`, `ssb_get_data`
+- Dette er et godt eksempel paa `remote MCP`
 
 ---
 

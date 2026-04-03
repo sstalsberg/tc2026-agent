@@ -1,0 +1,39 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/copilot/plugin/v2.3/schema.json",
+    "schema_version": "v2.3",
+    "name_for_human": "Statens vegvesen - Kjøretøydata",
+    "description_for_human": "Slå opp tekniske kjøretøydata hos Statens vegvesen med kjennemerke eller understellsnummer.",
+    "description_for_model": "Brukes til oppslag av tekniske kjøretøydata hos Statens vegvesen. Kall funksjonen med enten kjennemerke eller understellsnummer.",
+    "contact_email": "steinar.stalsberg@atea.no",
+    "namespace": "statensvegvesenagent",
+    "capabilities": {},
+    "functions": [
+        {
+            "name": "hentKjoretoydata",
+            "description": "Henter kjøretøydata basert på enten `kjennemerke` eller `understellsnummer`. Send kun én av parameterne i samme kall.",
+            "capabilities": {
+                "response_semantics": {
+                    "data_path": "$.kjoretoydataListe",
+                    "static_template": {
+                        "file": "./adaptiveCards/hentKjoretoydata.json"
+                    }
+                }
+            }
+        }
+    ],
+    "runtimes": [
+        {
+            "type": "OpenApi",
+            "auth": {
+                "type": "ApiKeyPluginVault",
+                "reference_id": "${{SVVAPIKEY_REGISTRATION_ID}}"
+            },
+            "spec": {
+                "url": "apiSpecificationFile/openapi.yaml"
+            },
+            "run_for_functions": [
+                "hentKjoretoydata"
+            ]
+        }
+    ]
+}
