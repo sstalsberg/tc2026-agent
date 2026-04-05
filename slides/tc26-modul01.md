@@ -141,7 +141,7 @@ En AI-agent er et intelligent program som bruker en eller flere språkmodeller t
 
 # Hva består en agent av?
 
-| Byggekloss | Rolle |
+| Nøkkeldel | Rolle |
 | --- | --- |
 | Språkmodell | Forstår språk, resonnerer og svarer |
 | Instruksjoner | Setter rolle, grenser og prioriteringer |
@@ -158,7 +158,7 @@ Ikke alle agenter trenger å bruke alle delene.
 
 ---
 
-# Tre agenttyper
+# Agenttyper med eksempler
 
 | Type | Hva den gjør | Eksempel |
 | --- | --- | --- |
@@ -176,7 +176,7 @@ Ikke alle agenter trenger å bruke alle delene.
 
 # Når passer en agent godt?
 
-| Passer godt | Passer dårlig |
+| Når det passer godt | Når det ikke passer |
 | --- | --- |
 | Variabelt eller uklart behov | Helt faste regler og skjemaer |
 | Kombinasjon av kunnskap og handling | Krav om høy presisjon uten rom for tolkning |
@@ -208,6 +208,16 @@ For Atea betyr dette både intern bruk og nye leveranser til kunder.
 
 ---
 
+# Tre skift i måten vi jobber på
+
+- AI-assistenten blir et nytt grensesnitt for arbeid
+- Agenter orkestrerer flere steg og handlinger
+- Et intelligenslag kobler sammen dokumenter, møter, chat og forretningsdata
+
+Verdien flytter seg fra å finne riktig skjerm til å få svar og utføre handling i samme arbeidsflyt.
+
+---
+
 # Diskusjon i grupper
 
 - Hvilken jobb gjør du i dag som en agent kunne gjort 80 % av?
@@ -230,7 +240,7 @@ For Atea betyr dette både intern bruk og nye leveranser til kunder.
 
 ---
 
-# Laboppgave: Beskriv agentideen din
+# Laboppgave: Beskriv din første agentidé
 
 | Punkt | Notater |
 | --- | --- |
@@ -250,6 +260,6 @@ For Atea betyr dette både intern bruk og nye leveranser til kunder.
 
 # Hva har vi gått igjennom i denne modulen?
 
-1. Forstår hva en AI-agent er og hva den består av
+1. Forstår hva en AI-agent er og hvilke deler den har
 2. Skiller mellom ulike agenttyper og når de passer godt
 3. Beskriver en første agentidé med målgruppe, oppgave og verdi

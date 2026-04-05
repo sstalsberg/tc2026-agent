@@ -315,6 +315,9 @@ Viktige nyanser:
 | Scope og støy | Færre og mer presise kilder gir mindre irrelevant grounding |
 | Datakvalitet og eierskap | Uten vedlikehold, opprydding og ansvarlige eiere forringes kunnskapsbasen over tid |
 
+For strukturerte kilder som `Dataverse` og `Azure SQL` hjelper gode feltnavn, beskrivelser, synonymer og begrepsforklaringer agenten å tolke tabeller og kolonner riktigere.
+For `SharePoint` og opplastede filer er mindre og mer målrettede kilder ofte bedre enn store mapper, lange dokumenter og tung spesialformatering.
+
 ---
 
 # Hvordan tester du tilgang og treff på kunnskap?

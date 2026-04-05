@@ -355,6 +355,24 @@ I praksis:
 
 ---
 
+# Forbedringssløyfe for agenter
+
+| Trinn | Hva du gjør |
+| --- | --- |
+| Test | Kjør et fast testsett mot agenten |
+| Analyser | Se hvilke svar som feiler og hvorfor |
+| Forbedre | Juster instruksjoner, kunnskap, verktøy eller struktur |
+| Publiser | Gjør endringen tilgjengelig i riktig miljø |
+| Evaluer på nytt | Kjør samme testsett igjen og sammenlign resultatet |
+
+Læringspunkter:
+
+- Få og tydelige instruksjonsregler fungerer ofte bedre enn en lang regelbok
+- Testcaser bør helst kjøres isolert, så én feil ikke forurenser resten av samtalen
+- Instruksjoner alene har et tak; noen feil krever bedre verktøy, struktur eller eksempler
+
+---
+
 # Kanal og klient
 
 | Begrep | Hva det betyr |
@@ -366,6 +384,17 @@ Hvorfor dette betyr noe:
 
 - En kanal sier hvor agenten er tilgjengelig
 - En klient sier hvordan opplevelsen faktisk ser ut for brukeren
+
+---
+
+# Teams som kanal: det du må huske
+
+- Teams husker samtaler over tid, så gammel kontekst kan påvirke nye svar
+- Test alltid i faktisk Teams-klient, ikke bare i studio eller webchat
+- Verifiser at ny versjon faktisk er tatt i bruk etter publisering
+- Sjekk opplevelsen i både desktop og mobil hvis agenten skal brukes bredt
+
+Poenget er at Teams ikke bare er en kanal, men en klient med egen brukeropplevelse og egen konteksthistorikk.
 
 ---
 

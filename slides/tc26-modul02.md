@@ -143,9 +143,38 @@ style: |
 | Agent Builder i M365 Copilot | Deklarative agenter direkte i Microsoft 365 Copilot | Rask prototyping og personlig eller teamnær produktivitet |
 | SharePoint agents | Agent bygget direkte over SharePoint-områder, biblioteker, mapper eller filer | Når agenten skal svare over et avgrenset dokumentsett i SharePoint eller Teams |
 | Copilot Studio | Low-code og pro-code plattform for egne agenter | Du vil bygge en agent for team, prosess eller fagområde |
+| Teams SDK | Kodebibliotek for samarbeidsagenter i Teams og Copilot | Når agenten skal jobbe i kanaler, møter eller annen gruppebasert samhandling |
 | Microsoft 365 Agents SDK | Agentutvikling med kode for M365 Copilot, Teams, web og egne flater | Når du trenger å tilpasse agenten med egen kode, egne API-er m.m. |
 | Microsoft Foundry Agent Service | Agenttjeneste i Azure med low-code og pro-code valg | Når du vil bygge, drifte, publisere og skalere i Azure |
 | Microsoft Agent Framework (preview) | Rammeverk for orkestrering, workflows og multi-agent | Når flere spesialiserte agenter må samarbeide |
+
+---
+
+# Hva er en custom engine agent?
+
+- Mer fleksibel enn en ren deklarativ agent
+- Du styrer orkestrering, modeller og integrasjoner mer eksplisitt
+- Kan bygges low-code i `Copilot Studio`
+- Kan bygges pro-code med `Teams SDK`, `Microsoft 365 Agents SDK` eller med `Foundry`-agenter inn i Microsoft 365
+- Godt valg når standard Copilot-opplevelser ikke er nok, eller når du trenger mer avansert arbeidsflyt og proaktiv automasjon
+
+---
+
+![Custom engine agent](../assets/agents-system-cea.png)
+
+---
+
+# Sammenligning av byggespor
+
+| Egenskap | Copilot Studio | Teams SDK | Microsoft 365 Agents SDK | Foundry |
+| --- | --- | --- | --- | --- |
+| Tilnærming | Low-code | Pro-code | Pro-code | Low-code eller pro-code |
+| Typisk verktøy | Copilot Studio UI | Visual Studio / VS Code | Visual Studio / VS Code + Agents Toolkit | Foundry portal eller Agents Toolkit |
+| Publisering | Egen organisasjon | Organisasjon eller store | Organisasjon, store og flere kanaler | Organisasjon eller store |
+| Kanaler | M365 Copilot, Teams, partnerapper, mobil og web | M365 Copilot og Teams | M365 Copilot, Teams, partnerapper, mobil og web | M365 Copilot og Teams |
+| Orkestrering | Copilot Studio | Innebygd action planner | Du tar med egen orkestrering | Du tar med egen orkestrering |
+| Modeller | Copilot Studio-modeller | Valgfrie modeller | Valgfrie modeller | Foundry OpenAI eller egne modeller |
+| Språk | Ikke aktuelt | C#, TypeScript, JavaScript, Python | C#, JavaScript, Python | Python og C# |
 
 ---
 

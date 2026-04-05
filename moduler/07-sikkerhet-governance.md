@@ -46,6 +46,25 @@ Hovedpoenget er enkelt:
 - en agent må styres som en virksomhetsløsning
 - ikke bare som en spennende demo
 
+## Agent sprawl: hvorfor dette blir et IT-problem
+
+Når virksomheten går fra én agent til mange, oppstår et nytt problem:
+
+- IT mister oversikten
+- identiteter og eierskap blir uklare
+- flere agenter blir tatt i bruk utenfor etablerte kontrollflater
+
+| Utfordring | Hva det betyr i praksis |
+| --- | --- |
+| For mange agenter uten oversikt | IT vet ikke hva som faktisk er i bruk |
+| Uklar identitet | Det er uklart hvem agenten handler som |
+| Utydelig eierskap | Ingen følger opp livssyklus, feil eller risiko |
+| Shadow agents | Agenter tas i bruk utenfor etablerte kontrollflater |
+| Større angrepsflate | Flere integrasjoner, flere rettigheter og mer compliance-risiko |
+
+Governance handler derfor ikke bare om å sikre én agent.
+Det handler også om å styre en voksende agentportefølje.
+
 ## Fire styringslag rundt en agent
 
 Det er nyttig å tenke på governance som fire lag:
@@ -73,6 +92,7 @@ Poenget er at Agent 365 skal gjøre det mulig å:
 - få oversikt over hvilke agenter som finnes i virksomheten
 - styre tilgang, policyer og livssyklus
 - koble agentene til observabilitet, sikkerhet og compliance
+- fange opp både registrerte agenter og eventuelle shadow agents
 
 Microsoft beskriver blant annet disse kjernedelene:
 
@@ -96,6 +116,21 @@ Det er også viktig å være presis på modenhet:
 
 - Per 30. mars 2026 er Agent 365 dokumentert som del av `Frontier preview-programmet`
 - dokumentasjonen sier at funksjoner og tilgjengelighet kan endre seg i preview
+
+### De fem pilarene i Agent 365
+
+En nyttig måte å forstå Agent 365 på er gjennom de fem pilarene Microsoft bruker i materialet sitt:
+
+| Pilar | Hva den gir deg |
+| --- | --- |
+| Registry | Full oversikt over agenter i virksomheten |
+| Access Control | Styrt tilgang, policyer og least privilege |
+| Visualization | Innsikt i forbindelser, bruk og adferd |
+| Interoperability | Kobling til Work IQ, apper og arbeidsflyt |
+| Security | Trusseldeteksjon, beskyttelse og respons |
+
+Dette er viktig fordi Agent 365 ikke bare handler om identitet.
+Det er et bredere styringslag rundt agentene.
 
 ## Hvordan Agent 365 passer mot governance-lagene
 
@@ -133,6 +168,22 @@ Det gjør det spesielt relevant når spørsmålene blir:
 - Hvordan ser vi misbruk, feil og risikofylt adferd?
 - Hvordan kobler vi agentene til eksisterende sikkerhets- og compliance-arbeid?
 
+## Agent 365 vs. plattformstyring
+
+Det er nyttig å skille mellom hva som styres i Agent 365 og hva som fortsatt styres i den enkelte plattformen.
+
+| Hvis du vil styre ... | Typisk sted |
+| --- | --- |
+| Agenter på tvers av plattformer | `Agent 365` |
+| Agentidentitet, tilgang og registry | `Microsoft 365 admin center` + `Entra Agent ID` |
+| Copilot Studio-spesifikke miljøvalg og ALM | `Power Platform admin center` og Copilot Studio |
+| Førsteparts Copilot-opplevelser | `Microsoft 365 admin center` |
+
+Husk:
+
+- `Agent 365` ligger over flere byggespor
+- plattformspesifikke adminflater forsvinner ikke
+
 ## Identitet og tilgang
 
 Tilgangsstyring er et av de første områdene som må være på plass.
@@ -158,7 +209,7 @@ Guardrails er et samleord for flere typer kontrollmekanismer rundt en agent.
 
 | Kontroll | Hva den beskytter mot |
 | --- | --- |
-| Innholdsfiltrering | Skadelig eller uønsket input og output |
+| Input- og output-filtrering | Skadelig eller uønsket input og output før tools og svar brukes |
 | Prompt shields | Direkte og indirekte prompt injection |
 | Grounding og siteringer | Hallusinasjoner og svak sporbarhet |
 | Human in the loop | Feil ved sensitive eller irreversible handlinger |
@@ -173,6 +224,22 @@ Guardrails består ofte av flere lag samtidig:
 - instruksjoner
 - tilgangskontroll
 - menneskelig kontroll ved behov
+
+### Hvordan Copilot Studio håndterer usikkert innhold
+
+I Copilot Studio kan guardrails vise seg på flere måter i runtime:
+
+| Mekanisme | Trigges av | Brukeren ser | Hva du justerer |
+| --- | --- | --- | --- |
+| `Responsible AI filtering` | Sikkerhets- eller policybrudd i input eller output | `ContentFiltered` i debug eller blokkert/custom feilmelding i runtime | Juster filtere og sikkerhetsnivå |
+| `Unknown intent fallback` | Ingen god match i trigger, topic eller kjent handlingsspor | Vennlig omformulering eller fallback | Legg til triggerfraser, knowledge eller tydeligere routing |
+| `Agent instructions` | Sporsperrer eller custom scope-regler i agenten | Høflig avvisning eller forklaring | Gå gjennom instruksjoner, scope og regler |
+
+Husk:
+
+- input filtreres før agenten handler
+- output filtreres før svaret sendes
+- fallback og avvisning er også guardrails
 
 ## Evaluering før produksjon
 
@@ -347,12 +414,13 @@ Etter denne modulen bør du sitte igjen med fire ting:
 
 ## Lenker
 
-- [Overview of Microsoft Agent 365](https://learn.microsoft.com/microsoft-agent-365/overview)
-- [Agent Management Essentials for Microsoft 365](https://learn.microsoft.com/copilot/microsoft-365/agent-essentials/agent-essentials-overview)
-- [Secure AI agents at scale using Microsoft Agent 365](https://learn.microsoft.com/security/security-for-ai/agent-365-security)
-- [Copilot Studio security and governance](https://learn.microsoft.com/microsoft-copilot-studio/security-and-governance)
-- [Assign licenses and manage access to Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/requirements-licensing)
-- [Copilot Studio analytics and effectiveness](https://learn.microsoft.com/microsoft-copilot-studio/analytics-improve-agent-effectiveness)
-- [Publish and deploy your agent in Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/publication-fundamentals-publish-channels)
-- [Microsoft Foundry observability](https://learn.microsoft.com/azure/foundry/concepts/observability)
-- [Publish and share agents in Microsoft Foundry](https://learn.microsoft.com/azure/foundry/agents/how-to/publish-agent)
+- Offisiell oversikt over Microsoft Agent 365 som kontrollplan: [Overview of Microsoft Agent 365](https://learn.microsoft.com/microsoft-agent-365/overview)
+- Offisiell oversikt over kjerneoppgaver i agentforvaltning for Microsoft 365: [Agent Management Essentials for Microsoft 365](https://learn.microsoft.com/copilot/microsoft-365/agent-essentials/agent-essentials-overview)
+- Offisiell sikkerhetsveiledning for AI-agenter i stor skala: [Secure AI agents at scale using Microsoft Agent 365](https://learn.microsoft.com/security/security-for-ai/agent-365-security)
+- Offisiell dokumentasjon for sikkerhet og governance i Copilot Studio: [Copilot Studio security and governance](https://learn.microsoft.com/microsoft-copilot-studio/security-and-governance)
+- Offisiell veiledning for lisenser og tilgangsstyring i Copilot Studio: [Assign licenses and manage access to Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/requirements-licensing)
+- Offisiell dokumentasjon for analytics og kvalitetsforbedring i Copilot Studio: [Copilot Studio analytics and effectiveness](https://learn.microsoft.com/microsoft-copilot-studio/analytics-improve-agent-effectiveness)
+- Offisiell veiledning for publisering og kanaler i Copilot Studio: [Publish and deploy your agent in Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/publication-fundamentals-publish-channels)
+- Offisiell oversikt over observability i Microsoft Foundry: [Microsoft Foundry observability](https://learn.microsoft.com/azure/foundry/concepts/observability)
+- Offisiell veiledning for publisering og deling av agenter i Microsoft Foundry: [Publish and share agents in Microsoft Foundry](https://learn.microsoft.com/azure/foundry/agents/how-to/publish-agent)
+- Videre lesning om versjonering, deling og styring av agentkonfigurasjon som kode: [APM – Agent Package Manager](https://github.com/microsoft/apm)

@@ -6,7 +6,7 @@ Denne sesjonen handler om å forstå hva en agent er, hvilke typer agenter som f
 
 ## Læringsmål
 
-- Forstå hva en AI-agent er og hvilke byggeklosser den består av
+- Forstå hva en AI-agent er og hvilke deler den har
 - Skille mellom retrieval-, task- og autonomous-agenter
 - Vurdere når en agent passer godt, og når den ikke er riktig løsning
 - Beskrive en første agentidé med målgruppe, oppgave og verdi
@@ -25,7 +25,7 @@ Det er derfor nyttig å tenke på en agent som noe mer enn en tradisjonell chatb
 
 ## Hva består en agent av?
 
-| Byggekloss | Rolle |
+| Nøkkeldel | Rolle |
 | --- | --- |
 | Språkmodell | Forstår språk, resonnerer og svarer |
 | Instruksjoner | Setter rolle, grenser og prioriteringer |
@@ -45,7 +45,7 @@ En enkel måte å lese tabellen på er dette:
 - Orkestrering styrer flyten
 - Triggeren avgjør når agenten starter
 
-## Tre agenttyper
+## Agenttyper med eksempler
 
 I workshopen bruker vi tre enkle kategorier:
 
@@ -57,7 +57,7 @@ I workshopen bruker vi tre enkle kategorier:
 
 ## Når passer en agent godt?
 
-| Passer godt | Passer dårlig |
+| Når det passer godt | Når det ikke passer |
 | --- | --- |
 | Variabelt eller uklart behov | Helt faste regler og skjemaer |
 | Kombinasjon av kunnskap og handling | Krav om høy presisjon uten rom for tolkning |
@@ -122,7 +122,7 @@ Vi går dypere inn i plattformvalg senere i kurset. I denne sesjonen er poenget 
 - Når ville du valgt Copilot Studio, og når ville du heller kodet selv?
 - Hvis agentbruk virkelig vokser kraftig de neste årene, hvilke muligheter og utfordringer skaper det for IT-bransjen?
 
-## Laboppgave: Beskriv agentideen din
+## Laboppgave: Beskriv din første agentidé
 
 I laben skal du ikke designe hele løsningen. Du skal beskrive kjernen i idéen.
 
@@ -154,7 +154,7 @@ En god første agentidé er ofte enkel. Den trenger ikke være “stor”. Det v
 
 Etter denne sesjonen skal deltakerne sitte igjen med tre ting:
 
-1. Forstå hva en AI-agent er og hva den består av
+1. Forstå hva en AI-agent er og hvilke deler den har
 2. Skille mellom ulike agenttyper og når de passer godt
 3. Beskrive en første agentidé med målgruppe, oppgave og verdi
 

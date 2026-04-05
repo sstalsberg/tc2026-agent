@@ -184,6 +184,21 @@ Praktisk huskeregel:
 
 ---
 
+# Flere innstillinger som påvirker svar
+
+| Innstilling | Hva den gjør | Vær obs på |
+| --- | --- | --- |
+| Repetition penalty | Demper gjentakelser og looper | For høy verdi kan gjøre teksten unaturlig |
+| Presence penalty | Oppmuntrer modellen til å introdusere nye ord eller tema | Kan gjøre svaret mer utforskende enn ønsket |
+| Frequency penalty | Demper ord som allerede er brukt mange ganger | Kan gi bedre variasjon, men også mindre flyt |
+
+Praktisk huskeregel:
+
+- Juster disse først når du faktisk ser repetisjon eller monotone svar
+- Mer kontekst er ikke alltid bedre: lengre historikk kan koste mer og gi tregere eller svakere svar
+
+---
+
 # Modelltyper du typisk velger mellom
 
 | Modelltype | Styrke | Typisk bruk |

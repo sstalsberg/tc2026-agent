@@ -176,6 +176,41 @@ Chunking hjelper systemet å hente riktig utdrag.
 Hvis chunkene er for store, blir konteksten upresis.
 Hvis de er for små, kan du miste sammenheng.
 
+### Azure AI Search: fra dokument til treff
+
+Når du bruker Azure AI Search som kunnskapsmotor, går innholdet typisk gjennom denne pipelinen:
+
+| Steg | Hva som skjer |
+| --- | --- |
+| Datakilde | Dokumenter hentes fra en støttet kilde |
+| Indexer | Innholdet trekkes inn i pipelinen |
+| Chunking | Store dokumenter deles opp i mindre biter |
+| Embeddings | Hver bit kan vektoriseres |
+| Index | Tekstfelt og vektorfelt lagres i samme søkeindeks |
+| Vectorizer | Brukerens spørsmål kan vektoriseres ved spørring |
+| Ranking | Hybridt søk og semantisk rangering løfter de beste treffene |
+
+Viktige nyanser:
+
+- `Integrated vectorization` gjør chunking og vektorisering til en del av selve indekseringen
+- embeddings kommer normalt fra en modell i `Azure OpenAI` eller `Microsoft Foundry`, ikke fra Azure AI Search alene
+- det er ofte en fordel å bruke samme embedding-spor ved indeksering og ved spørring
+- i Copilot Studio kan Azure AI Search legges inn som egen kunnskapskilde
+
+### Copilot Studio-filer vs. Azure AI Search
+
+To vanlige valg for dokumentgrunnlag i Copilot Studio er:
+
+| Valg | Styrke | Når det passer |
+| --- | --- | --- |
+| Filopplasting i Copilot Studio | Raskt og enkelt å komme i gang | Mindre dokumentsett og enkel grounding |
+| Azure AI Search | Mer kontroll på chunking, embeddings, metadata, hybridt og semantisk søk | Når kvalitet, kontroll og søkekonfigurasjon betyr mer |
+
+Kort sagt:
+
+- filopplasting er enklest å starte med
+- Azure AI Search gir mer kontroll og ofte bedre retrieval i større eller viktigere kunnskapsdomener
+
 ### Hva avgjør kvaliteten på kunnskapssvar?
 
 Kvaliteten på svar som er basert på kunnskap og kontekst avhenger av flere ting:
@@ -186,6 +221,8 @@ Kvaliteten på svar som er basert på kunnskap og kontekst avhenger av flere tin
 - tilgangsstyring
 - scope og støy
 - datakvalitet og eierskap
+
+For strukturerte kilder som Dataverse og Azure SQL hjelper gode feltnavn, beskrivelser, synonymer og begrepsforklaringer agenten å tolke tabeller og kolonner riktigere.
 
 ### Hvorfor beskrive kunnskapskilden?
 
@@ -391,6 +428,22 @@ Det viktigste å forstå er:
 
 Derfor bør dette brukes når andre og mer robuste integrasjonsformer ikke er tilgjengelige.
 
+### Human in the loop i Copilot Studio
+
+`Human in the loop` er ikke bare et generelt prinsipp. I Copilot Studio finnes det som konkrete funksjoner i agent- og workflow-design.
+
+| Mønster | Hva det gjør |
+| --- | --- |
+| `Request for Information` | Agenten sender en forespørsel til et menneske og venter på svar |
+| `Approval / review` | Et menneske kan godkjenne, avvise eller supplere informasjon |
+| `Human supervision` | Agenten kan stoppe opp og be om hjelp når den er usikker |
+
+Typiske brukstilfeller:
+
+- manglende informasjon
+- godkjenning av kostnad eller bestilling
+- avklaringer før agenten fortsetter
+
 ### Prosess
 
 Prosess betyr at agenten bruker en sekvens av handlinger, ikke bare ett kall.
@@ -427,6 +480,23 @@ Navnene varierer mellom plattformer, men prinsippet er det samme:
 - Copilot Studio bruker agent flows og event triggers
 - Foundry bruker workflows, actions og eksterne triggere
 - kodeagenter kan starte fra scheduler, webhook, queue eller backend-jobb
+
+### Agent + workflow: når bruker du hva?
+
+Et nyttig skille er:
+
+| Bruk agent når du trenger | Bruk workflow når du trenger |
+| --- | --- |
+| Fleksibilitet i samtale og tolkning | Faste steg i kjent rekkefølge |
+| Resonering og valg av neste handling | Forutsigbar kjøring hver gang |
+| Hente inn kontekst fra bruker eller kilder | Standardisert prosess med logging og kontroll |
+| Dynamisk valg av tools eller neste steg | Godkjenning, branching og systemoppdateringer |
+
+Husk:
+
+- agenten velger og forstår
+- workflowen utfører og standardiserer
+- ofte er riktig mønster `agent + workflow`, ikke `agent vs workflow`
 
 ### Hvordan agenten bruker prosess
 
@@ -514,6 +584,41 @@ Dette gjør det lettere for agenten å forstå hvilke verktøy som finnes og hvo
 Den enkle flyten er:
 
 Agent → MCP → API / data / kontekst → MCP → Agent
+
+### MCP i Azure: Logic Apps
+
+En praktisk vei til MCP i Azure er `Azure Logic Apps (Standard)`.
+
+| Mulighet | Hva det betyr |
+| --- | --- |
+| Logic Apps som MCP-server | Kan eksponere workflows som remote MCP-servere |
+| `1400+ connectors` | Gjør det lett å lage tools mot SaaS, on-prem og Microsoft-tjenester |
+| Workflows som tools | Et MCP-kall kan trigge en eksisterende arbeidsflyt |
+| Easy Auth / OAuth 2.0 | Gir innebygd auth for MCP-serveren |
+| Application Insights / Log Analytics | Gir historikk, diagnostikk og sporbarhet |
+
+Dette passer best når:
+
+- du allerede har integrasjoner eller workflows i Logic Apps
+- du vil lage MCP-tools raskt uten å bygge mye kode
+
+### MCP i Azure: Azure Functions
+
+Hvis du vil ha mer kodekontroll, er `Azure Functions` et godt alternativ.
+
+| Mulighet | Hva det betyr |
+| --- | --- |
+| Functions MCP extension | Bygg MCP-server direkte med Functions-trigger/bindings-modellen |
+| Self-hosted MCP server | Host en eksisterende MCP-server bygget med offisiell MCP SDK |
+| Built-in auth | Beskytter serverendepunktet med innebygd autentisering |
+| Managed identity | Godt spor for sikker tilgang til Azure-ressurser |
+| Serverless og skalerbar hosting | Passer godt for kodebaserte og egendefinerte tools |
+
+Dette passer best når:
+
+- du vil bygge MCP i kode
+- du trenger mer kontroll enn Logic Apps gir
+- du allerede har en MCP-server du vil hoste i Azure
 
 ### Eksempel: remote MCP mot SSB
 
@@ -670,13 +775,20 @@ Etter denne modulen bør du sitte igjen med:
 
 ## Lenker
 
-- [Copilot Studio overview](https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-what-is-copilot-studio)
-- [Knowledge in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-copilot-studio)
-- [Generative orchestration in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-generative-actions)
-- [Azure AI Search: Retrieval-augmented generation overview](https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview)
-- [Copilot Studio and Azure (eksempelrepo)](https://github.com/Azure/Copilot-Studio-and-Azure)
-- [Microsoft Foundry Agent Service overview](https://learn.microsoft.com/en-us/azure/foundry/agents/overview)
-- [Connect your agent to an existing MCP server](https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-add-existing-server-to-agent)
-- [Skills for Copilot Studio: Build agents from YAML code, up to 20x Faster](https://microsoft.github.io/mcscatblog/posts/skills-for-copilot-studio/)
-- [TRY SSB MCP](https://tools.try.no/ssb-mcp)
-- [Awesome GitHub Copilot](https://awesome-copilot.github.com/)
+- Offisiell oversikt over hva Copilot Studio er: [Copilot Studio overview](https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-what-is-copilot-studio)
+- Offisiell dokumentasjon for hvordan kunnskap fungerer i Copilot Studio: [Knowledge in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-copilot-studio)
+- Offisiell forklaring av generativ orkestrering i Copilot Studio: [Generative orchestration in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-generative-actions)
+- Offisiell dokumentasjon for Azure AI Search som kunnskapskilde i Copilot Studio: [Knowledge source: Azure AI Search](https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-azure-ai-search)
+- Offisiell veiledning for hvordan du gjør SharePoint og embedded files mer treffsikre i deklarative agenter: [Optimize content retrieval](https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/optimize-content-retrieval)
+- Offisiell oversikt over RAG-mønsteret i Azure AI Search: [Azure AI Search: Retrieval-augmented generation overview](https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview)
+- Eksempelrepo som viser hvordan Copilot Studio kan brukes sammen med Azure-tjenester: [Copilot Studio and Azure (eksempelrepo)](https://github.com/Azure/Copilot-Studio-and-Azure)
+- Offisiell oversikt over agenttjenester i Microsoft Foundry: [Microsoft Foundry Agent Service overview](https://learn.microsoft.com/en-us/azure/foundry/agents/overview)
+- Offisiell veiledning for å koble en agent til en eksisterende MCP-server: [Connect your agent to an existing MCP server](https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-add-existing-server-to-agent)
+- Offisiell veiledning for å lage en MCP-server i Azure Logic Apps: [Create a Logic Apps MCP server](https://learn.microsoft.com/en-us/azure/logic-apps/create-model-context-protocol-server-standard)
+- Offisiell steg-for-steg for MCP med Azure Functions: [Azure Functions MCP tutorial](https://learn.microsoft.com/en-us/azure/azure-functions/functions-mcp-tutorial)
+- Offisiell dokumentasjon for self-hosted MCP-servere i Azure Functions: [Self-hosted MCP servers on Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/self-hosted-mcp-servers)
+- Eksempelrepo som viser en MCP-server hostet i Azure Web App / App Service og koblet til Copilot Studio: [spotify-mcp](https://github.com/ifiecas/spotify-mcp)
+- Bloggpost fra Microsoft CAT om å bygge Copilot Studio-agenter fra YAML: [Skills for Copilot Studio: Build agents from YAML code, up to 20x Faster](https://microsoft.github.io/mcscatblog/posts/skills-for-copilot-studio/)
+- Artikkel med innebygd video som viser Azure SQL som kunnskapskilde i Copilot Studio, inkludert synonymer og begrepsforklaringer på kolonner: [Copilot Studio: Connect An Azure SQL Database As Knowledge](https://www.matthewdevaney.com/copilot-studio-connect-an-azure-sql-database-as-knowledge/)
+- Eksempel på en offentlig MCP-server mot SSB-data: [TRY SSB MCP](https://tools.try.no/ssb-mcp)
+- Samleside med eksempler og ressurser rundt GitHub Copilot og agentbruk: [Awesome GitHub Copilot](https://awesome-copilot.github.com/)
