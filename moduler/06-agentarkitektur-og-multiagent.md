@@ -2,15 +2,7 @@
 
 Denne modulen handler om hvordan du går fra én agent til en mer sammensatt agentløsning.
 
-Vi ser på:
-
-- hvorfor du i noen tilfeller bør splitte én agent i flere
-- hvilke arkitekturmønstre som finnes for samarbeid mellom agenter
-- hva et orkestratorlag gjør
-- hvordan `child agents`, `connected agents`, `topics` og `A2A` passer inn
-- hva du må styre når flere agenter samarbeider
-
-Målet er ikke å gjøre alle til multi-agent-arkitekter på én gang. Målet er å gi deg et språk for å vite når multi-agent gir verdi, og når det bare gjør løsningen mer komplisert.
+Vi ser på når det lønner seg å splitte én agent i flere, hvilke samarbeidsmønstre som finnes, og hva du må styre når flere agenter jobber sammen.
 
 [Forrige: Modul 4](./04-prompt-engineering-og-kvalitet.md) | [Til hovedside](../README.md) | [Neste: Modul 7](./07-sikkerhet-governance.md)
 
@@ -19,23 +11,11 @@ Målet er ikke å gjøre alle til multi-agent-arkitekter på én gang. Målet er
 - Forstå hvorfor multi-agent kan gi bedre spesialisering, gjenbruk og sporbarhet
 - Kjenne de vanligste multi-agent-mønstrene
 - Se når én agent bør splittes i flere
-- Forstå forskjellen på `child agents` og `connected agents`
+- Forstå forskjellen på child agents og connected agents
 - Se hva orkestratorlaget gjør i Copilot Studio, Foundry og kodebaserte rammeverk
-- Kjenne til `topics`, `human in the loop` og `A2A`
+- Kjenne til topics, A2A og human in the loop
 
 ## Hvorfor multi-agent?
-
-En naturlig første tanke når en agent vokser, er å legge inn litt mer kunnskap, litt flere verktøy og litt flere regler i samme agent.
-
-Det kan fungere en stund. Men etter hvert blir løsningen ofte vanskeligere å styre.
-
-Multi-agent blir interessant når du trenger:
-
-- tydeligere spesialisering
-- enklere vedlikehold
-- bedre sporbarhet
-- bedre kvalitet gjennom flere perspektiver
-- skalerbarhet når nye kapabiliteter skal legges til
 
 | Gevinst | Hvorfor det hjelper |
 | --- | --- |
@@ -45,11 +25,9 @@ Multi-agent blir interessant når du trenger:
 | Bedre kvalitet | Flere perspektiver kan gi bedre kontroll, review og kvalitetssikring |
 | Skalerbarhet | Nye kapabiliteter kan legges til som egne spesialistagenter |
 
-Det betyr ikke at multi-agent alltid er riktig. Ofte er én agent fortsatt best. Men når løsningens ansvar begynner å bli for bredt, kan oppdeling være et bedre arkitekturvalg.
+Multi-agent er ikke alltid riktig svar. Start enkelt, men kjenn igjen signalene som tilsier at løsningen bør deles opp.
 
 ## Arkitekturmønstre for multi-agent
-
-Det finnes flere vanlige måter å organisere samarbeid mellom agenter på:
 
 | Mønster | Hva det betyr | Typisk bruk |
 | --- | --- | --- |
@@ -59,49 +37,40 @@ Det finnes flere vanlige måter å organisere samarbeid mellom agenter på:
 | Group Chat | Flere agenter diskuterer i en koordinert samtale | Idémyldring, review, konsensus |
 | Manager / orchestrator | En hovedagent delegerer til spesialister | Hub-and-spoke, connected agents |
 
-Disse mønstrene er nyttige fordi de viser at multi-agent ikke er én ting. Det er flere måter å organisere ansvar og flyt på.
-
-Et sekvensmønster passer ofte godt når stegene må skje i bestemt rekkefølge.
-Et parallelt mønster passer bedre når flere perspektiver kan jobbe samtidig.
-Et manager-mønster passer godt når én hovedagent skal holde oversikt og delegere videre.
-
 ## Når bør du splitte én agent i flere?
-
-En praktisk tommelfingerregel er å starte med én agent og splitte senere.
-
-Noen typiske signaler på at det kan være på tide å dele opp løsningen er:
 
 | Signal | Hva det betyr |
 | --- | --- |
 | Beskrivelser begynner å overlappe | Orkestratoren får vanskeligere for å velge riktig tool, topic eller agent |
-| Du nærmer deg 30–40 valg i Copilot Studio | Microsoft anbefaler å vurdere splitting når presisjonen begynner å falle |
-| Ulike team eier ulike domener | Egen agent gir tydeligere ansvar og livssyklus |
+| Du nærmer deg 30-40 valg i Copilot Studio | Microsoft anbefaler å vurdere splitting når presisjonen begynner å falle |
+| Ulike team eier ulike domener | Connected agents gir tydeligere ansvar og livssyklus |
 | Du trenger ulike modeller, auth eller policyer | Egen agent gir bedre styring |
 | Kapabiliteten skal gjenbrukes flere steder | En connected agent er ofte bedre enn å kopiere logikk |
 
-Det viktigste her er ikke et eksakt tall.
-Det viktigste er at agenten blir vanskeligere å styre når:
+## Når holder én agent, og når trenger du connected agents?
 
-- for mange valg ligner på hverandre
-- for mange ansvar ligger i samme løsning
-- samme agent må håndtere veldig ulike roller
+| Velg én agent når ... | Velg connected agents når ... |
+| --- | --- |
+| Oppgaven har tydelig intent og avgrenset scope | Oppgaven kan deles i tydelige deldomener |
+| Verktøyene er kjent på forhånd | Ulike agenter trenger ulike data, verktøy eller policyer |
+| Du vil ha raske svar med lav latency | Flere spesialister må jobbe i serie eller parallelt |
+| Ett team eier hele løsningen | Flere team eier hver sin del |
+| Du kan evaluere hele flyten som ett system | Du vil gjenbruke eksisterende agenter og evalueringer |
 
 ## Diskusjon: Trenger du multi-agent?
 
-Før du deler opp løsningen, er det nyttig å stoppe opp og vurdere om behovet faktisk er der.
+Ta utgangspunkt i agentideen din og vurder:
 
-Diskuter for agentideen din:
-
-| Spørsmål | Hva du leter etter |
+| Spørsmål | Notater |
 | --- | --- |
-| Har løsningen tydelige delområder eller roller? | Tegn på at spesialisering kan gi verdi |
-| Har ulike deler forskjellige verktøy, data eller eiere? | Tegn på at ansvar bør skilles |
-| Trenger du flere perspektiver eller review før svar? | Tegn på at fleragentmønster kan bedre kvaliteten |
-| Holder én agent hvis du rydder i instruksjoner og verktøy? | Sjekk om multi-agent egentlig bare skjuler et designproblem |
+| Har løsningen tydelige delområder eller roller? | |
+| Har ulike deler forskjellige verktøy, data eller eiere? | |
+| Trenger du flere perspektiver eller review før svar? | |
+| Holder én agent hvis du rydder i instruksjoner og verktøy? | |
 
 ## Copilot Studio - Child agents vs. connected agents
 
-I Copilot Studio er dette en nyttig skillelinje når du vil dele opp løsningen.
+I Copilot Studio kan du dele opp løsningen med både child agents og connected agents.
 
 |  | Child agent | Connected agent |
 | --- | --- | --- |
@@ -110,53 +79,19 @@ I Copilot Studio er dette en nyttig skillelinje når du vil dele opp løsningen.
 | Kontekst | Del av samme løsning | Samtalehistorikk kan sendes videre, eller begrenses |
 | Gjenbruk | Best for ett avgrenset delproblem | Best for gjenbruk, eget domene eller eget team |
 | Livssyklus | Forvaltes sammen med hovedagenten | Kan publiseres og styres separat |
-| Typiske koblinger | Copilot Studio internt | Copilot Studio, Foundry, Microsoft 365 Agents SDK eller A2A |
-
-En enkel måte å forstå forskjellen på er:
-
-- `child agent` er en underagent i samme løsning
-- `connected agent` er en mer selvstendig agent som kobles på utenfra
-
-Child agents passer godt når du vil isolere et delproblem uten å lage en full separat agentportefølje.
-Connected agents passer bedre når du trenger gjenbruk, tydelig eierskap eller egne grenser for data, auth og livssyklus.
+| Typiske koblinger | Copilot Studio | Copilot Studio, Foundry, M365 Agents SDK, A2A |
 
 ## Orkestratorlaget i agentarkitekturen
 
-Når flere byggesteiner skal samarbeide, trenger du et lag som bestemmer hva som skal skje videre.
-
-Det er dette vi mener med orkestratorlaget.
-
 | Orkestratorlaget gjør | Hvorfor det betyr noe |
 | --- | --- |
-| Velger mellom topics, tools, knowledge og andre agenter | Hindrer at alt havner i én stor agent |
-| Bestemmer rekkefølge og avhengigheter | Gjør at steg skjer i riktig orden |
-| Samler resultater fra flere spesialister | Brukeren får ett samlet svar |
-| Håndterer feil, retry og fallback | Løsningen blir mer robust |
-| Holder kontroll på kontekst, state og sporbarhet | Det blir lettere å forstå hva som skjedde |
-
-Poenget er at orkestrering er et arkitekturlag, ikke bare enda et verktøy.
-
-## Hvor ligger orkestreringen i ulike plattformer?
-
-Forskjellige plattformer legger orkestreringen på forskjellige steder:
-
-| Plattform | Hvor orkestreringen ligger |
-| --- | --- |
-| Copilot Studio | Generativ orkestrering velger topics, tools, knowledge og andre agenter |
-| Microsoft Foundry - prompt agents | Tjenesten håndterer orkestreringen automatisk |
-| Microsoft Foundry - workflow agents | Workflows orkestrerer steg, branching og agent-til-agent-mønstre |
-| Microsoft Foundry - hosted agents | Du skriver orkestreringslogikken selv i kode, inkludert tool calls, flertrinns resonnering og agentkoordinering, mens Foundry håndterer runtime, skalering og infrastruktur |
-| Agent Framework | Du bruker ferdige workflow-orkestratorer som sequential, concurrent, handoff, group chat og magentic for å styre flyt, kontekst og human-in-the-loop i kode |
-
-Dette er nyttig å forstå fordi multi-agent ikke alltid betyr samme tekniske løsning.
-
-Noen ganger ligger orkestreringen i plattformen.
-Andre ganger ligger den i workflow.
-Og i kodeagenter kan den ligge fullt ut i din egen applikasjonslogikk.
+| Velger mellom topics, tools, knowledge og andre agenter | Hindrer at alt havner i én stor agent med for mange ansvar |
+| Bestemmer rekkefølge og avhengigheter | Gjør at steg skjer i riktig orden og med riktig kontekst |
+| Samler resultater fra flere spesialister | Brukeren får ett samlet svar i stedet for mange delresultater |
+| Håndterer feil, retry og fallback | Systemet blir mer robust når én del feiler |
+| Holder kontroll på kontekst, state og sporbarhet | Du ser lettere hva som skjedde hvor i kjeden |
 
 ## Hva velger orkestratorlaget i Copilot Studio?
-
-I Copilot Studio med generativ orkestrering kan agenten velge mellom flere typer byggeklosser:
 
 | Byggekloss | Hvordan den brukes |
 | --- | --- |
@@ -166,127 +101,94 @@ I Copilot Studio med generativ orkestrering kan agenten velge mellom flere typer
 | Child agents | Når én del av løsningen bør isoleres i en underagent |
 | Connected agents | Når et annet agentdomene eller en ekstern agent bør ta del av jobben |
 
-Det viktige poenget her er at valg ikke bare handler om “hva finnes”, men om metadata og beskrivelser.
+I generativ orkestrering velges disse byggesteinene ut fra beskrivelse, navn, parametere og samtalekontekst.
 
-I praksis betyr det at gode navn, beskrivelser og tydelig avgrensning blir kritisk når løsningen vokser.
+## Hvor ligger orkestreringen i ulike plattformer?
+
+| Plattform | Hvor orkestreringen ligger |
+| --- | --- |
+| Copilot Studio | Generativ orkestrering som velger topics, tools, knowledge og andre agenter |
+| Microsoft Foundry - prompt agents | Tjenesten håndterer orkestreringen automatisk |
+| Microsoft Foundry - workflow agents | Workflows orkestrerer steg, branching og agent-til-agent-mønstre |
+| Microsoft Foundry - hosted agents | Du skriver orkestreringslogikken selv i kode, mens Foundry håndterer runtime, skalering og infrastruktur |
+| Agent Framework | Du bruker ferdige workflow-orkestratorer som sequential, concurrent, handoff, group chat og magentic |
 
 ## Topics i Copilot Studio
 
-Et topic er et samtaledesignmønster for å styre hvordan en del av dialogen skal gå videre.
+Et topic er et samtaledesignmønster for å styre dialogflyt.
 
-Topics passer godt for:
+- Topics passer godt for avklaringsspørsmål, branching og faste samtalemønstre.
+- De kan være både deterministiske og mer generative.
+- De kan også kalle tools og andre agenter.
 
-- avklaringsspørsmål
-- branching
-- faste samtalemønstre
-- dialogsteg som bør være mer deterministiske
-- enkle og deterministiske eller mer komplekse og generative flyter som også kan kalle tools og andre agenter
-
-Et topic er altså ikke bare “et spørsmålssvar”.
-Det er en måte å definere hvordan en del av samtalen skal håndteres.
-
-I Foundry brukes ikke topic-begrepet på samme måte. Der er de nærmeste parallellene:
-
-- instructions
-- workflows
-- agentlogikk
-
-## Human in the loop i agentiske prosesser
-
-Når agenter går fra å svare til å handle, blir menneskelig kontroll viktigere.
-
-| Når du bør ha menneskelig kontroll | Hvorfor |
-| --- | --- |
-| Før irreversible handlinger | Sending, publisering, sletting og bestilling bør ofte godkjennes |
-| Når data er sensitive eller regulatoriske | Bedre kontroll på personvern og sikkerhet |
-| Når agenten gjør vurderinger, ikke bare oppslag | Mennesker må eie viktige beslutninger |
-| Når kvaliteten må være høy og sporbar | Review reduserer feil og gjør ansvar tydelig |
-| Når autonomien øker | Mer selvstendige agenter trenger flere kontrollpunkt |
-
-Dette er et viktig prinsipp også utenfor Copilot Studio.
-
-Jo mer autonom en agent er, desto viktigere er det å ha:
-
-- godkjenning
-- review
-- eskalering
-- sporbarhet
+I Foundry finnes ikke et direkte topic-begrep. Der ligger den samme logikken oftere i instructions, workflows og agentlogikk.
 
 ## A2A – Agent-to-Agent-protokollen
 
-`A2A` står for `Agent-to-Agent` og beskriver en åpen standardisert måte for agenter å snakke med andre agenter på tvers av plattformer.
-
-Kort forklart:
-
-- MCP kobler en agent til verktøy og data
-- A2A kobler en agent til en annen agent
-
-Det er særlig nyttig når den andre agenten allerede har:
-
-- egen logikk
-- egne workflows
-- egne verktøy
-- eller er bygget i et annet rammeverk
-
-I praksis er dette relevant når du bygger en portefølje av agenter i stedet for én stor altmulig-agent.
+A2A er en åpen standard for agent-til-agent-kommunikasjon på tvers av plattformer.
 
 | MCP | A2A |
 | --- | --- |
 | Verktøytilgang | Agent-til-agent kommunikasjon |
 | Kobler LLM til funksjoner og data | Kobler agenter på tvers av plattformer |
-| Én host → mange servere | Mange agenter → samarbeid via manifester |
-
-I Microsoft Foundry finnes dette som en egen A2A tool i preview. I Copilot Studio kan A2A-agenter kobles på som connected agents i preview.
+| Én host -> mange servere | Mange agenter -> samarbeid via manifester |
 
 ## A2A i praksis
 
 | Begrep | Hva det betyr |
 | --- | --- |
-| Agent Card | Et maskinlesbart “visittkort” som beskriver agentens kapabiliteter, endepunkt og auth |
+| Agent Card | Et maskinlesbart visittkort som beskriver agentens kapabiliteter, endepunkt og auth |
 | Task | Selve oppgaven som sendes fra én agent til en annen |
 | Artifacts | Resultater som kommer tilbake, for eksempel tekst, filer eller strukturert data |
 | Discovery | Orkestratoren kan finne relevante agenter uten hardkoding |
 
-Hovedidé:
+Hovedidéen er enkel:
 
 - MCP gjør verktøy oppdagbare for agenten
 - A2A gjør andre agenter oppdagbare for agenten
 
-Når passer det?
+## Copilot, Work IQ og det bredere agentøkosystemet
 
-- når en annen agent allerede eier sitt domene, sine verktøy og sin logikk
+Copilot er ikke bare en egen agentflate. Det kan også delta i et større connected-agent-økosystem.
+
+| Rolle | Hva det betyr |
+| --- | --- |
+| `Copilot som UI` | Brukeren møter et kjent grensesnitt i M365 |
+| `Work IQ` | Gir tilgang til arbeidskontekst som dokumenter, e-post, møter og relasjoner |
+| `Copilot som MCP / A2A-deltaker` | Eksterne agenter kan bruke Copilot og Work IQ i større flyter |
+| `Eksterne agenter i Copilot` | Copilot kan utvides med flere spesialiserte agenter |
 
 ## Hva må du styre når flere agenter samarbeider?
 
-Når flere agenter samarbeider, må du styre mer enn bare hva hver agent gjør alene.
-
 | Du må styre | Hvorfor |
 | --- | --- |
-| Gode beskrivelser | Orkestratoren velger topics, tools og agenter ut fra metadata |
-| Kontekstoverføring | Neste agent må få full samtalehistorikk eller et avgrenset oppdrag, avhengig av behov |
-| Deterministiske handoff | Noe routing bør være eksplisitt, ikke overlatt til modellen |
+| Gode beskrivelser | Orkestratoren velger topics, tools og andre agenter ut fra metadata |
+| Kontekstoverføring | Avgjør om neste agent skal få full samtalehistorikk eller bare et avgrenset oppdrag |
+| Deterministiske handoff | Bruk eksplisitt redirect når routing ikke bør overlates til modellen |
 | Prioritet og betingelser | Flere byggeklosser kan reagere på samme behov |
-| Sporbarhet og logging | Viktig når flere systemer og agenter er involvert |
-| Human in the loop | Kreves ofte når flere agenter kan trigge handlinger |
+| Sporbarhet og logging | Viktig når connected agents ligger utenfor hovedagenten |
+| Human in the loop | Kreves ofte når flere agenter kan trigge sensitive handlinger |
 
-Dette er et godt eksempel på at multi-agent er like mye et styringsproblem som et designproblem.
+## Vanlige fallgruver i multi-agent
 
-## Vanlige fallgruver
+- For mange agenter gir mer forsinkelse og større testområde enn verdi
+- Svake beskrivelser gjør at feil agent velges
+- Uklare grenser mellom hovedagent og connected agent gjør feilsøking vanskelig
+- Eksterne agenter krever tydelig ansvar for dataflyt, sikkerhet og godkjenning
+- Siteringer og sporbarhet kan bli svakere når svar sendes mellom flere agenter
+- Uten human in the loop kan flere agenter handle feil uten kontroll
 
-Noen typiske feil går igjen:
+## Hvordan connected agents bør oppleves for brukeren
 
-- for mange agenter gir mer forsinkelse og mer kompleksitet enn verdi
-- svake beskrivelser gjør at feil agent velges
-- uklare grenser mellom hovedagent og underagenter gjør feilsøking vanskelig
-- eksterne agenter krever tydelig ansvar for data, sikkerhet og godkjenning
-- siteringer og sporbarhet kan bli svakere når svar går gjennom flere ledd
-- uten human in the loop kan flere agenter gjøre feil uten at noen stopper dem
-
-Derfor er det viktig å starte med et enkelt mønster, og bare øke kompleksiteten når det faktisk løser et problem.
+| Prinsipp | Hvorfor det betyr noe |
+| --- | --- |
+| En primær agentflate | Brukeren slipper å velge mellom mange agenter selv |
+| Subagenter kan være skjult | Reduserer kompleksitet i opplevelsen |
+| Hovedagenten oppsummerer | Brukeren får et samlet svar |
+| Sporbarhet må vises | Brukeren og drift må kunne se hvilke agenter som bidro |
+| Human in the loop ved behov | Viktig når flere agenter kan trigge sensitive handlinger |
 
 ## Lab
-
-I denne laben kan du jobbe i to spor.
 
 ### Spor A – vurder om du trenger multi-agent
 
@@ -299,20 +201,18 @@ I denne laben kan du jobbe i to spor.
 
 ### Spor B – skisser en enkel agentarkitektur
 
-1. Identifiser 2–3 domener i agentideen din
-2. Velg et mønster som passer, for eksempel sekvens eller manager/orchestrator
-3. Beskriv hvilke deler som kunne vært egne child agents eller connected agents
-4. Noter hvor du trenger human in the loop
+Beskriv kort:
 
-Målet med laben er ikke å bygge hele arkitekturen ferdig, men å trene på å se når oppdeling gir verdi.
+- hovedagentens rolle
+- hvilke spesialister som eventuelt trengs
+- hvilke verktøy eller kunnskapskilder hver agent skal eie
+- hvor du trenger human in the loop
 
 ## Oppsummering
 
-Etter denne modulen bør du sitte igjen med:
-
-1. En forståelse av hvorfor og når multi-agent kan være nyttig
-2. Et språk for å beskrive mønstre som sekvens, handoff, group chat og orchestrator
-3. En bedre forståelse av hvordan orkestrering, topics, child agents, connected agents og A2A henger sammen
+1. Multi-agent gir verdi når ansvar, verktøy eller eierskap bør skilles
+2. Orkestrering er et eget arkitekturlag som styrer topics, tools, knowledge og andre agenter
+3. Connected agents, A2A og gode beskrivelser er sentrale når løsningen vokser
 
 [Forrige: Modul 4](./04-prompt-engineering-og-kvalitet.md) | [Til hovedside](../README.md) | [Neste: Modul 7](./07-sikkerhet-governance.md)
 

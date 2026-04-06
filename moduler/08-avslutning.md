@@ -1,13 +1,6 @@
 # Modul 8: Avslutning, oppsummering og deling
 
-Denne avslutningsøkten samler trådene fra hele workshopen.
-
-Planen er todelt:
-
-- først oppsummere hva vi faktisk har gått gjennom
-- deretter gi deltakerne tid til å dele, vise og reflektere over hva de har bygget
-
-Målet er ikke å rekke én ting til. Målet er å sette læringen i system, synliggjøre progresjonen og gjøre neste steg tydelig.
+Denne avslutningsøkten samler trådene fra hele workshopen og gir deltakerne tid til å dele hva de har laget, hva de har lært, og hva de vil gjøre videre.
 
 [Forrige: Modul 7](./07-sikkerhet-governance.md) | [Til hovedside](../README.md)
 
@@ -20,27 +13,17 @@ Målet er ikke å rekke én ting til. Målet er å sette læringen i system, syn
 
 ## Hva har vi gått gjennom?
 
-Gjennom workshopen har vi bygget opp en helhetlig forståelse av agentutvikling, fra idé til drift.
-
-## Oppsummering av modulene
-
 | Modul | Hovedtema | Kjerneinnsikt |
 | --- | --- | --- |
-| 1 | Introduksjon til AI-agenter | En agent er mer enn en chatbot. Den kombinerer modell, instruksjoner, kunnskap og verktøy |
-| 2 | Kom i gang med en agent | Plattformvalg betyr noe. Ulike behov peker mot ulike byggespor |
-| 3 | Instruksjoner, kunnskap og verktøy | Det er disse tre lagene som gjør agenten nyttig i praksis |
-| 4 | Under panseret på en LLM | Kvalitet avhenger av input, modellvalg, kontekst og multimodalitet |
-| 5 | Kodeagenter *(ekstern økt)* | Agentmønsteret gjelder også i utviklerverktøy, kodeflyt og pro-code-scenarier |
-| 6 | Agentarkitektur og multi-agent | Start enkelt, men vit når det er riktig å splitte i flere agenter |
-| 7 | Governance, evaluering og publisering | En agent må styres som en virksomhetsløsning, ikke bare bygges som en demo |
-
-Det viktigste er ikke å huske hver detalj, men å forstå helheten.
-
-Modul 5 holdes som en ekstern økt, men hører likevel naturlig inn i helheten fordi den viser hvordan de samme prinsippene dukker opp igjen i kodeagenter og utviklerverktøy.
+| 1 | Introduksjon til AI-agenter | En agent er mer enn en chatbot |
+| 2 | Kom i gang med en agent | Plattformvalg betyr noe |
+| 3 | Instruksjoner, kunnskap og verktøy | Det er disse tre lagene som gjør agenten nyttig |
+| 4 | Under panseret på en LLM | Kvalitet avhenger av input, modellvalg og kontekst |
+| 5 | Kodeagenter *(ekstern økt)* | De samme agentmønstrene brukes også i kode og utviklerflyt |
+| 6 | Agentarkitektur og multi-agent | Start enkelt, men vit når du bør splitte |
+| 7 | Governance, evaluering og publisering | En agent må styres som en virksomhetsløsning |
 
 ## Den røde tråden i workshopen
-
-Den enkleste måten å lese hele workshopen på er slik:
 
 1. Finn en god oppgave for en agent
 2. Velg riktig plattform og byggespor
@@ -51,7 +34,7 @@ Den enkleste måten å lese hele workshopen på er slik:
 
 ## Deling og demo
 
-I denne delen er fokuset å dele det dere har laget så langt. Det kan være:
+Hva har dere laget i løpet av workshopen?
 
 - en agentidé
 - en prototype
@@ -60,18 +43,14 @@ I denne delen er fokuset å dele det dere har laget så langt. Det kan være:
 - et verktøydesign
 - en agentarkitektur
 
-Det viktigste er ikke hvor ferdig løsningen er. Det viktigste er at du kan forklare hva du prøvde å få til, og hva du lærte.
-
 ## Forslag til demoformat
-
-Et kort og effektivt format er:
 
 1. Hva bygde du?
 2. Hvem er agenten for?
 3. Hva er én ting agenten gjør bra?
 4. Hva er én ting du ville forbedret videre?
 
-Et alternativ er å bruke dette skjemaet:
+Alternativt kan du bruke dette skjemaet:
 
 | Punkt | Hva du kan si |
 | --- | --- |
@@ -84,8 +63,6 @@ Et alternativ er å bruke dette skjemaet:
 
 ## Refleksjon etter demoene
 
-Etter delingen kan det være nyttig å samle noen felles refleksjoner:
-
 | Refleksjonsspørsmål | Notater |
 | --- | --- |
 | Hvilke mønstre gikk igjen i flere løsninger? | |
@@ -95,19 +72,9 @@ Etter delingen kan det være nyttig å samle noen felles refleksjoner:
 
 ## Avsluttende runde
 
-Hvis du vil ha en enkel avslutning i rommet, kan hver deltaker eller gruppe svare kort på én av disse:
+Velg én av disse:
 
 - Hva er det viktigste du tar med deg?
 - Hva vil du teste videre først?
-
-## Oppsummering
-
-Hele workshopen har i praksis handlet om dette:
-
-1. Finne en god oppgave for en agent
-2. Bygge opp agenten med riktige instruksjoner, kunnskapskilder og verktøy
-3. Forstå modellvalg, arkitektur og drift godt nok til å gjøre bevisste valg
-
-Hvis deltakerne sitter igjen med det, har workshopen gjort jobben sin.
 
 [Forrige: Modul 7](./07-sikkerhet-governance.md) | [Til hovedside](../README.md)

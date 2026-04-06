@@ -1,12 +1,10 @@
 # Modul 3: Instruksjoner, kunnskap og verktøy
 
-I denne modulen går vi gjennom det som gjør en agent nyttig:
+I denne modulen går vi gjennom det som gjør en agent nyttig i praksis:
 
 - gode instruksjoner
-- kunnskap og grounding
-- verktøy
-
-Vi ser på hvordan disse delene henger sammen, og hvordan du kan begynne å tenke på dem når du utvikler din egen agentidé.
+- riktig kunnskap og grounding
+- verktøy som lar agenten hente data eller utføre handlinger
 
 [Forrige: Modul 2](./02-agentplattformer.md) | [Til hovedside](../README.md) | [Neste: Modul 4](./04-prompt-engineering-og-kvalitet.md)
 
@@ -15,21 +13,23 @@ Vi ser på hvordan disse delene henger sammen, og hvordan du kan begynne å tenk
 - Forstå hva instruksjoner er og hvordan de skrives
 - Se hvordan kunnskap, kontekst og grounding påvirker kvaliteten på svarene
 - Forstå hvor RAG passer inn, og hvorfor retrieval-laget betyr mye for agenten
-- Skille mellom forskjellige typer verktøy og vite når de passer
+- Skille mellom ulike typer verktøy og vite når de passer
 - Kjenne forskjellen mellom connectors, prosess, API, MCP, A2A og skills
 
 ## Del 1: Instruksjoner
 
 ### Hva er instruksjoner?
 
-Instruksjoner er rammene agenten jobber innenfor. De forteller agenten:
+Instruksjoner er rammene som styrer hvordan agenten forstår, beslutter og handler.
 
-- hva den skal gjøre
+De definerer:
+
+- hva agenten skal gjøre
 - hva den ikke skal gjøre
 - hvilke prioriteringer som gjelder
 - hvordan den skal svare
 
-En nyttig måte å tenke på er at instruksjoner er styringsmekanismen for agentens rolle og handlingsrom.
+Gode instruksjoner gir mer forutsigbar og konsistent oppførsel.
 
 ### Hva bør instruksjonen inneholde?
 
@@ -39,44 +39,69 @@ En nyttig måte å tenke på er at instruksjoner er styringsmekanismen for agent
 | Oppgaver agenten løser | Prioriter det viktigste først |
 | Kilder og verktøy den skal bruke, og når | Si når agenten skal bruke verktøy og når den skal la være |
 | Hva den skal avvise, eskalere eller be om avklaring på | Definer handlingsrom og stoppkriterier |
-| Hvordan svaret skal formateres | Gi tydelig format når det faktisk betyr noe |
+| Hvordan svaret skal formateres | Beskriv formatet når det betyr noe |
 | Eksempler på gode svar | Bruk 1-2 few-shot-eksempler når tone, struktur eller kvalitet er viktig |
-| Rekkefølge hvis steg må tas i orden | Test steg for steg |
+| Rekkefølge hvis steg må tas i orden | Beskriv steg for steg når rekkefølge er viktig |
 
-### Det som ofte mangler
-
-| Mangler ofte | Hvorfor det betyr noe |
-| --- | --- |
-| Handlingsrom | Agenten må vite når den skal handle selv og når den skal spørre |
-| Verktøybruk | Tydelige kriterier gir færre unødvendige bruk eller feil verktøykall |
-| Stoppkriterier | Gjør det tydelig når oppgaven er ferdig og når den skal eskalere |
-| Rekkefølge | Hvis steg må tas i riktig rekkefølge, bør instruksjonen si det eksplisitt |
-
-Dette er viktig fordi agenten ellers må “gjette” mer.
-
-### Praktisk råd
-
-Start enkelt. Test. Juster én ting om gangen.
-
-Det er som regel bedre å begynne med korte, tydelige instruksjoner og forbedre dem gradvis enn å starte med en lang tekstblokk full av regler.
+Bruk gjerne en LLM til å hjelpe deg å skrive og forbedre instruksjonen, men test resultatet mot faktiske scenarier.
 
 ### Eksempel: instruksjoner for pappavits-agenten
 
 | Del | Eksempel |
 | --- | --- |
 | Rolle og mål | Du er Pappavits-agenten. Du skal underholde deltakerne med korte, trygge pappa-vitser på norsk bokmål. |
-| Oppgaver | Lag én vits om gangen, lag en ny når brukeren ber om det, og tilpass tema hvis brukeren ønsker det. |
-| Kilder og verktøy | Bruk ikke eksterne kilder eller verktøy. Bruk bare instruksjonene og egne språkferdigheter. |
+| Oppgaver | Lag én vits om gangen. Lag en ny når brukeren ber om det, og tilpass tema hvis brukeren ønsker det. |
+| Kilder og verktøy | Ikke bruk eksterne kilder eller verktøy. Bruk kun instruksjonene og egne språkferdigheter. |
 | Avvise / avklare | Avvis støtende, hatefulle eller seksuelle vitser. Be om avklaring hvis temaet er uklart. |
 | Svarformat | Svar med 2-4 korte linjer. Gi først vitsen, deretter ett kort oppfølgingsspørsmål. |
-| Few-shot-eksempel | Eksempel: "Hva sa den ene kaffeputen til den andre? Skal vi ta en kopp?" Følg samme lette og tørre stil. |
-| Rekkefølge | 1. Forstå tema eller ønske. 2. Lag én trygg vits. 3. Spør kort om brukeren vil ha en til. |
+| Few-shot-eksempel | Eksempel: "Hva sa den ene kaffeputen til den andre? Skal vi ta en kopp?" Følg samme enkle og trygge stil. |
+| Handlingsrom / stopp | Hvis brukeren skriver "en til", lag én ny vits uten å stille flere spørsmål. Oppgaven er ferdig når én trygg vits er levert. |
+| Rekkefølge | 1. Forstå tema 2. Lag vits 3. Sjekk at den er trygg 4. Lever svaret |
+
+### Det som ofte mangler i instruksjoner
+
+| Mangler ofte | Hvorfor det betyr noe |
+| --- | --- |
+| Handlingsrom | Agenten må vite når den skal handle selv og når den skal spørre |
+| Verktøybruk | Tydelige kriterier gir færre unødvendige eller feil verktøykall |
+| Stoppkriterier | Gjør det tydelig når oppgaven er ferdig og når den skal eskalere |
+| Rekkefølge | Hvis steg må tas i riktig rekkefølge, bør instruksjonen si det eksplisitt |
+
+### Instruksjoner vs. beskrivelser i Copilot Studio
+
+|  | Instruksjoner | Beskrivelser |
+| --- | --- | --- |
+| Fokus | Hvordan agenten skal oppføre seg | Når noe skal brukes |
+| Brukes til | Stil, regler, flyt og begrensninger | Når verktøy, topics eller agenter skal velges |
+| Eksempel | "Bekreft før du lagrer" | "Dette verktøyet oppretter en ordre" |
+
+- Instruksjoner styrer oppførsel og hvordan agenten responderer
+- Beskrivelser hjelper orkestratoren å velge riktig verktøy eller agent
+
+Hvis du skriver alt i instruksjoner, jobber du mot orkestratoren. Hvis du bruker beskrivelser riktig, jobber du med den.
+
+### Lab: Skriv forslag til instruksjon for din agent
+
+| Del | Notater |
+| --- | --- |
+| Rolle og mål |  |
+| 2-3 oppgaver agenten skal løse |  |
+| Hvilke kilder eller verktøy agenten kan bruke |  |
+| Hva agenten ikke skal gjøre |  |
+| Hvordan svaret skal se ut |  |
+| Når agenten skal spørre om avklaring |  |
+
+Tips:
+
+- Bruk Copilot eller en annen LLM til å hjelpe deg å skrive instruksjonen
+- Bruk en prompt optimizer eller iterer manuelt for å forbedre den
+- Legg ved 1-2 gode eksempler hvis agenten skal svare i en bestemt stil eller struktur
 
 ## Del 2: Kunnskap, kontekst og RAG
 
 ### Kunnskap og kontekst i M365
 
-Når vi sier at en agent er “grounded”, mener vi at den svarer med utgangspunkt i faktiske kilder og kontekst, ikke bare modellens generelle kunnskap.
+Når vi sier at en agent er grounded, mener vi at den svarer med utgangspunkt i faktiske kilder og kontekst, ikke bare modellens generelle kunnskap.
 
 | Prinsipp | Kort forklart |
 | --- | --- |
@@ -85,12 +110,9 @@ Når vi sier at en agent er “grounded”, mener vi at den svarer med utgangspu
 | Tilgang må respekteres | Brukeren skal bare få svar fra data vedkommende har tilgang til |
 | Siteringer gir kontroll | Brukeren kan se hvor svaret kommer fra |
 
-To praktiske følger av dette er:
-
-- avgrens kunnskapsgrunnlaget når du vil ha presise svar
-- begrens generell kunnskap når du vil redusere støy
-
-Det er også viktig å skille mellom varige kunnskapskilder og filer som brukeren laster opp i samtalen. En fil i selve dialogen blir del av konteksten for den samtalen, men er normalt ikke en permanent kunnskapskilde i agenten.
+- Avgrens kunnskapsgrunnlaget når du vil ha presise svar
+- Begrens generell kunnskap når du trenger høy presisjon
+- Filer brukeren laster opp i samtalen blir kontekst for dialogen, men er ikke en varig kunnskapskilde
 
 ### Ustrukturert kunnskap vs. strukturerte data
 
@@ -101,25 +123,25 @@ Det er nyttig å skille mellom to typer kunnskap i en agent:
 | Ustrukturert kunnskap | Dokumenter, nettsider, notater, e-poster og fritekst | Spørsmål, oppsummering, søk og forklaring |
 | Strukturert data | Rader, felter og objekter som kunder, kontakter, saker, ordre og hendelser | Presise oppslag, regler, validering og handlinger |
 
-- bruk dokumentkilder når brukeren trenger forklaring, kontekst eller siterbare svar
-- bruk strukturert data når agenten må finne, oppdatere eller kontrollere konkrete felter og poster
+- Bruk dokumentkilder når brukeren trenger forklaring, kontekst eller siterbare svar
+- Bruk strukturert data når agenten må finne, oppdatere eller kontrollere konkrete felter og poster
 
-### Måter å hente kunnskap på
+### Måter å hente kunnskap på i Microsoft-økosystemet
 
 | Teknikk | Kort forklart | Styrke |
 | --- | --- | --- |
 | Graph + semantisk indeks | Innebygd grounding i M365 Copilot | Ingen egen indeks |
-| Copilot Studio – SharePoint | SharePoint brukes som kunnskapskilde | Ferskt M365-innhold |
-| Copilot Studio – filer | Opplastede eller synkroniserte filer brukes som kunnskap | Bra for avgrensede dokumentsett |
+| Copilot Studio - SharePoint | SharePoint brukes som kunnskapskilde | Ferskt M365-innhold |
+| Copilot Studio - filer | Opplastede eller synkroniserte filer brukes som kunnskap | Bra for avgrensede dokumentsett |
 | Connectors | Oppslag direkte i kildesystemet | Live data |
-| Azure AI Search – klassisk RAG | Egen indeks med hybrid, vektor og semantikk | Mest kontroll |
-| Azure AI Search – agentic retrieval (preview) | LLM planlegger delspørringer og samler treff | Best for komplekse spørsmål |
+| Azure AI Search - klassisk RAG | Egen indeks med hybrid, vektor og semantikk | Mest kontroll |
+| Azure AI Search - agentic retrieval (preview) | LLM planlegger delspørringer og samler treff | Best for komplekse spørsmål |
 
 ### Hvilke strategier støttes hvor?
 
 | Strategi | M365 Copilot | Copilot Studio | Microsoft Foundry |
 | --- | --- | --- | --- |
-| Graph + semantisk indeks | Ja | Ja (delvis) | Ikke innebygd |
+| Graph + semantisk indeks | Ja | Delvis | Ikke innebygd |
 | SharePoint / OneDrive | Ja | Ja | Ikke innebygd |
 | Opplastede filer | Ja, embedded file content | Ja | Nei |
 | Connectors som realtidskunnskap | Begrenset | Ja | Ikke innebygd |
@@ -130,119 +152,114 @@ Det er nyttig å skille mellom to typer kunnskap i en agent:
 
 RAG står for Retrieval-Augmented Generation.
 
-En enkel forklaring er:
+Det er et mønster der relevant kontekst hentes før modellen svarer:
 
 1. Brukeren spør
-2. Systemet henter relevant kontekst fra en kilde eller indeks
-3. Modellen får både spørsmålet og den hentede konteksten
+2. Systemet henter relevant kontekst fra kilder eller indeks
+3. Modellen får spørsmål og kontekst
 4. Agenten svarer, gjerne med siteringer
-
-RAG er altså ett mønster for å hente relevant kontekst før modellen svarer.
 
 ### Hvorfor er RAG vanskelig i praksis?
 
-I teorien virker RAG enkelt. I praksis er det flere utfordringer:
+RAG er enkelt som idé, men kan være krevende i gjennomføring.
 
-- brukere spør ofte vagt eller samtalebasert
-- innhold ligger i mange ulike systemer
-- modellen kan ikke få “alt”, bare et begrenset utvalg
-- svar må komme raskt
-- sikkerhet og tilgangsstyring må holdes intakt
-
-Det betyr at retrieval-laget er like viktig som selve modellen.
+| Utfordring | Hva det betyr i praksis |
+| --- | --- |
+| Spørsmålsforståelse | Brukere spør ofte vagt, samtalebasert eller med underforstått kontekst |
+| Flere datakilder | Innhold ligger i SharePoint, databaser, web, blob-lagring og andre systemer |
+| Tokenbegrensning | Modellen kan ikke få alt, bare de mest relevante utdragene |
+| Responstid | Brukeren forventer svar på sekunder, ikke minutter |
+| Sikkerhet og styring | Agenten må bare hente innhold brukeren faktisk har lov til å se |
 
 ### Hva må retrieval-laget gjøre godt?
 
-Et godt retrieval-lag må:
+| Behov | Typiske mekanismer |
+| --- | --- |
+| Forstå hensikt, ikke bare ord | Hybridt søk, vektorsøk, semantisk rangering og eventuelt agentic retrieval |
+| Finne på tvers av kilder | Kunnskapskilder, indekser, connectors eller direkte oppslag |
+| Begrense hvor mye kontekst som sendes inn | Chunking, top-k, terskler og utvalg av felter |
+| Bevare sporbarhet | Siteringer, referanser og tydelig kildegrunnlag |
+| Ivareta sikkerhet | Tilgangstrimming, filterbasert sikkerhet og riktig autentisering |
 
-- forstå mening, ikke bare ord
-- finne på tvers av riktige kilder
-- begrense hvor mye kontekst som sendes inn
-- bevare sporbarhet og siteringer
-- respektere tilgang og autentisering
-
-Det er derfor grounding handler om mer enn bare “å koble til en datakilde”.
+God grounding handler derfor ikke bare om språkmodellen, men også om hvor godt retrieval-laget er utformet.
 
 ### Semantisk søk og chunking
 
-To begreper er spesielt viktige:
+| Begrep | Kort forklart | Hvorfor det betyr noe |
+| --- | --- | --- |
+| Semantisk søk / rangering | Treffer på mening og sammenheng, ikke bare eksakte ord | Bedre treff når brukerens ordvalg ikke matcher dokumentet |
+| Chunking | Store dokumenter deles i mindre biter før de indekseres og hentes | Gir mer presis kontekst og holder seg innenfor tokengrenser |
 
-- **Semantisk søk**: systemet finner mening og sammenheng, ikke bare identiske ord
-- **Chunking**: store dokumenter deles opp i mindre biter før de søkes i eller indekseres
+Kort sagt: semantikk hjelper systemet å finne riktig innhold, og chunking hjelper det å hente riktig utdrag.
 
-Semantisk søk hjelper systemet å finne riktig innhold.
-Chunking hjelper systemet å hente riktig utdrag.
+### Microsoft Foundry IQ / agentic retrieval
 
-Hvis chunkene er for store, blir konteksten upresis.
-Hvis de er for små, kan du miste sammenheng.
+| Klassisk retrieval | Agentic retrieval |
+| --- | --- |
+| Én spørring inn mot én indeks | Flere delspørringer planlegges automatisk |
+| Treffer primært på ett formulert spørsmål | Bruker også chat-historikk og underforstått kontekst |
+| Godt nok for enklere spørsmål | Best for komplekse spørsmål og flere kunnskapskilder |
+
+Agentic retrieval gjør typisk dette:
+
+1. Leser hele spørsmålet og samtalekonteksten
+2. Bryter det ned i delspørringer
+3. Kjører dem parallelt
+4. Reranker treff og returnerer grounding, referanser og aktivitetsplan
 
 ### Azure AI Search: fra dokument til treff
-
-Når du bruker Azure AI Search som kunnskapsmotor, går innholdet typisk gjennom denne pipelinen:
 
 | Steg | Hva som skjer |
 | --- | --- |
 | Datakilde | Dokumenter hentes fra en støttet kilde |
-| Indexer | Innholdet trekkes inn i pipelinen |
+| Indexer | Trekker innholdet inn i pipelinen |
 | Chunking | Store dokumenter deles opp i mindre biter |
 | Embeddings | Hver bit kan vektoriseres |
 | Index | Tekstfelt og vektorfelt lagres i samme søkeindeks |
 | Vectorizer | Brukerens spørsmål kan vektoriseres ved spørring |
-| Ranking | Hybridt søk og semantisk rangering løfter de beste treffene |
-
-Viktige nyanser:
+| Ranking | Hybrid søk og semantisk rangering løfter de beste treffene |
 
 - `Integrated vectorization` gjør chunking og vektorisering til en del av selve indekseringen
-- embeddings kommer normalt fra en modell i `Azure OpenAI` eller `Microsoft Foundry`, ikke fra Azure AI Search alene
-- det er ofte en fordel å bruke samme embedding-spor ved indeksering og ved spørring
-- i Copilot Studio kan Azure AI Search legges inn som egen kunnskapskilde
+- Embeddings-modellen ligger typisk i `Azure OpenAI` eller `Microsoft Foundry`, ikke i Azure AI Search alene
+- I Copilot Studio kan Azure AI Search legges inn som egen kunnskapskilde
+- Eksempelrepo: `https://github.com/Azure/Copilot-Studio-and-Azure`
 
-### Copilot Studio-filer vs. Azure AI Search
-
-To vanlige valg for dokumentgrunnlag i Copilot Studio er:
+### Copilot Studio filer vs. Azure AI Search
 
 | Valg | Styrke | Når det passer |
 | --- | --- | --- |
-| Filopplasting i Copilot Studio | Raskt og enkelt å komme i gang | Mindre dokumentsett og enkel grounding |
-| Azure AI Search | Mer kontroll på chunking, embeddings, metadata, hybridt og semantisk søk | Når kvalitet, kontroll og søkekonfigurasjon betyr mer |
+| `Filopplasting i Copilot Studio` | Raskt og enkelt å komme i gang | Mindre dokumentsett og enkel grounding |
+| `Azure AI Search` | Mer kontroll på chunking, embeddings, metadata, hybridt og semantisk søk | Når kvalitet, kontroll og søkekonfigurasjon betyr mer |
 
 Kort sagt:
 
 - filopplasting er enklest å starte med
 - Azure AI Search gir mer kontroll og ofte bedre retrieval i større eller viktigere kunnskapsdomener
 
+### SharePoint i Azure: indeksert eller remote?
+
+| Mønster | Hva det betyr | Når det passer |
+| --- | --- | --- |
+| `Indexed SharePoint` | Azure AI Search lager indeks over SharePoint-innhold | Når du vil ha mer kontroll på chunking, embeddings og søkeoppsett |
+| `Remote SharePoint` | Innhold hentes direkte fra SharePoint ved spørring | Når du vil respektere brukerens tilgang direkte i M365 uten egen kopi |
+
+Viktige nyanser:
+
+- `Remote SharePoint` krever at sluttbrukeren har en **Microsoft 365 Copilot-lisens**
+- `Remote SharePoint` er bare tilgjengelig som knowledge source i **agentic retrieval** i preview, ikke i klassisk RAG
+
 ### Hva avgjør kvaliteten på kunnskapssvar?
 
-Kvaliteten på svar som er basert på kunnskap og kontekst avhenger av flere ting:
+| Faktor | Hvorfor det betyr noe |
+| --- | --- |
+| Metadata og struktur | Tydelige titler, kolonner og informasjonsarkitektur gjør filtering og ranking bedre |
+| Ferskhet | Direkte søk i kilden gir ferskere svar enn kopierte indekser som synkroniseres periodisk |
+| Chunking og semantikk | Lange dokumenter blir mer treffsikre når de deles opp og matches på mening, ikke bare ord |
+| Tilgangsstyring | Brukeren skal bare få treff på innhold vedkommende faktisk har tilgang til |
+| Scope og støy | Færre og mer presise kilder gir mindre irrelevant grounding |
+| Datakvalitet og eierskap | Uten vedlikehold, opprydding og ansvarlige eiere forringes kunnskapsbasen over tid |
 
-- metadata og struktur
-- ferskhet
-- chunking og semantikk
-- tilgangsstyring
-- scope og støy
-- datakvalitet og eierskap
-
-For strukturerte kilder som Dataverse og Azure SQL hjelper gode feltnavn, beskrivelser, synonymer og begrepsforklaringer agenten å tolke tabeller og kolonner riktigere.
-
-### Hvorfor beskrive kunnskapskilden?
-
-I Copilot Studio brukes beskrivelsen når agenten skal velge riktig kunnskapskilde.
-I Foundry / Foundry IQ påvirker beskrivelser og retrieval instructions query planning.
-
-Kort sagt:
-
-- en god beskrivelse hjelper agenten å forstå når en kilde bør brukes
-- en dårlig beskrivelse gjør kildevalget mindre presist
-
-### Praktisk grense i Copilot Studio
-
-I Copilot Studio gjelder en praktisk grense:
-
-- hvis agenten har mer enn 25 kunnskapskilder, filtreres de først ned
-- filtreringen bruker navn og beskrivelse
-- opplastede filer teller ikke mot denne grensen
-
-Dette gjør kildebeskrivelser ekstra viktige. Hvis mange kilder ligner på hverandre i navn og beskrivelse, blir det vanskeligere å velge riktig.
+For strukturerte kilder som `Dataverse` og `Azure SQL` hjelper gode feltnavn, beskrivelser, synonymer og begrepsforklaringer agenten å tolke tabeller og kolonner riktigere.
 
 ### Hvordan tester du tilgang og treff på kunnskap?
 
@@ -254,9 +271,23 @@ Dette gjør kildebeskrivelser ekstra viktige. Hvis mange kilder ligner på hvera
 | Test etter endringer i kilden | Hvor raskt blir nye eller oppdaterte dokumenter søkbare? |
 | Test smale scope og metadatafiltre | Blir svarene bedre når du snevrer inn kilde, område eller dokumenttype? |
 
-Dette er et viktig poeng: du bør ikke bare teste “om agenten svarer”, men også hvorfor den svarer som den gjør.
+Tips: Bruk Graph Explorer eller søk direkte i SharePoint når du vil verifisere treff og tilgang.
 
-Tips: Bruk Graph Explorer når du vil verifisere tilgang, treff og hva Microsoft 365 faktisk returnerer.
+### Hvorfor beskrive kunnskapskilden?
+
+| Hvor | Hvorfor |
+| --- | --- |
+| Copilot Studio | Beskrivelsen hjelper agenten å velge riktig kilde og brukes når mange kunnskapskilder må filtreres |
+| Microsoft Foundry / Foundry IQ | Beskrivelser og retrieval instructions påvirker query planning |
+| SDK + Foundry | Samme effekt gjelder når agenten bruker Foundry IQ som kunnskapslag |
+
+Kort sagt: en god beskrivelse hjelper agenten å forstå når en kilde bør brukes, og når den ikke bør brukes.
+
+### Praktisk grense i Copilot Studio
+
+- Ved generativ orkestrering: hvis agenten har mer enn 25 kunnskapskilder, filtrerer Copilot Studio dem først med en intern modell basert på beskrivelsen
+- Korte eller generiske beskrivelser gjør det vanskeligere å velge riktig kilde
+- Opplastede filer til agenten teller ikke mot denne 25-grensen
 
 ### Kunnskapspipeline med Copilot
 
@@ -270,30 +301,36 @@ Tips: Bruk Graph Explorer når du vil verifisere tilgang, treff og hva Microsoft
 | 6 | Svaret modereres | Dobbeltsjekker svaret for uønsket innhold |
 | 7 | Respons returneres | Returnerer svar, siteringer og logger |
 
+### Laboppgave: Test grounding og retrieval
+
+| Punkt | Notater |
+| --- | --- |
+| Skriv 3 spørsmål agenten bør kunne svare godt på |  |
+| Hvilken kilde hvert svar bør komme fra |  |
+| Trenger kilden bedre struktur, metadata eller chunking? |  |
+| Hva skjer hvis spørsmålet stilles både eksakt og semantisk? |  |
+| Fungerer siteringer og tilgang som forventet? |  |
+
 ## Del 3: Verktøy i agenter
 
 ### Hva mener vi med verktøy?
 
-Et verktøy er agentens evne til å hente data eller utføre handlinger.
+Et verktøy er en konkret evne agenten har til å hente data eller utføre handlinger.
 
-Det betyr at agenten går utover ren tekstgenerering. Agenten kan for eksempel:
+Det betyr at agenten går utover ren tekstgenerering. Den kan for eksempel:
 
 - hente informasjon fra et system
 - starte en prosess
 - opprette eller oppdatere data
 - bruke andre agenter eller eksterne tjenester
 
-### Fra innebygde verktøy til MCP og skills
-
-Del 3 går fra plattformnære verktøy til mer standardiserte integrasjons- og samarbeidsmønstre.
-
-### Oversikt over forskjellige type verktøy
+### Oversikt over forskjellige typer verktøy
 
 | Nivå | Rolle |
 | --- | --- |
 | Innebygde verktøy | Bruke det plattformen allerede har |
 | Connectors | Koble på flere systemer |
-| Prosess | Kjøre flere steg på tvers av systemer |
+| Prosess | Kjører flere steg på tvers av systemer |
 | API | Mulighet for full kontroll over logikk og data |
 | MCP | Standardisert lag for verktøy og kontekst |
 | A2A (preview) | La en agent bruke en annen agent |
@@ -301,26 +338,23 @@ Del 3 går fra plattformnære verktøy til mer standardiserte integrasjons- og s
 
 ### Innebygde verktøy
 
-Dette er funksjonalitet plattformen allerede har tilgang til, særlig i Microsoft 365 Copilot.
+Dette er funksjonalitet agenten allerede har tilgang til via plattformen, typisk Microsoft 365 Copilot.
 
 Eksempler:
 
-- SharePoint og OneDrive
-- Outlook
-- Teams
+- Dokumenter i SharePoint og OneDrive
+- E-post og kalender i Outlook
+- Teams-møter og chat
 - Microsoft 365-data via Graph, Semantic Index og brukerens tilgangsmodell
 
-Det er viktig å forstå at dette normalt ikke er direkte API-kall fra agenten slik du ville gjort i en vanlig integrasjon. Dette er grounding og handlinger som plattformen allerede kan støtte gjennom Microsoft 365-laget.
+Dette er grounding og plattformstøttet funksjonalitet, ikke et direkte API-kall slik du ville skrevet i en vanlig integrasjon.
 
-### Variabler og samtalekontekst
+### Variabler
 
-Kunnskap er ikke det samme som samtalekontekst.
+Variabler brukes til å:
 
-Variabler brukes når agenten må holde på informasjon som gjelder i akkurat denne dialogen eller prosessen, for eksempel:
-
-- svar brukeren allerede har gitt
-- hvilken kanal eller rolle samtalen gjelder
-- kontekst som skal sendes videre til flow, tool eller annet topic
+- huske svar brukeren allerede har gitt
+- sende kontekst videre til flows, actions og andre topics
 
 I Copilot Studio er disse typene vanlige:
 
@@ -331,11 +365,6 @@ I Copilot Studio er disse typene vanlige:
 | Systemvariabler | Informasjon om bruker, kanal og aktivitet |
 | Environment variables | Konfigurasjon fra plattformen |
 
-Dette er nyttig å ha med fordi agenten ofte trenger både:
-
-- kunnskap for å vite noe
-- variabler for å huske hva som gjelder i samtalen akkurat nå
-
 ### Synonymer og regex: fra fritekst til strukturert input
 
 | Mønster | Hva det gjør | Eksempel |
@@ -344,21 +373,13 @@ Dette er nyttig å ha med fordi agenten ofte trenger både:
 | Lukket liste | Begrenser input til kjente valg | `hus`, `duplex`, `condo` |
 | Regex | Fanger mønstre i tekst | `[1-5]` soverom, postnr, ordrenr |
 
-- dette er broen mellom fri tekst og variabler agenten faktisk kan bruke
-- det reduserer feil i oppslag, routing og verktøykall
-- det passer best når innholdet er kjent og variasjonene kan beskrives
+- Dette er broen mellom fri tekst og variabler agenten faktisk kan bruke
+- Det reduserer feil i oppslag, routing og verktøykall
+- Det passer best når innholdet er kjent og variasjonene kan beskrives
 
 ### Connectors
 
-En connector er i praksis et innpakket API med definerte handlinger.
-
-Det viktige her er:
-
-- rask integrasjon
-- strukturert input/output
-- begrenset operasjonssett
-
-Connectoren eksponerer som regel ikke hele systemets API, bare et utvalg av handlinger.
+En connector er en ferdig integrasjon mot et system, i praksis et innpakket API med definerte handlinger.
 
 Eksempler:
 
@@ -368,75 +389,45 @@ Eksempler:
 - ServiceNow
 - Custom connector mot egen API via Power Platform
 
+Fordelen er rask integrasjon med strukturert input og output, men du får som regel bare et avgrenset sett av operasjoner.
+
 ### Run a Prompt / AI prompt som verktøy
 
-Noen ganger er ikke riktig verktøy et API eller en flow, men et eget prompt.
+Copilot Studio kan kjøre et eget prompt som en tool, med egne inputvariabler, modellvalg og strukturert output.
 
-I Copilot Studio kan et prompt kjøres som en egen tool med:
+| Godt valg når du trenger | Eksempel |
+| --- | --- |
+| Mer kontroll over format og regler | Returner JSON eller fast struktur |
+| Presis ekstraksjon eller klassifisering | Trekk ut felter fra tekst eller sorter innhold |
+| Gjenbrukbar AI-logikk | Oppsummering, sentiment eller teksttransformasjon |
 
-- egne inputvariabler
-- eget modellvalg
-- strukturert output
-
-Dette passer godt når du trenger:
-
-- klassifisering eller ekstraksjon
-- fast struktur på svaret, for eksempel JSON
-- en gjenbrukbar AI-operasjon som oppsummering, sentiment eller transformasjon
-
-Det samme mønsteret finnes også i Foundry og kodeagenter: en tydelig prompt-basert action med klart input og output.
+Prompt-verktøyet utfører én avgrenset AI-oppgave.
 
 ### Eksempel: code interpreter i en prompt
 
-Et konkret eksempel på `Run a Prompt` i Copilot Studio er å slå på `code interpreter` i prompt-verktøyet.
-
-Da kan prompten ikke bare generere tekst, men også skrive og kjøre Python-kode for å:
-
-- analysere data
-- gjøre beregninger og statistikk
-- lese, oppdatere og returnere Excel-filer
-- behandle Word-, PowerPoint- og PDF-filer
-- lage visualiseringer som grafer og diagrammer
-
-Dette passer når agenten må gjøre faktisk databehandling eller filbehandling, ikke bare oppsummere eller klassifisere tekst.
-
-Praktisk betyr det:
-
-- opprett en `Prompt` som tool i agenten
-- åpne `Settings` for prompten
-- slå på `Enable code interpreter`
-- gi prompten tydelige instruksjoner for input og ønsket output, for eksempel `Return as Excel` eller `Return as JSON`
-
-Viktige begrensninger og krav:
-
-- agenten må bruke brukerautentisering; scenarier uten brukerautentisering fungerer ikke
-- flere opplastede filer i samme prompt støttes ikke
-- flere filutdata i samme prompt støttes ikke
-- oppfølgingsspørsmål over flere turns om en opplastet fil støttes ikke
+- `Run a Prompt` kan utvides med `code interpreter`
+- Prompten kan skrive og kjøre Python-kode
+- Dette passer godt for dataanalyse, beregninger, visualiseringer og behandling av Excel-, Word-, PowerPoint- og PDF-filer
+- Slås på i promptens `Settings` med `Enable code interpreter`
+- Krever brukerautentisering
+- Støtter ikke flere opplastede filer eller flere filutdata i samme prompt
 
 ### Computer Use / GUI-automatisering
 
-Noen ganger finnes det verken API, connector eller egnet workflow. Da kan GUI-automatisering være et alternativ.
+I Copilot Studio lar `Computer Use` agenten bruke et nettsted eller en desktop-app med virtuell mus og tastatur.
 
-I Copilot Studio brukes dette gjennom `Computer Use`, hvor agenten kan tolke skjermen og bruke virtuell mus og tastatur.
-
-Det viktigste å forstå er:
-
-- verktøyet bruker syn og resonnering for å tolke UI
-- det passer best når en tjeneste mangler API eller annen integrasjon
-- det er tregere og mer sårbart enn API-basert integrasjon
-
-Derfor bør dette brukes når andre og mer robuste integrasjonsformer ikke er tilgjengelige.
+- Verktøyet bruker syn og resonnering for å tolke skjermen og velge neste steg
+- Det passer best når en tjeneste mangler API eller annen integrasjon
+- Det er tregere og mer sårbart enn API-basert integrasjon
 
 ### Human in the loop i Copilot Studio
-
-`Human in the loop` er ikke bare et generelt prinsipp. I Copilot Studio finnes det som konkrete funksjoner i agent- og workflow-design.
 
 | Mønster | Hva det gjør |
 | --- | --- |
 | `Request for Information` | Agenten sender en forespørsel til et menneske og venter på svar |
 | `Approval / review` | Et menneske kan godkjenne, avvise eller supplere informasjon |
 | `Human supervision` | Agenten kan stoppe opp og be om hjelp når den er usikker |
+| `Terskelbasert eskalering` | Agenten bruker en confidence score eller regel til å avgjøre når menneskelig hjelp skal involveres |
 
 Typiske brukstilfeller:
 
@@ -446,100 +437,68 @@ Typiske brukstilfeller:
 
 ### Prosess
 
-Prosess betyr at agenten bruker en sekvens av handlinger, ikke bare ett kall.
+Prosess lar agenten utføre en definert arbeidsflyt med flere steg, ikke bare ett enkelt kall.
 
-Typiske former og teknologier er:
+Typiske former:
 
-- Power Automate
+- Agent flow / Power Automate
 - Azure Logic Apps
-- backend-jobb, `n8n` eller kode i Foundry og kodeagenter
+- Backend-jobb, `n8n` eller kode i Foundry og kodeagenter
 
 Eksempler:
 
 - opprette Team, legge til medlemmer og sende varsling
 - registrere sak, hente data og sende til godkjenning
 
-Et viktig skille i modulen er:
-
-- agenten resonnerer
-- flowen utfører
-
-Prosess passer godt når stegene er kjent, og når flere systemer må oppdateres i riktig rekkefølge.
-
 ### Prosessmønstre: agent flow og event trigger
-
-To mønstre går igjen i mange agentplattformer:
 
 | Mønster | Hva det betyr | Typisk bruk |
 | --- | --- | --- |
 | Agent flow / workflow | En definert sekvens av steg som agenten kan starte | Repeterbare prosesser, godkjenning, oppdatering av flere systemer |
 | Event trigger | En hendelse starter agenten eller prosessen uten at brukeren spør i chat | Ny e-post, ny fil, ny rad, tidsplan, webhook eller business event |
 
-Navnene varierer mellom plattformer, men prinsippet er det samme:
+Navnene varierer, men konseptet er det samme:
 
-- Copilot Studio bruker agent flows og event triggers
-- Foundry bruker workflows, actions og eksterne triggere
-- kodeagenter kan starte fra scheduler, webhook, queue eller backend-jobb
+- Copilot Studio: agent flows og event triggers
+- Foundry: workflows, actions og eksterne triggere
+- Kodeagenter: scheduler, webhook, queue eller backend-prosess
 
-### Agent + workflow: når bruker du hva?
+### Agent + prosess: når bruker du hva?
 
-Et nyttig skille er:
-
-| Bruk agent når du trenger | Bruk workflow når du trenger |
+| Bruk agent når du trenger | Bruk prosess når du trenger |
 | --- | --- |
 | Fleksibilitet i samtale og tolkning | Faste steg i kjent rekkefølge |
 | Resonering og valg av neste handling | Forutsigbar kjøring hver gang |
 | Hente inn kontekst fra bruker eller kilder | Standardisert prosess med logging og kontroll |
 | Dynamisk valg av tools eller neste steg | Godkjenning, branching og systemoppdateringer |
 
-Husk:
+Kort sagt:
 
 - agenten velger og forstår
 - workflowen utfører og standardiserer
-- ofte er riktig mønster `agent + workflow`, ikke `agent vs workflow`
-
-### Hvordan agenten bruker prosess
-
-To vanlige forløp er:
-
-1. Brukerinitiert: Agent → Prosess → Systemer → Prosess → Agent
-2. Hendelsesdrevet: Hendelse → Prosess → Systemer → Prosess → Agent
-
-Dette understreker et viktig skille:
-
-- agenten velger og resonnerer
-- prosessen utfører og standardiserer
-
-### Prosess: styrker, begrensninger og når det passer
-
-| Styrker | Begrensninger | Bruk når |
-| --- | --- | --- |
-| Orkestrerer flere systemer i én operasjon | Kan oppleves tregt i chat | Prosessen er definert |
-| Standardiserer samme prosess hver gang | Dårlig egnet for avansert dynamisk resonnering | Stegene er kjent på forhånd |
-| Kan trigges av bruker, tidsplan eller hendelse | Krever god styring av auth, logging og feil | Flere systemer må oppdateres eller følges opp automatisk |
 
 ### API som verktøy
 
-Et API er en kontrollert inngang til et system.
+Et API er en kontrollert og strukturert inngang til et system.
 
 | Byggekloss | Hva det betyr |
 | --- | --- |
 | Endpoint | URL til en funksjon eller ressurs |
-| Metode | `GET`, `POST`, `PUT`, `PATCH` eller `DELETE` |
+| Metode | GET, POST, PUT, PATCH eller DELETE |
 | Input | Data du sender inn, ofte JSON |
 | Output | Strukturert svar tilbake |
 | Auth | Hvem du er og hva du har lov til å gjøre |
-| Schema | Tydelig kontrakt, ofte OpenAPI eller JSON Schema |
+| Schema | Tydelig kontrakt, ofte OpenAPI eller JSON schema |
 
-For agentbruk er det viktig at API-et ikke bare finnes, men at det er tydelig beskrevet:
+### Hvordan kobler du et REST API til agenten?
 
-- hva det gjør
-- hvilke input som forventes
-- hva som kommer tilbake
-- hvordan autentisering håndteres
-- hvilket schema eller kontrakt som gjelder
-
-Et godt agent-API er derfor ikke bare “et endpoint som finnes”, men en tydelig kontrakt som beskriver hva agenten kan gjøre og hvordan den skal gjøre det.
+| Del | Rolle |
+| --- | --- |
+| OpenAPI-beskrivelse | Forteller hvilke operasjoner, parametere og svar API-et har |
+| Auth / connection | Lar agenten koble seg til API-et på riktig måte |
+| Beskrivelser | Hjelper modellen å forstå når verktøyet skal brukes |
+| Tool / action / connector | Gjør API-et tilgjengelig som ferdighet i agenten |
+| Visning | Kan vises som tekst eller Adaptive Card |
 
 ### Hva et API gjør i agentkontekst
 
@@ -550,25 +509,13 @@ Når agenten kaller et API:
 3. Backend returnerer et strukturert svar
 4. Agenten tolker resultatet og svarer brukeren
 
-I praksis trenger agenten ikke bare tilgang til et API, men også en god beskrivelse av hva API-et gjør, hvordan input ser ut og hva som kommer tilbake.
+Agenten trenger ikke bare tilgang til API-et, men også en god beskrivelse av hva API-et gjør, hvordan input ser ut og hva som kommer tilbake.
 
 ### MCP: Model Context Protocol
 
-MCP er et standardisert lag som gjør verktøy og kontekst tilgjengelig for agenten på en strukturert måte.
+MCP er et standardisert lag som gjør verktøy og kontekst tilgjengelig på en strukturert måte, slik at agenten kan oppdage, forstå og bruke dem.
 
-Det viktige poenget i modulen er:
-
-- API gir tilgang
-- MCP gjør verktøy og kontekst brukbare for agenten
-
-MCP tilfører:
-
-- struktur
-- semantikk
-- oppdagbarhet
-- kontekstflyt
-
-Dette gjør det lettere for agenten å forstå hvilke verktøy som finnes og hvordan de skal brukes.
+MCP tilfører struktur, semantikk, oppdagbarhet og kontekstflyt rundt hvordan verktøy brukes. Det flytter også kompleksitet fra agentprompt til et standardisert tjenestelag.
 
 ### Hva består MCP av, og hvordan fungerer det?
 
@@ -581,87 +528,91 @@ Dette gjør det lettere for agenten å forstå hvilke verktøy som finnes og hvo
 | Discovery | Lar agenten se hvilke verktøy som finnes |
 | Execution | Kjøring mot underliggende systemer |
 
-Den enkle flyten er:
+Forenklet flyt:
 
-Agent → MCP → API / data / kontekst → MCP → Agent
+Agent -> MCP -> API / data / kontekst -> MCP -> Agent
 
 ### MCP i Azure: Logic Apps
 
-En praktisk vei til MCP i Azure er `Azure Logic Apps (Standard)`.
-
 | Mulighet | Hva det betyr |
 | --- | --- |
-| Logic Apps som MCP-server | Kan eksponere workflows som remote MCP-servere |
+| `Azure Logic Apps (Standard)` | Kan eksponere workflows som remote MCP-servere |
 | `1400+ connectors` | Gjør det lett å lage tools mot SaaS, on-prem og Microsoft-tjenester |
-| Workflows som tools | Et MCP-kall kan trigge en eksisterende arbeidsflyt |
-| Easy Auth / OAuth 2.0 | Gir innebygd auth for MCP-serveren |
-| Application Insights / Log Analytics | Gir historikk, diagnostikk og sporbarhet |
+| `Workflows som tools` | Et MCP-kall kan trigge en eksisterende arbeidsflyt |
+| `Easy Auth / OAuth 2.0` | Gir innebygd auth for MCP-serveren |
+| `Application Insights / Log Analytics` | Gir historikk, diagnostikk og sporbarhet |
 
-Dette passer best når:
+Passer best når:
 
 - du allerede har integrasjoner eller workflows i Logic Apps
 - du vil lage MCP-tools raskt uten å bygge mye kode
 
 ### MCP i Azure: Azure Functions
 
-Hvis du vil ha mer kodekontroll, er `Azure Functions` et godt alternativ.
-
 | Mulighet | Hva det betyr |
 | --- | --- |
-| Functions MCP extension | Bygg MCP-server direkte med Functions-trigger/bindings-modellen |
-| Self-hosted MCP server | Host en eksisterende MCP-server bygget med offisiell MCP SDK |
-| Built-in auth | Beskytter serverendepunktet med innebygd autentisering |
-| Managed identity | Godt spor for sikker tilgang til Azure-ressurser |
-| Serverless og skalerbar hosting | Passer godt for kodebaserte og egendefinerte tools |
+| `Functions MCP extension` | Bygg MCP-server direkte med Functions-trigger/bindings-modellen |
+| `Self-hosted MCP server` | Host en eksisterende MCP-server bygget med offisiell MCP SDK |
+| `Built-in auth` | Beskytter serverendepunktet med innebygd autentisering |
+| `Managed identity` | Godt spor for sikker tilgang til Azure-ressurser |
+| `Serverless og skalerbar hosting` | Passer godt for kodebaserte og egendefinerte tools |
 
-Dette passer best når:
+Passer best når:
 
 - du vil bygge MCP i kode
 - du trenger mer kontroll enn Logic Apps gir
 - du allerede har en MCP-server du vil hoste i Azure
 
-### Eksempel: remote MCP mot SSB
+### Eksempel: Remote MCP mot SSB
 
-Et nyttig workshop-eksempel er en eksisterende MCP-server for SSB-data.
+Et konkret eksempel i materialet er TRY sin MCP-server for SSB-data.
 
-Her trenger du ikke bygge serveren selv. I stedet kobler du agenten til en ferdig MCP-server, og agenten faar tilgang til verktøy som:
+- Bestill egen tilgang via `https://tools.try.no/ssb-mcp`
+- Legg inn `Server URL`: `https://tools.try.no/ssb-mcp/mcp`
+- Velg `Authentication`: `API key`
+- Velg `Type`: `Query`
+- Bruk parameter `key`
 
-- `ssb_search`
-- `ssb_table_metadata`
-- `ssb_get_data`
-- `ssb_get_url`
+Typiske tools er `ssb_search`, `ssb_table_metadata` og `ssb_get_data`.
 
-Praktisk betyr dette:
+### API vs. MCP
 
-- deltakerne bestiller egen tilgang hos `https://tools.try.no/ssb-mcp`
+- API = kall denne funksjonen
+- MCP = her er verktøyene du kan bruke
 
-### API vs MCP
-
-En nyttig huskeregel er:
-
-- API = “kall denne funksjonen”
-- MCP = “her er verktøyene og konteksten du kan bruke”
-
-Eller enda enklere:
+Eller sagt på en annen måte:
 
 - API gir tilgang til funksjoner
 - MCP gjør verktøy og kontekst brukbare for agenten
 
 ### A2A: agent som verktøy
 
-A2A betyr at én agent kan bruke en annen agent via en standard protokoll.
+- Agent2Agent gjør det mulig å koble én agent til en annen via en standard protokoll
+- I Microsoft Foundry er A2A en egen tool-type for å koble til andre agenter
+- I Copilot Studio kan du koble til en ekstern agent via en A2A connection
+- Bruk A2A når den andre agenten allerede har egen logikk, egne verktøy eller egne workflows
+- Vi går dypere inn i multi-agent-arkitektur i modul 6
 
-Dette passer når den andre agenten allerede har:
+### Skills
 
-- egen logikk
-- egne verktøy
-- egne workflows
+Skills er gjenbrukbare moduler som lærer agenten hvordan den bør løse en type oppgave, ikke bare hva den kan kalle.
 
-Det er altså ikke meningen at én agent skal “gjøre alt”. Noen ganger er det bedre å la en spesialisert agent gjøre jobben.
+En skill består typisk av:
 
-I Microsoft Foundry finnes dette som en A2A tool i preview. I Copilot Studio kan du koble til en ekstern agent via en A2A connection i preview.
+- instruksjoner for hvordan agenten skal løse en type oppgave
+- scripts eller kommandoer agenten kan bruke
+- ressurser og referansemateriale
+- strukturert metadata, ofte i en `SKILL.md` eller tilsvarende instruksjonsfil
 
-Vi går dypere inn i multi-agent arkitektur i modul 6.
+En skill lærer agenten hvordan den bør jobbe, ikke bare hva den kan kalle.
+
+### Eksempel på skill-tenkning
+
+| Oppgave | Hva skillen gir agenten |
+| --- | --- |
+| Feilsøke en deployment | Vet hvilke logs, statuskommandoer og checks som bør kjøres |
+| Gjennomgå en pull request | Følger en standard review-metode og sjekker risikoer |
+| Lage et nytt API | Vet hvilke filer, maler og teststeg som normalt trengs |
 
 ### Tool, API, MCP og skill: hva er forskjellen?
 
@@ -672,73 +623,9 @@ Vi går dypere inn i multi-agent arkitektur i modul 6.
 | MCP | Standardisert verktøylag for agenten |
 | Skill | Arbeidsmåte, instruksjoner og støttemateriell for en oppgavetype |
 
-### Skills
+### Lab: Vurder verktøyvalg
 
-En skill er ikke bare et verktøy, men en gjenbrukbar arbeidsmåte. Den kan bestå av:
-
-- instruksjoner
-- scripts eller kommandoer
-- ressurser og referansemateriale
-- strukturert metadata, ofte i en `SKILL.md`
-- eksempelrepo: `https://github.com/microsoft/skills`
-- ressurskatalog: `https://awesome-copilot.github.com/`
-
-Et nyttig skille er:
-
-- et tool lar agenten gjøre noe
-- en skill lærer agenten hvordan den bør løse en type oppgave
-
-### Eksempel på skill-tenkning
-
-En skill gir ikke bare tilgang til en operasjon, men en oppskrift for hvordan agenten bør jobbe.
-
-| Oppgave | Hva skillen gir agenten |
-| --- | --- |
-| Feilsøke en deployment | Vet hvilke logger, statuskommandoer og checks som bør kjøres |
-| Gjennomgå en pull request | Følger en standard review-metode og sjekker risikoer |
-| Lage et nytt API | Vet hvilke filer, maler og teststeg som normalt trengs |
-
-## Hvordan velge riktig nivå?
-
-- bruk innebygde verktøy når plattformen allerede dekker behovet
-- bruk connectors når du trenger standard integrasjoner raskt
-- bruk prosess når du må orkestrere flere steg
-- bruk API når du trenger mer kontroll
-- bruk MCP når du vil standardisere verktøy og kontekst for agentbruk
-- bruk A2A når en annen agent faktisk bør gjøre jobben
-- bruk skills når du vil standardisere arbeidsmåte for kodeagenter
-
-## Lab i sesjon 3
-
-### Laboppgave: Skriv forslag til instruksjon for din agent
-
-Tenk gjennom:
-
-- rolle og mål
-- 2–3 oppgaver agenten skal løse
-- hvilke kilder og verktøy den kan bruke
-- hva den ikke skal gjøre
-- hvordan svaret skal se ut
-- når den skal be om avklaring
-
-Tips:
-
-- bruk Copilot til å hjelpe deg med å skrive instruksjonen
-- bruk en prompt optimizer til å forbedre den
-- legg ved 1-2 gode eksempler hvis agenten skal svare i en bestemt stil eller struktur
-
-### Laboppgave: Test grounding og retrieval
-
-Skriv tre spørsmål agenten bør kunne svare godt på, og vurder:
-
-- hvilken kilde hvert svar bør komme fra
-- om kilden trenger bedre struktur, metadata eller chunking
-- hva som skjer med eksakte versus semantiske spørsmål
-- om siteringer og tilgang fungerer som forventet
-
-### Laboppgave: Vurder verktøyvalg
-
-Ta utgangspunkt i en oppgave eller agentidé, og vurder:
+Ta utgangspunkt i en oppgave, prosess eller agentidé du kjenner.
 
 | Behov | Valg | Hvorfor |
 | --- | --- | --- |
@@ -750,45 +637,33 @@ Ta utgangspunkt i en oppgave eller agentidé, og vurder:
 
 Velg mellom: innebygde verktøy, connectors, prosess, API, MCP, A2A eller skill.
 
-### Laboppgave: Beskriv ett valgt verktøy
+### Lab: Beskriv ett valgt verktøy
 
-Beskriv ett valgt verktøy mer konkret:
+| Del | Notater |
+| --- | --- |
+| Navn på verktøyet |  |
+| Hva skal agenten bruke det til? |  |
+| Hvilken input trenger verktøyet? |  |
+| Hva skal komme tilbake? |  |
+| Skal det være read eller write? |  |
+| Hvem må ha tilgang eller godkjenne bruk? |  |
 
-- navn
-- formål
-- input
-- output
-- read eller write
-- tilgang og godkjenning
-
-Diskuter til slutt om dette passer best som connector, prosess, API, MCP-tool, A2A eller skill.
+Diskuter: passer dette best som connector, prosess, API, MCP-tool, A2A eller skill?
 
 ## Hva har vi gått igjennom i denne modulen?
 
-Etter denne modulen bør du sitte igjen med:
-
-1. Skrive tydeligere instruksjoner med rolle, mål, handlingsrom, stoppkriterier og svarformat
-2. Forstå hvordan kunnskap, kontekst, grounding og RAG påvirker kvaliteten på agentsvar
-3. Skille mellom verktøynivåer som innebygde verktøy, connectors, prosess, API, MCP, A2A og skills
+1. Forstår hvordan instruksjoner og beskrivelser styrer agentens oppførsel og valg
+2. Forstår hvordan grounding, retrieval og RAG påvirker kvaliteten på svar
+3. Kan velge riktig verktøy eller mønster for en konkret agentløsning
 
 [Forrige: Modul 2](./02-agentplattformer.md) | [Til hovedside](../README.md) | [Neste: Modul 4](./04-prompt-engineering-og-kvalitet.md)
 
 ## Lenker
 
-- Offisiell oversikt over hva Copilot Studio er: [Copilot Studio overview](https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-what-is-copilot-studio)
-- Offisiell dokumentasjon for hvordan kunnskap fungerer i Copilot Studio: [Knowledge in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-copilot-studio)
-- Offisiell forklaring av generativ orkestrering i Copilot Studio: [Generative orchestration in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-generative-actions)
-- Offisiell dokumentasjon for Azure AI Search som kunnskapskilde i Copilot Studio: [Knowledge source: Azure AI Search](https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-azure-ai-search)
-- Offisiell veiledning for hvordan du gjør SharePoint og embedded files mer treffsikre i deklarative agenter: [Optimize content retrieval](https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/optimize-content-retrieval)
-- Offisiell oversikt over RAG-mønsteret i Azure AI Search: [Azure AI Search: Retrieval-augmented generation overview](https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview)
-- Eksempelrepo som viser hvordan Copilot Studio kan brukes sammen med Azure-tjenester: [Copilot Studio and Azure (eksempelrepo)](https://github.com/Azure/Copilot-Studio-and-Azure)
-- Offisiell oversikt over agenttjenester i Microsoft Foundry: [Microsoft Foundry Agent Service overview](https://learn.microsoft.com/en-us/azure/foundry/agents/overview)
-- Offisiell veiledning for å koble en agent til en eksisterende MCP-server: [Connect your agent to an existing MCP server](https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-add-existing-server-to-agent)
-- Offisiell veiledning for å lage en MCP-server i Azure Logic Apps: [Create a Logic Apps MCP server](https://learn.microsoft.com/en-us/azure/logic-apps/create-model-context-protocol-server-standard)
-- Offisiell steg-for-steg for MCP med Azure Functions: [Azure Functions MCP tutorial](https://learn.microsoft.com/en-us/azure/azure-functions/functions-mcp-tutorial)
-- Offisiell dokumentasjon for self-hosted MCP-servere i Azure Functions: [Self-hosted MCP servers on Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/self-hosted-mcp-servers)
-- Eksempelrepo som viser en MCP-server hostet i Azure Web App / App Service og koblet til Copilot Studio: [spotify-mcp](https://github.com/ifiecas/spotify-mcp)
-- Bloggpost fra Microsoft CAT om å bygge Copilot Studio-agenter fra YAML: [Skills for Copilot Studio: Build agents from YAML code, up to 20x Faster](https://microsoft.github.io/mcscatblog/posts/skills-for-copilot-studio/)
-- Artikkel med innebygd video som viser Azure SQL som kunnskapskilde i Copilot Studio, inkludert synonymer og begrepsforklaringer på kolonner: [Copilot Studio: Connect An Azure SQL Database As Knowledge](https://www.matthewdevaney.com/copilot-studio-connect-an-azure-sql-database-as-knowledge/)
-- Eksempel på en offentlig MCP-server mot SSB-data: [TRY SSB MCP](https://tools.try.no/ssb-mcp)
-- Samleside med eksempler og ressurser rundt GitHub Copilot og agentbruk: [Awesome GitHub Copilot](https://awesome-copilot.github.com/)
+- [Copilot Studio knowledge sources](https://learn.microsoft.com/microsoft-copilot-studio/knowledge-add-overview)
+- [Azure AI Search overview](https://learn.microsoft.com/azure/search/search-what-is-azure-search)
+- [Microsoft Foundry agentic retrieval](https://learn.microsoft.com/azure/foundry/agents/concepts/retrieval-augmented-generation)
+- [Copilot Studio custom connectors and actions](https://learn.microsoft.com/microsoft-copilot-studio/advanced-connectors)
+- [Model Context Protocol](https://modelcontextprotocol.io/introduction)
+- [A2A tool in Microsoft Foundry](https://learn.microsoft.com/azure/foundry/agents/how-to/tools/agent-to-agent)
+- [Microsoft skills repository](https://github.com/microsoft/skills)

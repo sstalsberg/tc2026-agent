@@ -2,17 +2,6 @@
 
 Denne modulen handler om hva som må være på plass når en agent skal gå fra idé og prototype til noe som faktisk kan brukes i en virksomhet.
 
-Vi ser på:
-
-- hvorfor governance er nødvendig rundt agenter
-- hvordan Microsoft Agent 365 kan fungere som kontrollplan for agentporteføljen
-- hvordan tilgang, sikkerhet og guardrails må styres
-- hvordan du evaluerer kvalitet før produksjon
-- hvordan feedback og observabilitet brukes til forbedring
-- hva publisering, lisens og roller betyr i praksis
-
-Målet er å gjøre det tydelig at en agent ikke bare er en modell med litt instruksjoner. Når agenten skal i produksjon, blir den en løsning som må eies, styres, måles og forbedres.
-
 [Forrige: Modul 6](./06-agentarkitektur-og-multiagent.md) | [Til hovedside](../README.md) | [Neste: Modul 8](./08-avslutning.md)
 
 ## Læringsmål
@@ -23,36 +12,18 @@ Målet er å gjøre det tydelig at en agent ikke bare er en modell med litt inst
 - Se hva som må evalueres før en agent settes i produksjon
 - Forstå hvordan feedback, tracing og logging brukes til forbedring
 - Vite hva publisering, lisens og kostnad betyr i drift
-- Se hvilke roller som typisk må involveres
 
-## Hvorfor trenger agenter governance?
-
-En agent kan hente data, bruke verktøy, trigge prosesser og i noen tilfeller utføre handlinger med reelle konsekvenser.
-
-Derfor holder det ikke å tenke på agenten som “bare en smart chat”.
-
-Noen typiske risikoer er:
+## Risiko i én agent
 
 | Risiko | Hva som kan gå galt |
 | --- | --- |
 | For brede tilganger | Agenten ser eller gjør for mye |
 | Svake guardrails | Skadelig eller uønsket output slipper gjennom |
 | Manglende evaluering | Dårlig kvalitet oppdages først i produksjon |
-| Lite sporbarhet | Det er uklart hva agenten gjorde og hvorfor |
+| Lite sporbarhet | Det er uklart hva agenten gjorde, hvorfor og med hvilke data |
 | Uklart eierskap | Ingen vet hvem som skal godkjenne eller følge opp |
 
-Hovedpoenget er enkelt:
-
-- en agent må styres som en virksomhetsløsning
-- ikke bare som en spennende demo
-
-## Agent sprawl: hvorfor dette blir et IT-problem
-
-Når virksomheten går fra én agent til mange, oppstår et nytt problem:
-
-- IT mister oversikten
-- identiteter og eierskap blir uklare
-- flere agenter blir tatt i bruk utenfor etablerte kontrollflater
+## Risiko når det skalerer: agent sprawl
 
 | Utfordring | Hva det betyr i praksis |
 | --- | --- |
@@ -62,131 +33,58 @@ Når virksomheten går fra én agent til mange, oppstår et nytt problem:
 | Shadow agents | Agenter tas i bruk utenfor etablerte kontrollflater |
 | Større angrepsflate | Flere integrasjoner, flere rettigheter og mer compliance-risiko |
 
-Governance handler derfor ikke bare om å sikre én agent.
-Det handler også om å styre en voksende agentportefølje.
+Governance handler derfor ikke bare om å sikre én agent, men om å styre en voksende agentportefølje.
 
 ## Fire styringslag rundt en agent
-
-Det er nyttig å tenke på governance som fire lag:
 
 | Lag | Hva du må styre |
 | --- | --- |
 | Tilgang | Identitet, roller, autentisering, least privilege |
 | Sikkerhet | Guardrails, innholdsfiltrering, dataflyt |
 | Kvalitet | Testsett, evaluering, målinger og godkjenning |
-| Drift | Publisering, overvåking, kostnad og ansvar |
-
-Dette er en god huskeregel fordi mange team fokuserer tungt på ett lag, men glemmer de andre.
-
-Et team kan for eksempel være gode på tilgangsstyring, men mangle systematisk evaluering.
-Eller de kan ha god kvalitet i test, men ingen plan for publisering og kostnad i drift.
+| Drift | Publisering, overvåking, kostnad, versjonering og ansvar |
 
 ## Microsoft Agent 365 som kontrollplan
 
-Per 30. mars 2026 beskriver Microsoft Learn `Microsoft Agent 365` som en kontrollplan for AI-agenter på tvers av hvor de er bygget eller kjøpt inn.
+Per **6. april 2026** beskriver Microsoft Learn `Microsoft Agent 365` som en kontrollplan for AI-agenter.
 
-Det viktigste poenget er ikke at Agent 365 bygger agenten for deg.
-Poenget er at Agent 365 skal gjøre det mulig å:
+Poenget er ikke å bygge agenten for deg, men å styre agentporteføljen på virksomhetsnivå:
 
-- gi agenten en tydelig identitet
-- få oversikt over hvilke agenter som finnes i virksomheten
-- styre tilgang, policyer og livssyklus
-- koble agentene til observabilitet, sikkerhet og compliance
-- fange opp både registrerte agenter og eventuelle shadow agents
+- egen identitet med `Microsoft Entra Agent ID`
+- samlet oversikt i `Microsoft 365 admin center` og `Agent Registry`
+- kobling til `Purview`, `Defender`, observability og styrte verktøy
+- dekning for både registrerte agenter og `shadow agents`
+- dokumentert som del av `Frontier preview-programmet`
 
-Microsoft beskriver blant annet disse kjernedelene:
-
-| Del | Hva det betyr i praksis |
-| --- | --- |
-| Microsoft Entra Agent ID | Hver agent kan få egen identitet for tilgang, livssyklus og styring |
-| Microsoft 365 admin center | IT kan se, overvåke og administrere agenter i en kjent kontrollflate |
-| Agent Registry | Gir oversikt over registrerte agenter, agenter med Agent ID og eventuelle shadow agents |
-| Purview og Defender | Kobler agentene til data governance, audit, trusseldeteksjon og respons |
-| MCP og agentverktøy | Gjør det mulig å koble agenter til styrte verktøy og data i Microsoft 365 |
-
-Det gjør Agent 365 relevant i denne modulen fordi det flytter diskusjonen fra:
-
-- "hvordan bygger vi én agent?"
-
-til:
-
-- "hvordan styrer vi mange agenter på en virksomhetsmessig måte?"
-
-Det er også viktig å være presis på modenhet:
-
-- Per 30. mars 2026 er Agent 365 dokumentert som del av `Frontier preview-programmet`
-- dokumentasjonen sier at funksjoner og tilgjengelighet kan endre seg i preview
-
-### De fem pilarene i Agent 365
-
-En nyttig måte å forstå Agent 365 på er gjennom de fem pilarene Microsoft bruker i materialet sitt:
+## De fem pilarene i Agent 365
 
 | Pilar | Hva den gir deg |
 | --- | --- |
 | Registry | Full oversikt over agenter i virksomheten |
 | Access Control | Styrt tilgang, policyer og least privilege |
-| Visualization | Innsikt i forbindelser, bruk og adferd |
+| Visualization | Innsikt i forbindelser, bruk og atferd |
 | Interoperability | Kobling til Work IQ, apper og arbeidsflyt |
 | Security | Trusseldeteksjon, beskyttelse og respons |
 
-Dette er viktig fordi Agent 365 ikke bare handler om identitet.
-Det er et bredere styringslag rundt agentene.
+## Hvorfor Agent 365 er interessant
 
-## Hvordan Agent 365 passer mot governance-lagene
-
-Hvis vi bruker de fire styringslagene i denne modulen, kan Agent 365 leses slik:
-
-| Lag | Hvordan Agent 365 bidrar |
-| --- | --- |
-| Tilgang | Agentidentitet, registry, least privilege, Conditional Access og sponsorskap |
-| Sikkerhet | Defender, runtime-beskyttelse, prompt shield, policyer og trusselhåndtering |
-| Kvalitet | Observabilitet, sporbarhet og innsikt som gjør evaluering og forbedring mer konkret |
-| Drift | Sentral administrasjon, agentoversikt, onboarding, livssyklus og policyhåndheving |
-
-Dette betyr ikke at Agent 365 erstatter:
-
-- gode instruksjoner
-- testsett
-- guardrails i selve agenten
-- tydelige eiere og godkjenning
-
-Men det betyr at virksomheten kan få en mer samlet måte å styre agentlandskapet på.
-
-## Hvorfor Agent 365 er interessant i denne workshopen
-
-I workshopen snakker vi mye om enkeltagenter, Copilot Studio, Foundry og kodeagenter.
-Agent 365 er interessant fordi Microsoft beskriver det som laget over dette igjen:
-
-- et styringslag for agentporteføljen
-- ikke bare et nytt byggespor
-
-Det gjør det spesielt relevant når spørsmålene blir:
-
-- Hvordan oppdager vi hvilke agenter som faktisk er i bruk?
-- Hvordan vet vi hvilken identitet en agent har?
-- Hvordan begrenser vi hva agenten får tilgang til?
+- Hvordan oppdager vi hvilke agenter som er i bruk?
+- Hvordan vet vi hvilken identitet de har?
+- Hvordan begrenser vi hva de får tilgang til?
 - Hvordan ser vi misbruk, feil og risikofylt adferd?
-- Hvordan kobler vi agentene til eksisterende sikkerhets- og compliance-arbeid?
+- Hvordan kobler vi dem til eksisterende sikkerhets- og compliance-arbeid?
 
 ## Agent 365 vs. plattformstyring
-
-Det er nyttig å skille mellom hva som styres i Agent 365 og hva som fortsatt styres i den enkelte plattformen.
 
 | Hvis du vil styre ... | Typisk sted |
 | --- | --- |
 | Agenter på tvers av plattformer | `Agent 365` |
-| Agentidentitet, tilgang og registry | `Microsoft 365 admin center` + `Entra Agent ID` |
+| Samlet registry og kontrollplan | `Agent 365` / `Microsoft 365 admin center` |
+| Agentidentitet og tilgang | `Microsoft Entra Agent ID` + `Microsoft 365 admin center` |
 | Copilot Studio-spesifikke miljøvalg og ALM | `Power Platform admin center` og Copilot Studio |
 | Førsteparts Copilot-opplevelser | `Microsoft 365 admin center` |
 
-Husk:
-
-- `Agent 365` ligger over flere byggespor
-- plattformspesifikke adminflater forsvinner ikke
-
 ## Identitet og tilgang
-
-Tilgangsstyring er et av de første områdene som må være på plass.
 
 | Prinsipp | Hvorfor det betyr noe |
 | --- | --- |
@@ -195,77 +93,42 @@ Tilgangsstyring er et av de første områdene som må være på plass.
 | Rollebasert tilgang | Ulike personer trenger ulik rett til å bygge, publisere og bruke |
 | Skille mellom dev og prod | Testtilganger skal ikke bli produksjonstilganger |
 
-Dette gjelder uansett plattform:
-
-- Copilot Studio
-- Microsoft Foundry
-- kodeagenter og egne applikasjoner
-
-Hvis du ikke vet hvilken identitet agenten bruker, eller hvilke rettigheter den faktisk har, blir resten av sikkerhetsarbeidet fort svakt.
-
 ## Guardrails og sikkerhet
-
-Guardrails er et samleord for flere typer kontrollmekanismer rundt en agent.
 
 | Kontroll | Hva den beskytter mot |
 | --- | --- |
 | Input- og output-filtrering | Skadelig eller uønsket input og output før tools og svar brukes |
-| Prompt shields | Direkte og indirekte prompt injection |
+| Beskyttelse mot prompt injection | Direkte og indirekte prompt injection |
 | Grounding og siteringer | Hallusinasjoner og svak sporbarhet |
 | Human in the loop | Feil ved sensitive eller irreversible handlinger |
-| Policyer på verktøy og connectorer | At agenten bruker feil system eller data |
+| Policyer på verktøy og connectors | At agenten bruker feil system eller data |
 
-Det viktige her er å ikke redusere guardrails til én teknisk funksjon.
-
-Guardrails består ofte av flere lag samtidig:
-
-- modellnivå
-- innholdsfiltrering
-- instruksjoner
-- tilgangskontroll
-- menneskelig kontroll ved behov
-
-### Hvordan Copilot Studio håndterer usikkert innhold
-
-I Copilot Studio kan guardrails vise seg på flere måter i runtime:
+## Copilot Studio: hvordan usikkert innhold håndteres
 
 | Mekanisme | Trigges av | Brukeren ser | Hva du justerer |
 | --- | --- | --- | --- |
-| `Responsible AI filtering` | Sikkerhets- eller policybrudd i input eller output | `ContentFiltered` i debug eller blokkert/custom feilmelding i runtime | Juster filtere og sikkerhetsnivå |
-| `Unknown intent fallback` | Ingen god match i trigger, topic eller kjent handlingsspor | Vennlig omformulering eller fallback | Legg til triggerfraser, knowledge eller tydeligere routing |
+| `Responsible AI filtering` | Sikkerhets- eller policybrudd i input eller output | `ContentFiltered` i debug eller blokkert/custom feilmelding i runtime | Gå gjennom content moderation policies og Responsible AI-oppsett |
+| `Unknown intent fallback` | Ingen god match i trigger, topic eller kjent handlingsspor | `Vennligst omformuler` eller eskalering til fallback | Legg til triggerfraser, knowledge eller tydeligere routing |
 | `Agent instructions` | Sporsperrer eller custom scope-regler i agenten | Høflig avvisning eller forklaring | Gå gjennom instruksjoner, scope og regler |
 
 Husk:
 
-- input filtreres før agenten handler
-- output filtreres før svaret sendes
+- Input filtreres før agenten handler
+- Output filtreres før svaret sendes
 - fallback og avvisning er også guardrails
+- I Teams finnes ikke en standard system-fallback-topic; lag en selv ved behov
 
 ## Evaluering før produksjon
-
-En agent bør ikke settes i produksjon bare fordi den “ser ut til å fungere”.
-
-Du må vite hva du faktisk har testet.
 
 | Hva du bør måle | Eksempler |
 | --- | --- |
 | Kvalitet | Relevans, presisjon, fullstendighet |
 | Sikkerhet | Prompt injection, policybrudd, sensitiv data |
-| Verktøybruk | Kaller agenten riktig tool, topic eller annen agent? |
+| Verktøybruk | Kaller agenten riktig verktøy, topic eller annen agent? |
 | Grounding | Er svarene støttet av riktige kilder? |
 | Robusthet | Fungerer løsningen på tvetydige og vanskelige spørsmål? |
 
-Evaluer derfor med:
-
-- faste testsett
-- representative samtaler
-- sammenligning mellom versjoner
-
-Det er særlig viktig når agenten endres ofte. En liten justering i instruksjoner, modell eller kunnskapsgrunnlag kan gi uventede bivirkninger andre steder.
-
 ## Hva bør et testsett inneholde?
-
-Et godt testsett bør dekke flere typer risiko og bruk:
 
 | Type test | Hvorfor den trengs |
 | --- | --- |
@@ -275,15 +138,7 @@ Et godt testsett bør dekke flere typer risiko og bruk:
 | Sikkerhetstester | Sjekker injection og policybrudd |
 | Verktøy- og prosessflyt | Sjekker at riktig handling trigges |
 
-Målet er enkelt:
-
-- fange feil før brukerne gjør det
-
-Dette gjør også evaluering mer konkret. I stedet for å spørre “føles agenten bra?”, kan du spørre “hvor ofte løser den oppgaven vi faktisk vil at den skal løse?”
-
 ## Feedback og observabilitet
-
-Når agenten er i bruk, trenger du både brukerinnsikt og teknisk observabilitet.
 
 | Kilde | Hva du lærer |
 | --- | --- |
@@ -291,7 +146,7 @@ Når agenten er i bruk, trenger du både brukerinnsikt og teknisk observabilitet
 | Analytics | Hvilke spørsmål og mønstre som går bra eller dårlig |
 | Traces | Hvilke steg, verktøy og agenter som ble brukt |
 | Metrics og logs | Latency, feilrate, tokenbruk, kostnad og sikkerhetshendelser |
-| Correlation ID | Binder sammen hele kjeden på tvers av verktøy og agenter |
+| Correlation ID | Binder sammen hele kjeden på tvers av verktøy, prosesser og agenter |
 
 Eksempler på plattformstøtte:
 
@@ -299,60 +154,62 @@ Eksempler på plattformstøtte:
 - Foundry og Azure: tracing, metrics og monitorering
 - Purview og andre kontrollflater: revisjon og sporbarhet
 
-Poenget er ikke bare å vite at noe gikk galt.
-Du må kunne forklare hvor i kjeden det skjedde og hvorfor.
+## Monitoring med Application Insights
 
-## Hvordan forbedrer du en agent over tid?
+| Hva du får | Eksempler |
+| --- | --- |
+| Samtaletelemetri | Inn- og utgående meldinger og events |
+| Topic- og verktøyinnsikt | Hvilke topics og handlinger som faktisk trigges |
+| Egne events | Custom telemetry fra topic eller prosess |
+| Driftssikt | Latency, exceptions, total conversations og trender |
 
-En god agent forbedres i en kontrollert sløyfe:
+## Forbedringssløyfe for agenter
 
-1. Samle feedback og driftsdata
-2. Finn mønstre i feil, misforståelser og dårlige svar
-3. Rett én ting om gangen:
-   instruksjoner, kunnskap, verktøy, modell eller guardrails
-4. Kjør evaluering på nytt
-5. Publiser ny versjon når endringen faktisk er bedre
+| Trinn | Hva du gjør |
+| --- | --- |
+| Test | Kjør et fast testsett mot agenten |
+| Analyser | Se hvilke svar som feiler og hvorfor |
+| Forbedre | Juster instruksjoner, kunnskap, verktøy eller struktur |
+| Publiser | Gjør endringen tilgjengelig i riktig miljø |
+| Evaluer på nytt | Kjør samme testsett igjen og sammenlign resultatet |
 
-Dette er viktig fordi mange agentprosjekter feiler i drift, ikke i demo.
+Læringspunkter:
 
-Problemet er sjelden at agenten aldri fungerte.
-Problemet er at ingen hadde en god måte å oppdage, forklare og forbedre feilene på.
+- Få og tydelige instruksjonsregler fungerer ofte bedre enn en lang regelbok
+- Testcaser bør helst kjøres isolert, så én feil ikke forurenser resten av samtalen
+- Instruksjoner alene har et tak; noen feil krever bedre verktøy, struktur eller eksempler
 
 ## Kanal og klient
-
-Før du publiserer, er det nyttig å skille mellom hvor agenten er tilgjengelig og hvordan brukeren faktisk møter den.
 
 | Begrep | Hva det betyr |
 | --- | --- |
 | Kanal | Stedet agenten publiseres til, for eksempel Teams, M365 Copilot, web eller app |
 | Klient | Grensesnittet brukeren faktisk møter, for eksempel Teams-chat, webchat eller en egendefinert app |
 
-Dette skillet gjør publiseringsdiskusjonen skarpere:
+Hvorfor dette betyr noe:
 
-- kanalen sier hvor agenten er tilgjengelig
-- klienten sier hvordan opplevelsen faktisk ser ut for brukeren
+- En kanal sier hvor agenten er tilgjengelig
+- En klient sier hvordan opplevelsen faktisk ser ut for brukeren
+
+## Teams som kanal: det du må huske
+
+- Teams husker samtaler over tid, så tidligere kontekst kan påvirke nye svar
+- Test alltid i faktisk Teams-klient, ikke bare i studio eller webchat
+- Verifiser at ny versjon faktisk er tatt i bruk etter publisering
+- I Teams får brukere normalt siste publiserte innhold etter ny samtale, typisk etter 30 min inaktivitet eller ved `start over`
+- Sjekk opplevelsen i både desktop og mobil hvis agenten skal brukes bredt
 
 ## Publisering er mer enn å trykke "Publish"
-
-Publisering er et kontrollpunkt, ikke bare en teknisk handling.
 
 | Spørsmål | Hva du må avklare |
 | --- | --- |
 | Hvor skal agenten brukes? | Teams, M365 Copilot, web, API, app |
 | Hvem skal få tilgang? | Individ, gruppe, avdeling eller hele virksomheten |
 | Hvilken identitet brukes i drift? | Brukerens, agentens eller en tjenesteidentitet |
-| Hvordan håndteres versjoner? | Dev, test og produksjon bør skilles |
+| Hvordan håndteres versjoner og miljøer? | Dev, test og produksjon bør skilles |
 | Hvem godkjenner endringer? | Fag, sikkerhet, IT eller produkteier |
 
-I praksis betyr dette at du må vite:
-
-- hvem agenten er for
-- hvor den skal eksponeres
-- hva som må være godkjent før den går live
-
 ## Lisens og kostnad må inn tidlig
-
-Mange agentprosjekter møter en praktisk stopper ikke i teknologi, men i lisens eller kostnadsmodell.
 
 | Plattformtype | Hva du må tenke på |
 | --- | --- |
@@ -360,67 +217,64 @@ Mange agentprosjekter møter en praktisk stopper ikke i teknologi, men i lisens 
 | Foundry | Modellkostnad, tokens, evaluering, observabilitet og Azure-forbruk |
 | Kodeagenter | Modellforbruk, hosting, nettverk, logging og egne integrasjoner |
 
-Hovedpoenget er:
+## Vanlige betalingsmodeller for agenter
 
-- feil lisens- eller kostnadsmodell kan stoppe et ellers godt prosjekt
+| Modell | Godt valg når | Husk |
+| --- | --- | --- |
+| Microsoft 365 Copilot-lisens | Brukerne allerede er lisensiert for Copilot | Bruk av agenter følger lisensen for disse brukerne |
+| Pay-as-you-go | Du vil starte smått eller har variabel bruk | Krever billing policy mot Azure |
+| Prepaid capacity | Du vil kjøpe kapasitet på forhånd | Administreres som kapasitet i Power Platform |
 
-Derfor bør kostnadsbildet være med allerede når du designer agentløsningen, ikke først ved publisering.
+- Noen deklarative agenter i Copilot Chat kan brukes uten ekstra kostnad når de bare er grounded i instruksjoner og offentlige nettsteder
+- Lav eller uforutsigbar bruk passer ofte bedre med forbruksbasert modell
+
+## Billing policy i praksis
+
+| Del | Hva den styrer |
+| --- | --- |
+| `Azure subscription` + `resource group` | Hvor kostnaden bokføres |
+| `All users` eller `Specific group` | Hvem som får bruke den forbruksbaserte tjenesten |
+| Budsjett | Hvor mye som kan brukes i perioden |
+| Varsler | Hvem som får beskjed ved terskler |
+| Tjenestekobling | Hvilke Copilot-tjenester policyen gjelder for |
 
 ## Roller og ansvar i en agentløsning
-
-Når agenten går i produksjon, må ansvar fordeles tydelig.
 
 | Rolle | Typisk ansvar |
 | --- | --- |
 | Produkteier | Mål, prioritering og verdi |
 | Fageier | Innhold, regler og kvalitet |
-| Utvikler / maker | Bygging, integrasjon og testing |
+| Utvikler / maker / konsulent | Bygging, integrasjon og testing |
 | Sikkerhet / IT | Policyer, tilgang, governance og publisering |
 | Drift / plattformteam | Overvåking, kostnad og livssyklus |
 
-Hvis ingen eier kvalitet og tilgang, blir agenten fort et driftsproblem.
-
-Dette er kanskje et av de viktigste governance-poengene i hele modulen:
-
-- uklart eierskap er i seg selv en risiko
-
-## Lab: Gjør agenten klar for produksjon
-
-I denne laben skal du se på agentideen eller agenten din som om den faktisk skulle publiseres.
+## Laboppgave: Gjør agenten klar for produksjon
 
 | Spørsmål | Notater |
 | --- | --- |
 | Hvilke tilganger trenger agenten faktisk? | |
-| Hvilke feil eller misbruk må dere teste for? | |
+| Hvilke feil, misbruk eller edge cases må dere teste for? | |
 | Hvilke målinger viser om agenten lykkes? | |
 | Hvordan samler dere feedback fra brukere? | |
 | Hvem må godkjenne publisering? | |
 | Hva er de viktigste kostnadsdriverne? | |
 
-Poenget med øvelsen er å flytte tankegangen fra bygging til drift:
-
-- Hva må være på plass før denne agenten er trygg å bruke?
-
 ## Hva har vi gått igjennom i denne modulen?
 
-Etter denne modulen bør du sitte igjen med fire ting:
-
 1. Hvorfor governance, sikkerhet og evaluering må bygges inn fra starten
-2. Hvordan Agent 365 kan fungere som kontrollplan rundt identitet, observabilitet og sikkerhet
-3. Hvordan feedback, tracing og målinger brukes til å forbedre agenten
+2. Hvordan Microsoft Agent 365 kan fungere som kontrollplan rundt identitet, observabilitet og sikkerhet
+3. Hvordan feedback, tracing og målinger brukes til kontinuerlig forbedring
 4. Hva publisering, tilgang og lisens betyr når agenten skal i produksjon
 
 [Forrige: Modul 6](./06-agentarkitektur-og-multiagent.md) | [Til hovedside](../README.md) | [Neste: Modul 8](./08-avslutning.md)
 
 ## Lenker
 
-- Offisiell oversikt over Microsoft Agent 365 som kontrollplan: [Overview of Microsoft Agent 365](https://learn.microsoft.com/microsoft-agent-365/overview)
-- Offisiell oversikt over kjerneoppgaver i agentforvaltning for Microsoft 365: [Agent Management Essentials for Microsoft 365](https://learn.microsoft.com/copilot/microsoft-365/agent-essentials/agent-essentials-overview)
-- Offisiell sikkerhetsveiledning for AI-agenter i stor skala: [Secure AI agents at scale using Microsoft Agent 365](https://learn.microsoft.com/security/security-for-ai/agent-365-security)
-- Offisiell dokumentasjon for sikkerhet og governance i Copilot Studio: [Copilot Studio security and governance](https://learn.microsoft.com/microsoft-copilot-studio/security-and-governance)
-- Offisiell veiledning for lisenser og tilgangsstyring i Copilot Studio: [Assign licenses and manage access to Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/requirements-licensing)
-- Offisiell dokumentasjon for analytics og kvalitetsforbedring i Copilot Studio: [Copilot Studio analytics and effectiveness](https://learn.microsoft.com/microsoft-copilot-studio/analytics-improve-agent-effectiveness)
-- Offisiell veiledning for publisering og kanaler i Copilot Studio: [Publish and deploy your agent in Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/publication-fundamentals-publish-channels)
-- Offisiell oversikt over observability i Microsoft Foundry: [Microsoft Foundry observability](https://learn.microsoft.com/azure/foundry/concepts/observability)
-- Offisiell veiledning for publisering og deling av agenter i Microsoft Foundry: [Publish and share agents in Microsoft Foundry](https://learn.microsoft.com/azure/foundry/agents/how-to/publish-agent)
-- Videre lesning om versjonering, deling og styring av agentkonfigurasjon som kode: [APM – Agent Package Manager](https://github.com/microsoft/apm)
+- [Overview of Microsoft Agent 365](https://learn.microsoft.com/microsoft-agent-365/overview)
+- [Agent Management Essentials for Microsoft 365](https://learn.microsoft.com/copilot/microsoft-365/agent-essentials/agent-essentials-overview)
+- [Secure AI agents at scale using Microsoft Agent 365](https://learn.microsoft.com/security/security-for-ai/agent-365-security)
+- [Copilot Studio security and governance](https://learn.microsoft.com/microsoft-copilot-studio/security-and-governance)
+- [Assign licenses and manage access to Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/requirements-licensing)
+- [Copilot Studio analytics and effectiveness](https://learn.microsoft.com/microsoft-copilot-studio/analytics-improve-agent-effectiveness)
+- [Publish and deploy your agent in Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/publication-fundamentals-publish-channels)
+- [Microsoft Foundry observability](https://learn.microsoft.com/azure/foundry/concepts/observability)
