@@ -1,123 +1,276 @@
 ---
 marp: true
-theme: gaia
+theme: default
 paginate: true
 size: 16:9
 title: Bygg din egen AI-agent
 description: Teknocamp 2026 - 2-dagers hands-on workshop
 style: |
   :root {
-    --tc-ink: #16313b;
-    --tc-muted: #4f6870;
-    --tc-accent: #0e8b7f;
-    --tc-accent-soft: #dff3ee;
-    --tc-bg: #f7f5ef;
-    --tc-line: #bfd7d1;
-    --tc-dark: #10242c;
+    --bg: #f5f8ff;
+    --panel: rgba(255, 255, 255, 0.84);
+    --panel-2: rgba(244, 248, 255, 0.9);
+    --ink: #13233f;
+    --muted: #667996;
+    --accent: #149e8e;
+    --accent-2: #5a8dff;
+    --accent-warm: #f2a83b;
+    --line: #c9d6eb;
   }
 
   section {
-    font-size: 28px;
-    font-family: "Aptos", "Segoe UI", "Helvetica Neue", sans-serif;
-    color: var(--tc-ink);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    font-size: 25px;
+    line-height: 1.42;
+    color: var(--ink);
+    position: relative;
+    overflow: hidden;
     background:
-      radial-gradient(circle at top right, rgba(14, 139, 127, 0.08), transparent 26%),
-      linear-gradient(180deg, #fbfaf6 0%, var(--tc-bg) 100%);
-    padding: 64px 74px 56px;
+      radial-gradient(circle at 12% 14%, rgba(20, 158, 142, 0.11), transparent 24%),
+      radial-gradient(circle at 84% 12%, rgba(90, 141, 255, 0.12), transparent 22%),
+      linear-gradient(180deg, #fbfdff 0%, #f2f7ff 56%, #eef4ff 100%);
+    padding: 56px 68px 48px;
+    border-left: 6px solid var(--accent);
+  }
+
+  section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(90, 141, 255, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(90, 141, 255, 0.07) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.18), transparent 76%);
+    pointer-events: none;
+  }
+
+  section > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  section.lead,
+  section.divider,
+  section.action {
+    background:
+      radial-gradient(circle at 16% 18%, rgba(20, 158, 142, 0.16), transparent 28%),
+      radial-gradient(circle at 86% 14%, rgba(90, 141, 255, 0.18), transparent 24%),
+      linear-gradient(135deg, #fafdff 0%, #edf5ff 54%, #e7f6f3 100%);
   }
 
   section.lead {
+    justify-content: center;
+    padding-right: 40%;
+  }
+
+  section.divider {
     text-align: center;
-    color: #f6fbfa;
-    background:
-      radial-gradient(circle at top left, rgba(126, 232, 209, 0.15), transparent 22%),
-      radial-gradient(circle at bottom right, rgba(14, 139, 127, 0.28), transparent 28%),
-      linear-gradient(145deg, #10242c 0%, #173b45 45%, #0f6f68 100%);
+    padding-top: 120px;
+  }
+
+  section.action {
+    border-left-color: var(--accent-warm);
+    box-shadow: inset 0 0 0 1px rgba(242, 168, 59, 0.18);
   }
 
   h1,
   h2,
   h3 {
-    font-family: "Aptos Display", "Segoe UI", "Helvetica Neue", sans-serif;
-    color: var(--tc-ink);
-    letter-spacing: -0.02em;
-    margin-bottom: 0.35em;
+    margin: 0 0 0.35em;
+    color: var(--ink);
   }
 
-  section.lead h1,
-  section.lead h2,
-  section.lead h3 {
-    color: #f6fbfa;
+  h1,
+  h2 {
+    font-family: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    letter-spacing: -0.04em;
+    line-height: 1.02;
   }
 
   h1 {
-    font-size: 1.5em;
-    padding-bottom: 0.18em;
-    border-bottom: 5px solid var(--tc-accent);
-    display: inline-block;
+    font-size: 1.58em;
   }
 
-  section.lead h1 {
-    border-bottom-color: rgba(246, 251, 250, 0.9);
+  h2 {
+    font-size: 1.02em;
+  }
+
+  h3 {
+    font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    font-size: 0.48em;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--accent-2);
+  }
+
+  section.lead h1,
+  section.divider h1 {
+    font-size: 1.88em;
+  }
+
+  section.lead h2,
+  section.divider h2 {
+    color: rgba(19, 35, 63, 0.74);
+  }
+
+  section.action h3 {
+    display: inline-flex;
+    padding: 0.35em 0.72em;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.58);
+    border: 1px solid rgba(90, 141, 255, 0.18);
+    color: #b76e10;
   }
 
   p,
   li {
-    color: var(--tc-ink);
-    line-height: 1.35;
+    color: var(--ink);
+    line-height: 1.44;
   }
 
   strong {
-    color: #0c5e59;
+    color: var(--accent);
+  }
+
+  section.action strong {
+    color: #b76e10;
+  }
+
+  section.action li::marker {
+    color: var(--accent-warm);
   }
 
   ul,
   ol {
-    padding-left: 1.1em;
+    padding-left: 1.08em;
+  }
+
+  li {
+    margin: 0.16em 0;
+  }
+
+  li::marker {
+    color: var(--accent);
   }
 
   table {
-    font-size: 0.72em;
-    border-collapse: collapse;
-    margin-top: 0.6em;
-    width: 100%;
-  }
-
-  th {
-    background: var(--tc-dark);
-    color: #f6fbfa;
-    border: 1px solid var(--tc-dark);
-    font-weight: 700;
-  }
-
-  td {
-    background: rgba(255, 255, 255, 0.72);
-    border: 1px solid var(--tc-line);
+    display: table !important;
+    width: calc(100% + 40px) !important;
+    max-width: none !important;
+    margin: 0.55em -20px 0.95em;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+    font-size: 0.67em;
+    border: 1px solid #c4d5ef;
+    border-radius: 22px;
+    overflow: hidden;
+    clip-path: inset(0 round 22px);
+    background: var(--panel-2);
+    box-shadow: 0 14px 32px rgba(76, 104, 164, 0.12);
   }
 
   th,
   td {
-    padding: 10px 12px;
+    padding: 11px 12px;
+    border: 0;
     vertical-align: top;
+    background: transparent;
   }
 
-  section::after {
-    font-size: 0.48em;
-    color: var(--tc-muted);
+  tbody {
+    background: var(--panel-2);
+  }
+
+  th {
+    background: linear-gradient(180deg, #d9e7ff 0%, #d2e2ff 100%) !important;
+    color: #10213e;
+    border-bottom: 1px solid var(--line);
     font-weight: 700;
+    text-align: left !important;
+  }
+
+  tr + tr td {
+    border-top: 1px solid var(--line);
+  }
+
+  th:first-child,
+  td:first-child {
+    padding-left: 18px;
+  }
+
+  th:last-child,
+  td:last-child {
+    padding-right: 18px;
+  }
+
+  tr:first-child th:first-child {
+    border-top-left-radius: 22px;
+  }
+
+  tr:first-child th:last-child {
+    border-top-right-radius: 22px;
+  }
+
+  tr:last-child td:first-child {
+    border-bottom-left-radius: 22px;
+  }
+
+  tr:last-child td:last-child {
+    border-bottom-right-radius: 22px;
   }
 
   code {
-    background: rgba(16, 36, 44, 0.08);
-    color: #0b5a55;
+    background: rgba(90, 141, 255, 0.08);
+    color: var(--accent-2);
     border-radius: 6px;
     padding: 0.08em 0.28em;
+    font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
   }
 
-  hr {
-    border: 0;
-    height: 2px;
-    background: var(--tc-line);
+  section.visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+      radial-gradient(circle at 18% 14%, rgba(20, 158, 142, 0.09), transparent 24%),
+      radial-gradient(circle at 82% 20%, rgba(90, 141, 255, 0.1), transparent 20%),
+      linear-gradient(180deg, #fbfdff 0%, #eef4ff 100%);
+    border-left-color: #8fb0ea;
+  }
+
+  section.visual::before {
+    display: none;
+  }
+
+  section.visual p {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  section.visual img {
+    max-width: 94%;
+    max-height: 560px;
+    border-radius: 18px;
+    box-shadow: 0 24px 60px rgba(76, 104, 164, 0.18);
+  }
+
+  section::after {
+    font-size: 0.46em;
+    color: var(--muted);
+    font-weight: 700;
+  }
+
+  section.lead::after,
+  section.divider::after,
+  section.action::after {
+    content: "";
   }
 ---
 
@@ -143,6 +296,7 @@ style: |
 - Filer brukeren laster opp i samtalen blir kontekst for dialogen, men er ikke en varig kunnskapskilde
 
 ---
+<!-- _class: action -->
 
 ### Ustrukturert kunnskap vs. Strukturerte data
 
@@ -153,8 +307,8 @@ Det er nyttig å skille mellom to typer kunnskap i en agent:
 | Ustrukturert kunnskap | Dokumenter, nettsider, notater, e-poster og fritekst | Spørsmål, oppsummering, søk og forklaring |
 | Strukturert data | Rader, felter og objekter som kunder, kontakter, saker, ordre og hendelser | brukes ofte til presise oppslag, regler, validering og handlinger |
 
-- bruk dokumentkilder når brukeren trenger forklaring, kontekst eller siterbare svar
-- bruk strukturert data når agenten må finne, oppdatere eller kontrollere konkrete felter og poster
+- Bruk dokumentkilder når brukeren trenger forklaring, kontekst eller siterbare svar
+- Bruk strukturert data når agenten må finne, oppdatere eller kontrollere konkrete felter og poster
 
 ---
 
@@ -175,7 +329,7 @@ Det er nyttig å skille mellom to typer kunnskap i en agent:
 
 | Strategi | M365 Copilot | Copilot Studio | Microsoft Foundry |
 | --- | --- | --- | --- |
-| Graph + semantisk indeks | Ja | Ja (Delvis) | Ikke innebygd |
+| Graph + semantisk indeks | Ja | Delvis | Ikke innebygd |
 | SharePoint / OneDrive | Ja | Ja | Ikke innebygd |
 | Opplastede filer | Ja, embedded file content | Ja | Nei |
 | Connectors som realtidskunnskap | Begrenset | Ja | Ikke innebygd |
@@ -188,7 +342,7 @@ Det er nyttig å skille mellom to typer kunnskap i en agent:
 
 RAG = Retrieval-Augmented Generation
 
-RAG er ett av flere mønstre for å hente relevant kontekst før modellen svarer.
+RAG er et mønster der relevant kontekst hentes før modellen svarer.
 
 1. Brukeren spør
 2. Systemet henter relevant kontekst fra kilder eller indeks
@@ -221,24 +375,7 @@ RAG er enkelt som idé, men kan være krevende i gjennomføring.
 | Bevare sporbarhet | Siteringer, referanser og tydelig kildegrunnlag |
 | Ivareta sikkerhet | Tilgangstrimming, filterbasert sikkerhet og riktig autentisering |
 
-God grounding handler derfor ikke bare om språkmodellen, men også om hvor godt retrieval-laget er designet.
-
----
-
-# Foundry IQ / agentic retrieval
-
-| Klassisk retrieval | Agentic retrieval |
-| --- | --- |
-| Én spørring inn mot én indeks | Flere delspørringer planlegges automatisk |
-| Treffer primært på ett formulert spørsmål | Bruker også chat-historikk og underforstått kontekst |
-| Godt nok for enklere spørsmål | Best for komplekse spørsmål og flere kunnskapskilder |
-
-Agentic retrieval gjør typisk dette:
-
-1. Leser hele spørsmålet og samtalekonteksten
-2. Bryter det ned i delspørringer
-3. Kjører dem parallelt
-4. Reranker treff og returnerer grounding, referanser og aktivitetsplan
+God grounding handler derfor ikke bare om språkmodellen, men også om hvor godt retrieval-laget er utformet.
 
 ---
 
@@ -255,6 +392,23 @@ Kort sagt: semantikk hjelper systemet å finne riktig innhold, chunking hjelper 
 
 ---
 
+# Microsoft Foundry IQ / agentic retrieval
+
+| Klassisk retrieval | Agentic retrieval |
+| --- | --- |
+| Én spørring inn mot én indeks | Flere delspørringer planlegges automatisk |
+| Treffer primært på ett formulert spørsmål | Bruker også chat-historikk og underforstått kontekst |
+| Godt nok for enklere spørsmål | Best for komplekse spørsmål og flere kunnskapskilder |
+
+Agentic retrieval gjør typisk dette:
+
+1. Leser hele spørsmålet og samtalekonteksten
+2. Bryter det ned i delspørringer
+3. Kjører dem parallelt
+4. Reranker treff og returnerer grounding, referanser og aktivitetsplan
+
+---
+
 # Azure AI Search: fra dokument til treff
 
 | Steg | Hva som skjer |
@@ -268,8 +422,7 @@ Kort sagt: semantikk hjelper systemet å finne riktig innhold, chunking hjelper 
 | Ranking | Hybrid søk og semantisk rangering løfter de beste treffene |
 
 - `Integrated vectorization` gjør chunking og vektorisering til en del av selve indekseringen
-- Embeddings kommer normalt fra en modell i `Azure OpenAI` eller `Microsoft Foundry`, ikke fra Azure AI Search alene
-- Det er ofte en fordel å bruke samme embedding-spor ved indeksering og ved spørring
+- Embeddings-modellen er et eget steg i `Azure OpenAI` eller `Microsoft Foundry`, ikke i Azure AI Search
 - I Copilot Studio kan Azure AI Search legges inn som egen kunnskapskilde
 - Eksempelrepo: `https://github.com/Azure/Copilot-Studio-and-Azure`
 
@@ -279,13 +432,13 @@ Kort sagt: semantikk hjelper systemet å finne riktig innhold, chunking hjelper 
 
 | Valg | Styrke | Når det passer |
 | --- | --- | --- |
-| `Filopplasting i Copilot Studio` | Raskt og enkelt aa komme i gang | Mindre dokumentsett og enkel grounding |
-| `Azure AI Search` | Mer kontroll paa chunking, embeddings, metadata, hybridt og semantisk soek | Naar kvalitet, kontroll og soekekonfigurasjon betyr mer |
+| `Filopplasting i Copilot Studio` | Raskt og enkelt å komme i gang | Mindre dokumentsett og enkel grounding |
+| `Azure AI Search` | Mer kontroll på chunking, embeddings, metadata, hybridt og semantisk søk | Når kvalitet, kontroll og søkekonfigurasjon betyr mer |
 
 Kort sagt:
 
-- filopplasting er enklest aa starte med
-- Azure AI Search gir mer kontroll og ofte bedre retrieval i stoerre eller viktigere kunnskapsdomener
+- filopplasting er enklest å starte med
+- Azure AI Search gir mer kontroll og ofte bedre retrieval i større eller viktigere kunnskapsdomener
 
 ---
 
@@ -330,7 +483,7 @@ For `SharePoint` og opplastede filer er mindre og mer målrettede kilder ofte be
 | Test etter endringer i kilden | Hvor raskt blir nye eller oppdaterte dokumenter søkbare? |
 | Test smale scope og metadatafiltre | Blir svarene bedre når du snevrer inn kilde, område eller dokumenttype? |
 
-Tips: Bruk Graph Explorer
+Tips: Bruk Graph Explorer eller søk direkte i SharePoint
 
 ---
 
@@ -348,10 +501,11 @@ Kort sagt: en god beskrivelse hjelper agenten å forstå når en kilde bør bruk
 
 # Praktisk grense i Copilot Studio
 
-- Ved generativ orkestrering: hvis agenten har mer enn 25 kunnskapskilder, filtrerer Copilot Studio dem først med en intern GPT basert på beskrivelsen
+- Ved generativ orkestrering: hvis agenten har mer enn 25 kunnskapskilder, filtrerer Copilot Studio dem først med en intern modell (GPT) basert på beskrivelsen
+  - Konsekvens: korte eller generiske beskrivelser gjør det vanskeligere å velge riktig kilde
+  - Tiltak: gi hver kilde tydelig navn, presis beskrivelse og et avgrenset ansvarsområde
 - Opplastede filer til agenten teller ikke mot denne 25-grensen
-- Konsekvens: korte eller generiske beskrivelser gjør det vanskeligere å velge riktig kilde
-- Tiltak: gi hver kilde tydelig navn, presis beskrivelse og et avgrenset ansvarsområde
+
 
 ---
 

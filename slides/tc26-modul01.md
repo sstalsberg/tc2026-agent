@@ -1,5 +1,5 @@
 ---
-marp: true
+marp: false
 theme: default
 paginate: true
 size: 16:9
@@ -293,7 +293,7 @@ style: |
 
 ![bg right:50% contain](../assets/tc01-agent.png)
 
-En AI-agent er et intelligent program som bruker en eller flere språkmodeller til å forstå behov, resonnere og utføre oppgaver for en bruker eller et system.
+En AI-agent er et intelligent program som bruker en eller flere språkmodeller til å forstå kontekst, ta beslutninger og utføre handlinger ved hjelp av verktøy for en bruker eller et system.
 
 ---
 
@@ -305,8 +305,9 @@ En AI-agent er et intelligent program som bruker en eller flere språkmodeller t
 | Instruksjoner | Setter rolle, grenser og prioriteringer |
 | Kunnskap | Gir tilgang til dokumenter, data og kontekst |
 | Verktøy | Lar agenten gjøre noe i systemer og API-er |
-| Orkestrering | Velger neste steg og rekkefølge |
-| Trigger | Starter fra brukerinput eller en hendelse |
+| Minne / state | Husker kontekst og tidligere interaksjoner |
+| Orkestrering (Planlegging) | Velger neste steg og rekkefølge |
+| Trigger | Starter fra brukerinput eller en hendelse (event) |
 
 Ikke alle agenter bruker eller trenger å bruke alle delene.
 
@@ -322,9 +323,9 @@ Ikke alle agenter bruker eller trenger å bruke alle delene.
 
 | Type | Hva den gjør | Eksempel |
 | --- | --- | --- |
-| Retrieval | Søker og svarer over egne data | FAQ-agent over SharePoint-dokumenter |
-| Task | Skriver til backend, bruker APIer | Bestillingsagent som mottar og opretter ordre i et CRM-system |
-| Autonomous | Jobber mot mål, instruksjoner, verktøy og triggere | Fakturaagent som overvåker innboks og bokfører |
+| Retrieval | Leser og svarer over egne data | FAQ-agent over SharePoint-dokumenter |
+| Task / Action | Utfører handlinger i systemer | Bestillingsagent som mottar og oppretter ordre i et CRM-system |
+| Orkestrator | Planlegger og kombinerer flere steg | Fakturaagent som overvåker innboks og bokfører |
 
 ---
 
@@ -333,7 +334,7 @@ Ikke alle agenter bruker eller trenger å bruke alle delene.
 | Når det passer godt | Når det ikke passer |
 | --- | --- |
 | Variabelt eller uklart behov | Helt faste regler og skjemaer |
-| Kombinasjon av kunnskap og handling | Krav om høy presisjon uten rom for tolkning |
+| Kombinasjon av kunnskap og handling | Krav om deterministisk og 100 % korrekt resultat (f.eks. finansielle beregninger) |
 | Flere steg før svar eller utførelse | Irreversible handlinger uten godkjenning |
 | Dialog, oppfølging og kontekst | Dårlige eller motstridende datakilder |
 
@@ -342,12 +343,11 @@ Ikke alle agenter bruker eller trenger å bruke alle delene.
 <!-- _class: action -->
 # Hvorfor satse på AI-agenter?
 
-1,3 milliarder AI-agenter innen 2028 (IDC)
-
+Estimert 1,3 milliarder AI-agenter innen 2028 (IDC)
 
 - **Produktivitet:** mindre manuelt arbeid og raskere oppfølging
 - **Kvalitet:** mer konsistente svar og færre feil
-- **Compliance:** bedre kontroll, logging og tilgangsstyring
+- **Compliance:** bedre sporbarhet, logging og tilgangsstyring
 - **Skalering:** samme mønster kan brukes på tvers av team og prosesser
 
 For Atea betyr dette både interne gevinster og nye leveranser til kunder.
@@ -358,7 +358,7 @@ For Atea betyr dette både interne gevinster og nye leveranser til kunder.
 
 - AI-assistenten blir et nytt grensesnitt for arbeid
 - Agenter orkestrerer flere steg og handlinger
-- Et intelligenslag kobler sammen dokumenter, møter, chat og forretningsdata
+- Et lag av AI kobler sammen dokumenter, møter, chat og forretningsdata
 
 Verdien flytter seg fra å lete i systemer til å få svar og utført oppgaver direkte i arbeidsflyten.
 
@@ -370,17 +370,7 @@ Verdien flytter seg fra å lete i systemer til å få svar og utført oppgaver d
 
 - Microsoft-agenter
 - Partneragenter (ServiceNow, SAP, Salesforce, etc.)
-- Egne agenter bygget av virksomheten på andre plattformer
-
----
-
-# Tre skift i måten vi jobber på
-
-- AI-assistenten blir et nytt grensesnitt for arbeid
-- Agenter orkestrerer flere steg og handlinger
-- Et intelligenslag kobler sammen dokumenter, møter, chat og forretningsdata
-
-Verdien flytter seg fra å lete i systemer til å få svar og utført oppgaver direkte i arbeidsflyten.
+- Egne agenter bygget av virksomheten på egne eller tredjeparts plattformer
 
 ---
 
@@ -388,7 +378,7 @@ Verdien flytter seg fra å lete i systemer til å få svar og utført oppgaver d
 
 ### Diskusjon
 
-- Hvilken jobb gjør du i dag som en agent kunne gjort 80 % av?
+- Hvilken oppgave gjør du i dag som en agent kunne løst 80 % av?
 - Hva er den største risikoen ved å la en agent handle autonomt i din virksomhet?
 - Copilot Studio vs. å kode selv: hva foretrekker du, og hvorfor?
 - Er 1,3 milliarder innen 2028 noe du tror skjer og hvilke muligheter, utfordringer, trusseler skaper det for IT-bransjen?
@@ -401,7 +391,7 @@ Verdien flytter seg fra å lete i systemer til å få svar og utført oppgaver d
 | --- | --- | --- |
 | Tilbudsassistent | Raskere tilbudsarbeid | Copilot Studio |
 | Onboarding-guide | Raskere svar til nyansatte | Copilot Studio |
-| Driftsvarsel-agent | Raskere oppfølging av hendelser | Microsoft Foundry |
+| Driftsvarsel-agent | Raskere oppfølging av hendelser | Microsoft AI Foundry |
 | Kompetanseassistent | Finne riktig konsulent raskere | Copilot Studio |
 | Møteforbereder | Bedre forberedte kundemøter | Microsoft 365 Agents SDK |
 | Teknisk FAQ-bot | Skalerbar kunnskapsdeling | Copilot Studio |
@@ -409,6 +399,7 @@ Verdien flytter seg fra å lete i systemer til å få svar og utført oppgaver d
 ---
 
 <!-- _class: action -->
+
 ### Lab
 
 # Beskriv din første agentidé
@@ -417,7 +408,7 @@ Verdien flytter seg fra å lete i systemer til å få svar og utført oppgaver d
 | --- | --- |
 | Navn på agenten |  |
 | Hvem skal bruke den? |  |
-| Primær oppgave - hva skal agenten gjøre? |  |
+| Primær oppgave – hvilken konkret handling eller verdi skal agenten levere? |  |
 | Forretningsverdi |  |
 
 **Gruppen gir tilbakemelding på hver idé:**
@@ -429,6 +420,6 @@ Verdien flytter seg fra å lete i systemer til å få svar og utført oppgaver d
 
 # Hva har vi gått igjennom i denne modulen?
 
-1. Forstår hva en AI-agent er og hvilke deler den har
+1. Kan forklare hva en AI-agent er og hvilke deler den består av
 2. Skiller mellom ulike agenttyper og når de passer godt
 3. Beskriver en første agentidé med målgruppe, oppgave og verdi
