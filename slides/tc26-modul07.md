@@ -281,19 +281,19 @@ style: |
 
 ---
 
-# Hvorfor trenger agenter governance?
+# Risiko i én agent
 
 | Risiko | Hva som kan gå galt |
 | --- | --- |
 | For brede tilganger | Agenten ser eller gjør for mye |
 | Svake guardrails | Skadelig eller uønsket output slipper gjennom |
 | Manglende evaluering | Dårlig kvalitet oppdages først i produksjon |
-| Lite sporbarhet | Det er uklart hva agenten gjorde og hvorfor |
+| Lite sporbarhet | Det er uklart hva agenten gjorde, hvorfor og med hvilke data |
 | Uklart eierskap | Ingen vet hvem som skal godkjenne eller følge opp |
 
 ---
 
-# Agent sprawl: hvorfor dette blir et IT-problem
+# Risiko når det skalerer: agent sprawl
 
 | Utfordring | Hva det betyr i praksis |
 | --- | --- |
@@ -303,7 +303,6 @@ style: |
 | Shadow agents | Agenter tas i bruk utenfor etablerte kontrollflater |
 | Større angrepsflate | Flere integrasjoner, flere rettigheter og mer compliance-risiko |
 
-Governance handler derfor ikke bare om én agent.  
 Det handler om å styre en voksende agentportefølje.
 
 ---
@@ -315,18 +314,16 @@ Det handler om å styre en voksende agentportefølje.
 | Tilgang | Identitet, roller, autentisering, least privilege |
 | Sikkerhet | Guardrails, innholdsfiltrering, dataflyt |
 | Kvalitet | Testsett, evaluering, målinger og godkjenning |
-| Drift | Publisering, overvåking, kostnad og ansvar |
+| Drift | Publisering, overvåking, kostnad, versjonering og ansvar |
 
 ---
 
 # Microsoft Agent 365 som kontrollplan
 
-- Per **30. mars 2026** beskriver Microsoft Learn `Microsoft Agent 365`
+- Per **6. april 2026** beskriver Microsoft Learn `Microsoft Agent 365`
   som en kontrollplan for AI-agenter
-- Poenget er ikke å bygge agenten for deg
-- Poenget er å styre agentporteføljen på virksomhetsnivå
-
-Kjernetanker:
+- Poenget er ikke å bygge agenten for deg,
+- men å styre agentporteføljen på virksomhetsnivå
 
 - egen identitet med `Microsoft Entra Agent ID`
 - samlet oversikt i `Microsoft 365 admin center` og `Agent Registry`
@@ -342,42 +339,19 @@ Kjernetanker:
 | --- | --- |
 | Registry | Full oversikt over agenter i virksomheten |
 | Access Control | Styrt tilgang, policyer og least privilege |
-| Visualization | Innsikt i forbindelser, bruk og adferd |
+| Visualization | Innsikt i forbindelser, bruk og atferd |
 | Interoperability | Kobling til Work IQ, apper og arbeidsflyt |
 | Security | Trusseldeteksjon, beskyttelse og respons |
-
-Dette er nyttig fordi Agent 365 ikke bare er identitet.  
-Det er et bredere styringslag rundt agentene.
-
----
-
-# Hvordan Agent 365 passer mot governance-lagene
-
-| Lag | Hvordan Agent 365 bidrar |
-| --- | --- |
-| Tilgang | Agentidentitet, registry, least privilege, Conditional Access og sponsorskap |
-| Sikkerhet | Defender, runtime-beskyttelse, prompt shield, policyer og trusselhåndtering |
-| Kvalitet | Observabilitet, sporbarhet og innsikt som gjør evaluering mer konkret |
-| Drift | Sentral administrasjon, agentoversikt, onboarding, livssyklus og policyhåndheving |
 
 ---
 
 # Hvorfor Agent 365 er interessant
-
-`Microsoft Agent 365` er relevant når spørsmålet ikke lenger er:
-
-- Hvordan bygger vi én agent?
-
-men:
 
 - Hvordan oppdager vi hvilke agenter som er i bruk?
 - Hvordan vet vi hvilken identitet de har?
 - Hvordan begrenser vi hva de får tilgang til?
 - Hvordan ser vi misbruk, feil og risikofylt adferd?
 - Hvordan kobler vi dem til eksisterende sikkerhets- og compliance-arbeid?
-
-Det er et styringslag for agentporteføljen,  
-ikke bare et nytt byggespor.
 
 ---
 
@@ -386,14 +360,10 @@ ikke bare et nytt byggespor.
 | Hvis du vil styre ... | Typisk sted |
 | --- | --- |
 | Agenter på tvers av plattformer | `Agent 365` |
-| Agentidentitet, tilgang og registry | `Microsoft 365 admin center` + `Entra Agent ID` |
+| Samlet registry og kontrollplan | `Agent 365` / `Microsoft 365 admin center` |
+| Agentidentitet og tilgang | `Microsoft Entra Agent ID` + `Microsoft 365 admin center` |
 | Copilot Studio-spesifikke miljøvalg og ALM | `Power Platform admin center` og Copilot Studio |
 | Førsteparts Copilot-opplevelser | `Microsoft 365 admin center` |
-
-Husk:
-
-- `Agent 365` ligger over flere byggespor
-- plattformspesifikke adminflater forsvinner ikke
 
 ---
 
@@ -413,10 +383,10 @@ Husk:
 | Kontroll | Hva den beskytter mot |
 | --- | --- |
 | Input- og output-filtrering | Skadelig eller uønsket input og output før tools og svar brukes |
-| Prompt shields | Direkte og indirekte prompt injection |
+| Beskyttelse mot prompt injection | Direkte og indirekte prompt injection |
 | Grounding og siteringer | Hallusinasjoner og svak sporbarhet |
 | Human in the loop | Feil ved sensitive eller irreversible handlinger |
-| Policyer på verktøy og connectorer | At agenten bruker feil system eller data |
+| Policyer på verktøy og connectors | At agenten bruker feil system eller data |
 
 ---
 
@@ -424,15 +394,16 @@ Husk:
 
 | Mekanisme | Trigges av | Brukeren ser | Hva du justerer |
 | --- | --- | --- | --- |
-| `Responsible AI filtering` | Sikkerhets- eller policybrudd i input eller output | `ContentFiltered` i debug eller blokkert/custom feilmelding i runtime | Juster filtere og sikkerhetsnivå |
+| `Responsible AI filtering` | Sikkerhets- eller policybrudd i input eller output | `ContentFiltered` i debug eller blokkert/custom feilmelding i runtime | Gå gjennom content moderation policies og Responsible AI-oppsett |
 | `Unknown intent fallback` | Ingen god match i trigger, topic eller kjent handlingsspor | `Vennligst omformuler` eller eskalering til fallback | Legg til triggerfraser, knowledge eller tydeligere routing |
 | `Agent instructions` | Sporsperrer eller custom scope-regler i agenten | Høflig avvisning eller forklaring | Gå gjennom instruksjoner, scope og regler |
 
 Husk:
 
-- input filtreres før agenten handler
-- output filtreres før svaret sendes
+- Input filtreres før agenten handler
+- Output filtreres før svaret sendes
 - fallback og avvisning er også guardrails
+- I Teams finnes ikke en standard system-fallback-topic; lag en selv ved behov
 
 ---
 
@@ -442,7 +413,7 @@ Husk:
 | --- | --- |
 | Kvalitet | Relevans, presisjon, fullstendighet |
 | Sikkerhet | Prompt injection, policybrudd, sensitiv data |
-| Verktøybruk | Kaller agenten riktig tool, topic eller annen agent? |
+| Verktøybruk | Kaller agenten riktig verktøy, topic eller annen agent? |
 | Grounding | Er svarene støttet av riktige kilder? |
 | Robusthet | Fungerer løsningen på tvetydige og vanskelige spørsmål? |
 
@@ -468,16 +439,13 @@ Husk:
 | Analytics | Hvilke spørsmål og mønstre som går bra eller dårlig |
 | Traces | Hvilke steg, verktøy og agenter som ble brukt |
 | Metrics og logs | Latency, feilrate, tokenbruk, kostnad og sikkerhetshendelser |
-| Correlation ID | Binder sammen hele kjeden på tvers av verktøy og agenter |
+| Correlation ID | Binder sammen hele kjeden på tvers av verktøy, prosesser og agenter |
 
 Eksempler på plattformstøtte:
 
 - Copilot Studio: analytics og plattformlogger
 - Foundry og Azure: tracing, metrics og monitorering
 - Purview og andre kontrollflater: revisjon og sporbarhet
-
-Poenget er ikke bare å vite at noe gikk galt.  
-Du må kunne forklare hvor i kjeden det skjedde og hvorfor.
 
 ---
 
@@ -489,22 +457,6 @@ Du må kunne forklare hvor i kjeden det skjedde og hvorfor.
 | Topic- og verktøyinnsikt | Hvilke topics og handlinger som faktisk trigges |
 | Egne events | Custom telemetry fra topic eller prosess |
 | Driftssikt | Latency, exceptions, total conversations og trender |
-
-I praksis:
-
-- Koble agenten til `Application Insights` via connection string i `Settings > Advanced`
-- Bruk `Logs` for KQL-spørringer
-
----
-
-# Hvordan forbedrer du en agent over tid?
-
-1. Samle feedback og driftsdata
-2. Finn mønstre i feil, misforståelser og dårlige svar
-3. Rett én ting om gangen:
-   instruksjoner, kunnskap, verktøy, modell eller guardrails
-4. Kjør evaluering på nytt
-5. Publiser ny versjon når endringen faktisk er bedre
 
 ---
 
@@ -542,9 +494,10 @@ Hvorfor dette betyr noe:
 
 # Teams som kanal: det du må huske
 
-- Teams husker samtaler over tid, så gammel kontekst kan påvirke nye svar
+- Teams husker samtaler over tid, så tidligere kontekst kan påvirke nye svar
 - Test alltid i faktisk Teams-klient, ikke bare i studio eller webchat
 - Verifiser at ny versjon faktisk er tatt i bruk etter publisering
+- I Teams får brukere normalt siste publiserte innhold etter ny samtale, typisk etter 30 min inaktivitet eller ved `start over`
 - Sjekk opplevelsen i både desktop og mobil hvis agenten skal brukes bredt
 
 Poenget er at Teams ikke bare er en kanal, men en klient med egen brukeropplevelse og egen konteksthistorikk.
@@ -558,7 +511,7 @@ Poenget er at Teams ikke bare er en kanal, men en klient med egen brukeropplevel
 | Hvor skal agenten brukes? | Teams, M365 Copilot, web, API, app |
 | Hvem skal få tilgang? | Individ, gruppe, avdeling eller hele virksomheten |
 | Hvilken identitet brukes i drift? | Brukerens, agentens eller en tjenesteidentitet |
-| Hvordan håndteres versjoner? | Dev, test og produksjon bør skilles |
+| Hvordan håndteres versjoner og miljøer? | Dev, test og produksjon bør skilles |
 | Hvem godkjenner endringer? | Fag, sikkerhet, IT eller produkteier |
 
 ---
@@ -573,13 +526,38 @@ Poenget er at Teams ikke bare er en kanal, men en klient med egen brukeropplevel
 
 ---
 
+# Vanlige betalingsmodeller for agenter
+
+| Modell | Godt valg når | Husk |
+| --- | --- | --- |
+| Microsoft 365 Copilot-lisens | Brukerne allerede er lisensiert for Copilot | Bruk av agenter følger lisensen for disse brukerne |
+| Pay-as-you-go | Du vil starte smått eller har variabel bruk | Krever billing policy mot Azure |
+| Prepaid capacity | Du vil kjøpe kapasitet på forhånd | Administreres som kapasitet i Power Platform |
+
+- Noen deklarative agenter i Copilot Chat kan brukes uten ekstra kostnad når de bare er grounded i instruksjoner og offentlige nettsteder
+- Lav eller uforutsigbar bruk passer ofte bedre med forbruksbasert modell
+
+---
+
+# Billing policy i praksis
+
+| Del | Hva den styrer |
+| --- | --- |
+| `Azure subscription` + `resource group` | Hvor kostnaden bokføres |
+| `All users` eller `Specific group` | Hvem som får bruke den forbruksbaserte tjenesten |
+| Budsjett | Hvor mye som kan brukes i perioden |
+| Varsler | Hvem som får beskjed ved terskler |
+| Tjenestekobling | Hvilke Copilot-tjenester policyen gjelder for |
+
+---
+
 # Roller og ansvar i en agentløsning
 
 | Rolle | Typisk ansvar |
 | --- | --- |
 | Produkteier | Mål, prioritering og verdi |
 | Fageier | Innhold, regler og kvalitet |
-| Utvikler / maker | Bygging, integrasjon og testing |
+| Utvikler / maker / konsulent | Bygging, integrasjon og testing |
 | Sikkerhet / IT | Policyer, tilgang, governance og publisering |
 | Drift / plattformteam | Overvåking, kostnad og livssyklus |
 
@@ -590,7 +568,7 @@ Poenget er at Teams ikke bare er en kanal, men en klient med egen brukeropplevel
 | Spørsmål | Notater |
 | --- | --- |
 | Hvilke tilganger trenger agenten faktisk? | |
-| Hvilke feil eller misbruk må dere teste for? | |
+| Hvilke feil, misbruk eller edge cases må dere teste for? | |
 | Hvilke målinger viser om agenten lykkes? | |
 | Hvordan samler dere feedback fra brukere? | |
 | Hvem må godkjenne publisering? | |
@@ -602,108 +580,5 @@ Poenget er at Teams ikke bare er en kanal, men en klient med egen brukeropplevel
 
 1. Hvorfor governance, sikkerhet og evaluering må bygges inn fra starten
 2. Hvordan Microsoft Agent 365 kan fungere som kontrollplan rundt identitet, observabilitet og sikkerhet
-3. Hvordan feedback, tracing og målinger brukes til å forbedre agenten
+3. Hvordan feedback, tracing og målinger brukes til kontinuerlig forbedring
 4. Hva publisering, tilgang og lisens betyr når agenten skal i produksjon
-
----
-
-<!-- _class: lead -->
-# Modul 7 - Addendum
-## Fra governance-prinsipp til operativ kvalitet
-
----
-
-# Kvalitetsutfordringen i én slide
-
-| Problem | Løsning | Verdi |
-| --- | --- | --- |
-| Agenten "virker" i test, men er ikke robust i praksis | Kjør strukturert review med score, funn og anbefaling | Raskere forbedring og tryggere produksjonssetting |
-| Kvalitet sitter i hodet til enkeltpersoner | Standardiser vurderingskriterier og dokumentasjon | Konsistent kvalitet på tvers av team |
-| Uklart hva som må forbedres først | Prioriter "high impact"-funn først | Bedre effekt av innsats og tid |
-
----
-
-# Review-flyt i 5 steg
-
-1. **Velg agent** (fra miljø eller opplastet løsning)
-2. **Kjør analyse** (topic, instruksjoner, struktur, test-signaler)
-3. **Prioriter funn** (start med høy alvorlighet)
-4. **Forbedre agenten** (navn, beskrivelser, scope, instruksjoner)
-5. **Re-kjør review** og dokumenter forbedring i score
-
-Tips: bruk PDF-eksport for å dele funn med maker-teamet.
-
----
-
-# Score-tolkning og release-gate (forslag)
-
-| Score | Tolkning | Tiltak |
-| --- | --- | --- |
-| 0-59 | Ikke klar | Stopp release. Gjør strukturelle forbedringer. |
-| 60-79 | Delvis klar | Forbedre toppfunn og re-test før bred deling. |
-| 80-100 | Klar kandidat | Kan gå til pilot/produksjon med normal oppfølging. |
-
-Forslag: Definer en lokal kvalitetsterskel per miljø (dev/test/prod).
-
----
-
-# Copilot Studio vs. M365 deklarativ agent
-
-| Område | Copilot Studio-agent | M365 deklarativ agent |
-| --- | --- | --- |
-| Fokus i review | Instruksjoner + topics + variabler + struktur | Primært instruksjonskvalitet og manifestkvalitet |
-| Typiske funn | Uklare topic-navn, overlapp, routing-gap, tool-omfang | Svak markdown-struktur, for få conversation starters |
-| Bruksscenario | Mer komplekse agenter med bredere orkestrering | Lettere agenter for konkrete M365-scenarier |
-
-Poeng: begge trenger governance, men review-tyngden er ulik.
-
----
-
-# Før/etter-eksempler du kan vise live
-
-| Før | Etter |
-| --- | --- |
-| Topic: `Fix problem` | Topic: `Feilsøk VPN-tilkobling` |
-| Beskrivelse: "send epost til HR" | "Send e-post til HR ved spørsmål om rekruttering; ikke bruk for onboarding" |
-| Instruksjon: "usually try to..." | "Always do X. Never do Y. Only do Z when ..." |
-
-Poeng: bedre språk gir bedre orkestrering og færre feilroutinger.
-
----
-
-# Begrensninger og roadmap (ærlig slide)
-
-**Ikke alt dekkes i én analyse:**
-- enkelte tredjepartsintegrasjoner
-- utvalgte agent-til-agent-scenarier
-- funksjoner avhengig av preview/beta-API-er
-
-**Anbefaling:**
-- kommuniser "in scope / out of scope" tydelig
-- bruk review som kvalitetssikring, ikke som eneste risikokontroll
-
----
-
-# ALM og modenhetsreise
-
-| Nivå | Praktisk gjennomføring |
-| --- | --- |
-| 1. Manuell review | Kjør review ved milepæler i utvikling |
-| 2. Team-basert kvalitetssyklus | Fast review-ritme + forbedringslogg |
-| 3. Pipeline-gate | Automatisk kontroll før deploy (når støtte er tilgjengelig) |
-
-Målbildet er CI/CD med kvalitetssjekk som standard, ikke unntak.
-
----
-
-# Call to action for partnerteam
-
-Neste steg etter denne sesjonen:
-
-1. Velg **1 kritisk agent** for gjennomgang
-2. Samle nødvendig input (miljø/løsning + kontaktperson)
-3. Kjør review og prioriter toppfunn
-4. Book kort forbedringsøkt med maker-teamet
-5. Re-kjør review og dokumenter effekt
-
-**Mål:** høyere kvalitet, raskere produksjonsmodning, mindre risiko.

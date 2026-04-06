@@ -345,11 +345,6 @@ Praktisk huskeregel:
 | Presence penalty | Oppmuntrer modellen til å introdusere nye ord eller tema | Kan gjøre svaret mer utforskende enn ønsket |
 | Frequency penalty | Demper ord som allerede er brukt mange ganger | Kan gi bedre variasjon, men også mindre flyt |
 
-Praktisk huskeregel:
-
-- Juster disse først når du faktisk ser repetisjon eller monotone svar
-- Mer kontekst er ikke alltid bedre: lengre historikk kan koste mer og gi tregere eller svakere svar
-
 ---
 
 # Modelltyper du typisk velger mellom
@@ -375,21 +370,7 @@ Praktisk huskeregel:
 
 ---
 
-# Multimodalitet: hva betyr det?
-
-En multimodal modell kan bruke flere typer input i samme kall.
-
-Vanlige modaliteter:
-
-- Tekst
-- Bilder
-- Dokumenter med layout og tekst
-- Lyd eller tale
-- Skjermbilder eller UI-bilder
-
----
-
-# Begrensninger du må kjenne til
+# Begrensninger du bør kjenne til
 
 | Risiko | Konsekvens |
 | --- | --- |
@@ -400,6 +381,7 @@ Vanlige modaliteter:
 | Sikkerhet og personvern | Bilder, lyd og dokumenter kan inneholde sensitiv informasjon |
 
 ---
+<!-- _class: action -->
 
 # Laboppgave: Velg modell og modalitet
 
@@ -410,10 +392,6 @@ Vanlige modaliteter:
 | Trenger agenten tekst, bilder, dokumenter eller lyd? | |
 | Hvor viktig er lav kostnad i produksjon? | |
 | Hva er et godt første modellvalg? | |
-
-Diskuter også:
-
-- Hva ville fått deg til å bytte modell senere?
 
 ---
 

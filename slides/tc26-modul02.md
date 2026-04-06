@@ -292,7 +292,6 @@ style: |
 | `Learning (Frontier)` | Learning-agent i private preview |
 | `Project Opal (Frontier)` | Oppgavebasert agent som kan jobbe asynkront via Cloud PC |
 
-
 ---
 
 # Agentplattformer

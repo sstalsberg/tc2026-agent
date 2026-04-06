@@ -332,6 +332,22 @@ Bruk gjerne LLM-en til å hjelpe deg med å skrive og forbedre instruksjonen
 
 ---
 
+# Instruksjoner vs beskrivelser (Copilot Studio)
+
+| | Instruksjoner | Beskrivelser |
+| --- | --- | --- |
+| Fokus | Hvordan agenten skal oppføre seg | Når noe skal brukes |
+| Brukes til | Stil, regler, flyt og begrensninger | Når verktøy, topics eller agenter skal velges |
+| Eksempel | "Bekreft før du lagrer" | "Dette verktøyet oppretter en ordre" |
+
+- Instruksjoner styrer oppførsel og hvordan agenten responderer
+- Beskrivelser hjelper orchestratoren å velge riktig verktøy eller agent
+
+**Poeng:** Hvis du skriver alt i instruksjoner, jobber du mot orchestratoren.  
+Hvis du bruker beskrivelser riktig, jobber du med den.
+
+---
+
 <!-- _class: action -->
 
 ### Lab

@@ -356,13 +356,3 @@ Velg én av disse:
 
 - Hva er det viktigste du tar med deg?
 - Hva vil du teste videre først?
-
----
-
-# Oppsummering
-
-Hele workshopen har i praksis handlet om dette:
-
-1. Finne en god oppgave for en agent
-2. Bygge opp agenten med riktige instruksjoner, kunnskapskilder og verktøy
-3. Forstå modellvalg, arkitektur og drift godt nok til å gjøre bevisste valg

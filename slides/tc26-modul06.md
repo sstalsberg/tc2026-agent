@@ -315,6 +315,20 @@ style: |
 | Du trenger ulike modeller, auth eller policyer | Egen agent gir bedre styring |
 | Kapabiliteten skal gjenbrukes flere steder | En connected agent er ofte bedre enn å kopiere logikk |
 
+---
+
+# Når holder én agent, og når trenger du connected agents?
+
+| Velg én agent når ... | Velg connected agents når ... |
+| --- | --- |
+| Oppgaven har tydelig intent og avgrenset scope | Oppgaven kan deles i tydelige deldomener |
+| Verktøyene er kjent på forhånd | Ulike agenter trenger ulike data, verktøy eller policyer |
+| Du vil ha raske svar med lav latency | Flere spesialister må jobbe i serie eller parallelt |
+| Ett team eier hele løsningen | Flere team eier hver sin del |
+| Du kan evaluere hele flyten som ett system | Du vil gjenbruke eksisterende agenter og evalueringer |
+
+---
+<!-- _class: action -->
 
 # Diskusjon: Trenger du multi-agent?
 
@@ -356,18 +370,6 @@ I Copilot Studio kan du bygge både child agents og connected agents for å dele
 
 ---
 
-# Hvor ligger orkestreringen i ulike plattformer?
-
-| Plattform | Hvor orkestreringen ligger |
-| --- | --- |
-| Copilot Studio | Generativ orkestrering som velger topics, tools, knowledge og andre agenter |
-| Microsoft Foundry - prompt agents | Tjenesten håndterer orkestreringen automatisk |
-| Microsoft Foundry - workflow agents | Workflows orkestrerer steg, branching og agent-til-agent-mønstre |
-| Microsoft Foundry - hosted agents | Du skriver orkestreringslogikken selv i kode, inkludert tool calls, flertrinns resonnering og agentkoordinering, mens Foundry håndterer runtime, skalering og infrastruktur |
-| Agent Framework | Du bruker ferdige workflow-orkestratorer som sequential, concurrent, handoff, group chat og magentic (manager) for å styre flyt, kontekst og human-in-the-loop i kode |
-
----
-
 # Hva velger orkestratorlaget i Copilot Studio?
 
 | Byggekloss | Hvordan den brukes |
@@ -382,6 +384,18 @@ I generativ orkestrering velges disse byggesteinene ut fra beskrivelse, navn, pa
 
 ---
 
+# Hvor ligger orkestreringen i ulike plattformer?
+
+| Plattform | Hvor orkestreringen ligger |
+| --- | --- |
+| Copilot Studio | Generativ orkestrering som velger topics, tools, knowledge og andre agenter |
+| Microsoft Foundry - prompt agents | Tjenesten håndterer orkestreringen automatisk |
+| Microsoft Foundry - workflow agents | Workflows orkestrerer steg, branching og agent-til-agent-mønstre |
+| Microsoft Foundry - hosted agents | Du skriver orkestreringslogikken selv i kode, inkludert tool calls, flertrinns resonnering og agentkoordinering, mens Foundry håndterer runtime, skalering og infrastruktur |
+| Agent Framework | Du bruker ferdige workflow-orkestratorer som sequential, concurrent, handoff, group chat og magentic (manager) for å styre flyt, kontekst og human-in-the-loop i kode |
+
+---
+
 # Topics i Copilot Studio
 
 Samtaledesignmønster for å styre dialogflyt
@@ -390,18 +404,6 @@ Samtaledesignmønster for å styre dialogflyt
 - Topics passer godt for dialogsteg, avklaringsspørsmål, branching og faste samtalemønstre
 - Kan være enkle og deterministiske, eller mer komplekse og generative, kan også kalle tools og andre agenter
 - I Foundry finnes ikke et direkte topic-begrep; nærmeste er instructions, workflows og agentlogikk
-
----
-
-# Human in the loop i agentiske prosesser
-
-| Når du bør ha menneskelig kontroll | Hvorfor |
-| --- | --- |
-| Før irreversible handlinger | Sending, publisering, sletting og bestilling bør ofte godkjennes |
-| Når data er sensitive eller regulatoriske | Gir bedre kontroll på personvern, sikkerhet og etterlevelse |
-| Når agenten gjør vurderinger, ikke bare oppslag | Mennesker må eie beslutninger som påvirker kunder, ansatte eller økonomi |
-| Når kvaliteten må være høy og sporbar | Review reduserer feil og gjør ansvar tydelig |
-| Når autonomien øker | Jo mer selvstendig agenten er, desto viktigere er kontrollpunkt og eskalering |
 
 ---
 
@@ -435,9 +437,24 @@ Hovedidé:
 - MCP gjør verktøy oppdagbare for agenten
 - A2A gjør andre agenter oppdagbare for agenten
 
-Når passer det?
+---
 
-- Når en annen agent allerede eier sitt domene, sine verktøy og sin logikk
+# Copilot, Work IQ og det bredere agentøkosystemet
+
+Copilot er ikke bare en egen agentflate.
+Det kan også delta i et større connected-agent-økosystem.
+
+| Rolle | Hva det betyr |
+| --- | --- |
+| `Copilot som UI` | Brukeren møter et kjent grensesnitt i M365 |
+| `Work IQ` | Gir tilgang til arbeidskontekst som dokumenter, e-post, møter og relasjoner |
+| `Copilot som MCP / A2A-deltaker` | Eksterne agenter kan bruke Copilot og Work IQ i større flyter |
+| `Eksterne agenter i Copilot` | Copilot kan utvides med flere spesialiserte agenter |
+
+Poenget er:
+
+- Copilot kan være inngangen til mange agenter
+- men Copilot kan også selv være en del av et større agentsystem
 
 ---
 
@@ -465,63 +482,6 @@ Når passer det?
 
 ---
 
-# Når trenger Copilot Studio hjelp fra Azure?
-
-| Behov | Azure-spor | Hvorfor |
-| --- | --- | --- |
-| Mer kontroll på kunnskapsinnhenting | `Azure AI Search` | Egen indeks med hybrid, vektor og semantisk rangering |
-| Vanskelige spørsmål over store kunnskapsdomener | `Foundry IQ / agentic retrieval` | LLM planlegger delspørringer og samler treff |
-| Annen modell enn standardvalget | `Azure AI Foundry models` | Prompt-verktøyet kan bruke modeller fra Foundry |
-
----
-
-# Hva består en deklarativ agent av?
-
-| Del | Type | Rolle |
-| --- | --- | --- |
-| `manifest.json` + ikoner | App package | Pakker agenten som app i Teams og Microsoft 365 |
-| `declarativeAgent.json` | Agentdefinisjon | Definerer navn, beskrivelse, instrukser og actions |
-| `instructions` | Agentinnhold | Ligger ofte i `declarativeAgent.json`, men kan legges i egen tekstfil |
-| `ai-plugin.json` + `openapi.yaml` | Valgfri action | Beskriver eksterne API-kall og operasjoner |
-| `adaptiveCards/*.json` | Valgfri visning | Viser svar som kort i stedet for bare tekst |
-| `env/` + `m365agents.yml` | Toolkit-prosjekt | Styrer provisjonering, bygg og publisering, ikke selve agentlogikken |
-
-- Dette er typisk struktur for en deklarativ agent bygget med app package og Toolkit
-- En code-first agent med Microsoft 365 Agents SDK har mer logikk i kode enn i disse JSON-filene
-
----
-
-# Når holder én agent, og når trenger du connected agents?
-
-| Velg én agent når ... | Velg connected agents når ... |
-| --- | --- |
-| Oppgaven har tydelig intent og avgrenset scope | Oppgaven kan deles i tydelige deldomener |
-| Verktøyene er kjent på forhånd | Ulike agenter trenger ulike data, verktøy eller policyer |
-| Du vil ha raske svar med lav latency | Flere spesialister må jobbe i serie eller parallelt |
-| Ett team eier hele løsningen | Flere team eier hver sin del |
-| Du kan evaluere hele flyten som ett system | Du vil gjenbruke eksisterende agenter og evalueringer |
-
----
-
-# Copilot, Work IQ og det bredere agentøkosystemet
-
-Copilot er ikke bare en egen agentflate.
-Det kan også delta i et større connected-agent-økosystem.
-
-| Rolle | Hva det betyr |
-| --- | --- |
-| `Copilot som UI` | Brukeren møter et kjent grensesnitt i M365 |
-| `Work IQ` | Gir tilgang til arbeidskontekst som dokumenter, e-post, møter og relasjoner |
-| `Copilot som MCP / A2A-deltaker` | Eksterne agenter kan bruke Copilot og Work IQ i større flyter |
-| `Eksterne agenter i Copilot` | Copilot kan utvides med flere spesialiserte agenter |
-
-Poenget er:
-
-- Copilot kan være inngangen til mange agenter
-- men Copilot kan også selv være en del av et større agentsystem
-
----
-
 # Hvordan connected agents bør oppleves for brukeren
 
 Målet er ikke at brukeren skal styre et helt agentkart selv.
@@ -534,8 +494,3 @@ Målet er et samlet, begripelig arbeidsforløp.
 | Hovedagenten oppsummerer | Brukeren får et samlet svar |
 | Sporbarhet må vises | Brukeren og drift må kunne se hvilke agenter som bidro |
 | Human in the loop ved behov | Viktig når flere agenter kan trigge sensitive handlinger |
-
-Designregel:
-
-- skjul intern kompleksitet
-- vis ansvar, kilder og kontrollpunkter
