@@ -4,10 +4,11 @@ const modules = [
     title: "Modul 1 – Introduksjon til AI-agenter",
     shortTitle: "Modul 1",
     summary:
-      "Hva er en agent? Hvilke byggeklosser består den av? Når er en agent passende løsning.",
+      "Hva er en agent, hvilke byggeklosser består den av, når passer den, og hvordan beskriver du en første agentidé.",
     takeaways: [
-      "En agent kombinerer språkmodell, styring, kunnskap og verktøy.",
-      "Retrieval-, task- og autonomous-agenter passer til ulike behov og ulike typer oppgaver."
+      "En agent kombinerer språkmodell, instruksjoner, kunnskap, verktøy og ofte state, orkestrering og triggere.",
+      "Retrieval-, task/action- og orkestratoragenter løser ulike typer behov.",
+      "En god første agentidé har tydelig bruker, tydelig oppgave og tydelig verdi."
     ],
     practice:
       "Forklar agentideen din med tre setninger: Hvem er brukeren, hva skal agenten gjøre, og hvilken verdi gir den?",
@@ -17,11 +18,33 @@ const modules = [
         options: [
           "En fast regelmotor uten språkforståelse som alltid følger samme flyt.",
           "En chatbot som kun leser opp ferdige svar fra en FAQ.",
-          "Et intelligent program som bruker en eller flere språkmodeller til å forstå behov, resonnere og utføre oppgaver."
+          "Et intelligent program som bruker en eller flere språkmodeller til å forstå kontekst, ta beslutninger og utføre handlinger ved hjelp av verktøy."
         ],
         correctIndex: 2,
         explanation:
-          "Modulen beskriver agenten som et intelligent program som bruker språkmodeller til å forstå, resonnere og utføre oppgaver."
+          "Modulen beskriver agenten som et intelligent program som bruker språkmodeller til å forstå kontekst, ta beslutninger og utføre handlinger."
+      },
+      {
+        prompt: "Hva er rollen til minne / state i en agent?",
+        options: [
+          "Å huske kontekst og tidligere interaksjoner når det er relevant.",
+          "Å bestemme hvilket lisensnivå agenten trenger i produksjon.",
+          "Å publisere agenten til riktig kanal."
+        ],
+        correctIndex: 0,
+        explanation:
+          "Riktig. Minne / state er delen som lar agenten holde på relevant kontekst og tidligere interaksjoner."
+      },
+      {
+        prompt: "Hvilket eksempel passer best som task / action-agent?",
+        options: [
+          "En FAQ-agent over SharePoint-dokumenter.",
+          "En agent som mottar og oppretter ordre i et CRM-system.",
+          "En agent som planlegger og kombinerer flere steg på tvers av systemer."
+        ],
+        correctIndex: 1,
+        explanation:
+          "Task / action-agenter bruker systemer og API-er for å utføre konkrete handlinger, som å opprette en ordre i et CRM-system."
       },
       {
         prompt: "Hvordan ser Microsoft for seg at virksomheter tar i bruk agenter?",
@@ -32,18 +55,7 @@ const modules = [
         ],
         correctIndex: 0,
         explanation:
-          "Modul 1 beskriver at virksomheter typisk vil ha en portefølje som består av Microsoft-agenter, partneragenter og egne agenter."
-      },
-      {
-        prompt: "Hvilket eksempel passer best som task-agent?",
-        options: [
-          "En FAQ-agent over SharePoint-dokumenter.",
-          "En agent som oppretter ordre i et CRM-system.",
-          "En agent som overvåker innboks og bokfører fakturaer automatisk."
-        ],
-        correctIndex: 1,
-        explanation:
-          "Task-agenter bruker systemer og API-er for å utføre konkrete oppgaver, som å opprette en ordre i et CRM-system."
+          "Riktig. Modulen beskriver en portefølje av Microsoft-agenter, partneragenter og egne agenter."
       },
       {
         prompt: "Når passer en agent typisk dårlig?",
@@ -71,28 +83,28 @@ const modules = [
   },
   {
     id: "modul2",
-    title: "Modul 2 – Kom i gang med en agent",
+    title: "Modul 2 – Agentplattformer",
     shortTitle: "Modul 2",
     summary:
-      "Oversikt over Microsofts agentøkosystem og hvordan plattformvalg påvirker bygging, sikkerhet og kanalvalg.",
+      "Oversikt over Microsofts agentøkosystem og hvordan du velger riktig byggespor.",
     takeaways: [
-      "Plattformvalg påvirker hvor mye kode du skriver og hvem som kan bygge løsningen.",
-      "Det finnes raske innganger i Microsoft 365 og mer avanserte byggespor med mer kontroll.",
-      "Agentideen bør styre plattformvalget, ikke omvendt."
+      "Samme agentidé kan bygges på flere måter, men plattformvalget påvirker data, verktøy, kanaler og styring.",
+      "Microsoft 365 har raske innganger, mens SDK-, Teams- og Foundry-spor gir mer kontroll.",
+      "Custom engine og Agent Framework er relevante når du trenger mer eksplisitt orkestrering eller avansert arbeidsflyt."
     ],
     practice:
-      "Ta agentideen din og velg ett spor: rask start i Microsoft 365, egen virksomhetsagent eller pro-code/azure-spor. Noter hvorfor.",
+      "Ta agentideen din og velg ett spor: rask start i Microsoft 365, virksomhetsagent i Copilot Studio, eller pro-code/Azure. Noter hvorfor.",
     questions: [
       {
         prompt: "Hvilken plattform passer best når agenten skal svare over et tydelig avgrenset dokumentsett?",
-        options: ["Microsoft Agent Framework", "Microsoft 365 Agents SDK", "SharePoint agents"],
-        correctIndex: 2,
+        options: ["SharePoint agents", "Microsoft Agent Framework", "Microsoft 365 Agents SDK"],
+        correctIndex: 0,
         explanation:
           "Riktig. SharePoint agents passer når agenten bygges direkte over et avgrenset innholdssett."
       },
       {
         prompt: "Hvilket valg passer best når du vil teste en idé raskt inne i Microsoft 365 Copilot?",
-        options: ["Agent Builder i M365 Copilot", "Foundry Agent Service", "Agent Framework"],
+        options: ["Agent Builder i M365 Copilot", "Microsoft Foundry Agent Service", "Teams SDK"],
         correctIndex: 0,
         explanation:
           "Agent Builder er den raskeste inngangen for prototyping i Microsoft 365."
@@ -114,6 +126,17 @@ const modules = [
         correctIndex: 1,
         explanation:
           "Foundry Agent Service passer godt når du trenger Azure-plattform og mer avansert drift."
+      },
+      {
+        prompt: "Hva kjennetegner en custom engine agent?",
+        options: [
+          "Den er mer fleksibel enn en ren deklarativ agent, og du styrer orkestrering, modellvalg og integrasjoner mer eksplisitt.",
+          "Det er bare et annet navn på SharePoint agents.",
+          "Det er kun en agenttype som brukes i Power Automate."
+        ],
+        correctIndex: 0,
+        explanation:
+          "Riktig. Custom engine-agenten er relevant når standard Copilot-opplevelser ikke er nok."
       },
       {
         prompt: "Når er Microsoft Agent Framework mest relevant?",
@@ -154,15 +177,15 @@ const modules = [
           "Riktig. I workshopen er dette fire ting som ofte mangler, og som svekker agentens styring."
       },
       {
-        prompt: "Hvorfor er few-shot-eksempler nyttige i instruksjoner?",
+        prompt: "Hva er hovedforskjellen på instruksjoner og beskrivelser i Copilot Studio?",
         options: [
-          "De erstatter behovet for kunnskapskilder.",
-          "De gjør at agenten ikke lenger trenger evaluering.",
-          "De hjelper når tone, struktur og svarstil er viktig."
+          "Instruksjoner styrer oppførsel; beskrivelser hjelper orkestratoren å velge når noe skal brukes.",
+          "Instruksjoner brukes bare til design; beskrivelser brukes bare til sikkerhet.",
+          "Det er to ord for det samme."
         ],
-        correctIndex: 2,
+        correctIndex: 0,
         explanation:
-          "Riktig. Eksempler på gode svar hjelper agenten å forstå forventet stil og struktur."
+          "Riktig. Instruksjoner sier hvordan agenten skal oppføre seg, mens beskrivelser hjelper når verktøy, topics eller agenter skal velges."
       },
       {
         prompt: "Hva betyr grounding i praksis?",
@@ -176,15 +199,15 @@ const modules = [
           "Riktig. Grounding betyr at svaret bygger på kilder, ikke bare modellens generelle kunnskap."
       },
       {
-        prompt: "Hvorfor er det viktig å beskrive en kunnskapskilde godt?",
+        prompt: "Hvorfor er retrieval-laget så viktig i RAG?",
         options: [
-          "Bare for at mennesker skal like oppsettet bedre.",
-          "Kun for å få lavere lisenskostnad.",
-          "Fordi agenten bruker beskrivelsen for å velge riktig kilde, spesielt når flere kilder ligner på hverandre."
+          "Fordi det finner relevant kontekst, begrenser hva som sendes inn, og må respektere tilgang og sikkerhet.",
+          "Fordi det automatisk erstatter behovet for instruksjoner og evaluering.",
+          "Fordi det bare handler om å gjøre dokumentene penere i søkeindeksen."
         ],
-        correctIndex: 2,
+        correctIndex: 0,
         explanation:
-          "Riktig. Gode beskrivelser hjelper agenten å velge riktig kunnskapskilde, og er ekstra viktige når antallet kilder vokser."
+          "Riktig. Retrieval-laget er ansvarlig for å hente riktig kontekst, begrense input og bevare sikkerhet og sporbarhet."
       },
       {
         prompt: "Hva er forskjellen på semantisk søk og chunking?",
@@ -199,7 +222,7 @@ const modules = [
       },
       {
         prompt: "Hvilket verktøynivå passer best når agenten skal kjøre flere kjente steg på tvers av systemer?",
-        options: ["Variabler", "Innebygde verktøy", "Prosess"],
+        options: ["Variabler", "Connectors", "Prosess"],
         correctIndex: 2,
         explanation:
           "Riktig. Prosess brukes når agenten må starte en sekvens av handlinger, ikke bare ett kall."
@@ -434,11 +457,11 @@ const modules = [
     title: "Modul 7 – Governance, evaluering og publisering",
     shortTitle: "Modul 7",
     summary:
-      "Hvordan en agent går fra prototype til noe som kan brukes forsvarlig i en virksomhet.",
+      "Hvordan en agent går fra prototype til noe som kan brukes forsvarlig og styres i en virksomhet.",
     takeaways: [
       "Governance må bygges inn fra start, ikke legges på til slutt.",
       "Tilgang, sikkerhet, kvalitet og drift er fire ulike styringslag.",
-      "Feedback, observabilitet og tydelig ansvar er nødvendig i drift."
+      "Agent 365, observabilitet og tydelige roller blir viktige når agenten går i produksjon."
     ],
     practice:
       "Se på agentideen din som om den skal i produksjon i morgen. Hvilke tre ting må være avklart for at du skal stole på den?",
@@ -464,6 +487,17 @@ const modules = [
         correctIndex: 1,
         explanation:
           "Riktig. Disse fire lagene gjør governance mer konkret og lettere å fordele ansvar i."
+      },
+      {
+        prompt: "Hva er Microsoft Agent 365 best beskrevet som i modulen?",
+        options: [
+          "En kontrollplan for agentporteføljen på tvers av plattformer, med identitet, registry og observability.",
+          "Et nytt navn på Copilot Studio.",
+          "Et krav om å bruke én bestemt modell i alle agenter."
+        ],
+        correctIndex: 0,
+        explanation:
+          "Riktig. Modulen beskriver Agent 365 som et styringslag eller kontrollplan for agentporteføljen."
       },
       {
         prompt: "Hva betyr minste privilegium i agentkontekst?",
@@ -533,7 +567,7 @@ const agentFunFacts = [
   "En virksomhet vil sjelden ende opp med én agent. Ofte vokser det fram en hel portefølje over tid."
 ];
 
-const storageKey = "tc26-modultester-state-v1";
+const storageKey = "tc26-modultester-state-v2";
 const moduleNav = document.querySelector("#module-nav");
 const moduleView = document.querySelector("#module-view");
 const completedModulesEl = document.querySelector("#completed-modules");
