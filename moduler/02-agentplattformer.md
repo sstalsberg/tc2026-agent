@@ -57,7 +57,7 @@ Microsoft leverer også ferdige agenter som del av sitt eget økosystem.
 
 Hvis du er usikker på hvor du skal starte, bruk Microsofts **Agent Platform Advisor**:
 
-- `https://microsoft.github.io/cat/agent-platform-advisor/index.html`
+- [Agent Platform Advisor](https://microsoft.github.io/cat/agent-platform-advisor/index.html)
 
 Den hjelper deg å velge mellom Microsofts agentplattformer ut fra scenario og krav.
 
