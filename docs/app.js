@@ -1,4 +1,4 @@
-const modules = [
+const moduleDefinitions = [
   {
     id: "modul1",
     title: "Modul 1 – Introduksjon til AI-agenter",
@@ -558,6 +558,142 @@ const modules = [
   }
 ];
 
+function hashString(value) {
+  let hash = 2166136261;
+
+  for (let index = 0; index < value.length; index += 1) {
+    hash ^= value.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+
+  return hash >>> 0;
+}
+
+function createRandom(seed) {
+  let state = seed >>> 0;
+
+  return () => {
+    state += 0x6d2b79f5;
+    let value = state;
+    value = Math.imul(value ^ (value >>> 15), value | 1);
+    value ^= value + Math.imul(value ^ (value >>> 7), value | 61);
+    return ((value ^ (value >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function pickNextTargetIndex(counts, previousIndex, random) {
+  const available = counts
+    .map((remaining, index) => ({ remaining, index }))
+    .filter(({ remaining, index }) => remaining > 0 && index !== previousIndex);
+  const pool = available.length
+    ? available
+    : counts
+        .map((remaining, index) => ({ remaining, index }))
+        .filter(({ remaining }) => remaining > 0);
+  const shuffledPool = [...pool];
+
+  for (let index = shuffledPool.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(random() * (index + 1));
+    [shuffledPool[index], shuffledPool[swapIndex]] = [
+      shuffledPool[swapIndex],
+      shuffledPool[index]
+    ];
+  }
+
+  shuffledPool.sort((left, right) => right.remaining - left.remaining);
+  return shuffledPool[0].index;
+}
+
+function buildTargetIndexes(questionCount, optionCount, seedKey) {
+  const counts = Array.from(
+    { length: optionCount },
+    () => Math.floor(questionCount / optionCount)
+  );
+  const startIndex = hashString(seedKey) % optionCount;
+
+  for (let extraIndex = 0; extraIndex < questionCount % optionCount; extraIndex += 1) {
+    counts[(startIndex + extraIndex) % optionCount] += 1;
+  }
+
+  const random = createRandom(hashString(`${seedKey}:sequence`));
+  const indexes = [];
+  let previousIndex = null;
+
+  while (indexes.length < questionCount) {
+    const nextIndex = pickNextTargetIndex(counts, previousIndex, random);
+    counts[nextIndex] -= 1;
+    indexes.push(nextIndex);
+    previousIndex = nextIndex;
+  }
+
+  return indexes;
+}
+
+function reorderQuestionOptions(question, targetCorrectIndex) {
+  if (question.correctIndex === targetCorrectIndex) {
+    return question;
+  }
+
+  const correctOption = question.options[question.correctIndex];
+  const incorrectOptions = question.options.filter(
+    (_, optionIndex) => optionIndex !== question.correctIndex
+  );
+  const options = [];
+  let incorrectIndex = 0;
+
+  for (let optionIndex = 0; optionIndex < question.options.length; optionIndex += 1) {
+    if (optionIndex === targetCorrectIndex) {
+      options.push(correctOption);
+      continue;
+    }
+
+    options.push(incorrectOptions[incorrectIndex]);
+    incorrectIndex += 1;
+  }
+
+  return {
+    ...question,
+    options,
+    correctIndex: targetCorrectIndex
+  };
+}
+
+function rebalanceModuleQuestions(modules) {
+  return modules.map((module) => {
+    const questions = [...module.questions];
+    const questionsByOptionCount = module.questions.reduce((groups, question, questionIndex) => {
+      const optionCount = question.options.length;
+      const group = groups.get(optionCount) || [];
+      group.push({ question, questionIndex });
+      groups.set(optionCount, group);
+      return groups;
+    }, new Map());
+
+    questionsByOptionCount.forEach((entries, optionCount) => {
+      const targetIndexes = buildTargetIndexes(
+        entries.length,
+        optionCount,
+        `${module.id}:${optionCount}`
+      );
+
+      entries.forEach(({ question, questionIndex }, entryIndex) => {
+        questions[questionIndex] = reorderQuestionOptions(
+          question,
+          targetIndexes[entryIndex]
+        );
+      });
+    });
+
+    return {
+      ...module,
+      questions
+    };
+  });
+}
+
+// Keep the authored answer data readable, but rebalance option order deterministically in the UI.
+const modules = rebalanceModuleQuestions(moduleDefinitions);
+
 const agentFunFacts = [
   "IDC-estimatet som brukes i workshopen peker mot 1,3 milliarder AI-agenter innen 2028.",
   "En retrieval-agent trenger ofte bare språkmodell, instruksjoner og kunnskap for å være nyttig.",
@@ -567,7 +703,7 @@ const agentFunFacts = [
   "En virksomhet vil sjelden ende opp med én agent. Ofte vokser det fram en hel portefølje over tid."
 ];
 
-const storageKey = "tc26-modultester-state-v2";
+const storageKey = "tc26-modultester-state-v3";
 const moduleNav = document.querySelector("#module-nav");
 const moduleView = document.querySelector("#module-view");
 const completedModulesEl = document.querySelector("#completed-modules");
