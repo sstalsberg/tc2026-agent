@@ -293,7 +293,7 @@ style: |
 
 - Avgrens kunnskapsgrunnlaget når du vil ha presise svar
 - Begrens generell kunnskap når du trenger høy presisjon (varierer fra plattform til plattform)
-- Filer brukeren laster opp i samtalen blir kontekst for dialogen, men er ikke en varig kunnskapskilde
+- Filer lastet opp i en chat blir kontekst for dialogen, mens filer lastet opp i agentoppsettet kan bli varig kunnskapskilde
 
 ---
 <!-- _class: action -->
@@ -309,6 +309,19 @@ Det er nyttig å skille mellom to typer kunnskap i en agent:
 
 - Bruk dokumentkilder når brukeren trenger forklaring, kontekst eller siterbare svar
 - Bruk strukturert data når agenten må finne, oppdatere eller kontrollere konkrete felter og poster
+
+---
+
+# Hvor ligger opplastet agentkunnskap?
+
+| Scenario | Hvor ligger filen? | Viktig nyanse |
+| --- | --- | --- |
+| Fil lastes opp direkte i en `declarative agent` | I en tenant-eid `SharePoint Embedded`-container | Ikke i vanlig SharePoint-site eller brukerens OneDrive |
+| Eksisterende `SharePoint`- eller `OneDrive`-fil legges til som kilde | Blir liggende der den allerede lå | Agenten refererer filen, den flyttes ikke |
+| Fil lastes opp i en vanlig chat | Blir kontekst for dialogen | Er normalt ikke en varig kunnskapskilde for agenten |
+
+- I adminvisning og PowerShell vises containeren under applikasjonsnavnet `Declarative Agent`
+- I `Microsoft 365 admin center > Agents > All agents` kan du se filnavn og `SharePoint container ID`
 
 ---
 
