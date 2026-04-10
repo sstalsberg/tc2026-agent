@@ -6,21 +6,21 @@ Mappen inneholder en TypeScript-basert MCP-server som:
 
 - starter en Mineflayer-bot
 - kobler botten til en lokal Minecraft-verden eller server
-- eksponerer Minecraft-handlinger som MCP-verktoey over `stdio`
+- eksponerer Minecraft-handlinger som MCP-verktøy over `stdio`
 
-Denne README-en er skrevet for lokal bruk i workshop-sammenheng, med Codex som primareksempel.
+Denne README-en er skrevet for lokal bruk i workshop-sammenheng, med Codex som primæreksempel.
 
 ## Hva dette er
 
-Serveren i denne mappen er en lokal MCP-prosess. Den er ment aa bli startet av en MCP-klient, ikke som en vanlig webserver.
+Serveren i denne mappen er en lokal MCP-prosess. Den er ment å bli startet av en MCP-klient, ikke som en vanlig webserver.
 
 Praktisk betyr det:
 
 - Codex starter prosessen for deg
 - prosessen kobler botten til Minecraft med `--host`, `--port` og `--username`
-- Codex faar tilgang til Minecraft-verktoeyene gjennom MCP
+- Codex får tilgang til Minecraft-verktøyene gjennom MCP
 
-Denne guiden dekker lokal `stdio`-bruk, for eksempel i Codex. Hvis du senere vil bruke samme server fra en klient som krever et remote MCP-endepunkt over HTTP, maa serveren publiseres eller proxes foerst.
+Denne guiden dekker lokal `stdio`-bruk, for eksempel i Codex. Hvis du senere vil bruke samme server fra en klient som krever et remote MCP-endepunkt over HTTP, må serveren publiseres eller proxes først.
 
 ## Krav
 
@@ -31,12 +31,12 @@ Denne guiden dekker lokal `stdio`-bruk, for eksempel i Codex. Hvis du senere vil
 
 Prosjektet er i kildekoden merket som testet mot Minecraft `1.21.11`.
 
-## Klargjoer Minecraft
+## Klargjør Minecraft
 
 Du kan bruke enten:
 
-- en lokal dedikert Minecraft-server som lytter paa `localhost:25565`
-- en singleplayer-verden som du aapner til LAN
+- en lokal dedikert Minecraft-server som lytter på `localhost:25565`
+- en singleplayer-verden som du åpner til LAN
 
 Hvis du bruker `Open to LAN` i Minecraft Java Edition:
 
@@ -48,12 +48,12 @@ Hvis du bruker `Open to LAN` i Minecraft Java Edition:
 Viktig:
 
 - en lokal dedikert server bruker ofte `25565`
-- en singleplayer-verden aapnet til LAN bruker vanligvis en tilfeldig port
-- bruk den faktiske porten fra Minecraft naar du konfigurerer MCP-serveren
+- en singleplayer-verden åpnet til LAN bruker vanligvis en tilfeldig port
+- bruk den faktiske porten fra Minecraft når du konfigurerer MCP-serveren
 
 ## Installer og bygg serveren
 
-Kjoer disse kommandoene fra denne mappen:
+Kjør disse kommandoene fra denne mappen:
 
 ```bash
 cd eksempler/mcp-minecraft
@@ -67,9 +67,9 @@ Etter bygging ligger oppstartsfilen her:
 dist/main.js
 ```
 
-## Kjoer serveren lokalt
+## Kjør serveren lokalt
 
-Serveren er en `stdio`-basert MCP-server. I praksis er det best aa la Codex starte den, men du kan ogsaa starte den direkte for testing:
+Serveren er en `stdio`-basert MCP-server. I praksis er det best å la Codex starte den, men du kan også starte den direkte for testing:
 
 ```bash
 node dist/main.js --host localhost --port 25565 --username CodexBot
@@ -80,27 +80,27 @@ Bytt ut `25565` hvis Minecraft-verdenen din bruker en annen port.
 Merk:
 
 - prosessen kan se "stille" ut i terminalen, fordi dette er en MCP-server og ikke et vanlig CLI-program
-- botten prover aa koble seg til Minecraft med en gang prosessen starter
+- botten prøver å koble seg til Minecraft med en gang prosessen starter
 
 ## Legg serveren til i Codex
 
-Den enkleste maaten er aa registrere serveren med `codex mcp add` mens du staar i denne mappen:
+Den enkleste måten er å registrere serveren med `codex mcp add` mens du står i denne mappen:
 
 ```bash
 cd eksempler/mcp-minecraft
 codex mcp add minecraft-local -- node $(pwd)/dist/main.js --host localhost --port 25565 --username CodexBot
 ```
 
-Hvis du bruker `Open to LAN`, maa du erstatte `25565` med porten Minecraft faktisk viser.
+Hvis du bruker `Open to LAN`, må du erstatte `25565` med porten Minecraft faktisk viser.
 
-Etterpaa kan du verifisere oppsettet:
+Etterpå kan du verifisere oppsettet:
 
 ```bash
 codex mcp list
 codex mcp get minecraft-local --json
 ```
 
-Start saa en ny Codex-sesjon. Da kan Codex laste serveren og bruke Minecraft-verktoeyene automatisk.
+Start så en ny Codex-sesjon. Da kan Codex laste serveren og bruke Minecraft-verktøyene automatisk.
 
 ## Alternativ: legg den inn manuelt i `~/.codex/config.toml`
 
@@ -122,11 +122,11 @@ startup_timeout_sec = 30.0
 enabled = true
 ```
 
-Bruk absolutt sti til `dist/main.js`, og start Codex paa nytt etter at configen er lagret.
+Bruk absolutt sti til `dist/main.js`, og start Codex på nytt etter at configen er lagret.
 
 ## Forslag til test i Codex
 
-Naar Minecraft er oppe og serveren er registrert i Codex, kan du teste med korte prompts som:
+Når Minecraft er oppe og serveren er registrert i Codex, kan du teste med korte prompts som:
 
 - `Finn posisjonen til Minecraft-botten.`
 - `Flytt botten til x=10, y=64, z=10.`
@@ -134,9 +134,9 @@ Naar Minecraft er oppe og serveren er registrert i Codex, kan du teste med korte
 - `Sjekk inventory og si om botten kan lage en crafting table.`
 - `Send en chatmelding som sier at botten er klar.`
 
-## Tilgjengelige verktoey
+## Tilgjengelige verktøy
 
-Serveren registrerer disse Minecraft-verktoeyene:
+Serveren registrerer disse Minecraft-verktøyene:
 
 - Bevegelse: `get-position`, `move-to-position`, `look-at`, `jump`, `move-in-direction`
 - Flyvning: `fly-to`
@@ -154,9 +154,9 @@ Serveren registrerer disse Minecraft-verktoeyene:
 
 Sjekk at:
 
-- Minecraft faktisk kjoerer
+- Minecraft faktisk kjører
 - `--host` og `--port` stemmer
-- du bruker riktig LAN-port hvis verdenen er aapnet med `Open to LAN`
+- du bruker riktig LAN-port hvis verdenen er åpnet med `Open to LAN`
 
 ### `fly-to` fungerer ikke
 
@@ -164,17 +164,17 @@ Sjekk at:
 
 ### Endringer i kildekoden blir ikke plukket opp
 
-Bygg paa nytt:
+Bygg på nytt:
 
 ```bash
 npm run build
 ```
 
-Hvis Codex allerede kjoerer, start en ny sesjon etterpaa.
+Hvis Codex allerede kjører, start en ny sesjon etterpå.
 
 ### Jeg vil verifisere at prosjektet fortsatt er friskt
 
-Kjoer testene:
+Kjør testene:
 
 ```bash
 npm test
