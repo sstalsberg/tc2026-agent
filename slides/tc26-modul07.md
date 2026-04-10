@@ -516,6 +516,25 @@ Poenget er at Teams ikke bare er en kanal, men en klient med egen brukeropplevel
 
 ---
 
+# Fra publish til distribusjon
+
+- `Publish` oppdaterer vanligvis agentens oppførsel
+- Distribusjon styrer hvordan agenten blir synlig i Teams og Microsoft 365 Copilot
+- Deling i Copilot Studio er ikke det samme som distribusjon i Teams eller `Microsoft 365 admin center`
+- Teams og Microsoft 365 Copilot er ulike kanaler og må testes separat
+
+---
+
+# Tre deploy-spor i Teams
+
+| Spor | Når det passer | Kjennetegn |
+| --- | --- | --- |
+| Direkte install | DEV og rask testing | Raskest, minst styring og ofte sideloading |
+| Send til admin-godkjenning | TEST og kontrollert utrulling | Maker initierer, admin godkjenner og appen kan senere styres sentralt |
+| Adminstyrt apputrulling | PROD og bred distribusjon | Mest kontroll og best egnet for styrt utrulling |
+
+---
+
 # Lisens og kostnad må inn tidlig
 
 | Plattformtype | Hva du må tenke på |
@@ -581,4 +600,4 @@ Poenget er at Teams ikke bare er en kanal, men en klient med egen brukeropplevel
 1. Hvorfor governance, sikkerhet og evaluering må bygges inn fra starten
 2. Hvordan Microsoft Agent 365 kan fungere som kontrollplan rundt identitet, observabilitet og sikkerhet
 3. Hvordan feedback, tracing og målinger brukes til kontinuerlig forbedring
-4. Hva publisering, tilgang og lisens betyr når agenten skal i produksjon
+4. Hva publisering, distribusjon, tilgang og lisens betyr når agenten skal i produksjon
